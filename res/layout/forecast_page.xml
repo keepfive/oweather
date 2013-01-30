@@ -25,9 +25,9 @@
             android:id="@+id/tvToday"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_weight="3" android:textSize="24sp"
+            android:layout_weight="3" android:textSize="48sp"
             android:gravity="center"
-            android:text="Today" >
+            android:text="Today" android:textStyle="bold">
         </TextView>
 
         <ImageButton

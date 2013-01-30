@@ -13,16 +13,13 @@ public class ForecastPageActivity extends OWActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.forecast_page);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		Typeface face=Typeface.createFromAsset(getAssets(), "fonts/titilliumthin.ttf"); 
+		Typeface face=Typeface.createFromAsset(getAssets(), "titilliumthin.ttf"); 
 		
 		text = (TextView)findViewById(R.id.tvToday);
 		TypefaceUtil.setTextViewTypeface(text, face);
-		 // TypefaceUtil.setViewGroupTypeface(get, typeface)
-		
 		
 	}
 
