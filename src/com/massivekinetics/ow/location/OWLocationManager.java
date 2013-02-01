@@ -3,7 +3,7 @@ package com.massivekinetics.ow.location;
 import android.content.Context;
 import android.location.*;
 import com.massivekinetics.ow.application.OWApplication;
-import com.massivekinetics.ow.status.OperationStatus;
+import com.massivekinetics.ow.states.OperationStatus;
 
 import java.io.IOException;
 import java.util.List;

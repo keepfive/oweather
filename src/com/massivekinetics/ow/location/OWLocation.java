@@ -1,6 +1,6 @@
 package com.massivekinetics.ow.location;
 
-import com.massivekinetics.ow.status.OperationStatus;
+import com.massivekinetics.ow.states.OperationStatus;
 import android.location.Location;
 
 /**

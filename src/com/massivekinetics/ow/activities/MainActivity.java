@@ -7,12 +7,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.WeatherForecast;
+import com.massivekinetics.ow.data.WeatherForecast;
 import com.massivekinetics.ow.data.WeatherModel;
 import com.massivekinetics.ow.data.parser.ParserStatus;
 import com.massivekinetics.ow.data.tasks.GetWeatherTask;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
-import com.massivekinetics.ow.location.OWLocationManager;
 
 public class MainActivity extends OWActivity {
 	/**

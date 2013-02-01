@@ -3,7 +3,7 @@ package com.massivekinetics.ow.data.tasks;
 import android.os.AsyncTask;
 
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.WeatherForecast;
+import com.massivekinetics.ow.data.WeatherForecast;
 import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.data.parser.WeatherParser;
 import com.massivekinetics.ow.network.Downloader;
