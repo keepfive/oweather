@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="90dp" android:weightSum="4" android:gravity="center_horizontal">
+
+
+    <ImageButton
+            android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:background="@android:color/transparent"
+            android:id="@+id/ibLeft" android:layout_gravity="center" android:src="@drawable/left_arrow"
+            android:scaleType="centerInside"/>
+    <ImageView
+            android:layout_width="0dp" android:layout_weight="2"
+            android:layout_height="fill_parent"
+            android:id="@+id/ivWeatherState" android:src="@drawable/weather_state_11" android:scaleType="centerInside"/>
+    <ImageButton
+            android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:background="@android:color/transparent"
+            android:id="@+id/ibRight" android:layout_gravity="center" android:src="@drawable/right_arrow"
+            android:scaleType="centerInside"/>
+</LinearLayout>

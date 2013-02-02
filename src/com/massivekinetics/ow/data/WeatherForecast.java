@@ -25,4 +25,9 @@ public class WeatherForecast {
 	public ParserStatus getStatus() {
 		return status;
 	}
+
+    public boolean isSuccessed(){
+        return status == ParserStatus.SUCCESS;
+    }
+
 }

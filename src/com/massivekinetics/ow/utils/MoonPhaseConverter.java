@@ -10,8 +10,6 @@ package com.massivekinetics.ow.utils;
 public class MoonPhaseConverter {
     public enum MOONPHASE {NONE, NEW_MOON, WAXING_MOON, FIRST_QUARTER, FULL_MOON, WANING_MOON, LAST_QUARTER, DARK_MOON}
 
-    ;
-
     public static MOONPHASE getMoonPhase(int d, int m, int y) {
         double approximate, precise;
 

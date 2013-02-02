@@ -25,7 +25,7 @@ public class GetWeatherTask extends AsyncTask<String, Void, WeatherForecast> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-
+        listener.notifyStart();
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.massivekinetics.ow.utils;
 
+import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.states.WeatherState;
 
 /**
@@ -11,7 +12,53 @@ import com.massivekinetics.ow.states.WeatherState;
  */
 public class WeatherCodeUtils {
 
-    public static WeatherState getWeatherResource(int weatherCode) {
+    public static int getWeatherImageResource(WeatherState weatherState){
+            switch (weatherState) {
+                case SUNNY:
+                    return R.drawable.weather_state_0;
+
+                case DOWNPOUR: {
+                    return   R.drawable.weather_state_1;
+                }
+
+                case LIGHT_RAIN: {
+                    return R.drawable.weather_state_6;
+                }
+                
+                case MOSTLY_CLOUDLY: {
+                    return R.drawable.weather_state_7;
+                }
+                
+                case PARTLY_CLOUDLY: {
+                    return R.drawable.weather_state_8;
+                }
+                
+                case RAIN: {
+                    return R.drawable.weather_state_5;
+                }
+                
+                case RAIN_AND_SUN: {
+                    return R.drawable.weather_state_9;
+                }
+                
+                case SLEET: {
+                    return R.drawable.weather_state_2;
+                }
+                
+                case SNOW: {
+                    return R.drawable.weather_state_4;
+                }
+                
+                case SNOW_FALL: {
+                    return R.drawable.weather_state_3;
+                }
+                
+                default:
+                    return R.drawable.ic_launcher;
+            }
+    }
+
+    public static WeatherState getWeatherState(int weatherCode) {
 
         switch (weatherCode) {
             case 113:

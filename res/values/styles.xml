@@ -1,5 +1,7 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Translucent" />
+    <style name="AppTheme" parent="android:Theme.Light">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
 </resources>

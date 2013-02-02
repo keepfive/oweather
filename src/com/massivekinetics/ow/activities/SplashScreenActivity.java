@@ -3,6 +3,12 @@ package com.massivekinetics.ow.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import com.massivekinetics.ow.R;
+import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.data.WeatherForecast;
+import com.massivekinetics.ow.data.manager.DataManager;
+import com.massivekinetics.ow.data.manager.WeatherDataManager;
+import com.massivekinetics.ow.data.tasks.GetWeatherTask;
+import com.massivekinetics.ow.data.tasks.LoadingListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +19,6 @@ import com.massivekinetics.ow.R;
  */
 public class SplashScreenActivity extends OWActivity {
     int delay = 5000;
-
     Runnable showForecastRunnable = new Runnable() {
         @Override
         public void run() {
@@ -25,6 +30,29 @@ public class SplashScreenActivity extends OWActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-        uiHandler.postDelayed(showForecastRunnable, delay);
+
+        new GetWeatherTask(new LoadingListener<WeatherForecast>() {
+            @Override
+            public void callback(WeatherForecast result) {
+                if (result.isSuccessed()) {
+                    DataManager dataManager = new WeatherDataManager(result);
+                    OWApplication.context.setDataManager(dataManager);
+                }
+                else{
+
+                }
+                notifyStop();
+            }
+
+            @Override
+            public void notifyStart() {
+            }
+
+            @Override
+            public void notifyStop() {
+                uiHandler.post(showForecastRunnable);
+            }
+        }).execute("kiev", "5");
+
     }
 }

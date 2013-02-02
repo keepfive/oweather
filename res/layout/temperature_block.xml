@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_marginTop="10dp"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content" android:layout_gravity="center_horizontal" android:weightSum="4">
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end|top" android:layout_marginTop="-20dp" android:layout_marginRight="12dp"
+            android:id="@+id/tvTemp" android:layout_weight="3" android:textColor="@android:color/white"
+            android:text="13" android:textSize="150sp" android:layout_gravity="center"/>
+
+
+    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:weightSum="5"
+                  android:layout_height="fill_parent" android:orientation="vertical">
+
+
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="0dp" android:layout_weight="1" android:gravity="left">
+            <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" android:scaleType="centerInside"
+                    android:id="@+id/imageView" android:layout_marginTop="11dp"
+                    android:src="@drawable/degrees"/>
+        </LinearLayout>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0dp" android:layout_weight="2" android:paddingLeft="5dp"
+                android:gravity="center"
+                android:id="@+id/tvDaytime" android:textColor="@android:color/white"
+                android:text="Night" android:textSize="20sp" android:layout_marginBottom="5dp"/>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0dp" android:layout_weight="2"
+                android:gravity="center_horizontal|top" android:paddingLeft="5dp"
+                android:id="@+id/tvNightTemp" android:textColor="@android:color/white"
+                android:textSize="36sp" android:layout_marginTop="-20dp"
+                android:text="18"/>
+    </LinearLayout>
+
+
+</LinearLayout>

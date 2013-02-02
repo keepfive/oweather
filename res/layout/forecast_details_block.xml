@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
+              android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="15dp">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp" android:weightSum="3">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvHumidity" android:layout_weight="1" android:text="77%"
+                android:textColor="@android:color/white" android:gravity="center" android:textSize="20sp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/tvWindSpeed" android:layout_weight="1" android:text="4 mph" android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvMoonPhase" android:layout_weight="1" android:text="Moon" android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content" android:weightSum="3">
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="40dp" android:layout_gravity="center"
+                android:id="@+id/ivHumidity" android:scaleType="centerInside" android:layout_weight="1"
+                android:src="@drawable/weather_drop_2" android:background="@android:color/transparent"/>
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="55dp" android:layout_gravity="center"
+                android:id="@+id/ivWindDirection" android:scaleType="centerInside" android:layout_weight="1"
+                android:src="@drawable/wind_direction" android:background="@android:color/transparent"/>
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="40dp" android:layout_gravity="center"
+                android:id="@+id/ivMoonPhase" android:scaleType="centerInside" android:layout_weight="1"
+                android:src="@drawable/weather_moon_5" android:background="@android:color/transparent"/>
+    </LinearLayout>
+</LinearLayout>
