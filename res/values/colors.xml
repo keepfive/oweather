@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!--Weather colors-->
+    <color name="ow_thunderstorm">#89766F</color>
     <color name="ow_sunny">#F2385A</color>
-    <color name="ow_downpour">#675680</color>
+    <color name="ow_downpour">#BDCCD4</color>
     <color name="ow_mostly_cloudy">#1D9E48</color>
 	<color name="ow_partly_cloudy">#F1854B</color>
-	<color name="ow_rain_and_sun">#E9B841</color>
-	
+	<color name="ow_rain_and_sun">#D5C000</color>
 	<color name="ow_light_rain">#BDA881</color>
 	<color name="ow_rain">#999999</color>
-	<color name="ow_snow">#375D81</color>
+	<color name="ow_snow">#3EA2E4</color>
 	<color name="ow_snowfall">#82A8C4</color>
-	<color name="ow_sleet">#36B1BF</color>
+	<color name="ow_sleet">#667688</color>
+    <color name="ow_fog">#75608B</color>
+    <color name="ow_storm">#5D5D5D</color>
+
+    <!--Application colors-->
+    <color name="ow_settings">#343434</color>
 	
 </resources>

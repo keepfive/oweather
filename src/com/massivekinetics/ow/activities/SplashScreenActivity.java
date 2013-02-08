@@ -51,6 +51,7 @@ public class SplashScreenActivity extends OWActivity {
             @Override
             public void notifyStop() {
                 uiHandler.post(showForecastRunnable);
+                SplashScreenActivity.this.finish();
             }
         }).execute("kiev", "5");
 

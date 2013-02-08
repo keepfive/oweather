@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="50dp" android:weightSum="3">
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
+                  android:layout_weight="1" android:gravity="center" android:orientation="horizontal" android:layout_gravity="center">
+
+        <ImageButton android:id="@+id/ibBack" android:layout_height="30dp" android:layout_width="fill_parent"
+                     android:src="@drawable/settings_back_button" android:background="@android:color/transparent" android:adjustViewBounds="true" android:scaleType="centerInside"/>
+
+
+    </LinearLayout>
+
+    <ImageView android:layout_height="wrap_content" android:layout_width="0dp" android:layout_weight="1"
+               android:src="@drawable/settings_header" android:layout_gravity="top" android:background="@android:color/transparent">
+    </ImageView>
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
+                  android:layout_weight="1" android:gravity="center" android:orientation="horizontal" android:layout_gravity="center">
+        <ImageButton android:layout_height="30dp" android:layout_width="30dp"
+                     android:src="@drawable/celcius_dark" android:background="@android:color/transparent" android:adjustViewBounds="true" android:scaleType="centerInside"/>
+
+        <ImageButton android:layout_height="30dp" android:layout_width="30dp"
+                     android:src="@drawable/fahrenheit_light" android:layout_marginLeft="10dp" android:background="@android:color/transparent" android:adjustViewBounds="true" android:scaleType="centerInside"/>
+
+    </LinearLayout>
+</LinearLayout>

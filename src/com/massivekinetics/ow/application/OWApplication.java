@@ -1,6 +1,7 @@
 package com.massivekinetics.ow.application;
 
 import android.app.Application;
+import android.util.DisplayMetrics;
 import com.massivekinetics.ow.data.manager.DataManager;
 import com.massivekinetics.ow.location.OWLocationManager;
 
@@ -8,6 +9,8 @@ public class OWApplication extends Application {
     public static OWApplication context;
     private OWLocationManager locationManager;
     private DataManager dataManager;
+
+    private DisplayMetrics displayMetrics;
 
     @Override
     public void onCreate() {
@@ -28,5 +31,12 @@ public class OWApplication extends Application {
         this.dataManager = dataManager;
     }
 
+    public DisplayMetrics getDisplayMetrics() {
+        return displayMetrics;
+    }
+
+    public void setDisplayMetrics(DisplayMetrics displayMetrics) {
+        this.displayMetrics = displayMetrics;
+    }
 
 }
