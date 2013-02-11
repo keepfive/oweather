@@ -13,7 +13,7 @@
 
     <application android:label="@string/app_name" android:name="com.massivekinetics.ow.application.OWApplication"
                  android:hardwareAccelerated="true"
-                 android:icon="@drawable/icon">
+                 android:icon="@drawable/icon" android:theme="@style/AppTheme">
 
         <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>

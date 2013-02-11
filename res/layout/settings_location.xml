@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/settingsLocation"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:layout_marginTop="15dp" android:layout_below="@id/settingsHeader">
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/your_location"
+            android:id="@+id/tvLocationTitle" android:gravity="center_horizontal"
+            android:textSize="48sp"
+            style="@style/TextView"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/etUserLocation" style="@style/LocationEditText"/>
+</LinearLayout>

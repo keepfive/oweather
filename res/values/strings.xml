@@ -4,4 +4,7 @@
     <string name="weather_key">bd44eb1c6f224139132601</string>
     <string name="weather_base_url_city">http://free.worldweatheronline.com/feed/weather.ashx?q=%CITY&amp;format=json&amp;num_of_days=%DAYS&amp;key=%KEY</string>
 	<string name="weather_base_url_gps">http://free.worldweatheronline.com/feed/weather.ashx?q=%LAT,%LONG&amp;format=json&amp;num_of_days=%DAYS&amp;key=%KEY</string>
+
+    <string name="your_location">Your location</string>
+    <string name="location_hint">your location here...</string>
 </resources>

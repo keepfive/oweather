@@ -12,7 +12,6 @@ import com.massivekinetics.ow.data.WeatherForecastChangedListener;
 import com.massivekinetics.ow.data.WeatherModel;
 import com.massivekinetics.ow.data.manager.DataManager;
 import com.massivekinetics.ow.states.WeatherState;
-import com.massivekinetics.ow.utils.TypefaceUtil;
 import com.massivekinetics.ow.utils.WeatherCodeUtils;
 
 public class ForecastPageActivity extends OWActivity implements WeatherForecastChangedListener {
@@ -29,7 +28,7 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
         setContentView(R.layout.forecast_page);
         dataManager = OWApplication.context.getDataManager();
 
-        initLayout();
+        initViews();
         initListeners();
         updateWeatherInfo();
         uiHandler.postDelayed(new Runnable() {
@@ -48,7 +47,8 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
         updateWeatherInfo();
     }
 
-    private void initLayout() {
+    @Override
+    protected void initViews() {
         tvToday = (TextView) findViewById(R.id.tvToday);
         tvDaytime = (TextView) findViewById(R.id.tvDaytime);
         tvNightTemp = (TextView) findViewById(R.id.tvNightTemp);
@@ -61,10 +61,11 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
         ivWeatherState = (ImageView) findViewById(R.id.ivWeatherState);
 
         ibSettings = (ImageButton) findViewById(R.id.ibSettings);
-        setLayoutFont(tvToday, tvCurrentTemp, tvMinus, tvNightTemp, tvDaytime, tvWeatherDescription, tvHumidity, tvWindSpeed, tvMoonPhase);
+        setFont(tvToday, tvCurrentTemp, tvMinus, tvNightTemp, tvDaytime, tvWeatherDescription, tvHumidity, tvWindSpeed, tvMoonPhase);
     }
 
-    private void initListeners() {
+    @Override
+    protected void initListeners() {
         ibSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,11 +74,6 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
                 startActivity(settingsIntent);
             }
         });
-    }
-
-    private void setLayoutFont(TextView... textViews) {
-        for (TextView textView : textViews)
-            TypefaceUtil.setTextViewTypeface(textView, fontThin);
     }
 
     private void updateWeatherInfo() {
