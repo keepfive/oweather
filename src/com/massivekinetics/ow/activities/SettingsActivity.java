@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 public class SettingsActivity extends OWActivity {
     ImageButton btnBack;
-    TextView tvLocationTitle;
+    TextView tvLocationTitle, tvAutoDefine, tvNotification;
     EditText etUserLocation;
     View progressBar;
 
@@ -56,9 +56,11 @@ public class SettingsActivity extends OWActivity {
     protected void initViews() {
         btnBack = (ImageButton) findViewById(R.id.ibBack);
         tvLocationTitle = (TextView) findViewById(R.id.tvLocationTitle);
+        tvAutoDefine = (TextView) findViewById(R.id.tvAutoDefine);
+        tvNotification = (TextView) findViewById(R.id.tvNotification);
         etUserLocation = (EditText) findViewById(R.id.etUserLocation);
         progressBar = findViewById(R.id.progressBar);
-        setFont(tvLocationTitle);
+        setFont(tvLocationTitle, tvAutoDefine, tvNotification);
     }
 
     @Override

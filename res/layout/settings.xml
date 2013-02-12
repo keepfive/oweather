@@ -7,7 +7,7 @@
 
     <include layout="@layout/settings_header" android:layout_alignParentTop="true"/>
     <include layout="@layout/settings_location"/>
-
+    <include layout="@layout/settings_switches"/>
 
     <include layout="@layout/progress_bar"/>
 </RelativeLayout>
