@@ -7,4 +7,5 @@
 
     <string name="your_location">Your location</string>
     <string name="location_hint">your location here...</string>
+    <string name="notification_time_message">Every day, at the appointed time, you will receive notification about the weather in notification tray</string>
 </resources>

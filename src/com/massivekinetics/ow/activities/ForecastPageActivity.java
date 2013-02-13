@@ -12,12 +12,13 @@ import com.massivekinetics.ow.data.WeatherForecastChangedListener;
 import com.massivekinetics.ow.data.WeatherModel;
 import com.massivekinetics.ow.data.manager.DataManager;
 import com.massivekinetics.ow.states.WeatherState;
+import com.massivekinetics.ow.utils.StringUtils;
 import com.massivekinetics.ow.utils.WeatherCodeUtils;
 
 public class ForecastPageActivity extends OWActivity implements WeatherForecastChangedListener {
     TextView tvToday, tvCurrentTemp, tvDaytime, tvNightTemp, tvWeatherDescription, tvMinus;
     TextView tvHumidity, tvWindSpeed, tvMoonPhase;
-    ImageView ivWeatherState;
+    ImageView ivWeatherState, ivHumidity;
     ImageButton ibSettings;
     DataManager dataManager;
     int i = 0;
@@ -59,6 +60,7 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
         tvWindSpeed = (TextView) findViewById(R.id.tvWindSpeed);
         tvMoonPhase = (TextView) findViewById(R.id.tvMoonPhase);
         ivWeatherState = (ImageView) findViewById(R.id.ivWeatherState);
+        ivHumidity = (ImageView) findViewById(R.id.ivHumidity);
 
         ibSettings = (ImageButton) findViewById(R.id.ibSettings);
         setFont(tvToday, tvCurrentTemp, tvMinus, tvNightTemp, tvDaytime, tvWeatherDescription, tvHumidity, tvWindSpeed, tvMoonPhase);
@@ -78,8 +80,8 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
 
     private void updateWeatherInfo() {
         WeatherModel model = dataManager.getWeatherForecast().getForecastList().get(i++);
-        int currentTemp =  Integer.parseInt(model.getTempMaxC());
-        if(currentTemp<0)
+        int currentTemp = Integer.parseInt(model.getTempMaxC());
+        if (currentTemp < 0)
             tvMinus.setVisibility(View.VISIBLE);
         else
             tvMinus.setVisibility(View.INVISIBLE);
@@ -87,17 +89,38 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
         currentTemp = Math.abs(currentTemp);
         int margin = resolveMargin(currentTemp);
 
-        tvCurrentTemp.setText(""+currentTemp);
+        tvCurrentTemp.setText("" + currentTemp);
 
         setMarginParams(margin, tvCurrentTemp);
 
 
         tvNightTemp.setText(model.getTempMinC());
-        tvHumidity.setText(model.getHumidity() + "%");
+        if (model.getHumidity() != null && model.getHumidity() != "") {
+            tvHumidity.setText(model.getHumidity() + "%");
+            ivHumidity.setImageResource(getHumidityResource((model.getHumidity())));
+        } else {
+            tvHumidity.setText(model.getPrecipitation() + " mm");
+            ivHumidity.setImageResource(R.drawable.precipmm);
+        }
+
         tvWindSpeed.setText(model.getWindSpeedMiles() + " mph");
         WeatherState weatherState = WeatherCodeUtils.getWeatherState(Integer.parseInt(model.getWeatherCode()));
         int resource = WeatherCodeUtils.getWeatherImageResource(weatherState);
         ivWeatherState.setImageResource(resource);
+    }
+
+    private int getHumidityResource(String humidity) {
+        if (StringUtils.isNullOrEmpty(humidity))
+            return R.drawable.weather_drop_1;
+
+        int resId = Integer.parseInt(humidity);
+
+        if (resId >= 0 && resId <= 33)
+            return R.drawable.weather_drop_1;
+        else if (resId >= 34 && resId < 67)
+            return R.drawable.weather_drop_2;
+        else
+            return R.drawable.weather_drop_3;
     }
 
     private int resolveMargin(int temperature) {

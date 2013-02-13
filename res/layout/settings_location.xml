@@ -4,7 +4,7 @@
               android:id="@+id/settingsLocation"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content" android:layout_marginTop="15dp" android:layout_below="@id/settingsHeader">
+              android:layout_height="wrap_content" android:layout_marginTop="25dp" android:layout_below="@id/settingsHeader">
 
     <TextView
             android:layout_width="fill_parent"
@@ -15,5 +15,5 @@
             style="@style/TextView"/>
     <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/etUserLocation" style="@style/LocationEditText"/>
+            android:layout_height="wrap_content" android:id="@+id/etUserLocation" android:layout_marginTop="25dp" style="@style/LocationEditText"/>
 </LinearLayout>

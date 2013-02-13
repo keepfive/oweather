@@ -1,16 +1,16 @@
 package com.massivekinetics.ow.activities;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.location.OWLocation;
+import com.massivekinetics.ow.location.MyLocation;
 import com.massivekinetics.ow.location.OWLocationManager;
-
-import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,10 +20,55 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public class SettingsActivity extends OWActivity {
-    ImageButton btnBack;
-    TextView tvLocationTitle, tvAutoDefine, tvNotification;
+    ImageButton btnBack, btnCelcius, btnFahrenheit;
+    TextView tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle;
+    TextView tvNotificationMessage, tvNotificationTime;
     EditText etUserLocation;
     View progressBar;
+    CompoundButton switchAutoDefine, switchNotification;
+    MyLocation location;
+    MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
+        @Override
+        public void gotLocation(Location location) {
+            String loc = null;
+
+            try {
+                loc = locMgr.getCityName(location);
+            } catch (Exception e) {
+            }
+
+            final String locVal = loc;
+            uiHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (locVal != null)
+                        etUserLocation.setText(locVal);
+                    else
+                        etUserLocation.setText("Could not find");
+
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
+        }
+    };
+    OWLocationManager locMgr = new OWLocationManager();
+
+    private View.OnClickListener temperatureModeListener = new View.OnClickListener() {
+        boolean isCelsius = true;
+        @Override
+        public void onClick(View v) {
+            isCelsius = !isCelsius;
+            final int resIdC = isCelsius ? R.drawable.celcius_light : R.drawable.celcius_dark;
+            final int resIdF = isCelsius ? R.drawable.fahrenheit_dark : R.drawable.fahrenheit_light;
+            uiHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    btnCelcius.setImageResource(resIdC);
+                    btnFahrenheit.setImageResource(resIdF);
+                }
+            });
+        }
+    };
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,32 +80,32 @@ public class SettingsActivity extends OWActivity {
     }
 
     private void tryGetLocation() {
-        OWLocationManager locationManager = new OWLocationManager();
-        OWLocation loc = locationManager.getLastKnownLocation();
-        if (loc != OWLocation.NULL) {
-            try {
-                final String city = locationManager.getCityName(loc.location);
-                uiHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        etUserLocation.setText(city);
-                    }
-                });
-            } catch (IOException e) {
+        progressBar.setVisibility(View.VISIBLE);
 
-            }
-        }
+        location = new MyLocation();
+        location.getLocation(this, locationResult);
     }
 
     @Override
     protected void initViews() {
         btnBack = (ImageButton) findViewById(R.id.ibBack);
+        btnCelcius = (ImageButton) findViewById(R.id.ibCelcius);
+        btnFahrenheit = (ImageButton) findViewById(R.id.ibFahrenheit);
+
         tvLocationTitle = (TextView) findViewById(R.id.tvLocationTitle);
-        tvAutoDefine = (TextView) findViewById(R.id.tvAutoDefine);
-        tvNotification = (TextView) findViewById(R.id.tvNotification);
+        tvAutoDefineTitle = (TextView) findViewById(R.id.tvAutoDefine);
+        tvNotificationTitle = (TextView) findViewById(R.id.tvNotification);
+        tvNotificationMessage = (TextView) findViewById(R.id.tvNotificationMsg);
+        tvNotificationTime = (TextView) findViewById(R.id.tvNotificationTime);
+
+        tvNotificationMessage.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.reminder_arrow, 0);
+
         etUserLocation = (EditText) findViewById(R.id.etUserLocation);
         progressBar = findViewById(R.id.progressBar);
-        setFont(tvLocationTitle, tvAutoDefine, tvNotification);
+        switchAutoDefine = (CompoundButton) findViewById(R.id.switchAutoDefine);
+        switchNotification = (CompoundButton) findViewById(R.id.switchNotification);
+
+        setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, etUserLocation);
     }
 
     @Override
@@ -77,12 +122,19 @@ public class SettingsActivity extends OWActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                    finish();
+                    setLocation(etUserLocation.getText().toString());
                     return true;
                 }
                 return false;
             }
         });
+
+        btnCelcius.setOnClickListener(temperatureModeListener);
+
+        btnFahrenheit.setOnClickListener(temperatureModeListener);
+    }
+
+    private void setLocation(String areaName) {
     }
 
 

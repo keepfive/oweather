@@ -8,20 +8,20 @@
             android:layout_height="40dp" android:weightSum="3">
 
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvHumidity" android:layout_weight="1" android:text="77%"
+                android:id="@+id/tvHumidity" android:layout_weight="1"
                 android:textColor="@android:color/white" android:gravity="center" android:textSize="20sp"
                 />
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:id="@+id/tvWindSpeed" android:layout_weight="1" android:text="4 mph" android:gravity="center"
+                android:id="@+id/tvWindSpeed" android:layout_weight="1" android:gravity="center"
                 android:textSize="20sp"
                 android:textColor="@android:color/white"
                 />
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvMoonPhase" android:layout_weight="1" android:text="Moon" android:gravity="center"
                 android:textSize="20sp"
@@ -38,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp" android:layout_gravity="center"
                 android:id="@+id/ivHumidity" android:scaleType="centerInside" android:layout_weight="1"
-                android:src="@drawable/weather_drop_2" android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"/>
         <ImageView
                 android:layout_width="0dp"
                 android:layout_height="55dp" android:layout_gravity="center"
