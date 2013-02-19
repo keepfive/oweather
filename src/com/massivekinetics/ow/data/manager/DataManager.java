@@ -1,7 +1,10 @@
 package com.massivekinetics.ow.data.manager;
 
-import com.massivekinetics.ow.data.WeatherForecast;
 import com.massivekinetics.ow.data.WeatherForecastChangedListener;
+import com.massivekinetics.ow.data.model.WeatherForecast;
+import com.massivekinetics.ow.data.tasks.LoadingListener;
+
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,9 +13,16 @@ import com.massivekinetics.ow.data.WeatherForecastChangedListener;
  * Time: 12:36 AM
  * To change this template use File | Settings | File Templates.
  */
-public interface DataManager {
+public interface DataManager extends Serializable {
     void update();
-    WeatherForecast getWeatherForecast();
+
+    public void getWeatherForecast(LoadingListener<WeatherForecast> listener);
+
     void addWeatherForecastChangedListener(WeatherForecastChangedListener listener);
     void removeWeatherForecastChangedListener(WeatherForecastChangedListener listener);
+
+    void updateForecast(WeatherForecast forecast);
+
+    void saveForecast();
+    void restoreForecast();
 }

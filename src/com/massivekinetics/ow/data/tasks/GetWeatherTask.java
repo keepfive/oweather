@@ -3,7 +3,8 @@ package com.massivekinetics.ow.data.tasks;
 import android.os.AsyncTask;
 
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.data.WeatherForecast;
+import com.massivekinetics.ow.data.manager.WeatherDataManager;
+import com.massivekinetics.ow.data.model.WeatherForecast;
 import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.data.parser.WeatherParser;
 import com.massivekinetics.ow.network.Downloader;
@@ -35,7 +36,11 @@ public class GetWeatherTask extends AsyncTask<String, Void, WeatherForecast> {
 		String query = baseUrl.replace("%CITY", cityName).replace("%DAYS", numOfDays).replace("%KEY", key);
 		String response = Downloader.doGet(query);
 		WeatherForecast forecast = parser.getWeatherForecast(response);
-		return forecast;
+
+        if(forecast.isSuccessed())
+            WeatherDataManager.getInstance().updateForecast(forecast);
+
+        return forecast;
 	}
 
 	@Override

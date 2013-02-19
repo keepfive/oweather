@@ -2,55 +2,64 @@ package com.massivekinetics.ow.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
-import com.massivekinetics.ow.data.WeatherForecastChangedListener;
-import com.massivekinetics.ow.data.WeatherModel;
+import com.massivekinetics.ow.data.adapters.WeatherPagerAdapter;
 import com.massivekinetics.ow.data.manager.DataManager;
-import com.massivekinetics.ow.states.WeatherState;
+import com.massivekinetics.ow.data.manager.WeatherDataManager;
+import com.massivekinetics.ow.data.model.WeatherForecast;
+import com.massivekinetics.ow.data.model.WeatherModel;
+import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.utils.StringUtils;
-import com.massivekinetics.ow.utils.WeatherCodeUtils;
 
-public class ForecastPageActivity extends OWActivity implements WeatherForecastChangedListener {
-    TextView tvToday, tvCurrentTemp, tvDaytime, tvNightTemp, tvWeatherDescription, tvMinus;
+public class ForecastPageActivity extends OWActivity {
+    TextView tvDate, tvCurrentTemp, tvDaytime, tvNightTemp, tvWeatherDescription, tvMinus;
     TextView tvHumidity, tvWindSpeed, tvMoonPhase;
-    ImageView ivWeatherState, ivHumidity;
-    ImageButton ibSettings;
+    ImageView /*ivWeatherState,*/ ivHumidity;
+    ImageButton ibSettings, ibPrevious, ibNext;
+
+    ViewPager viewPager;
+
     DataManager dataManager;
-    int i = 0;
+
+    WeatherForecast weatherForecast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forecast_page);
-        dataManager = OWApplication.context.getDataManager();
+        dataManager = WeatherDataManager.getInstance();
 
         initViews();
         initListeners();
-        updateWeatherInfo();
-        uiHandler.postDelayed(new Runnable() {
+        LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
             @Override
-            public void run() {
-                if (i < 5) {
-                    onWeatherForecastChanged();
-                    uiHandler.postDelayed(this, 3000);
-                }
+            public void callback(WeatherForecast result) {
+                updateWeatherInfo(result);
             }
-        }, 3000);
-    }
 
-    @Override
-    public void onWeatherForecastChanged() {
-        updateWeatherInfo();
+            @Override
+            public void notifyStart() {
+
+            }
+
+            @Override
+            public void notifyStop() {
+
+            }
+        };
+        dataManager.getWeatherForecast(listener);
+
     }
 
     @Override
     protected void initViews() {
-        tvToday = (TextView) findViewById(R.id.tvToday);
+        tvDate = (TextView) findViewById(R.id.tvDate);
         tvDaytime = (TextView) findViewById(R.id.tvDaytime);
         tvNightTemp = (TextView) findViewById(R.id.tvNightTemp);
         tvCurrentTemp = (TextView) findViewById(R.id.tvTemp);
@@ -59,11 +68,16 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
         tvHumidity = (TextView) findViewById(R.id.tvHumidity);
         tvWindSpeed = (TextView) findViewById(R.id.tvWindSpeed);
         tvMoonPhase = (TextView) findViewById(R.id.tvMoonPhase);
-        ivWeatherState = (ImageView) findViewById(R.id.ivWeatherState);
+       // ivWeatherState = (ImageView) findViewById(R.id.ivWeatherState);
+
         ivHumidity = (ImageView) findViewById(R.id.ivHumidity);
+        viewPager = (ViewPager)findViewById(R.id.viewPager);
 
         ibSettings = (ImageButton) findViewById(R.id.ibSettings);
-        setFont(tvToday, tvCurrentTemp, tvMinus, tvNightTemp, tvDaytime, tvWeatherDescription, tvHumidity, tvWindSpeed, tvMoonPhase);
+        ibNext = (ImageButton) findViewById(R.id.ibNext);
+        ibPrevious = (ImageButton) findViewById(R.id.ibPrevious);
+
+        setFont(tvDate, tvCurrentTemp, tvMinus, tvNightTemp, tvDaytime, tvWeatherDescription, tvHumidity, tvWindSpeed, tvMoonPhase);
     }
 
     @Override
@@ -76,11 +90,62 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
                 startActivity(settingsIntent);
             }
         });
+
+        ibNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = viewPager.getCurrentItem()+1;
+                viewPager.setCurrentItem(pos);
+
+            }
+        });
+
+
+        ibPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = viewPager.getCurrentItem()-1;
+                viewPager.setCurrentItem(pos);
+
+            }
+        });
+
+
+
+
     }
 
-    private void updateWeatherInfo() {
-        WeatherModel model = dataManager.getWeatherForecast().getForecastList().get(i++);
-        int currentTemp = Integer.parseInt(model.getTempMaxC());
+    private void updateWeatherInfo(WeatherForecast weatherForecast) {
+       this.weatherForecast = weatherForecast;
+       updateUI();
+       viewPager.setAdapter(new WeatherPagerAdapter(this, weatherForecast.getForecastList()));
+       viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+           @Override
+           public void onPageScrolled(int i, float v, int i2) {
+           }
+
+           @Override
+           public void onPageSelected(int i) {
+               updateUI(i);
+           }
+
+           @Override
+           public void onPageScrollStateChanged(int i) {
+           }
+       });
+    }
+
+    private void updateUI(){
+        updateUI(0);
+    }
+
+    private void updateUI(final int position) {
+        WeatherModel model = weatherForecast.getForecastList().get(position);
+
+
+        tvDate.setText(model.getDateString());
+
+        int currentTemp = Integer.parseInt(model.getMaxTemperature());
         if (currentTemp < 0)
             tvMinus.setVisibility(View.VISIBLE);
         else
@@ -94,7 +159,7 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
         setMarginParams(margin, tvCurrentTemp);
 
 
-        tvNightTemp.setText(model.getTempMinC());
+        tvNightTemp.setText(model.getMinTemperature());
         if (model.getHumidity() != null && model.getHumidity() != "") {
             tvHumidity.setText(model.getHumidity() + "%");
             ivHumidity.setImageResource(getHumidityResource((model.getHumidity())));
@@ -104,9 +169,6 @@ public class ForecastPageActivity extends OWActivity implements WeatherForecastC
         }
 
         tvWindSpeed.setText(model.getWindSpeedMiles() + " mph");
-        WeatherState weatherState = WeatherCodeUtils.getWeatherState(Integer.parseInt(model.getWeatherCode()));
-        int resource = WeatherCodeUtils.getWeatherImageResource(weatherState);
-        ivWeatherState.setImageResource(resource);
     }
 
     private int getHumidityResource(String humidity) {

@@ -19,4 +19,6 @@
     <color name="ow_settings">#343434</color>
     <color name="ow_slider_left">#36B1C0</color>
     <color name="ow_slider_right">#272727</color>
+
+    <color name="ow_progress_background">#AA343434</color>
 </resources>

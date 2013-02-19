@@ -4,11 +4,15 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent" android:background="@color/ow_settings">
+    <RelativeLayout android:id="@android:id/content" android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_alignParentTop="true">
 
-    <include layout="@layout/settings_header" android:layout_alignParentTop="true"/>
-    <include layout="@layout/settings_location"/>
-    <include layout="@layout/settings_switches"/>
-    <include layout="@layout/settings_notification" />
+        <include layout="@layout/settings_header" android:layout_alignParentTop="true"/>
+        <include layout="@layout/settings_location"/>
+        <include layout="@layout/settings_switches"/>
+        <include layout="@layout/settings_notification" />
+
+    </RelativeLayout>
 
     <include layout="@layout/progress_bar"/>
 </RelativeLayout>

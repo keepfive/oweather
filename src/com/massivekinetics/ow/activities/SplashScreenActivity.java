@@ -4,15 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
-import com.massivekinetics.ow.data.WeatherForecast;
-import com.massivekinetics.ow.data.manager.DataManager;
-import com.massivekinetics.ow.data.manager.WeatherDataManager;
-import com.massivekinetics.ow.data.tasks.GetWeatherTask;
-import com.massivekinetics.ow.data.tasks.LoadingListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,29 +27,14 @@ public class SplashScreenActivity extends Activity {
 
         initApllication();
 
-        new GetWeatherTask(new LoadingListener<WeatherForecast>() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void callback(WeatherForecast result) {
-                if (result.isSuccessed()) {
-                    DataManager dataManager = new WeatherDataManager(result);
-                    OWApplication.context.setDataManager(dataManager);
-                } else {
-
-                }
-                notifyStop();
-            }
-
-            @Override
-            public void notifyStart() {
-            }
-
-            @Override
-            public void notifyStop() {
+            public void run() {
                 Intent showForecastIntent = new Intent(SplashScreenActivity.this, ForecastPageActivity.class);
                 startActivity(showForecastIntent);
+                finish();
             }
-        }).execute("kiev", "5");
-
+        }, 3000);
     }
 
     void initApllication() {

@@ -6,7 +6,7 @@
               android:layout_height="wrap_content" android:id="@+id/settingsNotification" android:layout_alignParentBottom="true" android:padding="15dp" android:layout_marginTop="15dp">
 
     <TextView android:id="@+id/tvNotificationTime" android:layout_width="fill_parent"
-              android:layout_height="wrap_content" android:text="9:00" android:textSize="24sp" android:padding="5dp"
+              android:layout_height="wrap_content" android:textSize="24sp" android:padding="5dp"
               android:drawableEnd="@drawable/reminder_arrow"
               android:background="@android:color/white" android:textColor="@color/ow_settings"
               android:paddingLeft="10dp" android:gravity="center_vertical" />

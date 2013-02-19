@@ -9,15 +9,16 @@
     <ImageButton
             android:layout_width="0dp" android:layout_weight="1"
             android:layout_height="wrap_content" android:background="@android:color/transparent"
-            android:id="@+id/ibLeft" android:layout_gravity="center" android:src="@drawable/left_arrow"
+            android:id="@+id/ibPrevious" android:layout_gravity="center" android:src="@drawable/left_arrow"
             android:scaleType="centerInside"/>
-    <ImageView
-            android:layout_width="0dp" android:layout_weight="2"
-            android:layout_height="fill_parent"
-            android:id="@+id/ivWeatherState" android:src="@drawable/weather_state_11" android:scaleType="centerInside"/>
+
+    <android.support.v4.view.ViewPager android:id="@+id/viewPager"  android:layout_width="0dp" android:layout_weight="2"
+                android:layout_height="fill_parent"
+                />
+
     <ImageButton
             android:layout_width="0dp" android:layout_weight="1"
             android:layout_height="wrap_content" android:background="@android:color/transparent"
-            android:id="@+id/ibRight" android:layout_gravity="center" android:src="@drawable/right_arrow"
+            android:id="@+id/ibNext" android:layout_gravity="center" android:src="@drawable/right_arrow"
             android:scaleType="centerInside"/>
 </LinearLayout>

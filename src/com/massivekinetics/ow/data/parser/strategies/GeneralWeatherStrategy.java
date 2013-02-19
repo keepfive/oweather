@@ -4,7 +4,7 @@ import org.json.JSONException;
 
 import org.json.JSONObject;
 
-import com.massivekinetics.ow.data.WeatherModel;
+import com.massivekinetics.ow.data.model.WeatherModel;
 import static com.massivekinetics.ow.data.parser.WeatherConstants.*;
 
 public class GeneralWeatherStrategy implements JsonParserStrategy {

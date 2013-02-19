@@ -1,13 +1,23 @@
-package com.massivekinetics.ow.data;
+package com.massivekinetics.ow.data.model;
 
 import com.massivekinetics.ow.data.parser.ParserStatus;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class WeatherForecast {
+public class WeatherForecast implements Serializable {
+    public static final transient WeatherForecast NULL = new WeatherForecast();
+    private long timeStamp;
+
 	private List<WeatherModel> forecastList = new ArrayList<WeatherModel>();
 	private ParserStatus status = ParserStatus.SUCCESS;
+
+
+    public WeatherForecast(){
+        timeStamp = new Date().getTime();
+    }
 	
 	public List<WeatherModel> getForecastList() {
 		return forecastList;
@@ -28,6 +38,10 @@ public class WeatherForecast {
 
     public boolean isSuccessed(){
         return status == ParserStatus.SUCCESS;
+    }
+
+    public long getTimeStamp(){
+        return timeStamp;
     }
 
 }

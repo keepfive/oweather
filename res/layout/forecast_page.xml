@@ -1,53 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/ow_mostly_cloudy"
-              android:orientation="vertical">
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
     <LinearLayout
-            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="5">
+            android:layout_height="match_parent"
+            android:background="@color/ow_mostly_cloudy"
+            android:orientation="vertical">
 
-        <ImageButton android:layout_gravity="center_horizontal|center"
-                     android:id="@+id/ibSettings"
-                     android:layout_width="30dp"
-                     android:layout_height="30dp"
-                     android:layout_weight="1"
-                     android:background="@android:color/transparent"
-                     android:src="@drawable/settings" android:adjustViewBounds="true" android:scaleType="centerInside"/>
-
-        <TextView
-                android:id="@+id/tvToday"
-                android:layout_width="wrap_content"
+        <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3" android:textSize="48sp"
-                android:gravity="center" android:textColor="@android:color/white"
-                android:text="Today" android:textStyle="bold">
-        </TextView>
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="5">
 
-        <ImageButton android:layout_gravity="center_horizontal|center"
-                     android:id="@+id/ibBack"
-                     android:layout_width="30dp"
-                     android:layout_height="30dp"
-                     android:layout_weight="1"
-                     android:background="@android:color/transparent"   android:visibility="invisible"
-                     android:src="@drawable/back" android:adjustViewBounds="true" android:scaleType="centerInside"/>
+            <ImageButton android:layout_gravity="center_horizontal|center"
+                         android:id="@+id/ibSettings"
+                         android:layout_width="30dp"
+                         android:layout_height="30dp"
+                         android:layout_weight="1"
+                         android:background="@android:color/transparent"
+                         android:src="@drawable/settings" android:adjustViewBounds="true"
+                         android:scaleType="centerInside"/>
+
+            <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3" android:textSize="42sp"
+                    android:gravity="center" android:textColor="@android:color/white"
+                    android:text="Today" android:textStyle="bold">
+            </TextView>
+
+            <ImageButton android:layout_gravity="center_horizontal|center"
+                         android:id="@+id/ibBack"
+                         android:layout_width="30dp"
+                         android:layout_height="30dp"
+                         android:layout_weight="1"
+                         android:background="@android:color/transparent" android:visibility="invisible"
+                         android:src="@drawable/back" android:adjustViewBounds="true" android:scaleType="centerInside"/>
+        </LinearLayout>
+
+        <include layout="@layout/temperature_block"/>
+        <include layout="@layout/weather_desc_block"/>
+
+        <TextView android:id="@+id/tvWeatherDesctiption" android:layout_width="fill_parent"
+                  android:layout_height="wrap_content" android:layout_marginTop="25dp"
+                  android:text="Storm, save your ass..." android:marqueeRepeatLimit="marquee_forever"
+                  android:gravity="center" android:textSize="32sp"
+                  android:textColor="@android:color/white"
+                />
+
+        <include layout="@layout/forecast_details_block"/>
+
     </LinearLayout>
 
-    <include layout="@layout/temperature_block"/>
-    <include layout="@layout/weather_desc_block"/>
-
-    <TextView android:id="@+id/tvWeatherDesctiption" android:layout_width="fill_parent"
-              android:layout_height="wrap_content" android:layout_marginTop="25dp"
-              android:text="Storm, save your ass..." android:marqueeRepeatLimit="marquee_forever" android:gravity="center" android:textSize="32sp"
-              android:textColor="@android:color/white"
-            />
-
-    <include layout="@layout/forecast_details_block"/>
-
-</LinearLayout>
+</RelativeLayout>

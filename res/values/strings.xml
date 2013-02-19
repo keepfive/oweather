@@ -8,4 +8,7 @@
     <string name="your_location">Your location</string>
     <string name="location_hint">your location here...</string>
     <string name="notification_time_message">Every day, at the appointed time, you will receive notification about the weather in notification tray</string>
+    <string name="could_not_locate">Your location could not been retrieved. Please add location manually</string>
+    <string name="location_saved">Location saved</string>
+    <string name="not_available">N/A</string>
 </resources>

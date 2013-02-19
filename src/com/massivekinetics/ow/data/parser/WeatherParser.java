@@ -14,8 +14,8 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-import com.massivekinetics.ow.data.WeatherForecast;
-import com.massivekinetics.ow.data.WeatherModel;
+import com.massivekinetics.ow.data.model.WeatherForecast;
+import com.massivekinetics.ow.data.model.WeatherModel;
 import com.massivekinetics.ow.data.parser.strategies.CurrentWeatherStrategy;
 import com.massivekinetics.ow.data.parser.strategies.GeneralWeatherStrategy;
 import com.massivekinetics.ow.data.parser.strategies.JsonParserStrategy;

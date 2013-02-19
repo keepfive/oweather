@@ -32,7 +32,7 @@
             <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp" android:scaleType="centerCrop"
-                    android:id="@+id/imageView" android:layout_marginTop="5dp"
+                    android:id="@+id/ivDegrees" android:layout_marginTop="5dp"
                     android:src="@drawable/degrees"/>
         </LinearLayout>
         <TextView
