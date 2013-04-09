@@ -5,12 +5,14 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.interfaces.ProgressListener;
 import com.massivekinetics.ow.location.OWLocationManager;
+import com.massivekinetics.ow.utils.StringUtils;
 
 import static com.massivekinetics.ow.data.manager.ConfigManager.*;
 
@@ -36,6 +38,7 @@ public class SettingsActivity extends OWActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.settings);
         initViews();
     }
@@ -96,7 +99,7 @@ public class SettingsActivity extends OWActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN  ) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    setUserLocation(etUserLocation.getText().toString());
+                    setUserLocation(etUserLocation.getText().toString(), "temp");
                     InputMethodManager imm =
                             (InputMethodManager)OWApplication.context.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(etUserLocation.getWindowToken(), 0);
@@ -156,8 +159,9 @@ public class SettingsActivity extends OWActivity {
     }
 
 
-    private void setUserLocation(String cityName) {
+    private void setUserLocation(String cityName, String gpsParams) {
         configManager.setConfig(CITY_NAME, cityName);
+        configManager.setConfig(GPS_PARAMS, gpsParams);
         notifier.alert(getString(R.string.location_saved), Toast.LENGTH_SHORT);
     }
 
@@ -165,18 +169,21 @@ public class SettingsActivity extends OWActivity {
         @Override
         public void gotLocation(Location location) {
             String cityName = null;
+            String gpsParams = null;
             try {
                 cityName = locationMgr.getCityName(location);
+                gpsParams = locationMgr.getGpsCoordinatesAsParams(location);
             } catch (Exception e) {}
 
             final String finalCityName = cityName;
+            final String finalGpsParams = gpsParams;
 
             uiHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (finalCityName != null){
+                    if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)){
                         etUserLocation.setText(finalCityName);
-                        setUserLocation(finalCityName);
+                        setUserLocation(finalCityName, finalGpsParams);
                     }
                     else
                         notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);

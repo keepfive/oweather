@@ -37,10 +37,11 @@ public class WeatherDataManager implements DataManager {
 
     @Override
     public void getWeatherForecast(LoadingListener<WeatherForecast> listener) {
+
         if(isForecastUpToDate())
             listener.callback(mWeatherForecast);
         else
-            new GetWeatherTask(listener).execute("kiev", "5");
+            new GetWeatherTask(new OWConfigManager(), listener).execute();
     }
 
     @Override

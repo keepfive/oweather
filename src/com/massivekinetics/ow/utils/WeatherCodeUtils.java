@@ -54,8 +54,54 @@ public class WeatherCodeUtils {
                 }
                 
                 default:
-                    return R.drawable.ic_launcher;
+                    return R.drawable.weather_state_0;
             }
+    }
+
+    public static int getWeatherBackgroundColor(WeatherState weatherState){
+        switch (weatherState) {
+            case SUNNY:
+                return R.color.ow_sunny;
+
+            case DOWNPOUR: {
+                return R.color.ow_downpour;
+            }
+
+            case LIGHT_RAIN: {
+                return R.color.ow_light_rain;
+            }
+
+            case MOSTLY_CLOUDLY: {
+                return R.color.ow_mostly_cloudy;
+            }
+
+            case PARTLY_CLOUDLY: {
+                return R.color.ow_partly_cloudy;
+            }
+
+            case RAIN: {
+                return R.color.ow_rain;
+            }
+
+            case RAIN_AND_SUN: {
+                return R.color.ow_rain_and_sun;
+            }
+
+            case SLEET: {
+                return R.color.ow_sleet;
+            }
+
+            case SNOW: {
+                return R.color.ow_snow;
+            }
+
+            case SNOW_FALL: {
+                return R.color.ow_snowfall;
+            }
+
+            default:
+                return R.color.ow_sunny;
+        }
     }
 
     public static WeatherState getWeatherState(int weatherCode) {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:pcr="http://schemas.android.com/apk/res/com.massivekinetics.ow"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent" >
+
+    <com.massivekinetics.ow.views.PullToRefreshLayout
+            android:id="@+id/pull_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/ow_settings"
+            pcr:actionViewId="@id/action_view"
+
+            android:scrollbars="vertical">
+
+        <include
+                android:id="@id/action_view"
+                layout="@layout/update_layout" />
+
+        <include layout="@layout/forecast_page"/>
+    </com.massivekinetics.ow.views.PullToRefreshLayout>
+
+</FrameLayout>

@@ -1,8 +1,10 @@
 package com.massivekinetics.ow.utils;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.TypedValue;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
 
@@ -87,6 +89,14 @@ public class BitmapUtils {
         src.recycle();
         // return final image
         return bmOut;
+    }
+
+    public static final int dipToPx(int dp) {
+
+        Resources r = OWApplication.context.getResources();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                r.getDisplayMetrics());
+
     }
 
 }

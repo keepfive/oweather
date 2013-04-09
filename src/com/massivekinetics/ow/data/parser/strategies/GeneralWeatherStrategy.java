@@ -23,7 +23,7 @@ public class GeneralWeatherStrategy implements JsonParserStrategy {
 		model.setWindDegree(jsonObject.getString(WIND_DIRECTION_DEGREE));
 		model.setWindDirection(jsonObject.getString(WIND_DIRECTION));
 		model.setWeatherCode(jsonObject.getString(WEATHER_CODE));
-		model.setDescription(jsonObject.getJSONArray(WEATHER_DESC).getJSONObject(0).getString(VALUE));
+		//model.setDescription(jsonObject.getJSONArray(WEATHER_DESC).getJSONObject(0).getString(VALUE));
 		return model;
 	}
 

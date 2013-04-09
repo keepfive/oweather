@@ -3,7 +3,9 @@
     <string name="app_name">oWeather</string>
     <string name="weather_key">bd44eb1c6f224139132601</string>
     <string name="weather_base_url_city">http://free.worldweatheronline.com/feed/weather.ashx?q=%CITY&amp;format=json&amp;num_of_days=%DAYS&amp;key=%KEY</string>
-	<string name="weather_base_url_gps">http://free.worldweatheronline.com/feed/weather.ashx?q=%LAT,%LONG&amp;format=json&amp;num_of_days=%DAYS&amp;key=%KEY</string>
+	<string name="weather_base_url_gps">http://free.worldweatheronline.com/feed/weather.ashx?q=%GPS&amp;format=json&amp;num_of_days=5&amp;key=%KEY</string>
+
+    <string name="ow_rest_base_gps">http://ow-test-v0.j.rsnx.ru/rest/1/weather?q=%GPS</string>
 
     <string name="your_location">Your location</string>
     <string name="location_hint">your location here...</string>
@@ -11,4 +13,7 @@
     <string name="could_not_locate">Your location could not been retrieved. Please add location manually</string>
     <string name="location_saved">Location saved</string>
     <string name="not_available">N/A</string>
+
+    <string name="pull_to_refresh">Pull down to refresh</string>
+    <string name="release_to_refresh">Release to refresh</string>
 </resources>

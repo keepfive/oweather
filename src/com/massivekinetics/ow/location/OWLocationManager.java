@@ -66,6 +66,17 @@ public class OWLocationManager {
         }
     }
 
+    public String getGpsCoordinatesAsParams(Location location) throws IOException{
+        if(location == null)
+            return null;
+
+        String params = "[lat],[long]";
+        params = params.replace("[lat]", ""+location.getLatitude());
+        params = params.replace("[long]", ""+location.getLongitude());
+
+        return params;
+    }
+
     private void requestLocationUpdates(){
         if(gps_enabled)
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGps);

@@ -15,6 +15,7 @@ public interface ConfigManager {
     public static final String NOTIFICATION_ENABLED = "notification_enabled";
     public static final String NOTIFICATION_TIME_HOUR = "notification_time_hour";
     public static final String NOTIFICATION_TIME_MINUTE = "notification_time_minute";
+    public static final String GPS_PARAMS = "gps_params";
 
     String getStringConfig(String configName);
 

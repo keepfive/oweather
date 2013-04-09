@@ -2,10 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-    <LinearLayout
+
+
+    <LinearLayout android:id="@+id/weather_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/ow_mostly_cloudy"
+
             android:orientation="vertical">
 
         <LinearLayout
@@ -18,7 +20,7 @@
 
             <ImageButton android:layout_gravity="center_horizontal|center"
                          android:id="@+id/ibSettings"
-                         android:layout_width="30dp"
+                         android:layout_width="0dp"
                          android:layout_height="30dp"
                          android:layout_weight="1"
                          android:background="@android:color/transparent"
@@ -27,16 +29,16 @@
 
             <TextView
                     android:id="@+id/tvDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" android:textSize="42sp"
+                    android:layout_weight="3" android:textSize="36sp"
                     android:gravity="center" android:textColor="@android:color/white"
                     android:text="Today" android:textStyle="bold">
             </TextView>
 
             <ImageButton android:layout_gravity="center_horizontal|center"
                          android:id="@+id/ibBack"
-                         android:layout_width="30dp"
+                         android:layout_width="0dp"
                          android:layout_height="30dp"
                          android:layout_weight="1"
                          android:background="@android:color/transparent" android:visibility="invisible"

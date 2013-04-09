@@ -3,7 +3,6 @@ package com.massivekinetics.ow.activities;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Window;
 import android.widget.TextView;
 import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.data.manager.ConfigManager;
@@ -19,7 +18,7 @@ public abstract class OWActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
     }
 
