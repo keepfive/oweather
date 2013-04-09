@@ -19,17 +19,19 @@ public class SwipeIndicatorPresenter {
     private ViewGroup layout;
     private int activeInicatorDrawableId, passiveIndicatorDrawableId;
 
-    public SwipeIndicatorPresenter(int indicatorCount) {
+    public SwipeIndicatorPresenter(ViewGroup layout, int indicatorCount) {
         this.indicatorCount = indicatorCount;
         activeInicatorDrawableId = R.drawable.indicator_active;
         passiveIndicatorDrawableId = R.drawable.indicator_passive;
+        this.layout = layout;
+
         inflateLayout();
         setCurrentActivePosition(0);
     }
 
     private void inflateLayout() {
         LayoutInflater inflater = LayoutInflater.from(OWApplication.context);
-        layout = (ViewGroup) inflater.inflate(R.layout.indicator_layout, null);
+        layout.removeAllViews();
         for (int i = 0; i < indicatorCount; i++) {
             ImageView imageView = (ImageView) inflater.inflate(R.layout.image_view, null);
             imageView.setImageResource(passiveIndicatorDrawableId);

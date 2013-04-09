@@ -23,6 +23,7 @@ import com.massivekinetics.ow.states.WeatherState;
 import com.massivekinetics.ow.utils.DateUtils;
 import com.massivekinetics.ow.utils.StringUtils;
 import com.massivekinetics.ow.utils.WeatherCodeUtils;
+import com.massivekinetics.ow.views.SwipeIndicatorPresenter;
 
 public class ForecastPageActivity extends PullToRefreshActivity {
     ViewGroup weatherContainer;
@@ -33,6 +34,10 @@ public class ForecastPageActivity extends PullToRefreshActivity {
     ImageButton ibSettings, ibPrevious, ibNext;
     ViewPager viewPager;
     DataManager dataManager;
+
+    SwipeIndicatorPresenter swipeIndicatorPresenter;
+    private ViewGroup indicatorLayout;
+
     WeatherForecast weatherForecast;
 
     LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
@@ -51,6 +56,7 @@ public class ForecastPageActivity extends PullToRefreshActivity {
 
         }
     };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,6 +103,8 @@ public class ForecastPageActivity extends PullToRefreshActivity {
         ibSettings = (ImageButton) findViewById(R.id.ibSettings);
         ibNext = (ImageButton) findViewById(R.id.ibNext);
         ibPrevious = (ImageButton) findViewById(R.id.ibPrevious);
+
+        indicatorLayout = (ViewGroup) findViewById(R.id.indicator);
 
         setFont(tvDate, tvCurrentTemp, tvMinus, tvNightTemp, tvDaytime, tvWeatherDescription, tvHumidity, tvWindSpeed, tvMoonPhase);
     }
@@ -175,6 +183,8 @@ public class ForecastPageActivity extends PullToRefreshActivity {
         }
 
         this.weatherForecast = weatherForecast;
+        swipeIndicatorPresenter = new SwipeIndicatorPresenter(indicatorLayout, weatherForecast.getForecastList().size());
+
         updateUI();
         viewPager.setAdapter(new WeatherPagerAdapter(this, weatherForecast.getForecastList()));
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -222,7 +232,7 @@ public class ForecastPageActivity extends PullToRefreshActivity {
     private void updateUI(final int position) {
         if(weatherForecast == WeatherForecast.NULL)
             return;
-
+        swipeIndicatorPresenter.setCurrentActivePosition(position);
         WeatherModel model = weatherForecast.getForecastList().get(position);
 
         DateUtils utils = new DateUtils();

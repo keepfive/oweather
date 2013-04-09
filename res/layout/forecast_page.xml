@@ -55,6 +55,10 @@
                   android:textColor="@android:color/white"
                 />
 
+        <LinearLayout android:id="@+id/indicator" android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="30dp" android:padding="5dp"/>
+
         <include layout="@layout/forecast_details_block"/>
 
     </LinearLayout>
