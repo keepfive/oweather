@@ -135,7 +135,7 @@ public class WeatherCodeUtils {
                 return WeatherState.SLEET;
 
             case 200:
-                return WeatherState.RAIN_AND_SUN;
+                return WeatherState.LIGHTING_STORM;
 
             case 227:
                 return WeatherState.SNOW;
@@ -144,10 +144,10 @@ public class WeatherCodeUtils {
                 return WeatherState.SNOW_FALL;
 
             case 248:
-                return WeatherState.MOSTLY_CLOUDLY;
+                return WeatherState.FOG;
 
             case 260:
-                return WeatherState.MOSTLY_CLOUDLY;
+                return WeatherState.FOG;
 
             case 263:
                 return WeatherState.RAIN_AND_SUN;
@@ -234,10 +234,10 @@ public class WeatherCodeUtils {
                 return WeatherState.SLEET;
 
             case 386:
-                return WeatherState.RAIN;
+                return WeatherState.LIGHTING_STORM;
 
             case 389:
-                return WeatherState.DOWNPOUR;
+                return WeatherState.LIGHTING_STORM;
 
             case 392:
                 return WeatherState.SNOW;

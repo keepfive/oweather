@@ -12,6 +12,7 @@ import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.interfaces.ProgressListener;
 import com.massivekinetics.ow.location.OWLocationManager;
+import com.massivekinetics.ow.utils.DateUtils;
 import com.massivekinetics.ow.utils.StringUtils;
 
 import static com.massivekinetics.ow.data.manager.ConfigManager.*;
@@ -25,26 +26,85 @@ import static com.massivekinetics.ow.data.manager.ConfigManager.*;
  */
 public class SettingsActivity extends OWActivity {
     View rootContent;
-
     ImageButton btnBack, btnCelsius, btnFahrenheit;
     TextView tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle;
     TextView tvNotificationMessage, tvNotificationTime;
     EditText etUserLocation;
     View progressBar;
     CompoundButton switchAutoDefine, switchNotification;
-
     OWLocationManager locationMgr;
+
+    OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
+
+        @Override
+        public void gotLocation(Location location) {
+            String cityName = null;
+            String gpsParams = null;
+            try {
+                cityName = locationMgr.getCityName(location);
+                gpsParams = locationMgr.getGpsCoordinatesAsParams(location);
+            } catch (Exception e) {
+
+            }
+
+            final String finalCityName = cityName;
+            final String finalGpsParams = gpsParams;
+
+            uiHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)) {
+                        etUserLocation.setText(finalCityName);
+                        setUserLocation(finalCityName, finalGpsParams);
+                    } else
+                        notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
+                    progressListener.hideProgress();
+                }
+            });
+        }
+    };
+    private View.OnClickListener temperatureModeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            boolean isFahrenheit = configManager.getBooleanConfig(TEMPERATURE_MODE_FAHRENHEIT);
+            isFahrenheit = !isFahrenheit;
+            configManager.setConfig(TEMPERATURE_MODE_FAHRENHEIT, isFahrenheit);
+            final int resIdC = isFahrenheit ? R.drawable.celcius_dark : R.drawable.celcius_light;
+            final int resIdF = isFahrenheit ? R.drawable.fahrenheit_light : R.drawable.fahrenheit_dark;
+            uiHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    btnCelsius.setImageResource(resIdC);
+                    btnFahrenheit.setImageResource(resIdF);
+                }
+            });
+        }
+    };
+    private ProgressListener progressListener = new ProgressListener() {
+        @Override
+        public void showProgress() {
+            progressBar.setVisibility(View.VISIBLE);
+            rootContent.setEnabled(false);
+        }
+
+        @Override
+        public void hideProgress() {
+            progressBar.setVisibility(View.GONE);
+            rootContent.setEnabled(true);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.settings);
+        locationMgr = new OWLocationManager();
         initViews();
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, etUserLocation);
         checkConfig();
@@ -52,10 +112,9 @@ public class SettingsActivity extends OWActivity {
     }
 
     private void tryGetLocation() {
-        progressBar.setVisibility(View.VISIBLE);
         locationMgr = new OWLocationManager();
         boolean isLocationAvailable = locationMgr.getLocation(this, locationResult);
-        if(isLocationAvailable)
+        if (isLocationAvailable)
             progressListener.showProgress();
         else
             notifier.alert("Your location could not been retrieved. Please add location manually", Toast.LENGTH_LONG);
@@ -97,11 +156,11 @@ public class SettingsActivity extends OWActivity {
         etUserLocation.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN  ) &&
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     setUserLocation(etUserLocation.getText().toString(), "temp");
                     InputMethodManager imm =
-                            (InputMethodManager)OWApplication.context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                            (InputMethodManager) OWApplication.context.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(etUserLocation.getWindowToken(), 0);
                     return true;
                 }
@@ -112,11 +171,12 @@ public class SettingsActivity extends OWActivity {
         btnCelsius.setOnClickListener(temperatureModeListener);
 
         btnFahrenheit.setOnClickListener(temperatureModeListener);
+
         switchAutoDefine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 configManager.setConfig(AUTO_DEFINE_LOCATION_ENABLED, isChecked);
-                if(isChecked)
+                if (isChecked)
                     tryGetLocation();
             }
         });
@@ -125,7 +185,7 @@ public class SettingsActivity extends OWActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 configManager.setConfig(NOTIFICATION_ENABLED, isChecked);
-                if(isChecked)
+                if (isChecked)
                     turnOnNotification();
             }
         });
@@ -151,79 +211,36 @@ public class SettingsActivity extends OWActivity {
 
         btnCelsius.setImageResource(resIdC);
         btnFahrenheit.setImageResource(resIdF);
+        if (cityName != null)
+            etUserLocation.setText(cityName);
+        else
+            notifyNoLocation();
 
-        etUserLocation.setText(cityName);
-
-        String notificationTime = notificationHour + ":" + ((notificationMin<10) ? "0" + notificationMin : notificationMin);
+        String notificationTime = notificationHour + ":" + ((notificationMin < 10) ? "0" + notificationMin : notificationMin);
         tvNotificationTime.setText(notificationTime);
     }
 
+    private void notifyNoLocation() {
+        Toast.makeText(this, "Application needs your location for proper work. Please choose manual or auto defining, otherwise leave app by back button", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (configManager.getStringConfig(CITY_NAME) == null)
+            System.exit(0);
+       /* else
+            startActivity(new Intent(this, ForecastPageActivity.class));   */
+
+        super.onBackPressed();
+
+    }
 
     private void setUserLocation(String cityName, String gpsParams) {
         configManager.setConfig(CITY_NAME, cityName);
         configManager.setConfig(GPS_PARAMS, gpsParams);
+        configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
         notifier.alert(getString(R.string.location_saved), Toast.LENGTH_SHORT);
     }
-
-    OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
-        @Override
-        public void gotLocation(Location location) {
-            String cityName = null;
-            String gpsParams = null;
-            try {
-                cityName = locationMgr.getCityName(location);
-                gpsParams = locationMgr.getGpsCoordinatesAsParams(location);
-            } catch (Exception e) {}
-
-            final String finalCityName = cityName;
-            final String finalGpsParams = gpsParams;
-
-            uiHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)){
-                        etUserLocation.setText(finalCityName);
-                        setUserLocation(finalCityName, finalGpsParams);
-                    }
-                    else
-                        notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
-                    progressListener.hideProgress();
-                }
-            });
-        }
-    };
-
-    private View.OnClickListener temperatureModeListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            boolean isFahrenheit = configManager.getBooleanConfig(TEMPERATURE_MODE_FAHRENHEIT);
-            isFahrenheit = !isFahrenheit;
-            configManager.setConfig(TEMPERATURE_MODE_FAHRENHEIT, isFahrenheit);
-            final int resIdC = isFahrenheit ? R.drawable.celcius_dark :  R.drawable.celcius_light;
-            final int resIdF = isFahrenheit ? R.drawable.fahrenheit_light : R.drawable.fahrenheit_dark;
-            uiHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    btnCelsius.setImageResource(resIdC);
-                    btnFahrenheit.setImageResource(resIdF);
-                }
-            });
-        }
-    };
-
-    private ProgressListener progressListener = new ProgressListener() {
-        @Override
-        public void showProgress() {
-            progressBar.setVisibility(View.VISIBLE);
-            rootContent.setEnabled(false);
-        }
-
-        @Override
-        public void hideProgress() {
-            progressBar.setVisibility(View.GONE);
-            rootContent.setEnabled(true);
-        }
-    };
 
 
 }

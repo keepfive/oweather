@@ -16,6 +16,7 @@ public interface ConfigManager {
     public static final String NOTIFICATION_TIME_HOUR = "notification_time_hour";
     public static final String NOTIFICATION_TIME_MINUTE = "notification_time_minute";
     public static final String GPS_PARAMS = "gps_params";
+    public static final String GPS_LAST_UPDATED = "gps_last_updated";
 
     String getStringConfig(String configName);
 
@@ -23,9 +24,12 @@ public interface ConfigManager {
 
     int getIntConfig(String configName);
 
+    long getLongConfig(String configName);
+
+
     void setConfig(String name, String value);
 
     void setConfig(String name, boolean value);
 
-    void setConfig(String name, int value);
+    void setConfig(String name, long value);
 }

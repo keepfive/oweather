@@ -19,7 +19,7 @@ public class OWConfigManager implements ConfigManager {
 
     @Override
     public String getStringConfig(String configName) {
-        return prefs.getString(configName, "");
+        return prefs.getString(configName, null);
     }
 
     @Override
@@ -33,6 +33,11 @@ public class OWConfigManager implements ConfigManager {
     }
 
     @Override
+    public long getLongConfig(String configName) {
+        return prefs.getLong(configName, 0);
+    }
+
+    @Override
     public void setConfig(String name, String value) {
         prefs.edit().putString(name, value).commit();
     }
@@ -43,9 +48,8 @@ public class OWConfigManager implements ConfigManager {
     }
 
     @Override
-    public void setConfig(String name, int value) {
-        prefs.edit().putInt(name, value).commit();
+    public void setConfig(String name, long value) {
+        prefs.edit().putLong(name, value).commit();
     }
-
 
 }

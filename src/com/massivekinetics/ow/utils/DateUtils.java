@@ -70,4 +70,8 @@ public class DateUtils {
     private boolean isNearestFuture(int diff) {
         return diff == 0 || diff == 1 || diff == -6 || diff == -1 || diff == 6;
     }
+
+    public static long getCurrentInMillis(){
+        return new Date().getTime();
+    }
 }

@@ -1,6 +1,7 @@
 package com.massivekinetics.ow.data.model;
 
 import com.massivekinetics.ow.data.parser.ParserStatus;
+import com.massivekinetics.ow.utils.DateUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class WeatherForecast implements Serializable {
 
 	private List<WeatherModel> forecastList = new ArrayList<WeatherModel>();
 	private ParserStatus status = ParserStatus.SUCCESS;
-
+    private String locationString;
 
     public WeatherForecast(){
         timeStamp = new Date().getTime();
@@ -42,6 +43,19 @@ public class WeatherForecast implements Serializable {
 
     public long getTimeStamp(){
         return timeStamp;
+    }
+
+    public String getLocationString(){
+        return locationString;
+    }
+
+    public void setLocationString(String locationString){
+        this.locationString = locationString;
+    }
+
+    public boolean isActual(){
+        long today = DateUtils.getCurrentInMillis();
+        return (today - timeStamp) < 5 * 24 * 60 * 60 * 1000;
     }
 
 }

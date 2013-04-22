@@ -1,5 +1,7 @@
 package com.massivekinetics.ow.data.parser;
 
-public enum ParserStatus {
+import java.io.Serializable;
+
+public enum ParserStatus implements Serializable {
 	SUCCESS, ERROR
 }

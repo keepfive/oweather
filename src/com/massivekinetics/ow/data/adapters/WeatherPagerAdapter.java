@@ -67,7 +67,7 @@ public class WeatherPagerAdapter extends PagerAdapter {
     }
 
     private void updateView(final View layout, int position) {
-        WeatherState weatherState = WeatherCodeUtils.getWeatherState(Integer.parseInt(items.get(position).getWeatherCode()));
+        WeatherState weatherState = items.get(position).getState();
         int resource = WeatherCodeUtils.getWeatherImageResource(weatherState);
         ((ImageView)layout).setImageResource(resource);
     }

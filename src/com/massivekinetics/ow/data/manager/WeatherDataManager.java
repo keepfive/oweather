@@ -1,10 +1,13 @@
 package com.massivekinetics.ow.data.manager;
 
+import android.util.Log;
+import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.data.WeatherForecastChangedListener;
 import com.massivekinetics.ow.data.model.WeatherForecast;
 import com.massivekinetics.ow.data.tasks.GetWeatherTask;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,32 +19,35 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class WeatherDataManager implements DataManager {
+    private static final String TAG = "WeatherDataManager";
+    private static WeatherDataManager instance = null;
     private WeatherForecast mWeatherForecast = WeatherForecast.NULL;
     private List<WeatherForecastChangedListener> listeners = new ArrayList<WeatherForecastChangedListener>();
-
-    private static WeatherDataManager instance = null;
 
     private WeatherDataManager() {
     }
 
-    public static WeatherDataManager getInstance(){
-        if(instance == null)
-            instance = new WeatherDataManager();
+    public static WeatherDataManager getInstance() {
+
+        synchronized (WeatherDataManager.class){
+            if (instance == null)
+                instance = new WeatherDataManager();
+        }
         return instance;
+
     }
 
     @Override
-    public void update() {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public void runUpdate(LoadingListener<WeatherForecast> listener) {
+        new GetWeatherTask(new OWConfigManager(), listener).execute();
     }
 
     @Override
     public void getWeatherForecast(LoadingListener<WeatherForecast> listener) {
-
-        if(isForecastUpToDate())
+        if (isForecastUpToDate())
             listener.callback(mWeatherForecast);
         else
-            new GetWeatherTask(new OWConfigManager(), listener).execute();
+            runUpdate(listener);
     }
 
     @Override
@@ -57,19 +63,43 @@ public class WeatherDataManager implements DataManager {
     @Override
     public void updateForecast(WeatherForecast forecast) {
         this.mWeatherForecast = forecast;
+        saveForecast();
     }
 
     @Override
     public void saveForecast() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        try {
+            File cache = new File(OWApplication.context.getCacheDir(), "oweather.dat");
+            cache.createNewFile();
+            FileOutputStream fos = new FileOutputStream(cache);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(mWeatherForecast);
+            oos.flush();
+            oos.close();
+        } catch (IOException e) {
+            Log.e(TAG, e.getMessage());
+        }
     }
 
     @Override
     public void restoreForecast() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        try {
+            File cache = new File(OWApplication.context.getCacheDir(), "oweather.dat");
+            if(cache.exists()){
+                FileInputStream input = new FileInputStream(cache);
+                ObjectInputStream ois = new ObjectInputStream(input);
+                WeatherForecast forecast = (WeatherForecast)ois.readObject();
+                this.mWeatherForecast = forecast;
+            }
+
+        } catch (IOException e) {
+            Log.e(TAG, e.getMessage());
+        } catch (ClassNotFoundException e) {
+            Log.e(TAG, e.getMessage());
+        }
     }
 
-    private boolean isForecastUpToDate(){
-        return mWeatherForecast!=WeatherForecast.NULL;
+    private boolean isForecastUpToDate() {
+        return mWeatherForecast != WeatherForecast.NULL;
     }
 }

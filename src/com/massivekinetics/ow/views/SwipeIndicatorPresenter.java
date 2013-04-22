@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
 
@@ -32,10 +33,13 @@ public class SwipeIndicatorPresenter {
     private void inflateLayout() {
         LayoutInflater inflater = LayoutInflater.from(OWApplication.context);
         layout.removeAllViews();
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(10, 5, 10, 5);
         for (int i = 0; i < indicatorCount; i++) {
             ImageView imageView = (ImageView) inflater.inflate(R.layout.image_view, null);
             imageView.setImageResource(passiveIndicatorDrawableId);
-            layout.addView(imageView);
+
+            layout.addView(imageView, params);
         }
     }
 
@@ -50,6 +54,5 @@ public class SwipeIndicatorPresenter {
         ((ImageView) layout.getChildAt(currentActivePosition)).setImageResource(passiveIndicatorDrawableId);
         ((ImageView) layout.getChildAt(newCurrentActivePosition)).setImageResource(activeInicatorDrawableId);
         this.currentActivePosition = newCurrentActivePosition;
-        //layout.requestLayout();
     }
 }

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import com.massivekinetics.ow.data.manager.DataManager;
+import com.massivekinetics.ow.data.manager.WeatherDataManager;
 
 public class OWApplication extends Application {
     public static OWApplication context;
@@ -21,11 +22,7 @@ public class OWApplication extends Application {
     }
 
     public DataManager getDataManager() {
-        return dataManager;
-    }
-
-    public void setDataManager(DataManager dataManager) {
-        this.dataManager = dataManager;
+        return WeatherDataManager.getInstance();
     }
 
     public DisplayMetrics getDisplayMetrics() {

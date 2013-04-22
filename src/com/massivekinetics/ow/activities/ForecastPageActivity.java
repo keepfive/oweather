@@ -3,17 +3,15 @@ package com.massivekinetics.ow.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.MotionEvent;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.data.adapters.WeatherPagerAdapter;
+import com.massivekinetics.ow.data.manager.ConfigManager;
 import com.massivekinetics.ow.data.manager.DataManager;
 import com.massivekinetics.ow.data.manager.WeatherDataManager;
 import com.massivekinetics.ow.data.model.WeatherForecast;
@@ -21,25 +19,22 @@ import com.massivekinetics.ow.data.model.WeatherModel;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.states.WeatherState;
 import com.massivekinetics.ow.utils.DateUtils;
+import com.massivekinetics.ow.utils.OWAnimationUtils;
 import com.massivekinetics.ow.utils.StringUtils;
 import com.massivekinetics.ow.utils.WeatherCodeUtils;
 import com.massivekinetics.ow.views.SwipeIndicatorPresenter;
 
-public class ForecastPageActivity extends PullToRefreshActivity {
-    ViewGroup weatherContainer;
-
+public class ForecastPageActivity extends OWActivity {
+    ViewGroup weatherContainer, updateLayout;
     TextView tvDate, tvCurrentTemp, tvDaytime, tvNightTemp, tvWeatherDescription, tvMinus;
-    TextView tvHumidity, tvWindSpeed, tvMoonPhase;
-    ImageView /*ivWeatherState,*/ ivHumidity;
-    ImageButton ibSettings, ibPrevious, ibNext;
+    TextView tvHumidity, tvWindSpeed, tvMoonPhase, tvWindDirection, tvLocationName;
+    ImageView ivWindDirection, ivHumidity, ivRefreshIndicator;
+    ImageButton ibSettings, ibPrevious, ibNext, ibRefresh;
     ViewPager viewPager;
     DataManager dataManager;
-
+    RelativeLayout content;
     SwipeIndicatorPresenter swipeIndicatorPresenter;
-    private ViewGroup indicatorLayout;
-
     WeatherForecast weatherForecast;
-
     LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
         @Override
         public void callback(WeatherForecast result) {
@@ -56,33 +51,31 @@ public class ForecastPageActivity extends PullToRefreshActivity {
 
         }
     };
-
+    private ViewGroup indicatorLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.test);
+        setContentView(R.layout.forecast_page);
         super.onCreate(savedInstanceState);
 
         dataManager = WeatherDataManager.getInstance();
 
         initViews();
         initListeners();
-
-
-
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         dataManager.getWeatherForecast(listener);
     }
 
     @Override
     protected void initViews() {
-        super.initViews();
-        weatherContainer = (ViewGroup)findViewById(R.id.weather_container);
+
+        weatherContainer = (ViewGroup) findViewById(R.id.weather_container);
+        updateLayout = (ViewGroup) findViewById(R.id.updateLayout);
         tvDate = (TextView) findViewById(R.id.tvDate);
         tvDaytime = (TextView) findViewById(R.id.tvDaytime);
         tvNightTemp = (TextView) findViewById(R.id.tvNightTemp);
@@ -92,55 +85,53 @@ public class ForecastPageActivity extends PullToRefreshActivity {
         tvHumidity = (TextView) findViewById(R.id.tvHumidity);
         tvWindSpeed = (TextView) findViewById(R.id.tvWindSpeed);
         tvMoonPhase = (TextView) findViewById(R.id.tvMoonPhase);
-        // ivWeatherState = (ImageView) findViewById(R.id.ivWeatherState);
+        tvWindDirection = (TextView) findViewById(R.id.tvWindDirection);
+        tvLocationName = (TextView) findViewById(R.id.tvLocationName);
 
+        ivWindDirection = (ImageView) findViewById(R.id.ivWindDirection);
         ivHumidity = (ImageView) findViewById(R.id.ivHumidity);
+        ivRefreshIndicator = (ImageView) findViewById(R.id.ivRefresh);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setFadingEdgeLength(0);
-        viewPager.setHorizontalFadingEdgeEnabled(false);
-
         viewPager.setOffscreenPageLimit(10);
+
         ibSettings = (ImageButton) findViewById(R.id.ibSettings);
         ibNext = (ImageButton) findViewById(R.id.ibNext);
         ibPrevious = (ImageButton) findViewById(R.id.ibPrevious);
+        ibRefresh = (ImageButton) findViewById(R.id.ibRefresh);
+        content = (RelativeLayout) findViewById(R.id.content);
 
         indicatorLayout = (ViewGroup) findViewById(R.id.indicator);
-
-        setFont(tvDate, tvCurrentTemp, tvMinus, tvNightTemp, tvDaytime, tvWeatherDescription, tvHumidity, tvWindSpeed, tvMoonPhase);
+        setFont(weatherContainer);
+        setFont(updateLayout);
+        //setFont(tvDate, tvCurrentTemp, tvMinus, tvNightTemp, tvDaytime, tvWeatherDescription, tvHumidity, tvWindSpeed, tvMoonPhase);
     }
 
-    @Override
-    protected void loadData() {
-        new Thread() {
+    protected void runWeatherUpdate() {
+        LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
             @Override
-            public void run() {
-                try {
-                    LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
-                        @Override
-                        public void callback(WeatherForecast result) {
-                            updateWeatherInfo(result);
-                            onDataLoaded();
-                        }
-
-                        @Override
-                        public void notifyStart() {
-
-                        }
-
-                        @Override
-                        public void notifyStop() {
-
-                        }
-                    };
-                    dataManager.getWeatherForecast(listener);
-
-                } catch (Exception e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
+            public void callback(WeatherForecast result) {
+                updateWeatherInfo(result);
             }
-        }.start();
 
-        //To change body of implemented methods use File | Settings | File Templates.
+            @Override
+            public void notifyStart() {
+                OWAnimationUtils.startRotation(ivRefreshIndicator);
+                String locationName = configManager.getStringConfig(ConfigManager.CITY_NAME);
+                locationName = (locationName == null) ? "" : locationName;
+                tvLocationName.setText(locationName);
+
+                updateLayout.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void notifyStop() {
+                ivRefreshIndicator.clearAnimation();
+                updateLayout.setVisibility(View.GONE);
+
+            }
+        };
+
+        dataManager.runUpdate(listener);
     }
 
     @Override
@@ -173,13 +164,23 @@ public class ForecastPageActivity extends PullToRefreshActivity {
             }
         });
 
+        ibRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runWeatherUpdate();
+            }
+        });
+
 
     }
 
     private void updateWeatherInfo(WeatherForecast weatherForecast) {
-        if(weatherForecast == WeatherForecast.NULL){
-            notifier.alert("error", Toast.LENGTH_LONG);
+        if (!weatherForecast.isSuccessed()) {
+            notifier.alert("Network error", Toast.LENGTH_LONG);
             return;
+        } else if (weatherForecast == WeatherForecast.NULL) {
+            Intent startSettings = new Intent(ForecastPageActivity.this, SettingsActivity.class);
+            startActivity(startSettings);
         }
 
         this.weatherForecast = weatherForecast;
@@ -203,26 +204,7 @@ public class ForecastPageActivity extends PullToRefreshActivity {
             }
         });
 
-        viewPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-               /* if(mPullLayout.isActive())
-                    return true;
-                        */
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_MOVE:
-                    case MotionEvent.ACTION_DOWN:
-                        mPullLayout.setEnabled(false);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                    default:
-                        mPullLayout.setEnabled(true);
-                        break;
-                }
 
-                return false;
-            }
-        });
     }
 
     private void updateUI() {
@@ -230,7 +212,7 @@ public class ForecastPageActivity extends PullToRefreshActivity {
     }
 
     private void updateUI(final int position) {
-        if(weatherForecast == WeatherForecast.NULL)
+        if (!weatherForecast.isSuccessed() || weatherForecast == WeatherForecast.NULL)
             return;
         swipeIndicatorPresenter.setCurrentActivePosition(position);
         WeatherModel model = weatherForecast.getForecastList().get(position);
@@ -241,6 +223,7 @@ public class ForecastPageActivity extends PullToRefreshActivity {
         tvDate.setText(nameOfDay);
 
         int currentTemp = Integer.parseInt(model.getMaxTemperature());
+
         if (currentTemp < 0)
             tvMinus.setVisibility(View.VISIBLE);
         else
@@ -264,9 +247,12 @@ public class ForecastPageActivity extends PullToRefreshActivity {
         }
 
         tvWindSpeed.setText(model.getWindSpeedMiles() + " mph");
-
-        WeatherState weatherState = WeatherCodeUtils.getWeatherState(Integer.parseInt(model.getWeatherCode()));
+        tvWindDirection.setText(model.getWindDirection());
+        WeatherState weatherState = model.getState();
+        tvWeatherDescription.setText(weatherState.getValue());
         int backgroundColor = WeatherCodeUtils.getWeatherBackgroundColor(weatherState);
+
+        OWAnimationUtils.rotate(ivWindDirection, Float.parseFloat(model.getWindDegree()));
         weatherContainer.setBackgroundColor(getResources().getColor(backgroundColor));
 
     }
@@ -286,7 +272,17 @@ public class ForecastPageActivity extends PullToRefreshActivity {
     }
 
     private int resolveMargin(int temperature) {
-        int density = (int) ((OWApplication) getApplication()).getDisplayMetrics().density;
+        int density = 1;
+
+        try {
+            density = (int) ((OWApplication) getApplication()).getDisplayMetrics().density;
+        } catch (NullPointerException npe) {
+            DisplayMetrics dm = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(dm);
+            getOWApplication().setDisplayMetrics(dm);
+            density = (int) dm.density;
+        }
+
         int margin = (temperature >= 10) ? 20 : 55;
         return margin * density;
     }

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  android:id="@+id/updateLayout"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content" android:padding="10dp" android:gravity="center">
-    <ImageView android:id="@+id/ivRefresh" android:src="@drawable/refresh_button" android:layout_height="50dp"
-               android:layout_width="50dp" android:layout_marginLeft="30dp"/>
+              android:layout_height="match_parent" android:gravity="center" android:background="@color/ow_progress_background" android:visibility="gone" android:paddingTop="48dp">
 
-    <TextView android:id="@+id/tvRefresh" android:text="@string/pull_to_refresh" android:layout_height="fill_parent"
-              android:layout_width="fill_parent" android:gravity="center" android:textColor="@android:color/white"/>
+    <ImageView android:id="@+id/ivRefresh" android:src="@drawable/refresh_arrow" android:layout_height="wrap_content"
+               android:layout_width="wrap_content" android:layout_gravity="center_horizontal" android:layout_marginBottom="41dp"/>
+
+    <TextView android:id="@+id/tvLocationName"  android:layout_height="wrap_content"
+              android:layout_width="wrap_content" android:layout_gravity="center_horizontal" android:textColor="@android:color/white"  android:textSize="32sp" android:text="Kyiv Ukraine"  />
+
 </LinearLayout>

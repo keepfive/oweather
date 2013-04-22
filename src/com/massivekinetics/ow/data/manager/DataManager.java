@@ -14,7 +14,8 @@ import java.io.Serializable;
  * To change this template use File | Settings | File Templates.
  */
 public interface DataManager extends Serializable {
-    void update();
+
+    void runUpdate(LoadingListener<WeatherForecast> listener);
 
     public void getWeatherForecast(LoadingListener<WeatherForecast> listener);
 
@@ -22,7 +23,6 @@ public interface DataManager extends Serializable {
     void removeWeatherForecastChangedListener(WeatherForecastChangedListener listener);
 
     void updateForecast(WeatherForecast forecast);
-
     void saveForecast();
     void restoreForecast();
 }

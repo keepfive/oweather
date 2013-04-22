@@ -3,6 +3,8 @@ package com.massivekinetics.ow.data.model;
 import android.util.Log;
 import com.massivekinetics.ow.data.manager.ConfigManager;
 import com.massivekinetics.ow.data.manager.OWConfigManager;
+import com.massivekinetics.ow.states.WeatherState;
+import com.massivekinetics.ow.utils.WeatherCodeUtils;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -28,7 +30,7 @@ public class WeatherModel implements Serializable {
 	private String precipitation = EMPTY;
 	private String humidity = EMPTY;
 	private transient Date date = new Date();
-    private transient ConfigManager configManager = new OWConfigManager();
+    private WeatherState state;
 
 	public transient static final WeatherModel NULL = new WeatherModel();
 
@@ -42,6 +44,8 @@ public class WeatherModel implements Serializable {
 	}
 
 	public Date getDate() {
+        if(date==null)
+            setDate();
 		return date;
 	}
 
@@ -54,13 +58,17 @@ public class WeatherModel implements Serializable {
 			}
 	}
 
+    private ConfigManager getConfigManager(){
+        return new OWConfigManager();
+    }
+
     public String getMaxTemperature(){
-        boolean isFahrenheit = configManager.getBooleanConfig(ConfigManager.TEMPERATURE_MODE_FAHRENHEIT);
+        boolean isFahrenheit = getConfigManager().getBooleanConfig(ConfigManager.TEMPERATURE_MODE_FAHRENHEIT);
         return isFahrenheit ? tempMaxF : tempMaxC;
     }
 
     public String getMinTemperature(){
-        boolean isFahrenheit = configManager.getBooleanConfig(ConfigManager.TEMPERATURE_MODE_FAHRENHEIT);
+        boolean isFahrenheit = getConfigManager().getBooleanConfig(ConfigManager.TEMPERATURE_MODE_FAHRENHEIT);
         return isFahrenheit ? tempMinF : tempMinC;
     }
 
@@ -121,10 +129,14 @@ public class WeatherModel implements Serializable {
 	}
 
 	public String getWindDirection() {
+
+
 		return windDirection;
 	}
 
 	public void setWindDirection(String windDirection) {
+        if(windDirection.length()>2)
+            windDirection = windDirection.substring(0, 2);
 		this.windDirection = windDirection;
 	}
 
@@ -134,6 +146,7 @@ public class WeatherModel implements Serializable {
 
 	public void setWeatherCode(String weatherCode) {
 		this.weatherCode = weatherCode;
+        setState(WeatherCodeUtils.getWeatherState(Integer.parseInt(weatherCode)));
 	}
 
 	public String getDescription() {
@@ -159,4 +172,12 @@ public class WeatherModel implements Serializable {
 	public void setHumidity(String humidity) {
 		this.humidity = humidity;
 	}
+
+    public WeatherState getState() {
+        return state;
+    }
+
+    public void setState(WeatherState state) {
+        this.state = state;
+    }
 }
