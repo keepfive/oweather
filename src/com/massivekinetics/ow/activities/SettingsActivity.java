@@ -33,7 +33,6 @@ public class SettingsActivity extends OWActivity {
     View progressBar;
     CompoundButton switchAutoDefine, switchNotification;
     OWLocationManager locationMgr;
-
     OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
 
         @Override
@@ -99,16 +98,17 @@ public class SettingsActivity extends OWActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.settings);
-        locationMgr = new OWLocationManager();
-        initViews();
+        // net.simonvt.library.timepicker.TimePicker tp = new TimePicker(this);
+       /* locationMgr = new OWLocationManager();
+        initViews();*/
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, etUserLocation);
+       /* setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, etUserLocation);
         checkConfig();
-        initListeners();
+        initListeners(); */
     }
 
     private void tryGetLocation() {

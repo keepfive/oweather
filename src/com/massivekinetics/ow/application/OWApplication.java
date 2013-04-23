@@ -19,6 +19,7 @@ public class OWApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+        initFonts();
     }
 
     public DataManager getDataManager() {
@@ -34,6 +35,8 @@ public class OWApplication extends Application {
     }
 
     public Typeface getFontThin() {
+        if(fontThin == null)
+            initFonts();
         return fontThin;
     }
 
@@ -42,11 +45,20 @@ public class OWApplication extends Application {
     }
 
     public Typeface getFontItalic() {
+        if(fontItalic == null)
+            initFonts();
         return fontItalic;
     }
 
     public void setFontItalic(Typeface fontItalic) {
         this.fontItalic = fontItalic;
+    }
+
+    private void initFonts(){
+        Typeface fontThin = Typeface.createFromAsset(getAssets(), "titilliumthin.ttf");
+        Typeface fontItalic = Typeface.createFromAsset(getAssets(), "titiliumitalic.ttf");
+        setFontThin(fontThin);
+        setFontItalic(fontItalic);
     }
 
 }

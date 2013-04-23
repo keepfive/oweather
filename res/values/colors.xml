@@ -23,4 +23,5 @@
     <color name="ow_slider_left">#36B1C0</color>
     <color name="ow_slider_right">#272727</color>
     <color name="ow_progress_background">#EE272727</color>
+    <color name="transparent">#00000000</color>
 </resources>

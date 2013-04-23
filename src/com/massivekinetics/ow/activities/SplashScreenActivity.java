@@ -1,13 +1,11 @@
 package com.massivekinetics.ow.activities;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.data.manager.ConfigManager;
 import com.massivekinetics.ow.location.OWLocationManager;
 import com.massivekinetics.ow.utils.DateUtils;
@@ -83,16 +81,8 @@ public class SplashScreenActivity extends OWActivity {
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             getOWApplication().setDisplayMetrics(displayMetrics);
             getOWApplication().getDataManager().restoreForecast();
-            initFonts();
             isInitialized = true;
         }
-    }
-
-    void initFonts() {
-        Typeface fontThin = Typeface.createFromAsset(getAssets(), "titilliumthin.ttf");
-        Typeface fontItalic = Typeface.createFromAsset(getAssets(), "titiliumitalic.ttf");
-        ((OWApplication) getApplication()).setFontThin(fontThin);
-        ((OWApplication) getApplication()).setFontItalic(fontItalic);
     }
 
     OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {

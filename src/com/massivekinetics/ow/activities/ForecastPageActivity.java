@@ -238,7 +238,7 @@ public class ForecastPageActivity extends OWActivity {
 
 
         tvNightTemp.setText(model.getMinTemperature());
-        if (model.getHumidity() != null && model.getHumidity() != "") {
+        if (position == 0) {
             tvHumidity.setText(model.getHumidity() + "%");
             ivHumidity.setImageResource(getHumidityResource((model.getHumidity())));
         } else {

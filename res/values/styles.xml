@@ -2,6 +2,7 @@
 
     <style name="AppTheme" parent="android:Theme.Light">
         <item name="android:textColor">@android:color/white</item>
+        <item name="numberPickerStyle">@style/NPWidget.Holo.NumberPicker</item>
     </style>
 
     <style name="TextView">
