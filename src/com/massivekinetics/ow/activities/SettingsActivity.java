@@ -1,6 +1,7 @@
 package com.massivekinetics.ow.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -25,7 +26,7 @@ import static com.massivekinetics.ow.data.manager.ConfigManager.*;
  * To change this template use File | Settings | File Templates.
  */
 public class SettingsActivity extends OWActivity {
-    View rootContent;
+    View rootContent, notification;
     ImageButton btnBack, btnCelsius, btnFahrenheit;
     TextView tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle;
     TextView tvNotificationMessage, tvNotificationTime;
@@ -93,22 +94,22 @@ public class SettingsActivity extends OWActivity {
         }
     };
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.settings);
-        // net.simonvt.library.timepicker.TimePicker tp = new TimePicker(this);
-       /* locationMgr = new OWLocationManager();
-        initViews();*/
+        locationMgr = new OWLocationManager();
+        initViews();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-       /* setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, etUserLocation);
+        setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, etUserLocation);
         checkConfig();
-        initListeners(); */
+        initListeners();
     }
 
     private void tryGetLocation() {
@@ -116,15 +117,17 @@ public class SettingsActivity extends OWActivity {
         boolean isLocationAvailable = locationMgr.getLocation(this, locationResult);
         if (isLocationAvailable)
             progressListener.showProgress();
-        else
+        else{
+            switchAutoDefine.performClick();
             notifier.alert("Your location could not been retrieved. Please add location manually", Toast.LENGTH_LONG);
+        }
     }
 
     @Override
     protected void initViews() {
         rootContent = findViewById(android.R.id.content);
 
-        btnBack = (ImageButton) findViewById(R.id.ibBack);
+        btnBack = (ImageButton)findViewById(R.id.ibBack);
         btnCelsius = (ImageButton) findViewById(R.id.ibCelcius);
         btnFahrenheit = (ImageButton) findViewById(R.id.ibFahrenheit);
 
@@ -140,7 +143,7 @@ public class SettingsActivity extends OWActivity {
         progressBar = findViewById(R.id.progressBar);
         switchAutoDefine = (CompoundButton) findViewById(R.id.switchAutoDefine);
         switchNotification = (CompoundButton) findViewById(R.id.switchNotification);
-
+        notification = findViewById(R.id.settingsNotification);
 
     }
 
@@ -187,6 +190,15 @@ public class SettingsActivity extends OWActivity {
                 configManager.setConfig(NOTIFICATION_ENABLED, isChecked);
                 if (isChecked)
                     turnOnNotification();
+            }
+        });
+
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent settingsIntent = new Intent(SettingsActivity.this, NotificationSettingsActivity.class);
+                settingsIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(settingsIntent);
             }
         });
 

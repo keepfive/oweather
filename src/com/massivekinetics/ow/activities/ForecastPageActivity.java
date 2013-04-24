@@ -76,6 +76,8 @@ public class ForecastPageActivity extends OWActivity {
 
         weatherContainer = (ViewGroup) findViewById(R.id.weather_container);
         updateLayout = (ViewGroup) findViewById(R.id.updateLayout);
+
+
         tvDate = (TextView) findViewById(R.id.tvDate);
         tvDaytime = (TextView) findViewById(R.id.tvDaytime);
         tvNightTemp = (TextView) findViewById(R.id.tvNightTemp);
