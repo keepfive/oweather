@@ -69,7 +69,7 @@ public class WeatherDataManager implements DataManager {
     @Override
     public void saveForecast() {
         try {
-            File cache = new File(OWApplication.context.getCacheDir(), "oweather.dat");
+            File cache = new File(OWApplication.getInstance().getCacheDir(), "oweather.dat");
             cache.createNewFile();
             FileOutputStream fos = new FileOutputStream(cache);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -84,7 +84,7 @@ public class WeatherDataManager implements DataManager {
     @Override
     public void restoreForecast() {
         try {
-            File cache = new File(OWApplication.context.getCacheDir(), "oweather.dat");
+            File cache = new File(OWApplication.getInstance().getCacheDir(), "oweather.dat");
             if(cache.exists()){
                 FileInputStream input = new FileInputStream(cache);
                 ObjectInputStream ois = new ObjectInputStream(input);

@@ -8,7 +8,10 @@ public class WeatherConstants {
 	
 	public static final String HUMIDITY = "humidity";
 	
-	public static final String PRECIPITATION = "precipMM";
+	public static final String PRECIPITATION_MM = "precipMM";
+    public static final String PRECIPITATION_IN = "precipIN";
+
+    public static final String LUNAR_STATE = "lunarState";
 
 	public static final String TEMP_C = "temp_C";
 	public static final String TEMP_F = "temp_F";

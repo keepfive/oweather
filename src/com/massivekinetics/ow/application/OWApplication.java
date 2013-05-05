@@ -3,12 +3,15 @@ package com.massivekinetics.ow.application;
 import android.app.Application;
 import android.graphics.Typeface;
 import android.util.DisplayMetrics;
+import com.massivekinetics.ow.data.manager.ConfigManager;
 import com.massivekinetics.ow.data.manager.DataManager;
+import com.massivekinetics.ow.data.manager.OWConfigManager;
 import com.massivekinetics.ow.data.manager.WeatherDataManager;
 
 public class OWApplication extends Application {
-    public static OWApplication context;
+    private static OWApplication context;
     private DataManager dataManager;
+    private ConfigManager configManager;
 
     private DisplayMetrics displayMetrics;
 
@@ -19,11 +22,20 @@ public class OWApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+        configManager = new OWConfigManager();
         initFonts();
+    }
+
+    public static OWApplication getInstance(){
+        return context;
     }
 
     public DataManager getDataManager() {
         return WeatherDataManager.getInstance();
+    }
+
+    public ConfigManager getConfigManager(){
+        return configManager;
     }
 
     public DisplayMetrics getDisplayMetrics() {

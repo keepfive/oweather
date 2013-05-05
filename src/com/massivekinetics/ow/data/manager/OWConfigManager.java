@@ -14,7 +14,7 @@ public class OWConfigManager implements ConfigManager {
     SharedPreferences prefs;
 
     public OWConfigManager(){
-        prefs = OWApplication.context.getSharedPreferences(SETTINGS, 0);
+        prefs = OWApplication.getInstance().getSharedPreferences(SETTINGS, 0);
     }
 
     @Override
@@ -50,6 +50,34 @@ public class OWConfigManager implements ConfigManager {
     @Override
     public void setConfig(String name, long value) {
         prefs.edit().putLong(name, value).commit();
+    }
+
+    public String getActiveSession(){
+        return prefs.getString(SESSION, null);
+    }
+
+    @Override
+    public boolean getAutoDefineLocation() {
+        return prefs.getBoolean(AUTO_DEFINE_LOCATION_ENABLED, true);
+    }
+
+    public void setActiveSession(String session){
+        prefs.edit().putString(SESSION, session).commit();
+    }
+
+    @Override
+    public void setAutoDefineLocation(boolean isAllowed) {
+        prefs.edit().putBoolean(AUTO_DEFINE_LOCATION_ENABLED, isAllowed).commit();
+    }
+
+    @Override
+    public String getLocation() {
+        return prefs.getString(GPS_PARAMS, null);
+    }
+
+    @Override
+    public void setLocation(String locationString) {
+        prefs.edit().putString(GPS_PARAMS, locationString).commit();
     }
 
 }

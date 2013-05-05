@@ -14,6 +14,7 @@ import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.interfaces.ProgressListener;
 import com.massivekinetics.ow.location.OWLocationManager;
 import com.massivekinetics.ow.utils.DateUtils;
+import com.massivekinetics.ow.utils.NavigationService;
 import com.massivekinetics.ow.utils.StringUtils;
 
 import static com.massivekinetics.ow.data.manager.ConfigManager.*;
@@ -41,7 +42,7 @@ public class SettingsActivity extends OWActivity {
             String cityName = null;
             String gpsParams = null;
             try {
-                cityName = locationMgr.getCityName(location);
+                cityName = locationMgr.getLocationName(location);
                 gpsParams = locationMgr.getGpsCoordinatesAsParams(location);
             } catch (Exception e) {
 
@@ -152,7 +153,7 @@ public class SettingsActivity extends OWActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SettingsActivity.this.finish();
+                resolveBackClick();
             }
         });
 
@@ -161,9 +162,10 @@ public class SettingsActivity extends OWActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    setUserLocation(etUserLocation.getText().toString(), "temp");
+                    //setUserLocation(etUserLocation.getText().toString(), "temp");
+                    Toast.makeText(SettingsActivity.this, "Not implemented autocompleter", Toast.LENGTH_SHORT).show();
                     InputMethodManager imm =
-                            (InputMethodManager) OWApplication.context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                            (InputMethodManager) OWApplication.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(etUserLocation.getWindowToken(), 0);
                     return true;
                 }
@@ -178,7 +180,7 @@ public class SettingsActivity extends OWActivity {
         switchAutoDefine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                configManager.setConfig(AUTO_DEFINE_LOCATION_ENABLED, isChecked);
+                configManager.setAutoDefineLocation(isChecked);
                 if (isChecked)
                     tryGetLocation();
             }
@@ -208,7 +210,7 @@ public class SettingsActivity extends OWActivity {
     }
 
     private void checkConfig() {
-        boolean isAutoDefineLocation = configManager.getBooleanConfig(AUTO_DEFINE_LOCATION_ENABLED);
+        boolean isAutoDefineLocation = configManager.getAutoDefineLocation();
         boolean isNotificationEnabled = configManager.getBooleanConfig(NOTIFICATION_ENABLED);
         boolean isFahrenheit = configManager.getBooleanConfig(TEMPERATURE_MODE_FAHRENHEIT);
         String cityName = configManager.getStringConfig(CITY_NAME);
@@ -238,13 +240,18 @@ public class SettingsActivity extends OWActivity {
 
     @Override
     public void onBackPressed() {
-        if (configManager.getStringConfig(CITY_NAME) == null)
-            System.exit(0);
-       /* else
-            startActivity(new Intent(this, ForecastPageActivity.class));   */
-
+        resolveBackClick();
         super.onBackPressed();
+    }
 
+    private void resolveBackClick(){
+        Class nextPageClass;
+        if (configManager.getStringConfig(CITY_NAME) == null)
+            nextPageClass = ErrorActivity.class;
+        else
+            nextPageClass = UpdatePageActivity.class;
+        NavigationService.navigate(this, nextPageClass);
+        this.finish();
     }
 
     private void setUserLocation(String cityName, String gpsParams) {

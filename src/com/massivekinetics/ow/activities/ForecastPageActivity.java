@@ -20,15 +20,15 @@ import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.states.WeatherState;
 import com.massivekinetics.ow.utils.DateUtils;
 import com.massivekinetics.ow.utils.OWAnimationUtils;
+import com.massivekinetics.ow.utils.ResourcesCodeUtils;
 import com.massivekinetics.ow.utils.StringUtils;
-import com.massivekinetics.ow.utils.WeatherCodeUtils;
 import com.massivekinetics.ow.views.SwipeIndicatorPresenter;
 
 public class ForecastPageActivity extends OWActivity {
     ViewGroup weatherContainer, updateLayout;
     TextView tvDate, tvCurrentTemp, tvDaytime, tvNightTemp, tvWeatherDescription, tvMinus;
     TextView tvHumidity, tvWindSpeed, tvMoonPhase, tvWindDirection, tvLocationName;
-    ImageView ivWindDirection, ivHumidity, ivRefreshIndicator;
+    ImageView ivWindDirection, ivHumidity, ivRefreshIndicator, ivLunarState;
     ImageButton ibSettings, ibPrevious, ibNext, ibRefresh;
     ViewPager viewPager;
     DataManager dataManager;
@@ -93,6 +93,8 @@ public class ForecastPageActivity extends OWActivity {
         ivWindDirection = (ImageView) findViewById(R.id.ivWindDirection);
         ivHumidity = (ImageView) findViewById(R.id.ivHumidity);
         ivRefreshIndicator = (ImageView) findViewById(R.id.ivRefresh);
+        ivLunarState = (ImageView) findViewById(R.id.ivLunarState);
+
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(10);
 
@@ -241,18 +243,20 @@ public class ForecastPageActivity extends OWActivity {
 
         tvNightTemp.setText(model.getMinTemperature());
         if (position == 0) {
-            tvHumidity.setText(model.getHumidity() + "%");
+            tvHumidity.setText(model.getHumidity() + " %");
             ivHumidity.setImageResource(getHumidityResource((model.getHumidity())));
         } else {
-            tvHumidity.setText(model.getPrecipitation() + " mm");
+            tvHumidity.setText(model.getPrecipitation());
             ivHumidity.setImageResource(R.drawable.precipmm);
         }
 
-        tvWindSpeed.setText(model.getWindSpeedMiles() + " mph");
+        tvWindSpeed.setText(model.getWindSpeed());
         tvWindDirection.setText(model.getWindDirection());
+        ivLunarState.setImageResource(ResourcesCodeUtils.getLunarStateImageResource(model.getLunarState()));
+
         WeatherState weatherState = model.getState();
         tvWeatherDescription.setText(weatherState.getValue());
-        int backgroundColor = WeatherCodeUtils.getWeatherBackgroundColor(weatherState);
+        int backgroundColor = ResourcesCodeUtils.getWeatherBackgroundColor(weatherState);
 
         OWAnimationUtils.rotate(ivWindDirection, Float.parseFloat(model.getWindDegree()));
         weatherContainer.setBackgroundColor(getResources().getColor(backgroundColor));

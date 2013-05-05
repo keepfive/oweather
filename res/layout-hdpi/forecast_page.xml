@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true">
+
+        <LinearLayout android:id="@+id/weather_container"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+
+            <LinearLayout
+                    android:id="@+id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="5" android:layout_marginTop="5dp">
+
+                <ImageButton android:layout_gravity="center_horizontal|center"
+                             android:id="@+id/ibSettings"
+                             android:layout_width="0dp"
+                             android:layout_height="30dp"
+                             android:layout_weight="1"
+                             android:background="@android:color/transparent"
+                             android:src="@drawable/settings" android:adjustViewBounds="true"
+                             android:scaleType="centerInside"/>
+
+                <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3" android:textSize="30sp"
+                        android:gravity="center" android:textColor="@android:color/white"
+                        android:textStyle="bold">
+                </TextView>
+
+                <ImageButton android:layout_gravity="center_horizontal|center"
+                             android:id="@+id/ibRefresh"
+                             android:layout_width="0dp"
+                             android:layout_height="30dp"
+                             android:layout_weight="1"
+                             android:background="@android:color/transparent" android:visibility="visible"
+                             android:src="@drawable/refresh_button" android:adjustViewBounds="true"
+                             android:scaleType="centerInside"/>
+            </LinearLayout>
+
+            <include layout="@layout/temperature_block"/>
+            <include layout="@layout/weather_desc_block"/>
+
+            <TextView android:id="@+id/tvWeatherDesctiption" android:layout_width="fill_parent"
+                      android:layout_height="wrap_content" android:layout_marginTop="25dp"
+                      android:marqueeRepeatLimit="marquee_forever"
+                      android:gravity="center" android:textSize="32sp"
+                      android:textColor="@android:color/white"
+                    />
+
+            <LinearLayout android:id="@+id/indicator" android:orientation="horizontal"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content" android:padding="5dp" android:gravity="center_horizontal"
+                          android:layout_marginTop="20dp"/>
+
+            <include layout="@layout/forecast_details_block"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <include layout="@layout/update_layout"/>
+
+</RelativeLayout>

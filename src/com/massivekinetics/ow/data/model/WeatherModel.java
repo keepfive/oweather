@@ -1,18 +1,14 @@
 package com.massivekinetics.ow.data.model;
 
-import android.util.Log;
 import com.massivekinetics.ow.data.manager.ConfigManager;
 import com.massivekinetics.ow.data.manager.OWConfigManager;
 import com.massivekinetics.ow.states.WeatherState;
-import com.massivekinetics.ow.utils.WeatherCodeUtils;
+import com.massivekinetics.ow.utils.ResourcesCodeUtils;
 
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static com.massivekinetics.ow.utils.StringUtils.isNullOrEmpty;
 
 public class WeatherModel implements Serializable {
 
@@ -27,9 +23,13 @@ public class WeatherModel implements Serializable {
 	private String windDegree = EMPTY, windDirection = EMPTY;
 	private String weatherCode = EMPTY;
 	private String description = EMPTY;
-	private String precipitation = EMPTY;
-	private String humidity = EMPTY;
-	private transient Date date = new Date();
+	private String precipitationMM = EMPTY;
+    private String precipitationIN = EMPTY;
+    public int lunarState = 0;
+
+    private String humidity = EMPTY;
+	private transient Date date;
+    private long timeStamp;
     private WeatherState state;
 
 	public transient static final WeatherModel NULL = new WeatherModel();
@@ -43,19 +43,26 @@ public class WeatherModel implements Serializable {
 		setDate();
 	}
 
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+        setDate();
+    }
+
 	public Date getDate() {
         if(date==null)
             setDate();
 		return date;
 	}
 
-	private void setDate() {
+	private void setDate() {    /*
 		if (!isNullOrEmpty(dateString))
 			try {
 				date = dateFormat.parse(dateString);
 			} catch (ParseException pe) {
 				Log.e(TAG, pe.getMessage());
-			}
+			} */
+        if(timeStamp != 0)
+            date = new Date(timeStamp);
 	}
 
     private ConfigManager getConfigManager(){
@@ -146,7 +153,7 @@ public class WeatherModel implements Serializable {
 
 	public void setWeatherCode(String weatherCode) {
 		this.weatherCode = weatherCode;
-        setState(WeatherCodeUtils.getWeatherState(Integer.parseInt(weatherCode)));
+        setState(ResourcesCodeUtils.getWeatherState(Integer.parseInt(weatherCode)));
 	}
 
 	public String getDescription() {
@@ -157,13 +164,31 @@ public class WeatherModel implements Serializable {
 		this.description = description;
 	}
 
-	public String getPrecipitation() {
-		return precipitation;
+	public String getPrecipitationMM() {
+            return precipitationMM;
+        }
+
+    public void setPrecipitationMM(String precipitation) {
+        this.precipitationMM = precipitation;
 	}
 
-	public void setPrecipitation(String precipitation) {
-		this.precipitation = precipitation;
-	}
+    public String getPrecipitationIN() {
+        return precipitationIN;
+    }
+
+    public void setPrecipitationIN(String precipitation) {
+        this.precipitationIN = precipitation;
+    }
+
+    public String getPrecipitation(){
+        boolean isFahrenheit = getConfigManager().getBooleanConfig(ConfigManager.TEMPERATURE_MODE_FAHRENHEIT);
+        return isFahrenheit ? precipitationIN  + " in" : precipitationMM  + " mm";
+    }
+
+    public String getWindSpeed(){
+        boolean isFahrenheit = getConfigManager().getBooleanConfig(ConfigManager.TEMPERATURE_MODE_FAHRENHEIT);
+        return isFahrenheit ? windSpeedMiles  + " mph" : windSpeedKmph  + " kmph";
+    }
 
 	public String getHumidity() {
 		return humidity;
@@ -172,6 +197,14 @@ public class WeatherModel implements Serializable {
 	public void setHumidity(String humidity) {
 		this.humidity = humidity;
 	}
+
+    public int getLunarState() {
+        return lunarState;
+    }
+
+    public void setLunarState(int lunarState) {
+        this.lunarState = lunarState;
+    }
 
     public WeatherState getState() {
         return state;

@@ -24,14 +24,17 @@ public class OWLocationManager {
     Timer timer;
     LocationManager lm;
     LocationResult locationResult;
-    Geocoder geoCoder = new Geocoder(OWApplication.context, Locale.US);
+    Geocoder geoCoder = new Geocoder(OWApplication.getInstance(), Locale.US);
     boolean gps_enabled = false;
     boolean network_enabled = false;
     boolean passive_enabled = false;
     Handler handler;
     LocationListener locationListenerGps = new LocationListener() {
         public void onLocationChanged(Location location) {
-            timer.cancel();
+            if (timer != null)
+                synchronized (OWLocationManager.class) {
+                    timer.cancel();
+                }
             locationResult.gotLocation(location);
             removeLocationUpdates();
         }
@@ -47,7 +50,10 @@ public class OWLocationManager {
     };
     LocationListener locationListenerNetwork = new LocationListener() {
         public void onLocationChanged(Location location) {
-            timer.cancel();
+            if (timer != null)
+                synchronized (OWLocationManager.class) {
+                    timer.cancel();
+                }
             locationResult.gotLocation(location);
             removeLocationUpdates();
         }
@@ -66,6 +72,7 @@ public class OWLocationManager {
     public boolean getLocation(Context context, LocationResult result) {
         if (lm == null)
             lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        this.locationResult = result;
 
         //exceptions will be thrown if provider is not permitted.
         try {
@@ -96,15 +103,35 @@ public class OWLocationManager {
         return true;
     }
 
-    public String getCityName(Location location) throws IOException {
+    public String getLocationName(Location location) throws IOException {
         if (location != null) {
-            List<Address> addressList = geoCoder.getFromLocation(location.getLatitude(), location.getLongitude(), 5);
-            if (addressList != null && !addressList.isEmpty()) {
-                Address first = addressList.get(0);
-                return first.getLocality() + " " + first.getCountryName();
+
+            try {
+                List<Address> addressList = geoCoder.getFromLocation(location.getLatitude(), location.getLongitude(), 5);
+                if (addressList != null && !addressList.isEmpty()) {
+                    Address first = addressList.get(0);
+                    String areaName = getAreaName(first);
+                    String countryName = first.getCountryName();
+
+                    String locationName = (areaName == null) ? countryName : areaName + " " + countryName;
+                    return locationName;
+                }
+            } catch (Exception e) {
+               return "Location name unknown";
             }
         }
         return null;
+    }
+
+    private String getAreaName(Address address) {
+        String locationName = address.getLocality();
+
+        if (locationName == null)
+            locationName = address.getAdminArea();
+        if (locationName == null)
+            locationName = address.getFeatureName();
+
+        return locationName;
     }
 
     public String getGpsCoordinatesAsParams(Location location) throws IOException {
@@ -175,7 +202,7 @@ public class OWLocationManager {
                 return;
             }
 
-            if (tries < 5) {
+            if (tries < 20) {
                 tries++;
                 requestLocationUpdates();
                 handler.postDelayed(new GetLastLocation(locationResult), 3000);

@@ -1,24 +1,23 @@
 package com.massivekinetics.ow.data.parser;
 
-import static com.massivekinetics.ow.data.parser.WeatherConstants.CURRENT_CONDITION;
-import static com.massivekinetics.ow.data.parser.WeatherConstants.DATA;
-import static com.massivekinetics.ow.data.parser.WeatherConstants.WEATHER;
-import static com.massivekinetics.ow.utils.StringUtils.isNullOrEmpty;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.util.Log;
-
 import com.massivekinetics.ow.data.model.WeatherForecast;
 import com.massivekinetics.ow.data.model.WeatherModel;
 import com.massivekinetics.ow.data.parser.strategies.CurrentWeatherStrategy;
 import com.massivekinetics.ow.data.parser.strategies.GeneralWeatherStrategy;
 import com.massivekinetics.ow.data.parser.strategies.JsonParserStrategy;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import static com.massivekinetics.ow.data.parser.WeatherConstants.CURRENT_CONDITION;
+import static com.massivekinetics.ow.data.parser.WeatherConstants.WEATHER;
+import static com.massivekinetics.ow.utils.StringUtils.isNullOrEmpty;
 
 public class WeatherParser {
 
@@ -33,7 +32,7 @@ public class WeatherParser {
 			forecast.setStatus(ParserStatus.ERROR);
 		else {
 			try {
-				JSONObject generalData = new JSONObject(json).getJSONObject(DATA);
+				JSONObject generalData = new JSONObject(json);//.getJSONObject(DATA);
 				List<WeatherModel> generalForecast = getGeneralForecast(generalData);
 				WeatherModel currentWeatherModel = getCurrentWeather(generalData);
 				mergeCurrentConditions(generalForecast, currentWeatherModel);
@@ -67,10 +66,15 @@ public class WeatherParser {
 		List<WeatherModel> generalForecast = new ArrayList<WeatherModel>();
 
 		JSONArray generalForecastArray = generalData.getJSONArray(WEATHER);
+        Date today = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
 		for (int i = 0; i < generalForecastArray.length(); i++) {
 			JSONObject weatherForecastObject = generalForecastArray
 					.getJSONObject(i);
 			WeatherModel weatherModel = getWeatherFromJson(weatherForecastObject);
+            weatherModel.setTimeStamp(calendar.getTimeInMillis());
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
 			generalForecast.add(weatherModel);
 		}
 
@@ -80,8 +84,8 @@ public class WeatherParser {
 	private WeatherModel getCurrentWeather(JSONObject generalData)
 			throws JSONException {
 		setParserStrategy(new CurrentWeatherStrategy());
-		JSONObject currentConditionObject = generalData.getJSONArray(
-				CURRENT_CONDITION).getJSONObject(0);
+		JSONObject currentConditionObject = generalData.getJSONObject(
+                CURRENT_CONDITION);//.getJSONObject(0);
 		WeatherModel currentWeather = getWeatherFromJson(currentConditionObject);
 		return currentWeather;
 	}
@@ -92,9 +96,11 @@ public class WeatherParser {
 				&& currentWeatherModel != WeatherModel.NULL) {
 			WeatherModel forecastModel = generalForecast.get(0);
 
-			if (!isNullOrEmpty(currentWeatherModel.getPrecipitation()))
-				forecastModel.setPrecipitation(currentWeatherModel
-						.getPrecipitation());
+			if (!isNullOrEmpty(currentWeatherModel.getPrecipitationMM()))
+				forecastModel.setPrecipitationMM(currentWeatherModel.getPrecipitationMM());
+
+            if (!isNullOrEmpty(currentWeatherModel.getPrecipitationIN()))
+                forecastModel.setPrecipitationIN(currentWeatherModel.getPrecipitationIN());
 
 			if (!isNullOrEmpty(currentWeatherModel.getHumidity()))
 				forecastModel.setHumidity(currentWeatherModel.getHumidity());

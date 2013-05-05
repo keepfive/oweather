@@ -31,7 +31,7 @@ public class SwipeIndicatorPresenter {
     }
 
     private void inflateLayout() {
-        LayoutInflater inflater = LayoutInflater.from(OWApplication.context);
+        LayoutInflater inflater = LayoutInflater.from(OWApplication.getInstance());
         layout.removeAllViews();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(10, 5, 10, 5);

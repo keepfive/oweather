@@ -10,7 +10,7 @@ import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.activities.OWActivity;
 import com.massivekinetics.ow.data.model.WeatherModel;
 import com.massivekinetics.ow.states.WeatherState;
-import com.massivekinetics.ow.utils.WeatherCodeUtils;
+import com.massivekinetics.ow.utils.ResourcesCodeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,7 @@ public class WeatherPagerAdapter extends PagerAdapter {
 
     private void updateView(final View layout, int position) {
         WeatherState weatherState = items.get(position).getState();
-        int resource = WeatherCodeUtils.getWeatherImageResource(weatherState);
+        int resource = ResourcesCodeUtils.getWeatherImageResource(weatherState);
         ((ImageView)layout).setImageResource(resource);
     }
 }

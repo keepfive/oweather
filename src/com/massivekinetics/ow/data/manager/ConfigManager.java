@@ -17,6 +17,7 @@ public interface ConfigManager {
     public static final String NOTIFICATION_TIME_MINUTE = "notification_time_minute";
     public static final String GPS_PARAMS = "gps_params";
     public static final String GPS_LAST_UPDATED = "gps_last_updated";
+    public static final String SESSION = "session";
 
     String getStringConfig(String configName);
 
@@ -32,4 +33,16 @@ public interface ConfigManager {
     void setConfig(String name, boolean value);
 
     void setConfig(String name, long value);
+
+    String getActiveSession();
+    boolean getAutoDefineLocation();
+
+    void setActiveSession(String session);
+    void setAutoDefineLocation(boolean isAllowed);
+
+    String getLocation();
+    void setLocation(String locationString);
+
+
+
 }

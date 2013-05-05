@@ -53,7 +53,7 @@ public class BitmapUtils {
     }
 
     public static Bitmap doGreyscale(int resourceId) {
-        Bitmap src = BitmapFactory.decodeResource(OWApplication.context.getResources(), R.drawable.settings);
+        Bitmap src = BitmapFactory.decodeResource(OWApplication.getInstance().getResources(), R.drawable.settings);
         // constant factors
         final double GS_RED = 0.299;
         final double GS_GREEN = 0.587;
@@ -93,7 +93,7 @@ public class BitmapUtils {
 
     public static final int dipToPx(int dp) {
 
-        Resources r = OWApplication.context.getResources();
+        Resources r = OWApplication.getInstance().getResources();
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
                 r.getDisplayMetrics());
 

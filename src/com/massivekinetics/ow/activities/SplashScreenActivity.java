@@ -1,16 +1,20 @@
 package com.massivekinetics.ow.activities;
 
-import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.data.manager.ConfigManager;
+import com.massivekinetics.ow.data.tasks.GetSessionTask;
+import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.location.OWLocationManager;
+import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.DateUtils;
+import com.massivekinetics.ow.utils.NavigationService;
 
 import static com.massivekinetics.ow.data.manager.ConfigManager.*;
+import static com.massivekinetics.ow.utils.Constants.ERROR;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +25,49 @@ import static com.massivekinetics.ow.data.manager.ConfigManager.*;
  */
 public class SplashScreenActivity extends OWActivity {
     private static boolean isInitialized = false;
+    OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
+        @Override
+        public void gotLocation(Location location) {
+            String cityName = null;
+            String gpsParams = null;
+            try {
+                cityName = locationManager.getLocationName(location);
+                gpsParams = locationManager.getGpsCoordinatesAsParams(location);
+            } catch (Exception e) {
+
+            }
+
+            if (cityName != null && gpsParams != null) {
+                configManager.setConfig(CITY_NAME, cityName);
+                configManager.setConfig(GPS_PARAMS, gpsParams);
+                configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
+            }
+
+            goNext(100);
+        }
+    };
+    private LoadingListener<Boolean> listener = new LoadingListener<Boolean>() {
+        @Override
+        public void callback(Boolean isSessionSucceded) {
+            if (isSessionSucceded) {
+
+                checkLocation();
+
+            } else {
+                goNext(2000);
+            }
+        }
+
+        @Override
+        public void notifyStart() {
+
+        }
+
+        @Override
+        public void notifyStop() {
+
+        }
+    };
 
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -30,45 +77,41 @@ public class SplashScreenActivity extends OWActivity {
     }
 
     private void checkLocation() {
-        goNext(2000);
-
-      /*  if(configManager.getBooleanConfig(AUTO_DEFINE_LOCATION_ENABLED)){
+        if (configManager.getBooleanConfig(AUTO_DEFINE_LOCATION_ENABLED)) {
             locationManager.getLocation(this, locationResult);
         } else {
             goNext(2000);
-        }*/
+        }
     }
 
     public void onResume() {
         super.onResume();
         initApplication();
-        checkLocation();
+        new GetSessionTask(configManager, listener, 5).execute();
     }
 
-    private void goNext(final int delay){
-
+    private void goNext(final int delay) {
         uiHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent nextActivity;
-                if (configManager.getStringConfig(ConfigManager.GPS_PARAMS) == null) {
-                    nextActivity = new Intent(SplashScreenActivity.this, SettingsActivity.class);
+                if (!NetworkUtils.isOnline() || configManager.getStringConfig(ConfigManager.GPS_PARAMS) == null)
+                    NavigationService.navigate(SplashScreenActivity.this, ErrorActivity.class);//
+                   // navigateToErrorActivity(LOCATION_ERROR);
+                else
+                    NavigationService.navigate(SplashScreenActivity.this, UpdatePageActivity.class);
 
-                } else {
-                    nextActivity = new Intent(SplashScreenActivity.this, ForecastPageActivity.class);
-                }
-
-                startActivity(nextActivity);
                 finish();
             }
         }, delay);
     }
 
     @Override
-    protected void initViews() {}
+    protected void initViews() {
+    }
 
     @Override
-    protected void initListeners() {}
+    protected void initListeners() {
+    }
 
     public void onPause() {
         super.onPause();
@@ -85,25 +128,9 @@ public class SplashScreenActivity extends OWActivity {
         }
     }
 
-    OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
-        @Override
-        public void gotLocation(Location location) {
-            String cityName = null;
-            String gpsParams = null;
-            try {
-                cityName = locationManager.getCityName(location);
-                gpsParams = locationManager.getGpsCoordinatesAsParams(location);
-            } catch (Exception e) {
-
-            }
-
-            if(cityName!=null && gpsParams!=null){
-                configManager.setConfig(CITY_NAME, cityName);
-                configManager.setConfig(GPS_PARAMS, gpsParams);
-                configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
-            }
-
-            goNext(100);
-        }
-    };
+    void navigateToErrorActivity(int errorCode) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(ERROR, errorCode);
+        NavigationService.navigate(SplashScreenActivity.this, ErrorActivity.class, bundle);
+    }
 }
