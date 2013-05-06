@@ -18,6 +18,7 @@ import java.net.URL;
  * To change this template use File | Settings | File Templates.
  */
 public class NetworkUtils {
+    public static final String CODE_403 = "session_expired";
     public static String doGet(final String serverUrl) {
         StringBuffer data = new StringBuffer(256);
         try {
@@ -71,6 +72,9 @@ public class NetworkUtils {
             writer.writeBytes(body);
             writer.flush();
             // Get the response
+
+            if(connection.getResponseCode() == 403)
+                return CODE_403;
 
             InputStream is = connection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(is));

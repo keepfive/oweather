@@ -43,9 +43,13 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
     protected WeatherForecast doInBackground(Void... params) {
         if (!NetworkUtils.isOnline() || StringUtils.isNullOrEmpty(gpsParams) || StringUtils.isNullOrEmpty(session))
             return WeatherForecast.NULL;
-        String requestBody = com.massivekinetics.ow.network.SecurityManager.getWeatherRequestEncryptedBody();
-        String serverUrl = resources.getString(R.string.test_server_url_get_weather);
-        final String response = NetworkUtils.doPost(serverUrl, requestBody);
+
+        String response = getWeatherResponse();
+
+        if(response.equals(NetworkUtils.CODE_403)){
+            new GetSessionTask().doTask();
+            response = getWeatherResponse();
+        }
 
         WeatherForecast forecast = parser.getWeatherForecast(response);
 
@@ -61,6 +65,12 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
         super.onPostExecute(result);
         listener.callback(result);
         listener.notifyStop();
+    }
+
+    private String getWeatherResponse(){
+        String requestBody = com.massivekinetics.ow.network.SecurityManager.getWeatherRequestEncryptedBody();
+        String serverUrl = resources.getString(R.string.test_server_url_get_weather);
+        return NetworkUtils.doPost(serverUrl, requestBody);
     }
 
 }

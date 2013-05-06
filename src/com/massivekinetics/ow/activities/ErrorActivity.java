@@ -39,6 +39,7 @@ public class ErrorActivity extends OWActivity {
             @Override
             public void onClick(View v) {
                 NavigationService.navigate(ErrorActivity.this, SettingsActivity.class);
+                finish();
             }
         });
     }

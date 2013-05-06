@@ -13,6 +13,7 @@ import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.interfaces.ProgressListener;
 import com.massivekinetics.ow.location.OWLocationManager;
+import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.DateUtils;
 import com.massivekinetics.ow.utils.NavigationService;
 import com.massivekinetics.ow.utils.StringUtils;
@@ -33,6 +34,7 @@ public class SettingsActivity extends OWActivity {
     TextView tvNotificationMessage, tvNotificationTime;
     EditText etUserLocation;
     View progressBar;
+    Boolean isLocationChanged;
     CompoundButton switchAutoDefine, switchNotification;
     OWLocationManager locationMgr;
     OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
@@ -44,6 +46,7 @@ public class SettingsActivity extends OWActivity {
             try {
                 cityName = locationMgr.getLocationName(location);
                 gpsParams = locationMgr.getGpsCoordinatesAsParams(location);
+                isLocationChanged = true;
             } catch (Exception e) {
 
             }
@@ -111,6 +114,7 @@ public class SettingsActivity extends OWActivity {
         setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, etUserLocation);
         checkConfig();
         initListeners();
+        isLocationChanged = false;
     }
 
     private void tryGetLocation() {
@@ -246,10 +250,12 @@ public class SettingsActivity extends OWActivity {
 
     private void resolveBackClick(){
         Class nextPageClass;
-        if (configManager.getStringConfig(CITY_NAME) == null)
+        if (configManager.getStringConfig(CITY_NAME) == null || !NetworkUtils.isOnline())
             nextPageClass = ErrorActivity.class;
-        else
+        else if(isLocationChanged)
             nextPageClass = UpdatePageActivity.class;
+        else
+            nextPageClass = ForecastPageActivity.class;
         NavigationService.navigate(this, nextPageClass);
         this.finish();
     }
