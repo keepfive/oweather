@@ -57,6 +57,7 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
             forecast.setLocationString(gpsParams);
             WeatherDataManager.getInstance().updateForecast(forecast);
         }
+
         return forecast;
     }
 

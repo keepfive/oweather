@@ -202,7 +202,7 @@ public class OWLocationManager {
                 return;
             }
 
-            if (tries < 20) {
+            if (tries < 5) {
                 tries++;
                 requestLocationUpdates();
                 handler.postDelayed(new GetLastLocation(locationResult), 3000);

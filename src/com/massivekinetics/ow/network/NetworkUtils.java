@@ -19,6 +19,8 @@ import java.net.URL;
  */
 public class NetworkUtils {
     public static final String CODE_403 = "session_expired";
+    private static final String TAG = "NetworkUtils";
+
     public static String doGet(final String serverUrl) {
         StringBuffer data = new StringBuffer(256);
         try {
@@ -26,8 +28,8 @@ public class NetworkUtils {
             //Ensures that connections are closed when switching networks
             System.setProperty("http.keepAlive", "false");
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setConnectTimeout(4000);
-            connection.setReadTimeout(10000);
+            connection.setConnectTimeout(2500);
+            connection.setReadTimeout(2500);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line = null;
@@ -36,8 +38,7 @@ public class NetworkUtils {
             }
             reader.close();
         } catch (Exception e) {
-              String m = e.getMessage();
-            boolean b = true;
+             Log.e(TAG, e.getMessage());
         }
         return data.toString();
     }
@@ -57,8 +58,8 @@ public class NetworkUtils {
             System.setProperty("http.keepAlive", "false");
 
             final HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setConnectTimeout(4000);
-            connection.setReadTimeout(10000);
+            connection.setConnectTimeout(2500);
+            connection.setReadTimeout(2500);
 
             connection.setDoOutput(true);
             connection.setDoInput(true);
@@ -88,7 +89,7 @@ public class NetworkUtils {
 
 
         } catch (Exception e) {
-
+            Log.e(TAG, e.getMessage());
         } finally {
             try {
                 if (writer != null)
@@ -96,7 +97,7 @@ public class NetworkUtils {
                 if (reader != null)
                     reader.close();
             } catch (Exception e) {
-                Log.e("Security", "Exception while closing reader or writer", e);
+                Log.e(TAG, "Exception while closing reader or writer", e);
             }
         }
 

@@ -1,6 +1,5 @@
 package com.massivekinetics.ow.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
@@ -18,10 +17,7 @@ import com.massivekinetics.ow.data.model.WeatherForecast;
 import com.massivekinetics.ow.data.model.WeatherModel;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.states.WeatherState;
-import com.massivekinetics.ow.utils.DateUtils;
-import com.massivekinetics.ow.utils.OWAnimationUtils;
-import com.massivekinetics.ow.utils.ResourcesCodeUtils;
-import com.massivekinetics.ow.utils.StringUtils;
+import com.massivekinetics.ow.utils.*;
 import com.massivekinetics.ow.views.SwipeIndicatorPresenter;
 
 public class ForecastPageActivity extends OWActivity {
@@ -38,6 +34,12 @@ public class ForecastPageActivity extends OWActivity {
     LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
         @Override
         public void callback(WeatherForecast result) {
+            if(!result.isSuccessed()){
+                Bundle data = new Bundle();
+                data.putCharSequence(ErrorActivity.ERROR_DESCRIPTION, getString(R.string.no_cache));
+                NavigationService.navigate(ForecastPageActivity.this, ErrorActivity.class);
+                finish();
+            }
             updateWeatherInfo(result);
         }
 
@@ -76,8 +78,6 @@ public class ForecastPageActivity extends OWActivity {
 
         weatherContainer = (ViewGroup) findViewById(R.id.weather_container);
         updateLayout = (ViewGroup) findViewById(R.id.updateLayout);
-
-
         tvDate = (TextView) findViewById(R.id.tvDate);
         tvDaytime = (TextView) findViewById(R.id.tvDaytime);
         tvNightTemp = (TextView) findViewById(R.id.tvNightTemp);
@@ -143,9 +143,9 @@ public class ForecastPageActivity extends OWActivity {
         ibSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent settingsIntent = new Intent(ForecastPageActivity.this, SettingsActivity.class);
-                settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(settingsIntent);
+                NavigationService.navigate(ForecastPageActivity.this, TestActivity.class);
+                //NavigationService.navigate(ForecastPageActivity.this, SettingsActivity.class);
+                finish();
             }
         });
 
@@ -180,13 +180,11 @@ public class ForecastPageActivity extends OWActivity {
 
     private void updateWeatherInfo(WeatherForecast weatherForecast) {
         if (!weatherForecast.isSuccessed()) {
-            notifier.alert("Network error", Toast.LENGTH_LONG);
+            notifier.alert(getString(R.string.weather_not_updated), Toast.LENGTH_LONG);
             return;
-        } else if (weatherForecast == WeatherForecast.NULL) {
-            Intent startSettings = new Intent(ForecastPageActivity.this, SettingsActivity.class);
-            startActivity(startSettings);
         }
 
+        weatherContainer.setVisibility(View.VISIBLE);
         this.weatherForecast = weatherForecast;
         swipeIndicatorPresenter = new SwipeIndicatorPresenter(indicatorLayout, weatherForecast.getForecastList().size());
 

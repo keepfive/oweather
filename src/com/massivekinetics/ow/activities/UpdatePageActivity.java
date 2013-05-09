@@ -1,13 +1,12 @@
 package com.massivekinetics.ow.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.data.manager.OWConfigManager;
 import com.massivekinetics.ow.data.model.WeatherForecast;
-import com.massivekinetics.ow.data.tasks.GetWeatherTask;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.utils.NavigationService;
 import com.massivekinetics.ow.utils.OWAnimationUtils;
@@ -23,10 +22,10 @@ public class UpdatePageActivity extends OWActivity {
     LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
         @Override
         public void callback(WeatherForecast result) {
-            if (result == null || result == WeatherForecast.NULL) {
-
+            if (!result.isSuccessed() && !getOWApplication().getDataManager().hasActualForecast()) {
+                NavigationService.navigate(UpdatePageActivity.this, ErrorActivity.class, null, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             } else {
-                NavigationService.navigate(UpdatePageActivity.this, ForecastPageActivity.class);
+                NavigationService.navigate(UpdatePageActivity.this, ForecastPageActivity.class, null, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             }
             finish();
         }
@@ -48,7 +47,7 @@ public class UpdatePageActivity extends OWActivity {
         setContentView(R.layout.update_page);
         initViews();
 
-        new GetWeatherTask(new OWConfigManager(), listener).execute();
+        getOWApplication().getDataManager().runUpdate(listener);
     }
 
     @Override

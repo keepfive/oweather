@@ -31,6 +31,7 @@
         <activity android:name=".activities.ErrorActivity"/>
         <activity android:name=".activities.NetworkErrorActivity"/>
         <activity android:name=".activities.UpdatePageActivity"/>
+        <activity android:name=".activities.TestActivity"/>
     </application>
 
 </manifest>

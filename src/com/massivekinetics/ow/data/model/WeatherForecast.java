@@ -1,6 +1,5 @@
 package com.massivekinetics.ow.data.model;
 
-import com.massivekinetics.ow.data.parser.ParserStatus;
 import com.massivekinetics.ow.utils.DateUtils;
 
 import java.io.Serializable;
@@ -13,7 +12,6 @@ public class WeatherForecast implements Serializable {
     private long timeStamp;
 
 	private List<WeatherModel> forecastList = new ArrayList<WeatherModel>();
-	private ParserStatus status = ParserStatus.SUCCESS;
     private String locationString;
 
     public WeatherForecast(){
@@ -28,17 +26,10 @@ public class WeatherForecast implements Serializable {
 		if(forecastList!=null && !forecastList.isEmpty())
 			this.forecastList = new ArrayList<WeatherModel>(forecastList);
 	}
-	
-	public void setStatus(ParserStatus status){
-		this.status = status;
-	}
-	
-	public ParserStatus getStatus() {
-		return status;
-	}
 
     public boolean isSuccessed(){
-        return status == ParserStatus.SUCCESS;
+        boolean succeeded = this != NULL && !forecastList.isEmpty();
+        return succeeded;
     }
 
     public long getTimeStamp(){
@@ -55,7 +46,7 @@ public class WeatherForecast implements Serializable {
 
     public boolean isActual(){
         long today = DateUtils.getCurrentInMillis();
-        return (today - timeStamp) < 5 * 24 * 60 * 60 * 1000;
+        return !forecastList.isEmpty() && (today - timeStamp) < 5 * 24 * 60 * 60 * 1000;
     }
 
 }

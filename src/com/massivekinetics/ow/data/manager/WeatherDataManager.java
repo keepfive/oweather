@@ -6,6 +6,7 @@ import com.massivekinetics.ow.data.WeatherForecastChangedListener;
 import com.massivekinetics.ow.data.model.WeatherForecast;
 import com.massivekinetics.ow.data.tasks.GetWeatherTask;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
+import com.massivekinetics.ow.utils.DateUtils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class WeatherDataManager implements DataManager {
 
     @Override
     public void getWeatherForecast(LoadingListener<WeatherForecast> listener) {
-        if (isForecastUpToDate())
+        if (hasActualForecast())
             listener.callback(mWeatherForecast);
         else
             runUpdate(listener);
@@ -99,7 +100,12 @@ public class WeatherDataManager implements DataManager {
         }
     }
 
-    private boolean isForecastUpToDate() {
-        return mWeatherForecast != WeatherForecast.NULL;
+    public boolean hasActualForecast() {
+        String gpsLocation = OWApplication.getInstance().getConfigManager().getLocation();
+        long today = DateUtils.getCurrentInMillis();
+        boolean isActual = !mWeatherForecast.getForecastList().isEmpty()
+                && gpsLocation.equals(mWeatherForecast.getLocationString())
+                && (today - mWeatherForecast.getTimeStamp()) < 5 * 24 * 60 * 60 * 1000;
+        return isActual;
     }
 }

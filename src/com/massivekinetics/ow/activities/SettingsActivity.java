@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.data.manager.NotificationService;
 import com.massivekinetics.ow.interfaces.ProgressListener;
 import com.massivekinetics.ow.location.OWLocationManager;
 import com.massivekinetics.ow.network.NetworkUtils;
@@ -28,13 +29,13 @@ import static com.massivekinetics.ow.data.manager.ConfigManager.*;
  * To change this template use File | Settings | File Templates.
  */
 public class SettingsActivity extends OWActivity {
-    View rootContent, notification;
+    View rootContent, settingsNotification;
     ImageButton btnBack, btnCelsius, btnFahrenheit;
     TextView tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle;
     TextView tvNotificationMessage, tvNotificationTime;
     EditText etUserLocation;
     View progressBar;
-    Boolean isLocationChanged;
+    Boolean isLocationChanged, isCheckingLocation;
     CompoundButton switchAutoDefine, switchNotification;
     OWLocationManager locationMgr;
     OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
@@ -88,16 +89,23 @@ public class SettingsActivity extends OWActivity {
         @Override
         public void showProgress() {
             progressBar.setVisibility(View.VISIBLE);
-            rootContent.setEnabled(false);
+            switchAutoDefine.setEnabled(false);
+            switchNotification.setEnabled(false);
+            tvNotificationTime.setEnabled(false);
+            etUserLocation.setEnabled(false);
+            isCheckingLocation = true;
         }
 
         @Override
         public void hideProgress() {
             progressBar.setVisibility(View.GONE);
-            rootContent.setEnabled(true);
+            switchAutoDefine.setEnabled(true);
+            switchNotification.setEnabled(true);
+            etUserLocation.setEnabled(true);
+            tvNotificationTime.setEnabled(true);
+            isCheckingLocation = false;
         }
     };
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -122,17 +130,15 @@ public class SettingsActivity extends OWActivity {
         boolean isLocationAvailable = locationMgr.getLocation(this, locationResult);
         if (isLocationAvailable)
             progressListener.showProgress();
-        else{
-            switchAutoDefine.performClick();
-            notifier.alert("Your location could not been retrieved. Please add location manually", Toast.LENGTH_LONG);
-        }
+        else
+            notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
     }
 
     @Override
     protected void initViews() {
         rootContent = findViewById(android.R.id.content);
 
-        btnBack = (ImageButton)findViewById(R.id.ibBack);
+        btnBack = (ImageButton) findViewById(R.id.ibBack);
         btnCelsius = (ImageButton) findViewById(R.id.ibCelcius);
         btnFahrenheit = (ImageButton) findViewById(R.id.ibFahrenheit);
 
@@ -148,7 +154,7 @@ public class SettingsActivity extends OWActivity {
         progressBar = findViewById(R.id.progressBar);
         switchAutoDefine = (CompoundButton) findViewById(R.id.switchAutoDefine);
         switchNotification = (CompoundButton) findViewById(R.id.switchNotification);
-        notification = findViewById(R.id.settingsNotification);
+        settingsNotification = findViewById(R.id.settingsNotification);
 
     }
 
@@ -193,13 +199,15 @@ public class SettingsActivity extends OWActivity {
         switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                configManager.setConfig(NOTIFICATION_ENABLED, isChecked);
-                if (isChecked)
-                    turnOnNotification();
+                configManager.setNotificationEnabled(isChecked);
+                NotificationService.turnNotification(isChecked);
+
+                int notificationVisibility = isChecked ? View.VISIBLE : View.INVISIBLE;
+                settingsNotification.setVisibility(notificationVisibility);
             }
         });
 
-        notification.setOnClickListener(new View.OnClickListener() {
+        tvNotificationTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent settingsIntent = new Intent(SettingsActivity.this, NotificationSettingsActivity.class);
@@ -210,19 +218,17 @@ public class SettingsActivity extends OWActivity {
 
     }
 
-    private void turnOnNotification() {
-    }
-
     private void checkConfig() {
         boolean isAutoDefineLocation = configManager.getAutoDefineLocation();
-        boolean isNotificationEnabled = configManager.getBooleanConfig(NOTIFICATION_ENABLED);
+        boolean isNotificationEnabled = configManager.isNotificationEnabled();
         boolean isFahrenheit = configManager.getBooleanConfig(TEMPERATURE_MODE_FAHRENHEIT);
         String cityName = configManager.getStringConfig(CITY_NAME);
-        int notificationHour = configManager.getIntConfig(NOTIFICATION_TIME_HOUR);
-        int notificationMin = configManager.getIntConfig(NOTIFICATION_TIME_MINUTE);
 
         switchAutoDefine.setChecked(isAutoDefineLocation);
         switchNotification.setChecked(isNotificationEnabled);
+
+        int notificationVisibility = isNotificationEnabled ? View.VISIBLE : View.INVISIBLE;
+        settingsNotification.setVisibility(notificationVisibility);
 
         final int resIdC = isFahrenheit ? R.drawable.celcius_dark : R.drawable.celcius_light;
         final int resIdF = isFahrenheit ? R.drawable.fahrenheit_light : R.drawable.fahrenheit_dark;
@@ -232,30 +238,33 @@ public class SettingsActivity extends OWActivity {
         if (cityName != null)
             etUserLocation.setText(cityName);
         else
-            notifyNoLocation();
+            tryGetLocation();
 
-        String notificationTime = notificationHour + ":" + ((notificationMin < 10) ? "0" + notificationMin : notificationMin);
-        tvNotificationTime.setText(notificationTime);
-    }
-
-    private void notifyNoLocation() {
-        Toast.makeText(this, "Application needs your location for proper work. Please choose manual or auto defining, otherwise leave app by back button", Toast.LENGTH_LONG).show();
+        tvNotificationTime.setText(configManager.getNotificationTimeAsString());
     }
 
     @Override
     public void onBackPressed() {
+        if(isCheckingLocation)
+            return;
+
         resolveBackClick();
         super.onBackPressed();
     }
 
-    private void resolveBackClick(){
+    private void resolveBackClick() {
         Class nextPageClass;
-        if (configManager.getStringConfig(CITY_NAME) == null || !NetworkUtils.isOnline())
+
+
+        if (StringUtils.isNullOrEmpty(configManager.getLocation()) || !NetworkUtils.isOnline())
             nextPageClass = ErrorActivity.class;
-        else if(isLocationChanged)
+
+        else if (isLocationChanged)
             nextPageClass = UpdatePageActivity.class;
+
         else
             nextPageClass = ForecastPageActivity.class;
+
         NavigationService.navigate(this, nextPageClass);
         this.finish();
     }

@@ -1,6 +1,7 @@
 package com.massivekinetics.ow.data.manager;
 
 import android.content.SharedPreferences;
+import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
 
 /**
@@ -78,6 +79,39 @@ public class OWConfigManager implements ConfigManager {
     @Override
     public void setLocation(String locationString) {
         prefs.edit().putString(GPS_PARAMS, locationString).commit();
+    }
+
+    @Override
+    public String getNotificationTimeAsString() {
+        int notificationHour = prefs.getInt(NOTIFICATION_TIME_HOUR, -1);
+        int notificationMinute = prefs.getInt(NOTIFICATION_TIME_MINUTE, -1);
+        if(notificationHour == -1 || notificationMinute == -1)
+            return OWApplication.getInstance().getString(R.string.select_time);
+        else {
+            String notificationTime = notificationHour + ":" + ((notificationMinute < 10) ? "0" + notificationMinute : notificationMinute);
+            return notificationTime;
+        }
+    }
+
+    @Override
+    public void setNotificationTime(int hour, int minute) {
+        synchronized (OWConfigManager.class){
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt(NOTIFICATION_TIME_HOUR, hour);
+            editor.putInt(NOTIFICATION_TIME_MINUTE, minute);
+            editor.commit();
+        }
+    }
+
+    @Override
+    public void setNotificationEnabled(boolean isEnabled) {
+
+        prefs.edit().putBoolean(NOTIFICATION_ENABLED, isEnabled).commit();
+    }
+
+    @Override
+    public boolean isNotificationEnabled() {
+        return prefs.getBoolean(NOTIFICATION_ENABLED, false);
     }
 
 }

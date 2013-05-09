@@ -43,6 +43,9 @@ public interface ConfigManager {
     String getLocation();
     void setLocation(String locationString);
 
-
+    String getNotificationTimeAsString();
+    void setNotificationTime(int hour, int minute);
+    void setNotificationEnabled(boolean isEnabled);
+    boolean isNotificationEnabled();
 
 }

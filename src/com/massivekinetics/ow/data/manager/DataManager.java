@@ -25,4 +25,5 @@ public interface DataManager extends Serializable {
     void updateForecast(WeatherForecast forecast);
     void saveForecast();
     void restoreForecast();
+    boolean hasActualForecast();
 }

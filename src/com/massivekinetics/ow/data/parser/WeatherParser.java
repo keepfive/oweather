@@ -26,25 +26,20 @@ public class WeatherParser {
 
 
 	public WeatherForecast getWeatherForecast(String json) {
-		WeatherForecast forecast = new WeatherForecast();
-		
-		if (json.contains("error"))
-			forecast.setStatus(ParserStatus.ERROR);
-		else {
+		if (!json.contains("error")){
 			try {
-				JSONObject generalData = new JSONObject(json);//.getJSONObject(DATA);
+                WeatherForecast forecast = new WeatherForecast();
+				JSONObject generalData = new JSONObject(json);
 				List<WeatherModel> generalForecast = getGeneralForecast(generalData);
 				WeatherModel currentWeatherModel = getCurrentWeather(generalData);
 				mergeCurrentConditions(generalForecast, currentWeatherModel);
-				
 				forecast.setForecastList(generalForecast);
-				forecast.setStatus(ParserStatus.SUCCESS);
+                return forecast;
 			} catch (JSONException jse) {
-				forecast.setStatus(ParserStatus.ERROR);
 				Log.e(TAG, jse.getMessage());
 			}
 		}
-		return forecast;
+		return WeatherForecast.NULL;
 	}
 
 	public WeatherModel getWeatherFromJson(JSONObject jsonObject) {

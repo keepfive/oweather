@@ -2,6 +2,7 @@ package com.massivekinetics.ow.activities;
 
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
@@ -39,6 +40,14 @@ public class NotificationSettingsActivity extends OWActivity {
 
     @Override
     protected void initListeners() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        btnSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int hour = timePicker.getCurrentHour();
+                int minute = timePicker.getCurrentMinute();
+                configManager.setNotificationTime(hour, minute);
+                finish();
+            }
+        });
     }
 }
