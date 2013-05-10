@@ -12,6 +12,11 @@ import java.util.Date;
  * Time: 3:10 AM
  */
 public class DateUtils {
+    public boolean isToday(Date inputDate){
+        String name = getDayName(inputDate);
+        return name.equalsIgnoreCase(DayName.TODAY.getDisplayName());
+    }
+
     public String getDayName(Date inputDate) {
         String name = "";
         DayName dayName = DayName.TODAY;

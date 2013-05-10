@@ -11,7 +11,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.data.Autocompleter;
+import com.massivekinetics.ow.data.adapters.PlacesAutoCompleteAdapter;
 import com.massivekinetics.ow.data.manager.NotificationService;
+import com.massivekinetics.ow.data.model.Prediction;
+import com.massivekinetics.ow.data.tasks.GetLocationFromPlaceTask;
+import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.interfaces.ProgressListener;
 import com.massivekinetics.ow.location.OWLocationManager;
 import com.massivekinetics.ow.network.NetworkUtils;
@@ -28,14 +33,15 @@ import static com.massivekinetics.ow.data.manager.ConfigManager.*;
  * Time: 10:18 AM
  * To change this template use File | Settings | File Templates.
  */
-public class SettingsActivity extends OWActivity {
+public class SettingsActivity extends OWActivity implements AdapterView.OnItemClickListener {
     View rootContent, settingsNotification;
     ImageButton btnBack, btnCelsius, btnFahrenheit;
     TextView tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle;
     TextView tvNotificationMessage, tvNotificationTime;
-    EditText etUserLocation;
+    AutoCompleteTextView etUserLocation;
     View progressBar;
-    Boolean isLocationChanged, isCheckingLocation;
+
+    boolean isLocationChanged, isCheckingLocation;
     CompoundButton switchAutoDefine, switchNotification;
     OWLocationManager locationMgr;
     OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
@@ -121,6 +127,7 @@ public class SettingsActivity extends OWActivity {
         super.onResume();
         setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, etUserLocation);
         checkConfig();
+        etUserLocation.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.prediction));
         initListeners();
         isLocationChanged = false;
     }
@@ -150,7 +157,7 @@ public class SettingsActivity extends OWActivity {
 
         tvNotificationTime.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.reminder_arrow, 0);
 
-        etUserLocation = (EditText) findViewById(R.id.etUserLocation);
+        etUserLocation = (AutoCompleteTextView) findViewById(R.id.etUserLocation);
         progressBar = findViewById(R.id.progressBar);
         switchAutoDefine = (CompoundButton) findViewById(R.id.switchAutoDefine);
         switchNotification = (CompoundButton) findViewById(R.id.switchNotification);
@@ -182,6 +189,9 @@ public class SettingsActivity extends OWActivity {
                 return false;
             }
         });
+
+
+        etUserLocation.setOnItemClickListener(this);
 
         btnCelsius.setOnClickListener(temperatureModeListener);
 
@@ -273,8 +283,33 @@ public class SettingsActivity extends OWActivity {
         configManager.setConfig(CITY_NAME, cityName);
         configManager.setConfig(GPS_PARAMS, gpsParams);
         configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
+        isLocationChanged = true;
         notifier.alert(getString(R.string.location_saved), Toast.LENGTH_SHORT);
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final Prediction prediction = (Prediction) parent.getItemAtPosition(position);
+        etUserLocation.setText(prediction.getDescription());
+        new GetLocationFromPlaceTask(prediction.getReference(), new Autocompleter(), autocompleteListener).execute();
+    }
+
+    LoadingListener<String> autocompleteListener = new LoadingListener<String>() {
+        @Override
+        public void callback(String result) {
+            if(result != null)
+                setUserLocation(etUserLocation.getText().toString(), result);
+        }
+
+        @Override
+        public void notifyStart() {
+            progressListener.showProgress();
+        }
+
+        @Override
+        public void notifyStop() {
+            progressListener.hideProgress();
+        }
+    };
 }

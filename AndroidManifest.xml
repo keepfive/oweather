@@ -24,7 +24,19 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.ForecastPageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ForecastPageActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.massivekinetics.ow.forecast"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activities.OWNotification">
+            <intent-filter>
+                <action android:name="com.massivekinetics.ow.notification"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".activities.SettingsActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Holo.Light"/>
         <activity android:name=".activities.NotificationSettingsActivity" android:screenOrientation="portrait" />
@@ -32,6 +44,7 @@
         <activity android:name=".activities.NetworkErrorActivity"/>
         <activity android:name=".activities.UpdatePageActivity"/>
         <activity android:name=".activities.TestActivity"/>
+
     </application>
 
 </manifest>

@@ -54,13 +54,7 @@ public class WeatherModel implements Serializable {
 		return date;
 	}
 
-	private void setDate() {    /*
-		if (!isNullOrEmpty(dateString))
-			try {
-				date = dateFormat.parse(dateString);
-			} catch (ParseException pe) {
-				Log.e(TAG, pe.getMessage());
-			} */
+	private void setDate() {
         if(timeStamp != 0)
             date = new Date(timeStamp);
 	}

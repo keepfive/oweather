@@ -1,5 +1,6 @@
 package com.massivekinetics.ow.activities;
 
+import android.app.NotificationManager;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
@@ -21,6 +22,8 @@ import com.massivekinetics.ow.utils.*;
 import com.massivekinetics.ow.views.SwipeIndicatorPresenter;
 
 public class ForecastPageActivity extends OWActivity {
+    public static final String ACTION = "com.massivekinetics.ow.forecast";
+
     ViewGroup weatherContainer, updateLayout;
     TextView tvDate, tvCurrentTemp, tvDaytime, tvNightTemp, tvWeatherDescription, tvMinus;
     TextView tvHumidity, tvWindSpeed, tvMoonPhase, tvWindDirection, tvLocationName;
@@ -62,9 +65,19 @@ public class ForecastPageActivity extends OWActivity {
         super.onCreate(savedInstanceState);
 
         dataManager = WeatherDataManager.getInstance();
-
+        checkIntent();
         initViews();
         initListeners();
+    }
+
+    private void checkIntent() {
+        Bundle extras = getIntent().getExtras();
+        if(extras != null && extras.containsKey(OWNotification.NOTIFICATION_ID_KEY)){
+            //---look up the notification manager service---
+            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            //---cancel the notification---
+            nm.cancel(extras.getInt(OWNotification.NOTIFICATION_ID_KEY));
+        }
     }
 
     @Override
@@ -143,8 +156,8 @@ public class ForecastPageActivity extends OWActivity {
         ibSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavigationService.navigate(ForecastPageActivity.this, TestActivity.class);
-                //NavigationService.navigate(ForecastPageActivity.this, SettingsActivity.class);
+                //NavigationService.navigate(ForecastPageActivity.this, TestActivity.class);
+                NavigationService.navigate(ForecastPageActivity.this, SettingsActivity.class);
                 finish();
             }
         });

@@ -26,4 +26,5 @@ public interface DataManager extends Serializable {
     void saveForecast();
     void restoreForecast();
     boolean hasActualForecast();
+    String getNotification();
 }

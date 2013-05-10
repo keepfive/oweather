@@ -1,9 +1,11 @@
 package com.massivekinetics.ow.data.manager;
 
 import android.util.Log;
+import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.data.WeatherForecastChangedListener;
 import com.massivekinetics.ow.data.model.WeatherForecast;
+import com.massivekinetics.ow.data.model.WeatherModel;
 import com.massivekinetics.ow.data.tasks.GetWeatherTask;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.utils.DateUtils;
@@ -30,7 +32,7 @@ public class WeatherDataManager implements DataManager {
 
     public static WeatherDataManager getInstance() {
 
-        synchronized (WeatherDataManager.class){
+        synchronized (WeatherDataManager.class) {
             if (instance == null)
                 instance = new WeatherDataManager();
         }
@@ -86,10 +88,10 @@ public class WeatherDataManager implements DataManager {
     public void restoreForecast() {
         try {
             File cache = new File(OWApplication.getInstance().getCacheDir(), "oweather.dat");
-            if(cache.exists()){
+            if (cache.exists()) {
                 FileInputStream input = new FileInputStream(cache);
                 ObjectInputStream ois = new ObjectInputStream(input);
-                WeatherForecast forecast = (WeatherForecast)ois.readObject();
+                WeatherForecast forecast = (WeatherForecast) ois.readObject();
                 this.mWeatherForecast = forecast;
             }
 
@@ -107,5 +109,28 @@ public class WeatherDataManager implements DataManager {
                 && gpsLocation.equals(mWeatherForecast.getLocationString())
                 && (today - mWeatherForecast.getTimeStamp()) < 5 * 24 * 60 * 60 * 1000;
         return isActual;
+    }
+
+    @Override
+    public String getNotification() {
+        String notification = null;
+
+        if (hasActualForecast()) {
+            DateUtils dateUtils = new DateUtils();
+            for (WeatherModel model : mWeatherForecast.getForecastList()) {
+                if (dateUtils.isToday(model.getDate())) {
+                    char degree = '\u00B0';
+                    String degreeName = degree + (OWApplication.getInstance().getConfigManager().isTemperatureFahrengeitMode() ? "F" : "C");
+                    String notificationPattern = OWApplication.getInstance().getString(R.string.notification_pattern);
+
+                    notification = notificationPattern.replace("[DESC]", model.getState().getValue())
+                            .replace("[TEMP_MAX]", model.getMaxTemperature() + degreeName)
+                            .replace("[TEMP_MIN]", model.getMinTemperature() + degreeName);
+                }
+            }
+        }
+
+        return notification;
+
     }
 }

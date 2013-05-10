@@ -13,7 +13,7 @@
             android:id="@+id/tvLocationTitle" android:gravity="center_horizontal"
             android:textSize="36sp"
             style="@style/TextView"/>
-    <EditText
+    <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="45dp" android:textSize="28sp" android:id="@+id/etUserLocation" android:layout_marginTop="20dp" style="@style/LocationEditText" android:drawablePadding="5dp"/>
 </LinearLayout>

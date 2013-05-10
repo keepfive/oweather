@@ -89,7 +89,8 @@ public class NetworkUtils {
 
 
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            /*if(e != null)
+                Log.e(TAG, e.getMessage()); */
         } finally {
             try {
                 if (writer != null)

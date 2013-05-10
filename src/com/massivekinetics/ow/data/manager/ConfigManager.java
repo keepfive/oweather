@@ -48,4 +48,7 @@ public interface ConfigManager {
     void setNotificationEnabled(boolean isEnabled);
     boolean isNotificationEnabled();
 
+    boolean isTemperatureFahrengeitMode();
+    void setTemperatureFahrengeitMode(boolean isFahrengeit);
+
 }

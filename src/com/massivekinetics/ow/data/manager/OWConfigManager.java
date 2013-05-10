@@ -105,13 +105,22 @@ public class OWConfigManager implements ConfigManager {
 
     @Override
     public void setNotificationEnabled(boolean isEnabled) {
-
         prefs.edit().putBoolean(NOTIFICATION_ENABLED, isEnabled).commit();
     }
 
     @Override
     public boolean isNotificationEnabled() {
         return prefs.getBoolean(NOTIFICATION_ENABLED, false);
+    }
+
+    @Override
+    public boolean isTemperatureFahrengeitMode() {
+        return prefs.getBoolean(TEMPERATURE_MODE_FAHRENHEIT, false);
+    }
+
+    @Override
+    public void setTemperatureFahrengeitMode(boolean isFahrengeit) {
+        prefs.edit().putBoolean(TEMPERATURE_MODE_FAHRENHEIT, isFahrengeit).commit();
     }
 
 }

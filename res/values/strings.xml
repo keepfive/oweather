@@ -32,6 +32,7 @@
     <string name="location_hint">your location here...</string>
     <string name="notification_time">Notification time</string>
     <string name="notification_time_message">Here you can schedule everyday\n notification about the weather</string>
+    <string name="notification_pattern">[DESC] / Day [TEMP_MAX] / NIGHT [TEMP_MIN]</string>
     <string name="could_not_locate">Your location could not been retrieved. Please add location manually</string>
     <string name="location_saved">Location saved</string>
     <string name="not_available">N/A</string>

@@ -230,6 +230,9 @@ public class ResourcesCodeUtils {
             case 353:
                 return WeatherState.DOWNPOUR;
 
+            case 356:
+                return WeatherState.RAIN_AND_SUN;
+
             case 359:
                 return WeatherState.DOWNPOUR;
 

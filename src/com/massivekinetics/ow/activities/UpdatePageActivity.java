@@ -23,7 +23,7 @@ public class UpdatePageActivity extends OWActivity {
         @Override
         public void callback(WeatherForecast result) {
             if (!result.isSuccessed() && !getOWApplication().getDataManager().hasActualForecast()) {
-                NavigationService.navigate(UpdatePageActivity.this, ErrorActivity.class, null, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                NavigationService.navigate(UpdatePageActivity.this, ErrorActivity.class);
             } else {
                 NavigationService.navigate(UpdatePageActivity.this, ForecastPageActivity.class, null, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             }
