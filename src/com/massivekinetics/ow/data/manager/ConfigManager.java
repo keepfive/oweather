@@ -40,8 +40,11 @@ public interface ConfigManager {
     void setActiveSession(String session);
     void setAutoDefineLocation(boolean isAllowed);
 
-    String getLocation();
-    void setLocation(String locationString);
+    String getLocationName();
+    void setLocationName(String locationName);
+
+    String getLocationCoordinates();
+    void setLocationCoordinates(String locationCoordinates);
 
     String getNotificationTimeAsString();
     void setNotificationTime(int hour, int minute);

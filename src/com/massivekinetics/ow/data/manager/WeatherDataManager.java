@@ -103,7 +103,7 @@ public class WeatherDataManager implements DataManager {
     }
 
     public boolean hasActualForecast() {
-        String gpsLocation = OWApplication.getInstance().getConfigManager().getLocation();
+        String gpsLocation = OWApplication.getInstance().getConfigManager().getLocationCoordinates();
         long today = DateUtils.getCurrentInMillis();
         boolean isActual = !mWeatherForecast.getForecastList().isEmpty()
                 && gpsLocation.equals(mWeatherForecast.getLocationString())

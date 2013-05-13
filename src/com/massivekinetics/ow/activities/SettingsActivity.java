@@ -67,8 +67,12 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
                     if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)) {
                         etUserLocation.setText(finalCityName);
                         setUserLocation(finalCityName, finalGpsParams);
-                    } else
+                    } else{
                         notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
+                        etUserLocation.setText(configManager.getLocationName());
+                        etUserLocation.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                        switchAutoDefine.setChecked(false);
+                    }
                     progressListener.hideProgress();
                 }
             });
@@ -98,7 +102,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
             switchAutoDefine.setEnabled(false);
             switchNotification.setEnabled(false);
             tvNotificationTime.setEnabled(false);
-            etUserLocation.setEnabled(false);
+            //etUserLocation.setEnabled(false);
             isCheckingLocation = true;
         }
 
@@ -107,7 +111,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
             progressBar.setVisibility(View.GONE);
             switchAutoDefine.setEnabled(true);
             switchNotification.setEnabled(true);
-            etUserLocation.setEnabled(true);
+            //etUserLocation.setEnabled(true);
             tvNotificationTime.setEnabled(true);
             isCheckingLocation = false;
         }
@@ -127,7 +131,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         super.onResume();
         setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, etUserLocation);
         checkConfig();
-        etUserLocation.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.prediction));
+
         initListeners();
         isLocationChanged = false;
     }
@@ -135,8 +139,11 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     private void tryGetLocation() {
         locationMgr = new OWLocationManager();
         boolean isLocationAvailable = locationMgr.getLocation(this, locationResult);
-        if (isLocationAvailable)
+        if (isLocationAvailable){
             progressListener.showProgress();
+            etUserLocation.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.location_gps), null, null, null);
+            etUserLocation.setText("Retrieving location");
+        }
         else
             notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
     }
@@ -150,6 +157,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         btnFahrenheit = (ImageButton) findViewById(R.id.ibFahrenheit);
 
         tvLocationTitle = (TextView) findViewById(R.id.tvLocationTitle);
+
         tvAutoDefineTitle = (TextView) findViewById(R.id.tvAutoDefine);
         tvNotificationTitle = (TextView) findViewById(R.id.tvNotification);
         tvNotificationMessage = (TextView) findViewById(R.id.tvNotificationMsg);
@@ -163,6 +171,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         switchNotification = (CompoundButton) findViewById(R.id.switchNotification);
         settingsNotification = findViewById(R.id.settingsNotification);
 
+        tvLocationTitle.requestFocus();
     }
 
     @Override
@@ -201,8 +210,16 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 configManager.setAutoDefineLocation(isChecked);
-                if (isChecked)
+                if (isChecked){
                     tryGetLocation();
+                    etUserLocation.setEnabled(false);
+                    etUserLocation.setAdapter(null);
+                    etUserLocation.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.location_gps), null, null, null);
+                }else{
+                    etUserLocation.setEnabled(true);
+                    etUserLocation.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                    etUserLocation.setAdapter(new PlacesAutoCompleteAdapter(SettingsActivity.this, R.layout.prediction));
+                }
             }
         });
 
@@ -235,6 +252,12 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         String cityName = configManager.getStringConfig(CITY_NAME);
 
         switchAutoDefine.setChecked(isAutoDefineLocation);
+        if(isAutoDefineLocation){
+            etUserLocation.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.prediction));
+        } else {
+            etUserLocation.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+        }
+
         switchNotification.setChecked(isNotificationEnabled);
 
         int notificationVisibility = isNotificationEnabled ? View.VISIBLE : View.INVISIBLE;
@@ -245,9 +268,11 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
 
         btnCelsius.setImageResource(resIdC);
         btnFahrenheit.setImageResource(resIdF);
+
         if (cityName != null)
             etUserLocation.setText(cityName);
-        else
+
+        if(isAutoDefineLocation)
             tryGetLocation();
 
         tvNotificationTime.setText(configManager.getNotificationTimeAsString());
@@ -265,8 +290,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     private void resolveBackClick() {
         Class nextPageClass;
 
-
-        if (StringUtils.isNullOrEmpty(configManager.getLocation()) || !NetworkUtils.isOnline())
+        if (StringUtils.isNullOrEmpty(configManager.getLocationCoordinates()) || !NetworkUtils.isOnline())
             nextPageClass = ErrorActivity.class;
 
         else if (isLocationChanged)
@@ -280,8 +304,8 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     }
 
     private void setUserLocation(String cityName, String gpsParams) {
-        configManager.setConfig(CITY_NAME, cityName);
-        configManager.setConfig(GPS_PARAMS, gpsParams);
+        configManager.setLocationName(cityName);
+        configManager.setLocationCoordinates(gpsParams);
         configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
         isLocationChanged = true;
         notifier.alert(getString(R.string.location_saved), Toast.LENGTH_SHORT);
@@ -291,7 +315,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final Prediction prediction = (Prediction) parent.getItemAtPosition(position);
-        etUserLocation.setText(prediction.getDescription());
+        etUserLocation.setText(prediction.getCity());
         new GetLocationFromPlaceTask(prediction.getReference(), new Autocompleter(), autocompleteListener).execute();
     }
 

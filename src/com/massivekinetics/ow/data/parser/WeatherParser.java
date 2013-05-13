@@ -103,6 +103,15 @@ public class WeatherParser {
 			if (!isNullOrEmpty(currentWeatherModel.getTempMaxF()))
 				forecastModel.setTempMaxF(currentWeatherModel.getTempMaxF());
 
+            if (!isNullOrEmpty(currentWeatherModel.getTempMaxC()))
+                forecastModel.setTempMaxC(currentWeatherModel.getTempMaxC());
+
+            if (!isNullOrEmpty(currentWeatherModel.getTempMinF()))
+                forecastModel.setTempMinF(currentWeatherModel.getTempMinF());
+
+            if (!isNullOrEmpty(currentWeatherModel.getTempMinC()))
+                forecastModel.setTempMinC(currentWeatherModel.getTempMinC());
+
 			if (!isNullOrEmpty(currentWeatherModel.getWeatherCode()))
 				forecastModel.setWeatherCode(currentWeatherModel
 						.getWeatherCode());

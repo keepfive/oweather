@@ -29,7 +29,7 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
         baseUrl = resources.getString(R.string.weather_base_url_gps);
         key = resources.getString(R.string.weather_key);
         cityName = configManager.getStringConfig(ConfigManager.CITY_NAME);
-        gpsParams = configManager.getLocation();
+        gpsParams = configManager.getLocationCoordinates();
         session = configManager.getActiveSession();
     }
 

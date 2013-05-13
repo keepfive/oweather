@@ -84,7 +84,7 @@ public class SecurityManager {
         ConfigManager configManager = application.getConfigManager();
 
         String result = "";
-        String locationString = configManager.getLocation();
+        String locationString = configManager.getLocationCoordinates();
         String[] coordinateArray = locationString.split(",");
         for (String coordinate : coordinateArray) {
             float value = Float.parseFloat(coordinate);

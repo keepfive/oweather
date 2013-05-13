@@ -72,13 +72,23 @@ public class OWConfigManager implements ConfigManager {
     }
 
     @Override
-    public String getLocation() {
+    public String getLocationName() {
+        return prefs.getString(CITY_NAME, null);
+    }
+
+    @Override
+    public void setLocationName(String locationName) {
+        prefs.edit().putString(CITY_NAME, locationName).commit();
+    }
+
+    @Override
+    public String getLocationCoordinates() {
         return prefs.getString(GPS_PARAMS, null);
     }
 
     @Override
-    public void setLocation(String locationString) {
-        prefs.edit().putString(GPS_PARAMS, locationString).commit();
+    public void setLocationCoordinates(String locationCoordinates) {
+        prefs.edit().putString(GPS_PARAMS, locationCoordinates).commit();
     }
 
     @Override

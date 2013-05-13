@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.data.manager.ConfigManager;
 import com.massivekinetics.ow.data.tasks.GetSessionTask;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.NavigationService;
+import com.massivekinetics.ow.utils.StringUtils;
 
 import static com.massivekinetics.ow.utils.Constants.ERROR;
 
@@ -51,8 +51,10 @@ public class SplashScreenActivity extends OWActivity {
         uiHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (!NetworkUtils.isOnline() || configManager.getStringConfig(ConfigManager.GPS_PARAMS) == null)
+                if (!NetworkUtils.isOnline())
                     NavigationService.navigate(SplashScreenActivity.this, ErrorActivity.class);
+                else if (StringUtils.isNullOrEmpty(configManager.getLocationCoordinates()))
+                    NavigationService.navigate(SplashScreenActivity.this, SettingsActivity.class);
                 else
                     NavigationService.navigate(SplashScreenActivity.this, UpdatePageActivity.class);
                 finish();
