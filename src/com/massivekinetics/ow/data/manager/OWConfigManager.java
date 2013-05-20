@@ -133,4 +133,24 @@ public class OWConfigManager implements ConfigManager {
         prefs.edit().putBoolean(TEMPERATURE_MODE_FAHRENHEIT, isFahrengeit).commit();
     }
 
+    @Override
+    public void setNotificationHour(int hour) {
+        prefs.edit().putInt(NOTIFICATION_TIME_HOUR, hour).commit();
+    }
+
+    @Override
+    public int getNotificationHour() {
+        return prefs.getInt(NOTIFICATION_TIME_HOUR, -1);
+    }
+
+    @Override
+    public void setNotificationMinute(int minute) {
+        prefs.edit().putInt(NOTIFICATION_TIME_MINUTE, minute).commit();
+    }
+
+    @Override
+    public int getNotificationMinute() {
+        return prefs.getInt(NOTIFICATION_TIME_MINUTE, -1);
+    }
+
 }

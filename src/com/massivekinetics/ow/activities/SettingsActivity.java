@@ -2,6 +2,7 @@ package com.massivekinetics.ow.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -38,9 +39,8 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     ImageButton btnBack, btnCelsius, btnFahrenheit;
     TextView tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle;
     TextView tvNotificationMessage, tvNotificationTime;
-    AutoCompleteTextView etUserLocation;
+    AutoCompleteTextView locationAutoCompleteView;
     View progressBar;
-
     boolean isLocationChanged, isCheckingLocation;
     CompoundButton switchAutoDefine, switchNotification;
     OWLocationManager locationMgr;
@@ -65,17 +65,33 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
                 @Override
                 public void run() {
                     if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)) {
-                        etUserLocation.setText(finalCityName);
+                        locationAutoCompleteView.setText(finalCityName);
                         setUserLocation(finalCityName, finalGpsParams);
-                    } else{
+                    } else {
                         notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
-                        etUserLocation.setText(configManager.getLocationName());
-                        etUserLocation.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                        locationAutoCompleteView.setText(configManager.getLocationName());
                         switchAutoDefine.setChecked(false);
                     }
                     progressListener.hideProgress();
                 }
             });
+        }
+    };
+    LoadingListener<String> autocompleteListener = new LoadingListener<String>() {
+        @Override
+        public void callback(String result) {
+            if (result != null)
+                setUserLocation(locationAutoCompleteView.getText().toString(), result);
+        }
+
+        @Override
+        public void notifyStart() {
+            progressListener.showProgress();
+        }
+
+        @Override
+        public void notifyStop() {
+            progressListener.hideProgress();
         }
     };
     private View.OnClickListener temperatureModeListener = new View.OnClickListener() {
@@ -102,7 +118,6 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
             switchAutoDefine.setEnabled(false);
             switchNotification.setEnabled(false);
             tvNotificationTime.setEnabled(false);
-            //etUserLocation.setEnabled(false);
             isCheckingLocation = true;
         }
 
@@ -111,7 +126,6 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
             progressBar.setVisibility(View.GONE);
             switchAutoDefine.setEnabled(true);
             switchNotification.setEnabled(true);
-            //etUserLocation.setEnabled(true);
             tvNotificationTime.setEnabled(true);
             isCheckingLocation = false;
         }
@@ -129,22 +143,20 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     @Override
     public void onResume() {
         super.onResume();
-        setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, etUserLocation);
+        setFont(tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle, tvNotificationMessage, tvNotificationTime, locationAutoCompleteView);
         checkConfig();
-
         initListeners();
+        locationAutoCompleteView.clearListSelection();
         isLocationChanged = false;
     }
 
     private void tryGetLocation() {
         locationMgr = new OWLocationManager();
         boolean isLocationAvailable = locationMgr.getLocation(this, locationResult);
-        if (isLocationAvailable){
+        if (isLocationAvailable) {
             progressListener.showProgress();
-            etUserLocation.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.location_gps), null, null, null);
-            etUserLocation.setText("Retrieving location");
-        }
-        else
+            locationAutoCompleteView.setText(getString(R.string.retrieving_location));
+        } else
             notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
     }
 
@@ -165,7 +177,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
 
         tvNotificationTime.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.reminder_arrow, 0);
 
-        etUserLocation = (AutoCompleteTextView) findViewById(R.id.etUserLocation);
+        locationAutoCompleteView = (AutoCompleteTextView) findViewById(R.id.etUserLocation);
         progressBar = findViewById(R.id.progressBar);
         switchAutoDefine = (CompoundButton) findViewById(R.id.switchAutoDefine);
         switchNotification = (CompoundButton) findViewById(R.id.switchNotification);
@@ -183,16 +195,15 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
             }
         });
 
-        etUserLocation.setOnKeyListener(new View.OnKeyListener() {
+        locationAutoCompleteView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    //setUserLocation(etUserLocation.getText().toString(), "temp");
                     Toast.makeText(SettingsActivity.this, "Not implemented autocompleter", Toast.LENGTH_SHORT).show();
                     InputMethodManager imm =
                             (InputMethodManager) OWApplication.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(etUserLocation.getWindowToken(), 0);
+                    imm.hideSoftInputFromWindow(locationAutoCompleteView.getWindowToken(), 0);
                     return true;
                 }
                 return false;
@@ -200,7 +211,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         });
 
 
-        etUserLocation.setOnItemClickListener(this);
+        locationAutoCompleteView.setOnItemClickListener(this);
 
         btnCelsius.setOnClickListener(temperatureModeListener);
 
@@ -210,15 +221,9 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 configManager.setAutoDefineLocation(isChecked);
-                if (isChecked){
+                checkAutocompleteMode();
+                if (isChecked) {
                     tryGetLocation();
-                    etUserLocation.setEnabled(false);
-                    etUserLocation.setAdapter(null);
-                    etUserLocation.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.location_gps), null, null, null);
-                }else{
-                    etUserLocation.setEnabled(true);
-                    etUserLocation.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-                    etUserLocation.setAdapter(new PlacesAutoCompleteAdapter(SettingsActivity.this, R.layout.prediction));
                 }
             }
         });
@@ -252,11 +257,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         String cityName = configManager.getStringConfig(CITY_NAME);
 
         switchAutoDefine.setChecked(isAutoDefineLocation);
-        if(isAutoDefineLocation){
-            etUserLocation.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.prediction));
-        } else {
-            etUserLocation.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-        }
+        checkAutocompleteMode();
 
         switchNotification.setChecked(isNotificationEnabled);
 
@@ -270,9 +271,9 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         btnFahrenheit.setImageResource(resIdF);
 
         if (cityName != null)
-            etUserLocation.setText(cityName);
+            locationAutoCompleteView.setText(cityName);
 
-        if(isAutoDefineLocation)
+        if (isAutoDefineLocation)
             tryGetLocation();
 
         tvNotificationTime.setText(configManager.getNotificationTimeAsString());
@@ -280,7 +281,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
 
     @Override
     public void onBackPressed() {
-        if(isCheckingLocation)
+        if (isCheckingLocation)
             return;
 
         resolveBackClick();
@@ -311,29 +312,22 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         notifier.alert(getString(R.string.location_saved), Toast.LENGTH_SHORT);
     }
 
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final Prediction prediction = (Prediction) parent.getItemAtPosition(position);
-        etUserLocation.setText(prediction.getCity());
+        locationAutoCompleteView.setText(prediction.getCity());
         new GetLocationFromPlaceTask(prediction.getReference(), new Autocompleter(), autocompleteListener).execute();
+        InputMethodManager imm = (InputMethodManager) OWApplication.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(locationAutoCompleteView.getWindowToken(), 0);
     }
 
-    LoadingListener<String> autocompleteListener = new LoadingListener<String>() {
-        @Override
-        public void callback(String result) {
-            if(result != null)
-                setUserLocation(etUserLocation.getText().toString(), result);
-        }
-
-        @Override
-        public void notifyStart() {
-            progressListener.showProgress();
-        }
-
-        @Override
-        public void notifyStop() {
-            progressListener.hideProgress();
-        }
-    };
+    private void checkAutocompleteMode() {
+        boolean isAutoDefineEnabled = configManager.getAutoDefineLocation();
+        locationAutoCompleteView.setEnabled(!isAutoDefineEnabled);
+        ArrayAdapter adapter = (isAutoDefineEnabled) ? null : new PlacesAutoCompleteAdapter(SettingsActivity.this, R.layout.prediction);
+        Drawable leftDrawable = (isAutoDefineEnabled) ? getResources().getDrawable(R.drawable.location_gps) : null;
+        locationAutoCompleteView.setAdapter(adapter);
+        locationAutoCompleteView.setCompoundDrawablesWithIntrinsicBounds(leftDrawable, null, null, null);
+        locationAutoCompleteView.requestFocus(View.FOCUS_FORWARD);
+    }
 }

@@ -38,7 +38,7 @@ public class NetworkUtils {
             }
             reader.close();
         } catch (Exception e) {
-             Log.e(TAG, e.getMessage());
+            // Log.e(TAG, e.getMessage());
         }
         return data.toString();
     }

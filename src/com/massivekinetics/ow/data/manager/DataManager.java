@@ -2,6 +2,7 @@ package com.massivekinetics.ow.data.manager;
 
 import com.massivekinetics.ow.data.WeatherForecastChangedListener;
 import com.massivekinetics.ow.data.model.WeatherForecast;
+import com.massivekinetics.ow.data.model.WeatherModel;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
 
 import java.io.Serializable;
@@ -26,5 +27,6 @@ public interface DataManager extends Serializable {
     void saveForecast();
     void restoreForecast();
     boolean hasActualForecast();
+    WeatherModel getCurrentWeather();
     String getNotification();
 }

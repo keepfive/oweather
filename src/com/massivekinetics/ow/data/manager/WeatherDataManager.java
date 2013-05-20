@@ -103,12 +103,29 @@ public class WeatherDataManager implements DataManager {
     }
 
     public boolean hasActualForecast() {
+        if(mWeatherForecast == null || mWeatherForecast == WeatherForecast.NULL)
+            restoreForecast();
+
         String gpsLocation = OWApplication.getInstance().getConfigManager().getLocationCoordinates();
         long today = DateUtils.getCurrentInMillis();
         boolean isActual = !mWeatherForecast.getForecastList().isEmpty()
                 && gpsLocation.equals(mWeatherForecast.getLocationString())
                 && (today - mWeatherForecast.getTimeStamp()) < 5 * 24 * 60 * 60 * 1000;
         return isActual;
+    }
+
+    @Override
+    public WeatherModel getCurrentWeather() {
+        if (hasActualForecast()) {
+            DateUtils dateUtils = new DateUtils();
+            for (WeatherModel model : mWeatherForecast.getForecastList()) {
+                if (dateUtils.isToday(model.getDate())) {
+                    return model;
+                }
+            }
+        }
+
+        return WeatherModel.NULL;
     }
 
     @Override

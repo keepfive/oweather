@@ -3,17 +3,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <RelativeLayout android:id="@+id/content"
+    <RelativeLayout android:id="@+id/weather_container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignParentTop="true">
+                    android:layout_alignParentTop="true" android:visibility="gone">
 
-        <LinearLayout android:id="@+id/weather_container"
+       <!-- <LinearLayout android:id="@+id/weather_container"
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
-                      android:orientation="vertical" android:visibility="gone">
+                      android:orientation="vertical"> -->
 
-            <LinearLayout
+            <LinearLayout android:layout_alignParentTop="true"
                     android:id="@+id/header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -49,24 +49,24 @@
                              android:scaleType="centerInside"/>
             </LinearLayout>
 
-            <include layout="@layout/temperature_block"/>
-            <include layout="@layout/weather_desc_block"/>
+            <include layout="@layout/temperature_block" />
+            <include layout="@layout/weather_desc_block" />
 
-            <TextView android:id="@+id/tvWeatherDesctiption" android:layout_width="fill_parent"
+            <TextView android:id="@+id/tvWeatherDesctiption"  android:layout_width="fill_parent"
                       android:layout_height="wrap_content" android:layout_marginTop="25dp"
                       android:marqueeRepeatLimit="marquee_forever"
                       android:gravity="center" android:textSize="32sp"
-                      android:textColor="@android:color/white"
+                      android:textColor="@android:color/white" android:layout_below="@+id/weather_desc_block"
                     />
 
             <LinearLayout android:id="@+id/indicator" android:orientation="horizontal"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content" android:padding="5dp" android:gravity="center_horizontal"
-                          android:layout_marginTop="20dp"/>
+                          android:layout_marginTop="20dp" android:layout_below="@id/tvWeatherDesctiption"/>
 
-            <include layout="@layout/forecast_details_block"/>
+            <include layout="@layout/forecast_details_block" />
 
-        </LinearLayout>
+      <!--  </LinearLayout>  -->
 
 
     </RelativeLayout>

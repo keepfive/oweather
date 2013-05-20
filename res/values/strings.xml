@@ -80,4 +80,6 @@
 
     <!-- @hide DO NOT TRANSLATE. Separator between the hour and minute elements in a TimePicker widget -->
     <string name="time_picker_separator">:</string>
+    <string name="retrieving_location">Retrieving location</string>
+    <string name="widget_4_1">oW widget 4x1</string>
 </resources>

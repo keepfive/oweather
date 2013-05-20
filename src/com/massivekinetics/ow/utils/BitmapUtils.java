@@ -1,9 +1,7 @@
 package com.massivekinetics.ow.utils;
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
+import android.graphics.*;
 import android.util.TypedValue;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
@@ -89,6 +87,93 @@ public class BitmapUtils {
         src.recycle();
         // return final image
         return bmOut;
+    }
+
+    public static Bitmap getStringAsBitmap(String text, int textSize, int xOffset, int yOffset, int trimSize)  {
+        int width = dipToPx(155);
+        int height = dipToPx(30);
+        if(trimSize != -1 && text.length() >= (trimSize+1)){
+            text = text.substring(0, trimSize-1) + "...";
+        }
+        Bitmap myBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas myCanvas = new Canvas(myBitmap);
+        Paint paint = new Paint();
+        Typeface typeface = OWApplication.getInstance().getFontThin();
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+        paint.setTypeface(typeface);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(textSize);
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+        paint.setTextAlign(Paint.Align.LEFT);
+        myCanvas.drawText(text, xOffset, yOffset, paint);
+        return myBitmap;
+    }
+
+    public static Bitmap getStringAsBitmap2(String text, int textSize, int xOffset, int yOffset)  {
+        int width = dipToPx(95);
+        int height = dipToPx(70);
+        Bitmap myBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas myCanvas = new Canvas(myBitmap);
+        Paint paint = new Paint();
+        Typeface typeface = OWApplication.getInstance().getFontThin();
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+        paint.setTypeface(typeface);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(textSize);
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+        paint.setTextAlign(Paint.Align.LEFT);
+        myCanvas.drawText(text, xOffset, yOffset, paint);
+        return myBitmap;
+    }
+
+    public static Bitmap getStringAsBitmapCenter
+            (String text, int textSize, int xOffset, int yOffset)  {
+        int width = dipToPx(80);
+        int height = dipToPx(70);
+        Bitmap myBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas myCanvas = new Canvas(myBitmap);
+        Paint paint = new Paint();
+        Typeface typeface = OWApplication.getInstance().getFontThin();
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+        paint.setTypeface(typeface);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(textSize);
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+        paint.setTextAlign(Paint.Align.LEFT);
+        myCanvas.drawText(text, xOffset, yOffset, paint);
+        return myBitmap;
+    }
+
+    public static Bitmap getStringAsBitmapWithSize(String text, int textSize, int xOffset, int yOffset, int trimSize, int widhtDp, int heightDp)  {
+        int width = dipToPx(widhtDp);
+        int height = dipToPx(heightDp);
+        if(trimSize != -1 && text.length() >= (trimSize+1)){
+            text = text.substring(0, trimSize-1) + "...";
+        }
+        Bitmap myBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas myCanvas = new Canvas(myBitmap);
+        Paint paint = new Paint();
+        Typeface typeface = OWApplication.getInstance().getFontThin();
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+        paint.setTypeface(typeface);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(textSize);
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+        paint.setTextAlign(Paint.Align.LEFT);
+        myCanvas.drawText(text, xOffset, yOffset, paint);
+        return myBitmap;
     }
 
     public static final int dipToPx(int dp) {

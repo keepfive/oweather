@@ -31,7 +31,6 @@ public interface ConfigManager {
     void setConfig(String name, String value);
 
     void setConfig(String name, boolean value);
-
     void setConfig(String name, long value);
 
     String getActiveSession();
@@ -53,5 +52,12 @@ public interface ConfigManager {
 
     boolean isTemperatureFahrengeitMode();
     void setTemperatureFahrengeitMode(boolean isFahrengeit);
+
+    void setNotificationHour(int hour);
+    int getNotificationHour();
+
+    void setNotificationMinute(int minute);
+    int getNotificationMinute();
+
 
 }

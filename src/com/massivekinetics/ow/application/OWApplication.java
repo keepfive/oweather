@@ -69,6 +69,9 @@ public class OWApplication extends Application {
     private void initFonts(){
         Typeface fontThin = Typeface.createFromAsset(getAssets(), "titilliumthin.ttf");
         Typeface fontItalic = Typeface.createFromAsset(getAssets(), "titiliumitalic.ttf");
+        /*Typeface fontThin = Typeface.createFromAsset(getAssets(), "northern_light.otf");
+        Typeface fontItalic = Typeface.createFromAsset(getAssets(), "northern_light.otf");
+        */
         setFontThin(fontThin);
         setFontItalic(fontItalic);
     }
