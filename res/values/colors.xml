@@ -26,6 +26,6 @@
     <color name="transparent">#00000000</color>
 
 
-    <drawable name="ow_blue">#2E8CAE</drawable>
-    <drawable name="ow_blue_pressed">#4E8CAE</drawable>
+    <drawable name="ow_blue">#308DAF</drawable>
+    <drawable name="ow_blue_pressed">#558DAF</drawable>
 </resources>

@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="fill_parent"
-              android:layout_height="90dp"  android:id="@+id/weather_desc_block" android:layout_centerInParent="true"  android:weightSum="4" android:gravity="top|center_horizontal">
+              android:layout_height="90dp"  android:id="@+id/weather_desc_block" android:layout_centerInParent="true"  android:weightSum="6" android:gravity="top|center_horizontal">
 
 
     <ImageButton
@@ -12,7 +12,7 @@
             android:id="@+id/ibPrevious" android:layout_gravity="center" android:src="@drawable/left_arrow"
             android:scaleType="centerInside"/>
 
-    <android.support.v4.view.ViewPager android:id="@+id/viewPager"  android:layout_width="0dp" android:layout_weight="2"  android:background="@android:color/transparent"
+    <android.support.v4.view.ViewPager android:id="@+id/viewPager"  android:layout_width="0dp" android:layout_weight="4"  android:background="@android:color/transparent"
                 android:layout_height="fill_parent"  android:fadingEdge="none" android:scrollbarFadeDuration="0"  android:fadingEdgeLength="0dp" android:fadeScrollbars="false" android:overScrollMode="never"
                 />
 

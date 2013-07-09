@@ -19,18 +19,6 @@ import java.util.Calendar;
  */
 public class NotificationService {
     public static void turnNotification(boolean isOn) {
-      /*Calendar calendar = Calendar.getInstance();
-// 9 AM
-        calendar.set(Calendar.HOUR_OF_DAY, 9);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        PendingIntent pi = PendingIntent.getService(context, 0,
-                new Intent(context, MyClass.class), PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, pi);
-
-              */
         ConfigManager configManager = OWApplication.getInstance().getConfigManager();
         //---use the AlarmManager to trigger an alarm---
         AlarmManager alarmManager = (AlarmManager) OWApplication.getInstance().getSystemService(Context.ALARM_SERVICE);

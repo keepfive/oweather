@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import com.massivekinetics.ow.R;
+import com.massivekinetics.ow.data.manager.NotificationService;
 import com.massivekinetics.ow.views.timepicker.TimePicker;
 
 /**
@@ -46,6 +47,8 @@ public class NotificationSettingsActivity extends OWActivity {
                 int hour = timePicker.getCurrentHour();
                 int minute = timePicker.getCurrentMinute();
                 configManager.setNotificationTime(hour, minute);
+                NotificationService.turnNotification(false);
+                NotificationService.turnNotification(true);
                 finish();
             }
         });

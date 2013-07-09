@@ -11,6 +11,9 @@
     <string name="url_get_session">http://api.oweather.net/rest/1/getSession</string>
     <string name="url_get_weather">http://api.oweather.net/rest/1/weather</string>
 
+    <string name="google_analytics_dev">UA-39457220-1</string>
+    <string name="google_analytics_production">UA-39762882-1</string>
+
     <string name="rsa_token">
         878654923516102755875186758602874285917544326072118383176109618244898606747831066226648310876287428204536782
     </string>
@@ -81,5 +84,5 @@
     <!-- @hide DO NOT TRANSLATE. Separator between the hour and minute elements in a TimePicker widget -->
     <string name="time_picker_separator">:</string>
     <string name="retrieving_location">Retrieving location</string>
-    <string name="widget_4_1">oW widget 4x1</string>
+    <string name="widget_4_1">OWeather widget 4x1</string>
 </resources>

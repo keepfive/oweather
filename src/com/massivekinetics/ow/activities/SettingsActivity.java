@@ -198,14 +198,18 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         locationAutoCompleteView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    Toast.makeText(SettingsActivity.this, "Not implemented autocompleter", Toast.LENGTH_SHORT).show();
-                    InputMethodManager imm =
-                            (InputMethodManager) OWApplication.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
+               /* if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        InputMethodManager imm =
+                                (InputMethodManager) OWApplication.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(locationAutoCompleteView.getWindowToken(), 0);
                     return true;
+                }  */
+
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && locationAutoCompleteView.getAdapter() == null){
+                    ArrayAdapter adapter = (configManager.getAutoDefineLocation()) ? null : new PlacesAutoCompleteAdapter(SettingsActivity.this, R.layout.prediction);
+                    locationAutoCompleteView.setAdapter(adapter);
                 }
+
                 return false;
             }
         });
@@ -324,10 +328,14 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     private void checkAutocompleteMode() {
         boolean isAutoDefineEnabled = configManager.getAutoDefineLocation();
         locationAutoCompleteView.setEnabled(!isAutoDefineEnabled);
-        ArrayAdapter adapter = (isAutoDefineEnabled) ? null : new PlacesAutoCompleteAdapter(SettingsActivity.this, R.layout.prediction);
+        locationAutoCompleteView.setAdapter((ArrayAdapter<String>)null);
         Drawable leftDrawable = (isAutoDefineEnabled) ? getResources().getDrawable(R.drawable.location_gps) : null;
-        locationAutoCompleteView.setAdapter(adapter);
         locationAutoCompleteView.setCompoundDrawablesWithIntrinsicBounds(leftDrawable, null, null, null);
-        locationAutoCompleteView.requestFocus(View.FOCUS_FORWARD);
+
+        /*ArrayAdapter adapter = (isAutoDefineEnabled) ? null : new PlacesAutoCompleteAdapter(SettingsActivity.this, R.layout.prediction);
+
+        locationAutoCompleteView.setAdapter(adapter);
+
+        locationAutoCompleteView.requestFocus(View.FOCUS_FORWARD);  */
     }
 }

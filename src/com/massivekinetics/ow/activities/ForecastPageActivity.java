@@ -25,7 +25,7 @@ public class ForecastPageActivity extends OWActivity {
     public static final String ACTION = "com.massivekinetics.ow.forecast";
 
     ViewGroup weatherContainer, updateLayout;
-    TextView tvDate, tvCurrentTemp, tvDaytime, tvNightTemp, tvWeatherDescription, tvMinus;
+    TextView tvDate, tvCurrentTemp, tvDaytime, tvNightTemp, tvWeatherDescription, tvMinus, tvLocation;
     TextView tvHumidity, tvWindSpeed, tvMoonPhase, tvWindDirection, tvLocationName;
     ImageView ivWindDirection, ivHumidity, ivRefreshIndicator, ivLunarState;
     ImageButton ibSettings, ibPrevious, ibNext, ibRefresh;
@@ -118,6 +118,8 @@ public class ForecastPageActivity extends OWActivity {
         content = (RelativeLayout) findViewById(R.id.content);
 
         indicatorLayout = (ViewGroup) findViewById(R.id.indicator);
+        if(isTablet)
+            tvLocation = (TextView) findViewById(R.id.tvLocationMain);
         setFont(weatherContainer);
         setFont(updateLayout);
         //setFont(tvDate, tvCurrentTemp, tvMinus, tvNightTemp, tvDaytime, tvWeatherDescription, tvHumidity, tvWindSpeed, tvMoonPhase);
@@ -229,7 +231,20 @@ public class ForecastPageActivity extends OWActivity {
     private void updateUI(final int position) {
         if (!weatherForecast.isSuccessed() || weatherForecast == WeatherForecast.NULL)
             return;
+
+
         swipeIndicatorPresenter.setCurrentActivePosition(position);
+        int size = weatherForecast.getForecastList().size();
+
+        if(position == 0)
+            ibPrevious.setAlpha(128);
+        else if(position == size-1)
+            ibNext.setAlpha(128);
+        else{
+            ibPrevious.setAlpha(255);
+            ibNext.setAlpha(255);
+        }
+
         WeatherModel model = weatherForecast.getForecastList().get(position);
 
         DateUtils utils = new DateUtils();
@@ -241,9 +256,10 @@ public class ForecastPageActivity extends OWActivity {
 
         if (currentTemp < 0)
             tvMinus.setVisibility(View.VISIBLE);
-        else
-            tvMinus.setVisibility(View.INVISIBLE);
-
+        else{
+            int invis = isTablet ? View.GONE : View.INVISIBLE;
+            tvMinus.setVisibility(invis);
+        }
         currentTemp = Math.abs(currentTemp);
         int margin = resolveMargin(currentTemp);
 
@@ -251,6 +267,11 @@ public class ForecastPageActivity extends OWActivity {
 
         setMarginParams(margin, tvCurrentTemp);
 
+        if(isTablet){
+            String locationName = configManager.getStringConfig(ConfigManager.CITY_NAME);
+            locationName = (locationName == null) ? "" : locationName;
+            tvLocation.setText(locationName);
+        }
 
         tvNightTemp.setText(model.getMinTemperature());
         if (position == 0) {
@@ -269,7 +290,7 @@ public class ForecastPageActivity extends OWActivity {
         tvWeatherDescription.setText(weatherState.getValue());
         int backgroundColor = ResourcesCodeUtils.getWeatherBackgroundColor(weatherState);
 
-        OWAnimationUtils.rotate(ivWindDirection, Float.parseFloat(model.getWindDegree()));
+        OWAnimationUtils.rotate(ivWindDirection, Float.parseFloat(model.getWindDegree())+180);
         weatherContainer.setBackgroundColor(getResources().getColor(backgroundColor));
 
     }

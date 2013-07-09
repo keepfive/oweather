@@ -3,39 +3,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="50dp" android:weightSum="3" android:id="@+id/settingsHeader">
+              android:layout_height="70dp" android:weightSum="5" android:id="@+id/settingsHeader">
 
     <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
-                  android:layout_weight="1" android:layout_gravity="center_vertical|left"
+                  android:gravity="center"  android:layout_gravity="center"
                   android:orientation="horizontal"
-                  android:gravity="center_horizontal" android:weightSum="2">
+                  android:layout_weight="1" android:layout_marginTop="20dp">
 
-        <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
-                      android:layout_weight="1" android:layout_gravity="center_vertical|left" android:gravity="center_vertical|right">
+
 
             <ImageButton android:id="@+id/ibBack" android:layout_height="wrap_content"
                          android:layout_width="wrap_content"
-                         android:src="@drawable/settings_back_button" android:background="@android:color/transparent"
+                         android:src="@drawable/settings_back_button"
+                         android:background="@android:color/transparent"
                          android:adjustViewBounds="true" android:scaleType="centerInside"
                          android:layout_gravity="center"/>
-        </LinearLayout>
-
-        <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
-                      android:layout_weight="1" android:layout_gravity="center_vertical|left">
 
 
-        </LinearLayout>
 
     </LinearLayout>
 
-    <ImageView android:layout_height="wrap_content" android:layout_width="0dp" android:layout_weight="1"
+    <ImageView android:layout_height="wrap_content" android:layout_width="0dp" android:layout_weight="3"
                android:src="@drawable/settings_header" android:layout_gravity="top"
-               android:background="@android:color/transparent">
+               android:background="@android:color/transparent" android:scaleType="center">
     </ImageView>
 
     <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
                   android:layout_weight="1" android:gravity="center" android:orientation="horizontal"
-                  android:layout_gravity="center">
+                  android:layout_gravity="center" android:layout_marginTop="20dp">
         <ImageButton android:id="@+id/ibCelcius" android:layout_height="wrap_content"
                      android:layout_width="wrap_content"
                      android:src="@drawable/celcius_light" android:background="@android:color/transparent"
@@ -48,4 +43,6 @@
                      android:scaleType="centerInside"/>
 
     </LinearLayout>
+
+
 </LinearLayout>

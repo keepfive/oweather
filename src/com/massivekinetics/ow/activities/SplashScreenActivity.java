@@ -54,7 +54,7 @@ public class SplashScreenActivity extends OWActivity {
                 if (!NetworkUtils.isOnline())
                     NavigationService.navigate(SplashScreenActivity.this, ErrorActivity.class);
                 else if (StringUtils.isNullOrEmpty(configManager.getLocationCoordinates()))
-                    NavigationService.navigate(SplashScreenActivity.this, SettingsActivity.class);
+                    NavigationService.navigate(SplashScreenActivity.this, FirstLocationActivity.class);
                 else
                     NavigationService.navigate(SplashScreenActivity.this, UpdatePageActivity.class);
                 finish();
@@ -83,11 +83,5 @@ public class SplashScreenActivity extends OWActivity {
             getOWApplication().getDataManager().restoreForecast();
             isInitialized = true;
         }
-    }
-
-    void navigateToErrorActivity(int errorCode) {
-        Bundle bundle = new Bundle();
-        bundle.putInt(ERROR, errorCode);
-        NavigationService.navigate(SplashScreenActivity.this, ErrorActivity.class, bundle);
     }
 }

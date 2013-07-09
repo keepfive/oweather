@@ -113,7 +113,7 @@ public class OWLocationManager {
                     String areaName = getAreaName(first);
                     String countryName = first.getCountryName();
 
-                    String locationName = (areaName == null) ? countryName : areaName + " " + countryName;
+                    String locationName = (areaName == null) ? countryName : areaName;
                     return locationName;
                 }
             } catch (Exception e) {

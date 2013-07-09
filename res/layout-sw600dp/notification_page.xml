@@ -4,21 +4,22 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent" android:gravity="center"
-              android:background="@color/background" android:weightSum="4" android:id="@+id/rootContainer">
-    <RelativeLayout android:layout_height="0dp" android:layout_width="fill_parent" android:layout_weight="1"
-                    android:gravity="center_horizontal">
+              android:background="@color/background" android:weightSum="9" android:id="@+id/rootContainer">
+
+    <RelativeLayout android:layout_height="0dp" android:layout_width="fill_parent" android:layout_weight="3"
+                    android:gravity="center_horizontal" >
         <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content"
                    android:src="@drawable/header_remainder" android:layout_centerHorizontal="true"
                    android:layout_alignParentTop="true"
-                   android:background="@android:color/transparent">
+                   android:background="@android:color/transparent" >
         </ImageView>
 
-        <TextView android:layout_height="wrap_content" android:textSize="36sp" android:layout_width="fill_parent"
-                  android:gravity="center"
+        <TextView android:layout_height="wrap_content" android:textSize="60sp" android:layout_width="fill_parent"
+                  android:gravity="center"  android:layout_marginTop="20dp"
                   android:text="@string/notification_time" android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
-    <RelativeLayout android:layout_height="0dp" android:layout_width="fill_parent" android:layout_weight="1"
+    <RelativeLayout android:layout_height="0dp" android:layout_width="fill_parent" android:layout_weight="2"
                     android:gravity="center">
         <LinearLayout android:layout_width="fill_parent"
                       android:layout_height="wrap_content" android:gravity="center_vertical"
@@ -32,13 +33,13 @@
             <TextView android:id="@+id/tvNotificationMsg" android:layout_height="wrap_content"
                       android:layout_width="0dp"
                       android:layout_weight="4" android:text="@string/notification_time_message"
-                      style="@style/TextView" android:padding="5dp" android:textSize="16sp"
-                      android:lineSpacingExtra="-3dp"/>
+                      style="@style/TextView" android:padding="5dp" android:textSize="30sp"
+                      android:lineSpacingExtra="-3dp" android:maxLines="2"/>
         </LinearLayout>
     </RelativeLayout>
 
-    <RelativeLayout android:layout_height="0dp" android:layout_width="fill_parent" android:layout_weight="2"
-                    android:gravity="center_horizontal">
+    <RelativeLayout android:layout_height="0dp" android:layout_width="fill_parent" android:layout_weight="4"
+                    android:gravity="center_horizontal" android:paddingBottom="54dp">
         <com.massivekinetics.ow.views.timepicker.TimePicker
                 android:id="@+id/timePicker"
                 android:layout_width="wrap_content"
@@ -46,9 +47,9 @@
                 android:layout_alignParentTop="true"/>
 
         <Button android:id="@+id/btnSet" android:text="@string/set"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-                android:background="@drawable/error_button" android:layout_alignParentBottom="true"
+                android:layout_width="225dp"
+                android:layout_height="60dp" android:layout_centerHorizontal="true"
+                android:background="@drawable/blue_button" android:layout_alignParentBottom="true"
                 android:layout_marginBottom="15dp"
                 android:textSize="22sp"/>
     </RelativeLayout>

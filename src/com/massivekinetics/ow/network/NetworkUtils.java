@@ -28,8 +28,8 @@ public class NetworkUtils {
             //Ensures that connections are closed when switching networks
             System.setProperty("http.keepAlive", "false");
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setConnectTimeout(2500);
-            connection.setReadTimeout(2500);
+            connection.setConnectTimeout(7000);
+            connection.setReadTimeout(7000);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line = null;
@@ -58,8 +58,8 @@ public class NetworkUtils {
             System.setProperty("http.keepAlive", "false");
 
             final HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setConnectTimeout(2500);
-            connection.setReadTimeout(2500);
+            connection.setConnectTimeout(7000);
+            connection.setReadTimeout(7000);
 
             connection.setDoOutput(true);
             connection.setDoInput(true);

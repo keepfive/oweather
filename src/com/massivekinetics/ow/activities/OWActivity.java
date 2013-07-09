@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.data.manager.ConfigManager;
 import com.massivekinetics.ow.data.manager.OWConfigManager;
@@ -21,11 +22,14 @@ public abstract class OWActivity extends Activity {
     protected OWLocationManager locationManager = new OWLocationManager();
     private OWApplication application;
 
+    protected boolean isTablet = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         application = (OWApplication)getApplication();
+        isTablet = getResources().getBoolean(R.bool.isTablet);
     }
 
     protected OWApplication getOWApplication(){
@@ -40,6 +44,10 @@ public abstract class OWActivity extends Activity {
 
     protected void runOnMainThread(Runnable task){
         uiHandler.post(task);
+    }
+
+    public boolean isTablet(){
+        return isTablet;
     }
 
     protected void setFont(TextView... views){

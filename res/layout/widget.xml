@@ -44,7 +44,7 @@
     <LinearLayout android:layout_height="fill_parent" android:layout_width="0dp" android:layout_weight="1"
                   android:weightSum="4" android:orientation="horizontal">
 
-        <TextView
+        <TextView   android:fontFamily="sans-serif-thin"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:text="20"
@@ -55,7 +55,7 @@
 
         <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:weightSum="8"
                       android:layout_height="fill_parent" android:orientation="vertical">
-            <TextView
+            <TextView   android:fontFamily="sans-serif-thin"
                     android:layout_width="fill_parent"
                     android:layout_height="0dp" android:layout_weight="1"
                     android:gravity="center"
@@ -70,14 +70,14 @@
                         android:src="@drawable/degrees"/>
             </LinearLayout>
 
-            <TextView
+            <TextView    android:fontFamily="sans-serif-thin"
                     android:layout_width="fill_parent"
                     android:layout_height="0dp" android:layout_weight="2" android:paddingLeft="5dp"
                     android:gravity="center"
                     android:id="@+id/tvDaytime" android:textColor="@android:color/white"
                     android:text="@string/night" android:textSize="12sp"/>
 
-            <TextView
+            <TextView   android:fontFamily="sans-serif-thin"
                     android:layout_width="fill_parent"
                     android:layout_height="0dp" android:layout_weight="2"
                     android:gravity="center_horizontal|top" android:paddingLeft="5dp"
