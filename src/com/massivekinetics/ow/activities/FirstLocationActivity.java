@@ -76,33 +76,37 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
     OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
 
         @Override
-        public void gotLocation(Location location) {
-            String cityName = null;
-            String gpsParams = null;
-            try {
-                cityName = locationManager.getLocationName(location);
-                gpsParams = locationManager.getGpsCoordinatesAsParams(location);
-            } catch (Exception e) {
-
-            }
-
-            final String finalCityName = cityName;
-            final String finalGpsParams = gpsParams;
-
-
-            uiHandler.post(new Runnable() {
-                @Override
+        public void gotLocation(final Location location) {
+            new Thread() {
                 public void run() {
-                    if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)) {
-                        autoCompleteLocation.setText(finalCityName);
-                        setUserLocation(finalCityName, finalGpsParams);
-                    } else {
-                        notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
-                        autoCompleteLocation.setText(configManager.getLocationName());
+                    String cityName = null;
+                    String gpsParams = null;
+                    try {
+                        cityName = locationManager.getLocationName(location);
+                        gpsParams = locationManager.getGpsCoordinatesAsParams(location);
+                    } catch (Exception e) {
+
                     }
-                    progressListener.hideProgress();
+
+                    final String finalCityName = cityName;
+                    final String finalGpsParams = gpsParams;
+
+
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)) {
+                                autoCompleteLocation.setText(finalCityName);
+                                setUserLocation(finalCityName, finalGpsParams);
+                            } else {
+                                notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
+                                autoCompleteLocation.setText(configManager.getLocationName());
+                            }
+                            progressListener.hideProgress();
+                        }
+                    });
                 }
-            });
+            }.start();
         }
     };
 
@@ -110,7 +114,7 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
         configManager.setLocationName(cityName);
         configManager.setLocationCoordinates(gpsParams);
         configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
-        configManager.setAutoDefineLocation(false);
+        configManager.setAutoDefineLocation(true);
         NavigationService.navigate(FirstLocationActivity.this, UpdatePageActivity.class);
         finish();
     }

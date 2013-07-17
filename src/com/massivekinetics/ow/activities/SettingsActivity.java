@@ -35,7 +35,7 @@ import static com.massivekinetics.ow.data.manager.ConfigManager.*;
  * To change this template use File | Settings | File Templates.
  */
 public class SettingsActivity extends OWActivity implements AdapterView.OnItemClickListener {
-    View rootContent, settingsNotification;
+    View rootContent, settingsNotification, btnTemperature;
     ImageButton btnBack, btnCelsius, btnFahrenheit;
     TextView tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle;
     TextView tvNotificationMessage, tvNotificationTime;
@@ -47,34 +47,38 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
 
         @Override
-        public void gotLocation(Location location) {
-            String cityName = null;
-            String gpsParams = null;
-            try {
-                cityName = locationMgr.getLocationName(location);
-                gpsParams = locationMgr.getGpsCoordinatesAsParams(location);
-                isLocationChanged = true;
-            } catch (Exception e) {
-
-            }
-
-            final String finalCityName = cityName;
-            final String finalGpsParams = gpsParams;
-
-            uiHandler.post(new Runnable() {
-                @Override
+        public void gotLocation(final Location location) {
+            new Thread() {
                 public void run() {
-                    if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)) {
-                        locationAutoCompleteView.setText(finalCityName);
-                        setUserLocation(finalCityName, finalGpsParams);
-                    } else {
-                        notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
-                        locationAutoCompleteView.setText(configManager.getLocationName());
-                        switchAutoDefine.setChecked(false);
+                    String cityName = null;
+                    String gpsParams = null;
+                    try {
+                        cityName = locationMgr.getLocationName(location);
+                        gpsParams = locationMgr.getGpsCoordinatesAsParams(location);
+                        isLocationChanged = true;
+                    } catch (Exception e) {
+
                     }
-                    progressListener.hideProgress();
+
+                    final String finalCityName = cityName;
+                    final String finalGpsParams = gpsParams;
+
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)) {
+                                locationAutoCompleteView.setText(finalCityName);
+                                setUserLocation(finalCityName, finalGpsParams);
+                            } else {
+                                notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
+                                locationAutoCompleteView.setText(configManager.getLocationName());
+                                switchAutoDefine.setChecked(false);
+                            }
+                            progressListener.hideProgress();
+                        }
+                    });
                 }
-            });
+            }.start();
         }
     };
     LoadingListener<String> autocompleteListener = new LoadingListener<String>() {
@@ -183,7 +187,9 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         switchNotification = (CompoundButton) findViewById(R.id.switchNotification);
         settingsNotification = findViewById(R.id.settingsNotification);
 
+        btnTemperature = findViewById(R.id.btnTemperature);
         tvLocationTitle.requestFocus();
+
     }
 
     @Override
@@ -198,13 +204,6 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         locationAutoCompleteView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-               /* if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                        InputMethodManager imm =
-                                (InputMethodManager) OWApplication.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(locationAutoCompleteView.getWindowToken(), 0);
-                    return true;
-                }  */
-
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && locationAutoCompleteView.getAdapter() == null){
                     ArrayAdapter adapter = (configManager.getAutoDefineLocation()) ? null : new PlacesAutoCompleteAdapter(SettingsActivity.this, R.layout.prediction);
                     locationAutoCompleteView.setAdapter(adapter);
@@ -217,9 +216,10 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
 
         locationAutoCompleteView.setOnItemClickListener(this);
 
-        btnCelsius.setOnClickListener(temperatureModeListener);
+        //.setOnClickListener(temperatureModeListener);
 
-        btnFahrenheit.setOnClickListener(temperatureModeListener);
+       // btnFahrenheit.setOnClickListener(temperatureModeListener);
+        btnTemperature.setOnClickListener(temperatureModeListener);
 
         switchAutoDefine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -252,6 +252,8 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
             }
         });
 
+        setTouchDelegates(findViewById(android.R.id.content), btnBack, 200);
+        setTouchDelegates(findViewById(R.id.settingsHeader), btnTemperature, 200);
     }
 
     private void checkConfig() {

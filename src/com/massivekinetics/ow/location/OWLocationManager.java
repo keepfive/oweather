@@ -1,10 +1,14 @@
 package com.massivekinetics.ow.location;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.location.*;
 import android.os.Bundle;
 import android.os.Handler;
+import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.data.parser.geocoder.GeocoderParser;
+import com.massivekinetics.ow.network.NetworkUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,6 +33,9 @@ public class OWLocationManager {
     boolean network_enabled = false;
     boolean passive_enabled = false;
     Handler handler;
+    Resources resources;
+
+
     LocationListener locationListenerGps = new LocationListener() {
         public void onLocationChanged(Location location) {
             if (timer != null)
@@ -69,6 +76,10 @@ public class OWLocationManager {
     };
     private int tries = 0;
 
+    public OWLocationManager(){
+        this.resources = OWApplication.getInstance().getResources();
+    }
+
     public boolean getLocation(Context context, LocationResult result) {
         if (lm == null)
             lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -103,9 +114,10 @@ public class OWLocationManager {
         return true;
     }
 
-    public String getLocationName(Location location) throws IOException {
+    public String getLocationName(Location location) {
         if (location != null) {
-
+            return getLocationNameFromGoogle(location);
+            /*
             try {
                 List<Address> addressList = geoCoder.getFromLocation(location.getLatitude(), location.getLongitude(), 5);
                 if (addressList != null && !addressList.isEmpty()) {
@@ -117,8 +129,7 @@ public class OWLocationManager {
                     return locationName;
                 }
             } catch (Exception e) {
-               return "Location name unknown";
-            }
+            } */
         }
         return null;
     }
@@ -134,7 +145,16 @@ public class OWLocationManager {
         return locationName;
     }
 
-    public String getGpsCoordinatesAsParams(Location location) throws IOException {
+    private String getLocationNameFromGoogle(Location location){
+        String gps = getGpsCoordinatesAsParams(location);
+        String request = resources.getString(R.string.google_geocoder);
+        request = request.replace("%LATLNG", gps);
+        String response = NetworkUtils.doGet(request);
+
+        return new GeocoderParser().getLocationName(response);
+    }
+
+    public String getGpsCoordinatesAsParams(Location location){
         if (location == null)
             return null;
 

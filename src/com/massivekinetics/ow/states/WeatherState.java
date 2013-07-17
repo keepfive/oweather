@@ -10,7 +10,7 @@ package com.massivekinetics.ow.states;
 public enum WeatherState {
 
     SUNNY("Sunny"), MOSTLY_CLOUDLY("Mostly Cloudy"), PARTLY_CLOUDLY("Partly Cloudy"), RAIN("Rain"), RAIN_AND_SUN("Rain And Sun"), SLEET("Sleet"),
-    SNOW("Snow"), SNOW_FALL("Snow Fall"), LIGHTING_STORM("Lighting Storm"), LIGHT_RAIN("Light Rain"), DOWNPOUR("Downpour"), FOG("Fog"), HURRICANE("Hurricane"), NONE("none");
+    SNOW("Snow"), SNOW_FALL("Snow Fall"), LIGHTNING_STORM("Lightning Storm"), LIGHT_RAIN("Light Rain"), DOWNPOUR("Downpour"), FOG("Fog"), HURRICANE("Hurricane"), NONE("none");
 
     private final String value;
 

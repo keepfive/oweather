@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="50dp" android:weightSum="3" android:id="@+id/settingsHeader">
 
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
+    <LinearLayout android:layout_height="fill_parent" android:layout_width="0dp"
                   android:layout_weight="1" android:layout_gravity="center_vertical|left"
                   android:orientation="horizontal"
                   android:gravity="center_horizontal" android:weightSum="2">
@@ -33,7 +33,7 @@
                android:background="@android:color/transparent">
     </ImageView>
 
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
+    <LinearLayout android:id="@+id/btnTemperature" android:layout_height="fill_parent" android:layout_width="0dp"
                   android:layout_weight="1" android:gravity="center" android:orientation="horizontal"
                   android:layout_gravity="center">
         <ImageButton android:id="@+id/ibCelcius" android:layout_height="wrap_content"

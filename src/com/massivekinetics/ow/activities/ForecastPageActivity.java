@@ -1,9 +1,11 @@
 package com.massivekinetics.ow.activities;
 
 import android.app.NotificationManager;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,6 +31,7 @@ public class ForecastPageActivity extends OWActivity {
     TextView tvHumidity, tvWindSpeed, tvMoonPhase, tvWindDirection, tvLocationName;
     ImageView ivWindDirection, ivHumidity, ivRefreshIndicator, ivLunarState;
     ImageButton ibSettings, ibPrevious, ibNext, ibRefresh;
+
     ViewPager viewPager;
     DataManager dataManager;
     RelativeLayout content;
@@ -122,7 +125,10 @@ public class ForecastPageActivity extends OWActivity {
             tvLocation = (TextView) findViewById(R.id.tvLocationMain);
         setFont(weatherContainer);
         setFont(updateLayout);
-        //setFont(tvDate, tvCurrentTemp, tvMinus, tvNightTemp, tvDaytime, tvWeatherDescription, tvHumidity, tvWindSpeed, tvMoonPhase);
+
+        setTouchDelegates(findViewById(R.id.weather_container), ibSettings, 150);
+        setTouchDelegates(findViewById(R.id.header), ibRefresh, 150);
+        setTouchDelegates(findViewById(R.id.weather_desc_block), viewPager, 200);
     }
 
     protected void runWeatherUpdate() {

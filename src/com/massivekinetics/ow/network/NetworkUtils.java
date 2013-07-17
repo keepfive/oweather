@@ -38,7 +38,7 @@ public class NetworkUtils {
             }
             reader.close();
         } catch (Exception e) {
-            // Log.e(TAG, e.getMessage());
+             Log.e(TAG, e.getMessage());
         }
         return data.toString();
     }
@@ -107,7 +107,7 @@ public class NetworkUtils {
 
 
     public static String getSession(){
-        String requestURL = OWApplication.getInstance().getString(R.string.test_server_url_get_session);
+        String requestURL = OWApplication.getInstance().getString(R.string.ow_url_get_session);
         String base64 = doGet(requestURL);
         return base64;
     }

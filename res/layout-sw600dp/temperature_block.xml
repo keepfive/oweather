@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTemp" android:textColor="@android:color/white"
                 android:textSize="180sp" android:layout_gravity="center" android:singleLine="true"
-                android:maxLines="1" android:text="30" android:focusable="false"/>
+                android:maxLines="1" android:focusable="false"/>
 
     </LinearLayout>
 

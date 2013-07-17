@@ -14,10 +14,7 @@ import com.massivekinetics.ow.utils.StringUtils;
 public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
 
     WeatherParser parser = new WeatherParser();
-    String baseUrl;
-    String cityName;
     String gpsParams;
-    String key;
     private String session;
 
     private LoadingListener<WeatherForecast> listener;
@@ -26,9 +23,6 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
     public GetWeatherTask(ConfigManager configManager, LoadingListener<WeatherForecast> listener) {
         this.listener = listener;
         this.resources = OWApplication.getInstance().getResources();
-        baseUrl = resources.getString(R.string.weather_base_url_gps);
-        key = resources.getString(R.string.weather_key);
-        cityName = configManager.getStringConfig(ConfigManager.CITY_NAME);
         gpsParams = configManager.getLocationCoordinates();
         session = configManager.getActiveSession();
     }
@@ -70,7 +64,7 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
 
     private String getWeatherResponse(){
         String requestBody = com.massivekinetics.ow.network.SecurityManager.getWeatherRequestEncryptedBody();
-        String serverUrl = resources.getString(R.string.test_server_url_get_weather);
+        String serverUrl = resources.getString(R.string.ow_url_get_weather);
         return NetworkUtils.doPost(serverUrl, requestBody);
     }
 

@@ -56,7 +56,7 @@ public class ResourcesCodeUtils {
             case FOG:
                 return R.drawable.weather_state_10;
 
-            case LIGHTING_STORM:
+            case LIGHTNING_STORM:
                 return R.drawable.weather_state_12;
 
             case HURRICANE:
@@ -108,7 +108,7 @@ public class ResourcesCodeUtils {
                 return R.color.ow_snowfall;
             }
 
-            case LIGHTING_STORM:
+            case LIGHTNING_STORM:
                 return R.color.ow_lighting_storm;
 
             case FOG:
@@ -153,7 +153,7 @@ public class ResourcesCodeUtils {
                 return WeatherState.SLEET;
 
             case 200:
-                return WeatherState.LIGHTING_STORM;
+                return WeatherState.LIGHTNING_STORM;
 
             case 227:
                 return WeatherState.SNOW;
@@ -255,10 +255,10 @@ public class ResourcesCodeUtils {
                 return WeatherState.SLEET;
 
             case 386:
-                return WeatherState.LIGHTING_STORM;
+                return WeatherState.LIGHTNING_STORM;
 
             case 389:
-                return WeatherState.LIGHTING_STORM;
+                return WeatherState.LIGHTNING_STORM;
 
             case 392:
                 return WeatherState.SNOW;
