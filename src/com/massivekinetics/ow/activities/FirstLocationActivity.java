@@ -54,6 +54,7 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
         ArrayAdapter adapter = new PlacesAutoCompleteAdapter(FirstLocationActivity.this, R.layout.prediction);
         autoCompleteLocation.setAdapter(adapter);
         progressBar = findViewById(R.id.progressBar);
+        autoCompleteLocation.setEnabled(false);
     }
 
     @Override
@@ -70,6 +71,7 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
         @Override
         public void hideProgress() {
             progressBar.setVisibility(View.GONE);
+            autoCompleteLocation.setEnabled(true);
         }
     };
 
@@ -97,7 +99,7 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
                         public void run() {
                             if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)) {
                                 autoCompleteLocation.setText(finalCityName);
-                                setUserLocation(finalCityName, finalGpsParams);
+                                setUserLocation(finalCityName, finalGpsParams, true);
                             } else {
                                 notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
                                 autoCompleteLocation.setText(configManager.getLocationName());
@@ -110,11 +112,11 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
         }
     };
 
-    private void setUserLocation(String cityName, String gpsParams) {
+    private void setUserLocation(String cityName, String gpsParams, boolean isAutoDefined) {
         configManager.setLocationName(cityName);
         configManager.setLocationCoordinates(gpsParams);
         configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
-        configManager.setAutoDefineLocation(true);
+        configManager.setAutoDefineLocation(isAutoDefined);
         NavigationService.navigate(FirstLocationActivity.this, UpdatePageActivity.class);
         finish();
     }
@@ -141,7 +143,7 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
         @Override
         public void callback(String result) {
             if (result != null)
-                setUserLocation(autoCompleteLocation.getText().toString(), result);
+                setUserLocation(autoCompleteLocation.getText().toString(), result, false);
         }
 
         @Override

@@ -72,7 +72,7 @@ public class WeatherDataManager implements DataManager {
     public void updateForecast(WeatherForecast forecast) {
         this.mWeatherForecast = forecast;
         saveForecast();
-        updateWidget(OWApplication.getInstance());
+        //updateWidget(OWApplication.getInstance());
     }
 
     @Override
@@ -157,12 +157,12 @@ public class WeatherDataManager implements DataManager {
 
     }
 
-    private void updateWidget(Context context){
+   /* private void updateWidget(Context context){
         AppWidgetManager man = AppWidgetManager.getInstance(context);
         int[] ids = man.getAppWidgetIds(new ComponentName(context,oWeatherProvider4x1.class));
         Intent updateIntent = new Intent();
         updateIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
         context.sendBroadcast(updateIntent);
-    }
+    } */
 }

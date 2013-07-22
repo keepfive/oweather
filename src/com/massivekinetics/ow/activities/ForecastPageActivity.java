@@ -34,7 +34,6 @@ public class ForecastPageActivity extends OWActivity {
 
     ViewPager viewPager;
     DataManager dataManager;
-    RelativeLayout content;
     SwipeIndicatorPresenter swipeIndicatorPresenter;
     WeatherForecast weatherForecast;
     LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
@@ -118,7 +117,6 @@ public class ForecastPageActivity extends OWActivity {
         ibNext = (ImageButton) findViewById(R.id.ibNext);
         ibPrevious = (ImageButton) findViewById(R.id.ibPrevious);
         ibRefresh = (ImageButton) findViewById(R.id.ibRefresh);
-        content = (RelativeLayout) findViewById(R.id.content);
 
         indicatorLayout = (ViewGroup) findViewById(R.id.indicator);
         if(isTablet)
@@ -267,11 +265,11 @@ public class ForecastPageActivity extends OWActivity {
             tvMinus.setVisibility(invis);
         }
         currentTemp = Math.abs(currentTemp);
-        int margin = resolveMargin(currentTemp);
+        //int margin = resolveMargin(currentTemp);
 
         tvCurrentTemp.setText("" + currentTemp);
 
-        setMarginParams(margin, tvCurrentTemp);
+        //setMarginParams(margin, tvCurrentTemp);
 
         if(isTablet){
             String locationName = configManager.getStringConfig(ConfigManager.CITY_NAME);
@@ -327,7 +325,7 @@ public class ForecastPageActivity extends OWActivity {
             density = (int) dm.density;
         }
 
-        int margin = (temperature >= 10) ? 20 : 55;
+        int margin = (temperature >= 10) ? 20 : 45;
         return margin * density;
     }
 

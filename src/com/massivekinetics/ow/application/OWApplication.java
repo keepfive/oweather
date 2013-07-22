@@ -32,12 +32,6 @@ public class OWApplication extends Application {
 
     public String getDeviceId() {
 
-            TelephonyManager mTelephonyMgr = (TelephonyManager)getSystemService(android.app.Service.TELEPHONY_SERVICE);
-            //Log.d(TAG, "DeviceId: " + mTelephonyMgr.getDeviceId());
-
-            if (mTelephonyMgr.getDeviceId() != null)
-                return mTelephonyMgr.getDeviceId();
-
 			/*
 			 * Taken from http://www.pocketmagic.net/?p=1662 Pseudo-Unique ID, that works on all Android devices Some
 			 * devices don't have a phone (eg. Tablets) or for some reason you don't want to include the

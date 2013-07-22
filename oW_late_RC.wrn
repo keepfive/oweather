@@ -1,0 +1,11 @@
+(res/drawable-xhdpi/icon.png) found an alternate icon with better size:impact=1
+(AndroidManifest.xml) targetSdkVersion: 11 is higher than 10:required minimal Tablet OS version=10.2:impact=1
+PAVPLogger : parsing Logs for impacts : com.rim.pavp.sdk_wrapper.Impact@1384f2
+(com/massivekinetics/ow/data/manager/WeatherDataManager.java:162) uses package: android.appwidget:impact=3
+(com/massivekinetics/ow/data/manager/WeatherDataManager.java:161) uses package: android.appwidget:impact=3
+(com/massivekinetics/ow/data/manager/WeatherDataManager.java:161) uses package: android.appwidget:impact=3
+(com/massivekinetics/ow/widgets/oWeatherProvider4x1.java:124) uses package: android.appwidget:impact=3
+(com/massivekinetics/ow/widgets/oWeatherProvider4x1.java:37) uses package: android.appwidget:impact=3
+(com/massivekinetics/ow/widgets/oWeatherProvider4x1.java) uses package: android.appwidget:impact=3
+(com/massivekinetics/ow/widgets/oWeatherProvider4x1.java:26) uses package: android.appwidget:impact=3
+(com/massivekinetics/ow/widgets/oWeatherProvider4x1.java) uses package: android.appwidget:impact=3

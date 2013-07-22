@@ -1,29 +1,6 @@
 package com.massivekinetics.ow.widgets;
 
-import android.app.PendingIntent;
-import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.DisplayMetrics;
-import android.widget.RemoteViews;
-import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.activities.OWActivity;
-import com.massivekinetics.ow.activities.UpdatePageActivity;
-import com.massivekinetics.ow.application.OWApplication;
-import com.massivekinetics.ow.data.model.WeatherModel;
-import com.massivekinetics.ow.states.WeatherState;
-import com.massivekinetics.ow.utils.BitmapUtils;
-import com.massivekinetics.ow.utils.ResourcesCodeUtils;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-public class oWeatherProvider4x1 extends AppWidgetProvider {
+public class oWeatherProvider4x1{}/* extends AppWidgetProvider {
 
     public static final String ACTION = "android.appwidget.action.APPWIDGET_UPDATE";
 
@@ -145,3 +122,4 @@ public class oWeatherProvider4x1 extends AppWidgetProvider {
         return density != DisplayMetrics.DENSITY_LOW && density != DisplayMetrics.DENSITY_MEDIUM && density != DisplayMetrics.DENSITY_HIGH && !isTablet;
     }
 }
+                  */
