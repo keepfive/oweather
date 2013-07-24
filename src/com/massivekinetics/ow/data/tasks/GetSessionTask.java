@@ -7,6 +7,7 @@ import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.StringUtils;
 
 public class GetSessionTask extends AsyncTask<Void, Void, Boolean> {
+    private static final int DEFAULT_TRIES = 4;
 
     private int tries;
     private LoadingListener<Boolean> listener;
@@ -22,7 +23,7 @@ public class GetSessionTask extends AsyncTask<Void, Void, Boolean> {
 
             @Override
             public void notifyStop() {}
-        }, 5);
+        }, DEFAULT_TRIES);
     }
 
     public GetSessionTask(ConfigManager configManager, LoadingListener<Boolean> listener, int tries) {

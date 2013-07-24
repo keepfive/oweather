@@ -12,6 +12,7 @@ import com.massivekinetics.ow.data.model.WeatherForecast;
 import com.massivekinetics.ow.data.model.WeatherModel;
 import com.massivekinetics.ow.data.tasks.GetWeatherTask;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
+import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.DateUtils;
 import com.massivekinetics.ow.widgets.oWeatherProvider4x1;
 
@@ -31,6 +32,10 @@ public class WeatherDataManager implements DataManager {
     private static WeatherDataManager instance = null;
     private WeatherForecast mWeatherForecast = WeatherForecast.NULL;
     private List<WeatherForecastChangedListener> listeners = new ArrayList<WeatherForecastChangedListener>();
+
+    private static final long EXPIRATION_ONLINE = 3 * 60 * 60 * 1000;  // 3 hours
+    private static final long EXPIRATION_OFFLINE = 5 * (24 - 1) * 60 * 60 * 1000;  // 5 days minus 5 hours --> (24 - 1) just for convenience.
+
 
     private WeatherDataManager() {
     }
@@ -113,10 +118,12 @@ public class WeatherDataManager implements DataManager {
             restoreForecast();
 
         String gpsLocation = OWApplication.getInstance().getConfigManager().getLocationCoordinates();
-        long today = DateUtils.getCurrentInMillis();
-        boolean isActual = !mWeatherForecast.getForecastList().isEmpty()
-                && gpsLocation.equals(mWeatherForecast.getLocationString())
-                && (today - mWeatherForecast.getTimeStamp()) < 5 * 24 * 60 * 60 * 1000;
+        long weatherLifeInMsec = DateUtils.getCurrentInMillis()- mWeatherForecast.getTimeStamp();
+        long expirationLimit = NetworkUtils.isOnline() ? EXPIRATION_ONLINE : EXPIRATION_ONLINE;
+
+        boolean isActual = !mWeatherForecast.getForecastList().isEmpty() && gpsLocation.equals(mWeatherForecast.getLocationString())
+                && weatherLifeInMsec < expirationLimit;
+
         return isActual;
     }
 

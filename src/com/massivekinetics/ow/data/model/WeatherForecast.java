@@ -15,7 +15,8 @@ public class WeatherForecast implements Serializable {
     private String locationString;
 
     public WeatherForecast(){
-        timeStamp = new Date().getTime();
+        Date today = new Date();
+        timeStamp = today.getTime();
     }
 	
 	public List<WeatherModel> getForecastList() {
@@ -42,11 +43,6 @@ public class WeatherForecast implements Serializable {
 
     public void setLocationString(String locationString){
         this.locationString = locationString;
-    }
-
-    public boolean isActual(){
-        long today = DateUtils.getCurrentInMillis();
-        return !forecastList.isEmpty() && (today - timeStamp) < 5 * 24 * 60 * 60 * 1000;
     }
 
 }

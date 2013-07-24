@@ -22,14 +22,18 @@ public class NetworkUtils {
     private static final String TAG = "NetworkUtils";
 
     public static String doGet(final String serverUrl) {
+        return doGet(serverUrl, 7000);
+    }
+
+    public static String doGet(final String serverUrl, int timeout) {
         StringBuffer data = new StringBuffer(256);
         try {
             URL url = new URL(serverUrl);
             //Ensures that connections are closed when switching networks
             System.setProperty("http.keepAlive", "false");
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setConnectTimeout(7000);
-            connection.setReadTimeout(7000);
+            connection.setConnectTimeout(timeout);
+            connection.setReadTimeout(timeout);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line = null;
@@ -38,7 +42,7 @@ public class NetworkUtils {
             }
             reader.close();
         } catch (Exception e) {
-             Log.e(TAG, e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
         return data.toString();
     }
@@ -108,7 +112,7 @@ public class NetworkUtils {
 
     public static String getSession(){
         String requestURL = OWApplication.getInstance().getString(R.string.ow_url_get_session);
-        String base64 = doGet(requestURL);
+        String base64 = doGet(requestURL, 2000);
         return base64;
     }
 
