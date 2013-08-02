@@ -5,8 +5,8 @@
     <string name="weather_base_url_city">http://free.worldweatheronline.com/feed/weather.ashx?q=%CITY&amp;format=json&amp;num_of_days=%DAYS&amp;key=%KEY</string>
     <string name="weather_base_url_gps">http://free.worldweatheronline.com/feed/weather.ashx?q=%GPS&amp;format=json&amp;num_of_days=5&amp;key=%KEY</string>
 
-    <string name="test_server_url_get_weather">http://dev.oweather.net/dev/1/weather</string>
-    <string name="test_server_url_get_session">http://dev.oweather.net/dev/1/getSession</string>
+    <string name="test_ow_url_get_weather">http://dev.oweather.net/dev/1/weather</string>
+    <string name="test_ow_url_get_session">http://dev.oweather.net/dev/1/getSession</string>
 
     <string name="ow_url_get_session">http://api.oweather.net/rest/1/getSession</string>
     <string name="ow_url_get_weather">http://api.oweather.net/rest/1/weather</string>
@@ -87,5 +87,6 @@
     <!-- @hide DO NOT TRANSLATE. Separator between the hour and minute elements in a TimePicker widget -->
     <string name="time_picker_separator">:</string>
     <string name="retrieving_location">Retrieving location</string>
-    <string name="widget_4_1">OWeather widget 4x1</string>
+    <string name="widget_4_1">oW weather widget 4x1</string>
+    <string name="widget_4_2">oW weather widget 4x21</string>
 </resources>

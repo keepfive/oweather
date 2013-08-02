@@ -7,6 +7,12 @@
     <style name="TextView">
         <item name="android:textColor">@android:color/white</item>
     </style>
+    <style name="TextViewWidget">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
 
     <style name="LocationTextView" parent="TextView">
         <item name="android:gravity">center</item>

@@ -72,6 +72,7 @@ public class NetworkUtils {
             connection.setRequestProperty ("Accept", "application/json");
             connection.setRequestProperty("Content-Length", Integer.toString(body.length()));
             connection.setRequestProperty("Content-Type","text/plain");
+            connection.setRequestProperty("OS-TYPE","android");
 
             writer = new DataOutputStream(connection.getOutputStream());
             writer.writeBytes(body);

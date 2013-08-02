@@ -25,7 +25,6 @@ import com.massivekinetics.ow.views.SwipeIndicatorPresenter;
 
 public class ForecastPageActivity extends OWActivity {
     public static final String ACTION = "com.massivekinetics.ow.forecast";
-
     ViewGroup weatherContainer, updateLayout;
     TextView tvDate, tvCurrentTemp, tvDaytime, tvNightTemp, tvWeatherDescription, tvMinus, tvLocation;
     TextView tvHumidity, tvWindSpeed, tvMoonPhase, tvWindDirection, tvLocationName;
@@ -65,7 +64,6 @@ public class ForecastPageActivity extends OWActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.forecast_page);
         super.onCreate(savedInstanceState);
-
         dataManager = WeatherDataManager.getInstance();
         checkIntent();
         initViews();
@@ -224,8 +222,6 @@ public class ForecastPageActivity extends OWActivity {
 
             }
         });
-
-
     }
 
     private void updateUI() {
@@ -235,7 +231,6 @@ public class ForecastPageActivity extends OWActivity {
     private void updateUI(final int position) {
         if (!weatherForecast.isSuccessed() || weatherForecast == WeatherForecast.NULL)
             return;
-
 
         swipeIndicatorPresenter.setCurrentActivePosition(position);
         int size = weatherForecast.getForecastList().size();
