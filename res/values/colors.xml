@@ -19,12 +19,16 @@
 
     <!--Application colors-->
     <color name="background">#272727</color>
-    <color name="widget_background">#77111111</color>
+    <color name="widget_bg_black">#77111111</color>
+    <color name="widget_bg_white">#77AAAAAA</color>
     <color name="ow_settings">#343434</color>
     <color name="ow_slider_left">#36B1C0</color>
     <color name="ow_slider_right">#272727</color>
     <color name="ow_progress_background">#EE272727</color>
     <color name="transparent">#00000000</color>
+
+    <color name="dark_separator">#51272727</color>
+    <color name="light_separator">#51AAAAAA</color>
 
 
     <drawable name="ow_blue">#308DAF</drawable>

@@ -14,7 +14,7 @@ import com.massivekinetics.ow.application.OWApplication;
 public class OWConfigManager implements ConfigManager {
     SharedPreferences prefs;
 
-    public OWConfigManager(){
+    public OWConfigManager() {
         prefs = OWApplication.getInstance().getSharedPreferences(SETTINGS, 0);
     }
 
@@ -53,7 +53,7 @@ public class OWConfigManager implements ConfigManager {
         prefs.edit().putLong(name, value).commit();
     }
 
-    public String getActiveSession(){
+    public String getActiveSession() {
         return prefs.getString(SESSION, null);
     }
 
@@ -62,7 +62,7 @@ public class OWConfigManager implements ConfigManager {
         return prefs.getBoolean(AUTO_DEFINE_LOCATION_ENABLED, true);
     }
 
-    public void setActiveSession(String session){
+    public void setActiveSession(String session) {
         prefs.edit().putString(SESSION, session).commit();
     }
 
@@ -82,6 +82,16 @@ public class OWConfigManager implements ConfigManager {
     }
 
     @Override
+    public String getLocationCountry() {
+        return prefs.getString(COUNTRY_NAME, null);
+    }
+
+    @Override
+    public void setLocationCountry(String locationCountry) {
+        prefs.edit().putString(COUNTRY_NAME, locationCountry).commit();
+    }
+
+    @Override
     public String getLocationCoordinates() {
         return prefs.getString(GPS_PARAMS, null);
     }
@@ -95,7 +105,7 @@ public class OWConfigManager implements ConfigManager {
     public String getNotificationTimeAsString() {
         int notificationHour = prefs.getInt(NOTIFICATION_TIME_HOUR, -1);
         int notificationMinute = prefs.getInt(NOTIFICATION_TIME_MINUTE, -1);
-        if(notificationHour == -1 || notificationMinute == -1)
+        if (notificationHour == -1 || notificationMinute == -1)
             return OWApplication.getInstance().getString(R.string.select_time);
         else {
             String notificationTime = notificationHour + ":" + ((notificationMinute < 10) ? "0" + notificationMinute : notificationMinute);
@@ -105,7 +115,7 @@ public class OWConfigManager implements ConfigManager {
 
     @Override
     public void setNotificationTime(int hour, int minute) {
-        synchronized (OWConfigManager.class){
+        synchronized (OWConfigManager.class) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt(NOTIFICATION_TIME_HOUR, hour);
             editor.putInt(NOTIFICATION_TIME_MINUTE, minute);
@@ -152,5 +162,20 @@ public class OWConfigManager implements ConfigManager {
     public int getNotificationMinute() {
         return prefs.getInt(NOTIFICATION_TIME_MINUTE, -1);
     }
+
+    @Override
+    public void setWidgetBackground(int widgetId, int color) {
+        prefs.edit().putInt(WIDGET_BACKGROUND + widgetId, color).commit();
+    }
+
+    @Override
+    public int getWidgetBackground(int widgetId) {
+        int color = prefs.getInt(WIDGET_BACKGROUND + widgetId, -1);
+        if (color == -1)
+            return OWApplication.getInstance().getResources().getColor(R.color.widget_bg_black);
+        else
+            return color;
+    }
+
 
 }

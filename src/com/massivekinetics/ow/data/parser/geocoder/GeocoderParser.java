@@ -5,13 +5,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants.*;
 
 public class GeocoderParser {
     private static final String TAG = "GeocoderParser";
 
-    public String getLocationName(String json) {
-        String locationName = null;
+    public Map<String, String> getLocationInfoMap(String json) {
+        Map<String, String> locationMap = new HashMap<String, String>();
         if (!json.contains("error")) {
             try {
                 JSONObject dataObject = new JSONObject(json);
@@ -24,8 +27,13 @@ public class GeocoderParser {
                         for (int i = 0; i < addressComponentsArray.length(); i++){
                             JSONObject addressItem = addressComponentsArray.getJSONObject(i);
                             JSONArray typeArray = addressItem.getJSONArray(TYPES);
-                            if(typeArray.getString(0).equalsIgnoreCase(LOCALITY))
-                                locationName = addressItem.getString(LONG_NAME);
+                            if(typeArray.getString(0).equalsIgnoreCase(LOCALITY)){
+                                String locationName = addressItem.getString(LONG_NAME);
+                                locationMap.put(LOCALITY, locationName);
+                            }  if(typeArray.getString(0).equalsIgnoreCase(COUNTRY)) {
+                                String locationCountry = addressItem.getString(LONG_NAME);
+                                locationMap.put(COUNTRY, locationCountry);
+                            }
                         }
                     }
                 }
@@ -33,6 +41,6 @@ public class GeocoderParser {
                 Log.e(TAG, jse.getMessage());
             }
         }
-        return locationName;
+        return locationMap;
     }
 }

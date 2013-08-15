@@ -10,6 +10,7 @@ package com.massivekinetics.ow.data.manager;
 public interface ConfigManager {
     public static final String SETTINGS = "settings";
     public static final String CITY_NAME = "city_name";
+    public static final String COUNTRY_NAME = "country_name";
     public static final String TEMPERATURE_MODE_FAHRENHEIT = "temperature_mode_fahrenheit";
     public static final String AUTO_DEFINE_LOCATION_ENABLED = "auto_define_location_enabled";
     public static final String NOTIFICATION_ENABLED = "notification_enabled";
@@ -18,6 +19,7 @@ public interface ConfigManager {
     public static final String GPS_PARAMS = "gps_params";
     public static final String GPS_LAST_UPDATED = "gps_last_updated";
     public static final String SESSION = "session";
+    public static final String WIDGET_BACKGROUND = "widget_background_";
 
     String getStringConfig(String configName);
 
@@ -42,6 +44,9 @@ public interface ConfigManager {
     String getLocationName();
     void setLocationName(String locationName);
 
+    String getLocationCountry();
+    void setLocationCountry(String locationCountry);
+
     String getLocationCoordinates();
     void setLocationCoordinates(String locationCoordinates);
 
@@ -58,6 +63,9 @@ public interface ConfigManager {
 
     void setNotificationMinute(int minute);
     int getNotificationMinute();
+
+    void setWidgetBackground(int widgetId, int color);
+    int getWidgetBackground(int widgetId);
 
 
 }

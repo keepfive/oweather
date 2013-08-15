@@ -30,7 +30,8 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        listener.notifyStart();
+        if(listener != null)
+            listener.notifyStart();
     }
 
     @Override
@@ -58,8 +59,10 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
     @Override
     protected void onPostExecute(WeatherForecast result) {
         super.onPostExecute(result);
-        listener.callback(result);
-        listener.notifyStop();
+        if(listener != null){
+            listener.callback(result);
+            listener.notifyStop();
+        }
     }
 
     private String getWeatherResponse(){

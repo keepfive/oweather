@@ -138,6 +138,9 @@ public class WeatherDataManager implements DataManager {
             }
         }
 
+        else
+            runUpdate(null);
+
         return WeatherModel.NULL;
     }
 

@@ -12,6 +12,7 @@ import com.massivekinetics.ow.application.OWApplication;
 import com.massivekinetics.ow.data.Autocompleter;
 import com.massivekinetics.ow.data.adapters.PlacesAutoCompleteAdapter;
 import com.massivekinetics.ow.data.model.Prediction;
+import com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants;
 import com.massivekinetics.ow.data.tasks.GetLocationFromPlaceTask;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.interfaces.ProgressListener;
@@ -20,7 +21,11 @@ import com.massivekinetics.ow.utils.DateUtils;
 import com.massivekinetics.ow.utils.NavigationService;
 import com.massivekinetics.ow.utils.StringUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.massivekinetics.ow.data.manager.ConfigManager.GPS_LAST_UPDATED;
+import static com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -81,25 +86,23 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
         public void gotLocation(final Location location) {
             new Thread() {
                 public void run() {
-                    String cityName = null;
-                    String gpsParams = null;
+
+                    final Map<String, String> locationInfoMap = new HashMap<String, String>();
                     try {
-                        cityName = locationManager.getLocationName(location);
-                        gpsParams = locationManager.getGpsCoordinatesAsParams(location);
+                        locationInfoMap.putAll(locationManager.getLocationInfo(location));
                     } catch (Exception e) {
 
                     }
 
-                    final String finalCityName = cityName;
-                    final String finalGpsParams = gpsParams;
-
+                    final String cityName = locationInfoMap.get(GeocoderConstants.LOCALITY);
+                    final String gpsParams = locationInfoMap.get(GeocoderConstants.GPS_PARAMS);
 
                     uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)) {
-                                autoCompleteLocation.setText(finalCityName);
-                                setUserLocation(finalCityName, finalGpsParams, true);
+                            if (!StringUtils.isNullOrEmpty(cityName) && !StringUtils.isNullOrEmpty(gpsParams)) {
+                                autoCompleteLocation.setText(cityName);
+                                setUserLocation(locationInfoMap, true);
                             } else {
                                 notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
                                 autoCompleteLocation.setText(configManager.getLocationName());
@@ -112,9 +115,19 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
         }
     };
 
-    private void setUserLocation(String cityName, String gpsParams, boolean isAutoDefined) {
-        configManager.setLocationName(cityName);
-        configManager.setLocationCoordinates(gpsParams);
+    private void setUserLocation(Map<String, String> locationInfoMap, boolean isAutoDefined) {
+        String locality = locationInfoMap.get(LOCALITY);
+        String country = locationInfoMap.get(COUNTRY);
+        String gpsMarams = locationInfoMap.get(GPS_PARAMS);
+
+        if(!StringUtils.isNullOrEmpty(locality))
+            configManager.setLocationName(locality);
+        if(!StringUtils.isNullOrEmpty(country))
+            configManager.setLocationCountry(country);
+        if(!StringUtils.isNullOrEmpty(gpsMarams))
+            configManager.setLocationCoordinates(gpsMarams);
+
+
         configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
         configManager.setAutoDefineLocation(isAutoDefined);
         NavigationService.navigate(FirstLocationActivity.this, UpdatePageActivity.class);
@@ -142,8 +155,12 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
     LoadingListener<String> autocompleteListener = new LoadingListener<String>() {
         @Override
         public void callback(String result) {
-            if (result != null)
-                setUserLocation(autoCompleteLocation.getText().toString(), result, false);
+            if (result != null)  {
+                Map<String, String> locMap = new HashMap<String, String>(2);
+                locMap.put(LOCALITY,autoCompleteLocation.getText().toString());
+                locMap.put(GPS_PARAMS, result);
+                setUserLocation(locMap, false);
+            }
         }
 
         @Override

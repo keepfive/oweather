@@ -7,14 +7,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants;
 import com.massivekinetics.ow.data.parser.geocoder.GeocoderParser;
 import com.massivekinetics.ow.network.NetworkUtils;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -114,44 +112,22 @@ public class OWLocationManager {
         return true;
     }
 
-    public String getLocationName(Location location) {
+    public Map<String, String> getLocationInfo(Location location) {
         if (location != null) {
-            return getLocationNameFromGoogle(location);
-            /*
-            try {
-                List<Address> addressList = geoCoder.getFromLocation(location.getLatitude(), location.getLongitude(), 5);
-                if (addressList != null && !addressList.isEmpty()) {
-                    Address first = addressList.get(0);
-                    String areaName = getAreaName(first);
-                    String countryName = first.getCountryName();
-
-                    String locationName = (areaName == null) ? countryName : areaName;
-                    return locationName;
-                }
-            } catch (Exception e) {
-            } */
+            return getLocationInfoFromGoogle(location);
         }
         return null;
     }
 
-    private String getAreaName(Address address) {
-        String locationName = address.getLocality();
-
-        if (locationName == null)
-            locationName = address.getAdminArea();
-        if (locationName == null)
-            locationName = address.getFeatureName();
-
-        return locationName;
-    }
-
-    private String getLocationNameFromGoogle(Location location){
+    private Map<String, String> getLocationInfoFromGoogle(Location location){
         String gps = getGpsCoordinatesAsParams(location);
         String request = resources.getString(R.string.google_geocoder);
         request = request.replace("%LATLNG", gps);
         String response = NetworkUtils.doGet(request);
-
-        return new GeocoderParser().getLocationName(response);
+        Map<String, String> locationMap = new GeocoderParser().getLocationInfoMap(response);
+        String gpsParams = getGpsCoordinatesAsParams(location);
+        locationMap.put(GeocoderConstants.GPS_PARAMS, gpsParams);
+        return locationMap;
     }
 
     public String getGpsCoordinatesAsParams(Location location){

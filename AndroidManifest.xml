@@ -50,6 +50,11 @@
         <activity android:name=".activities.UpdatePageActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activities.TestActivity"/>
         <activity android:name=".activities.FirstLocationActivity"/>
+        <activity android:name=".activities.WidgetConfigActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".receivers.NotificationReceiver">
             <intent-filter>
@@ -64,6 +69,11 @@
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_4x2_info"/>
         </receiver>
+        <service android:name=".widgets.ClockUpdateService">
+            <intent-filter>
+                <action android:name="com.mk.clock.action.UPDATE" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

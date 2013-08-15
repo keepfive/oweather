@@ -18,6 +18,5 @@ public class GeocoderConstants {
     public static final String COUNTRY = "country";
     public static final String STATUS = "status";
     public static final String OK = "OK";
-
-
+    public static final String GPS_PARAMS = "gps_params";
 }

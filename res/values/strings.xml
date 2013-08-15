@@ -41,6 +41,7 @@
     <string name="could_not_locate">Your location could not been retrieved. Please add location manually</string>
     <string name="location_saved">Location saved</string>
     <string name="location_unknown">Unknown location</string>
+    <string name="no_location">No location</string>
     <string name="not_available">N/A</string>
     <string name="night">Night</string>
     <string name="day">Day</string>

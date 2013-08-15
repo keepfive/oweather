@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView android:id="@+id/bgColorText" android:text="Select background color" android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:padding="5dp" android:background="@color/background"
+              android:gravity="center"/>
+
+    <RadioGroup android:id="@+id/rgBackgorundColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+        <RadioButton
+                android:id="@+id/rbBlack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="Black"/>
+
+        <RadioButton
+                android:id="@+id/rbWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="White"/>
+    </RadioGroup>
+
+
+    <Button android:id="@+id/set" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal" android:gravity="center"
+            android:text="@string/set" android:background="@drawable/blue_button" android:paddingLeft="25dp" android:paddingRight="25dp" android:layout_marginTop="10dp"/>
+
+</LinearLayout>

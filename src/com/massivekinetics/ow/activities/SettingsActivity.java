@@ -16,6 +16,7 @@ import com.massivekinetics.ow.data.Autocompleter;
 import com.massivekinetics.ow.data.adapters.PlacesAutoCompleteAdapter;
 import com.massivekinetics.ow.data.manager.NotificationService;
 import com.massivekinetics.ow.data.model.Prediction;
+import com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants;
 import com.massivekinetics.ow.data.tasks.GetLocationFromPlaceTask;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.interfaces.ProgressListener;
@@ -25,7 +26,13 @@ import com.massivekinetics.ow.utils.DateUtils;
 import com.massivekinetics.ow.utils.NavigationService;
 import com.massivekinetics.ow.utils.StringUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.massivekinetics.ow.data.manager.ConfigManager.*;
+import static com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants.COUNTRY;
+import static com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants.GPS_PARAMS;
+import static com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants.LOCALITY;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,25 +57,22 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         public void gotLocation(final Location location) {
             new Thread() {
                 public void run() {
-                    String cityName = null;
-                    String gpsParams = null;
+                    final Map<String, String> locationInfoMap = new HashMap<String, String>();
                     try {
-                        cityName = locationMgr.getLocationName(location);
-                        gpsParams = locationMgr.getGpsCoordinatesAsParams(location);
-                        isLocationChanged = true;
+                        locationInfoMap.putAll(locationManager.getLocationInfo(location));
                     } catch (Exception e) {
 
                     }
 
-                    final String finalCityName = cityName;
-                    final String finalGpsParams = gpsParams;
+                    final String cityName = locationInfoMap.get(GeocoderConstants.LOCALITY);
+                    final String gpsParams = locationInfoMap.get(GeocoderConstants.GPS_PARAMS);
 
                     uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (!StringUtils.isNullOrEmpty(finalCityName) && !StringUtils.isNullOrEmpty(finalGpsParams)) {
-                                locationAutoCompleteView.setText(finalCityName);
-                                setUserLocation(finalCityName, finalGpsParams);
+                            if (!StringUtils.isNullOrEmpty(cityName) && !StringUtils.isNullOrEmpty(gpsParams)) {
+                                locationAutoCompleteView.setText(cityName);
+                                setUserLocation(locationInfoMap);
                             } else {
                                 notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
                                 locationAutoCompleteView.setText(configManager.getLocationName());
@@ -84,8 +88,12 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     LoadingListener<String> autocompleteListener = new LoadingListener<String>() {
         @Override
         public void callback(String result) {
-            if (result != null)
-                setUserLocation(locationAutoCompleteView.getText().toString(), result);
+            if (result != null)  {
+                Map<String, String> locMap = new HashMap<String, String>(2);
+                locMap.put(LOCALITY, locationAutoCompleteView.getText().toString());
+                locMap.put(GPS_PARAMS, result);
+                setUserLocation(locMap);
+            }
         }
 
         @Override
@@ -310,9 +318,26 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         this.finish();
     }
 
-    private void setUserLocation(String cityName, String gpsParams) {
+    /*private void setUserLocation(String cityName, String gpsParams) {
         configManager.setLocationName(cityName);
         configManager.setLocationCoordinates(gpsParams);
+        configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
+        isLocationChanged = true;
+        notifier.alert(getString(R.string.location_saved), Toast.LENGTH_SHORT);
+    }   */
+
+    private void setUserLocation(Map<String, String> locationInfoMap) {
+        String locality = locationInfoMap.get(LOCALITY);
+        String country = locationInfoMap.get(COUNTRY);
+        String gpsMarams = locationInfoMap.get(GPS_PARAMS);
+
+        if(!StringUtils.isNullOrEmpty(locality))
+            configManager.setLocationName(locality);
+        if(!StringUtils.isNullOrEmpty(country))
+            configManager.setLocationCountry(country);
+        if(!StringUtils.isNullOrEmpty(gpsMarams))
+            configManager.setLocationCoordinates(gpsMarams);
+
         configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
         isLocationChanged = true;
         notifier.alert(getString(R.string.location_saved), Toast.LENGTH_SHORT);
