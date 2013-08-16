@@ -1,6 +1,7 @@
 package com.massivekinetics.ow.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.massivekinetics.ow.location.OWLocationManager;
 import com.massivekinetics.ow.utils.DateUtils;
 import com.massivekinetics.ow.utils.NavigationService;
 import com.massivekinetics.ow.utils.StringUtils;
+import com.massivekinetics.ow.widgets.ClockUpdateService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -130,6 +132,9 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
 
         configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
         configManager.setAutoDefineLocation(isAutoDefined);
+
+        startService(new Intent(ClockUpdateService.ACTION_LOCATION_UPDATED));
+
         NavigationService.navigate(FirstLocationActivity.this, UpdatePageActivity.class);
         finish();
     }

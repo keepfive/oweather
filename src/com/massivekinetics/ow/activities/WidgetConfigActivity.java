@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.data.manager.ConfigManager;
 import com.massivekinetics.ow.data.manager.OWConfigManager;
+import com.massivekinetics.ow.widgets.ClockUpdateService;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,7 +32,7 @@ public class WidgetConfigActivity extends Activity {
         if(extras != null){
             appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         }
-        setResult(RESULT_CANCELED, null);
+
 
         if(appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID)
             finish();
@@ -49,6 +50,12 @@ public class WidgetConfigActivity extends Activity {
         });
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        setResult(RESULT_CANCELED, null);
+    }
+
     private void completedConfiguration(){
         int checkedId =  rgBackground.getCheckedRadioButtonId();
         boolean isWhite = checkedId == R.id.rbWhite;
@@ -58,6 +65,9 @@ public class WidgetConfigActivity extends Activity {
         Intent result = new Intent();
         result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         setResult(RESULT_OK, result);
+
+        startService(new Intent(ClockUpdateService.ACTION_UPDATE));
+
         finish();
     }
 }

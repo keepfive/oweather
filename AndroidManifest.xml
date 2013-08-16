@@ -72,6 +72,8 @@
         <service android:name=".widgets.ClockUpdateService">
             <intent-filter>
                 <action android:name="com.mk.clock.action.UPDATE" />
+                <action android:name="com.mk.clock.action.UPDATED_LOCATION" />
+                <action android:name="com.mk.clock.action.UPDATED_WEATHER" />
             </intent-filter>
         </service>
     </application>

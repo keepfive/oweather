@@ -14,6 +14,7 @@ import com.massivekinetics.ow.data.tasks.GetWeatherTask;
 import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.DateUtils;
+import com.massivekinetics.ow.widgets.ClockUpdateService;
 import com.massivekinetics.ow.widgets.oWeatherProvider4x1;
 
 import java.io.*;
@@ -77,6 +78,7 @@ public class WeatherDataManager implements DataManager {
     public void updateForecast(WeatherForecast forecast) {
         this.mWeatherForecast = forecast;
         saveForecast();
+        OWApplication.getInstance().startService(new Intent(ClockUpdateService.ACTION_WEATHER_UPDATED));
         //updateWidget(OWApplication.getInstance());
     }
 

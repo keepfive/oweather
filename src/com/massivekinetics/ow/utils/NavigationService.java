@@ -1,6 +1,8 @@
 package com.massivekinetics.ow.utils;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -119,5 +121,38 @@ public class NavigationService {
             }
         }
         return false;
+    }
+
+
+    public static final Intent alarmIntent(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        Intent alarmClockIntent = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
+
+        // Verify clock implementation
+        String clockImpls[][] = {
+                {"HTC Alarm ClockDT", "com.htc.android.worldclock", "com.htc.android.worldclock.WorldClockTabControl" },
+                {"Standart Alarm ClockDT", "com.android.deskclock", "com.android.deskclock.AlarmClock"},
+                {"Froyo Nexus Alarm ClockDT", "com.google.android.deskclock", "com.android.deskclock.DeskClock"},
+                {"Moto Blur Alarm ClockDT", "com.motorola.blur.alarmclock",  "com.motorola.blur.alarmclock.AlarmClock"},
+                {"Samsung Galaxy S", "com.sec.android.app.clockpackage","com.sec.android.app.clockpackage.ClockPackage"}
+        };
+
+        boolean foundClockImpl = false;
+
+        for(int i=0; i<clockImpls.length; i++) {
+            String packageName = clockImpls[i][1];
+            String className = clockImpls[i][2];
+            try {
+                ComponentName cn = new ComponentName(packageName, className);
+                packageManager.getActivityInfo(cn, PackageManager.GET_META_DATA);
+                alarmClockIntent.setComponent(cn);
+                foundClockImpl = true;
+            } catch (PackageManager.NameNotFoundException nf) {
+            }
+        }
+        if (foundClockImpl)
+            return alarmClockIntent;
+        else
+            return null;
     }
 }

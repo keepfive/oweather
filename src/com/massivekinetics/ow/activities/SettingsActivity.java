@@ -25,6 +25,7 @@ import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.DateUtils;
 import com.massivekinetics.ow.utils.NavigationService;
 import com.massivekinetics.ow.utils.StringUtils;
+import com.massivekinetics.ow.widgets.ClockUpdateService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +52,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     boolean isLocationChanged, isCheckingLocation;
     CompoundButton switchAutoDefine, switchNotification;
     OWLocationManager locationMgr;
+
     OWLocationManager.LocationResult locationResult = new OWLocationManager.LocationResult() {
 
         @Override
@@ -85,6 +87,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
             }.start();
         }
     };
+
     LoadingListener<String> autocompleteListener = new LoadingListener<String>() {
         @Override
         public void callback(String result) {
@@ -318,14 +321,6 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         this.finish();
     }
 
-    /*private void setUserLocation(String cityName, String gpsParams) {
-        configManager.setLocationName(cityName);
-        configManager.setLocationCoordinates(gpsParams);
-        configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
-        isLocationChanged = true;
-        notifier.alert(getString(R.string.location_saved), Toast.LENGTH_SHORT);
-    }   */
-
     private void setUserLocation(Map<String, String> locationInfoMap) {
         String locality = locationInfoMap.get(LOCALITY);
         String country = locationInfoMap.get(COUNTRY);
@@ -340,6 +335,9 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
 
         configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
         isLocationChanged = true;
+
+        startService(new Intent(ClockUpdateService.ACTION_LOCATION_UPDATED));
+
         notifier.alert(getString(R.string.location_saved), Toast.LENGTH_SHORT);
     }
 

@@ -7,21 +7,22 @@
               android:weightSum="9">
 
     <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="6"
-                    android:padding="7dp">
+                    android:paddingLeft="16dp" android:paddingTop="7dp" android:paddingRight="7dp"
+                    android:paddingBottom="7dp">
 
         <LinearLayout android:id="@+id/timeContainer" android:layout_width="match_parent"
                       android:layout_height="wrap_content" android:layout_alignParentTop="true"
                       android:orientation="horizontal" android:layout_marginTop="-1dp" android:layout_marginLeft="-1dp">
             <TextView android:id="@+id/time" style="@style/TextViewWidget" android:layout_width="wrap_content"
-                      android:textSize="60sp" android:text="12:20"
+                      android:textSize="60sp"
                       android:layout_marginBottom="-7dp" android:gravity="top"
                       android:layout_marginLeft="-3dp" android:layout_marginTop="-5dp" android:includeFontPadding="false"
-                      android:phoneNumber="true"/>
+                      />
 
             <TextView android:id="@+id/amPm" android:layout_width="wrap_content" android:layout_height="match_parent"
                       android:textSize="20sp" android:text="AM" android:textColor="@android:color/white"
                       android:gravity="top" android:layout_marginTop="5dp"
-                      android:includeFontPadding="false" android:layout_marginLeft="3dp"
+                      android:includeFontPadding="false" android:layout_marginLeft="3dp" android:visibility="gone"
                     />
 
         </LinearLayout>
@@ -29,11 +30,11 @@
                   android:textSize="16sp" android:text="Tue, May 28"/>
 
         <TextView android:id="@+id/locality" android:layout_above="@+id/country" style="@style/TextViewWidget"
-                  android:textSize="24sp" android:text="London" android:layout_marginTop="10dp"
-                  android:drawableLeft="@drawable/location_icon" android:drawablePadding="10dp"/>
+                  android:textSize="24sp" android:text="@string/no_location" android:layout_marginTop="10dp"
+                  android:drawableLeft="@drawable/location_light" android:drawablePadding="5dp"/>
 
         <TextView android:id="@id/country" style="@style/TextViewWidget" android:textSize="12sp"
-                  android:text="United Kingdom of Great Britain" android:layout_alignParentBottom="true"
+                  android:layout_alignParentBottom="true"
                   android:layout_marginBottom="5dp"/>
 
         <TextView android:id="@+id/darkSeparator" android:layout_height="fill_parent" android:layout_width="1dp" android:layout_alignParentRight="true"
@@ -43,20 +44,19 @@
 
     </RelativeLayout>
 
-    <RelativeLayout android:layout_width="0dp" android:padding="7dp"
+    <RelativeLayout android:id="@+id/dataAvailable" android:layout_width="0dp" android:padding="7dp"
                     android:layout_height="match_parent" android:orientation="vertical" android:layout_weight="3"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal" android:visibility="gone">
         <LinearLayout android:id="@+id/imgContainer" android:layout_height="wrap_content"
                       android:layout_width="match_parent" android:gravity="center_horizontal"
                       android:layout_alignParentTop="true">
-            <ImageView android:id="@+id/image" android:layout_height="wrap_content" android:layout_width="wrap_content"
-                       android:src="@drawable/weather_state_widget"
+            <ImageView android:id="@+id/image" android:layout_height="fill_parent" android:layout_width="wrap_content" android:src="@drawable/widget_state_rain"
                        android:scaleType="fitStart" android:layout_marginBottom="-12dp"
-                    />
+                       android:layout_marginTop="-12dp"/>
         </LinearLayout>
 
         <TextView android:id="@+id/weatherState" android:layout_below="@id/imgContainer" style="@style/TextViewWidget"
-                  android:textSize="16sp" android:text="Rain" android:gravity="center" android:marqueeRepeatLimit="marquee_forever" android:maxLines="2"/>
+                  android:textSize="16sp" android:text="Mostly Cloudly" android:gravity="center" android:layout_gravity="center" android:marqueeRepeatLimit="marquee_forever" android:maxLines="2"/>
 
         <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
                       android:orientation="horizontal"
@@ -84,6 +84,16 @@
         </LinearLayout>
 
 
+    </RelativeLayout>
+
+    <RelativeLayout android:id="@+id/dataNotAvailable" android:layout_width="0dp" android:padding="7dp"
+                    android:layout_height="match_parent" android:orientation="vertical" android:layout_weight="3"
+                    android:visibility="visible">
+
+        <ImageView android:id="@+id/imageError" android:src="@drawable/widget_state_error" android:layout_height="wrap_content"
+                   android:layout_width="wrap_content"
+                   android:scaleType="fitStart" android:layout_centerInParent="true"
+                />
     </RelativeLayout>
 
 

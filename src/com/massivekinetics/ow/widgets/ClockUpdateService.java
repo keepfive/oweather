@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+
+import static com.massivekinetics.ow.widgets.oWeatherProvider4x2.updateLocation;
 import static com.massivekinetics.ow.widgets.oWeatherProvider4x2.updateTime;
+import static com.massivekinetics.ow.widgets.oWeatherProvider4x2.updateWeather;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,6 +20,8 @@ import static com.massivekinetics.ow.widgets.oWeatherProvider4x2.updateTime;
  */
 public class ClockUpdateService extends Service {
     public static final String ACTION_UPDATE = "com.mk.clock.action.UPDATE";
+    public static final String ACTION_WEATHER_UPDATED = "com.mk.clock.action.UPDATED_WEATHER";
+    public static final String ACTION_LOCATION_UPDATED = "com.mk.clock.action.UPDATED_LOCATION";
 
     private final static IntentFilter intentFilter;
 
@@ -38,39 +43,31 @@ public class ClockUpdateService extends Service {
      */
     private final BroadcastReceiver clockChangedReceiver = new
             BroadcastReceiver() {
-                /**
-                 * {@inheritDoc}
-                 */
                 public void onReceive(Context context, Intent intent) {
                     updateTime(context);
                 }
             };
 
-    /**
-     * {@inheritDoc}
-     */
     public void onCreate() {
         super.onCreate();
-
         registerReceiver(clockChangedReceiver, intentFilter);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void onDestroy() {
         super.onDestroy();
-
         unregisterReceiver(clockChangedReceiver);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void onStart(Intent intent, int startId) {
         if (intent != null && intent.getAction() != null) {
             if (intent.getAction().equals(ACTION_UPDATE)) {
                 updateTime(this);
+                updateLocation(this);
+                updateWeather(this);
+            } else if (intent.getAction().equals(ACTION_LOCATION_UPDATED)) {
+                updateLocation(this);
+            } else if (intent.getAction().equals(ACTION_WEATHER_UPDATED)) {
+                updateWeather(this);
             }
         }
     }

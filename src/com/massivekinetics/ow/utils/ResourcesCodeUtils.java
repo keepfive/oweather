@@ -67,6 +67,61 @@ public class ResourcesCodeUtils {
         }
     }
 
+    public static int getWidgetWeatherImageResource(WeatherState weatherState) {
+        switch (weatherState) {
+            case SUNNY:
+                return R.drawable.widget_state_sunny;
+
+            case DOWNPOUR: {
+                return R.drawable.widget_state_downpour;
+            }
+
+            case LIGHT_RAIN: {
+                return R.drawable.widget_state_light_rain;
+            }
+
+            case MOSTLY_CLOUDLY: {
+                return R.drawable.widget_state_mostly_cloudly;
+            }
+
+            case PARTLY_CLOUDLY: {
+                return R.drawable.widget_state_partly_cloudly;
+            }
+
+            case RAIN: {
+                return R.drawable.widget_state_rain;
+            }
+
+            case RAIN_AND_SUN: {
+                return R.drawable.widget_state_rain_and_sun;
+            }
+
+            case SLEET: {
+                return R.drawable.widget_state_sleet;
+            }
+
+            case SNOW: {
+                return R.drawable.widget_state_snow;
+            }
+
+            case SNOW_FALL: {
+                return R.drawable.widget_state_snow_fall;
+            }
+
+            case FOG:
+                return R.drawable.widget_state_fog;
+
+            case LIGHTNING_STORM:
+                return R.drawable.widget_state_lightning_storm;
+
+            case HURRICANE:
+                return R.drawable.widget_state_hurricane;
+
+            default:
+                return R.drawable.widget_state_error;
+        }
+    }
+
     public static int getWeatherBackgroundColor(WeatherState weatherState) {
         switch (weatherState) {
             case SUNNY:
