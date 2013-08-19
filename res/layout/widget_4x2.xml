@@ -20,7 +20,7 @@
                       />
 
             <TextView android:id="@+id/amPm" android:layout_width="wrap_content" android:layout_height="match_parent"
-                      android:textSize="20sp" android:text="AM" android:textColor="@android:color/white"
+                      android:textSize="18sp" android:text="AM" android:textColor="@android:color/white"
                       android:gravity="top" android:layout_marginTop="5dp"
                       android:includeFontPadding="false" android:layout_marginLeft="3dp" android:visibility="gone"
                     />
@@ -31,11 +31,11 @@
 
         <TextView android:id="@+id/locality" android:layout_above="@+id/country" style="@style/TextViewWidget"
                   android:textSize="24sp" android:text="@string/no_location" android:layout_marginTop="10dp"
-                  android:drawableLeft="@drawable/location_light" android:drawablePadding="5dp"/>
+                  android:drawableLeft="@drawable/location_light" android:drawablePadding="5dp" android:singleLine="true" android:maxLines="1"/>
 
         <TextView android:id="@id/country" style="@style/TextViewWidget" android:textSize="12sp"
                   android:layout_alignParentBottom="true"
-                  android:layout_marginBottom="5dp"/>
+                  android:layout_marginBottom="5dp" android:singleLine="true" android:maxLines="1"/>
 
         <TextView android:id="@+id/darkSeparator" android:layout_height="fill_parent" android:layout_width="1dp" android:layout_alignParentRight="true"
                   android:background="@color/dark_separator"/>
@@ -56,14 +56,14 @@
         </LinearLayout>
 
         <TextView android:id="@+id/weatherState" android:layout_below="@id/imgContainer" style="@style/TextViewWidget"
-                  android:textSize="16sp" android:text="Mostly Cloudly" android:gravity="center" android:layout_gravity="center" android:marqueeRepeatLimit="marquee_forever" android:maxLines="2"/>
+                  android:textSize="16sp" android:gravity="center" android:layout_gravity="center" android:marqueeRepeatLimit="marquee_forever" android:maxLines="2"/>
 
         <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
                       android:orientation="horizontal"
                       android:layout_alignParentBottom="true" android:weightSum="5" android:gravity="bottom">
 
             <TextView android:id="@+id/max" style="@style/TextViewWithPadding" android:layout_height="match_parent"
-                      android:layout_width="0dp" android:layout_weight="3" android:text="+15" android:textSize="28sp"
+                      android:layout_width="0dp" android:layout_weight="3" android:paddingRight="3dp" android:textSize="28sp" android:gravity="right"
                       />
 
 
@@ -75,7 +75,7 @@
                         android:id="@+id/degrees"
                         android:src="@drawable/degrees"/>
                 <TextView android:id="@+id/min" style="@style/TextViewWithPadding" android:layout_height="wrap_content"
-                          android:layout_width="match_parent" android:text="-15" android:textSize="16sp"/>
+                          android:layout_width="match_parent" android:text="-15" android:textSize="16sp" android:gravity="left"/>
 
 
             </LinearLayout>

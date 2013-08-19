@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
-
-import static com.massivekinetics.ow.widgets.oWeatherProvider4x2.updateLocation;
-import static com.massivekinetics.ow.widgets.oWeatherProvider4x2.updateTime;
+import android.util.Log;
 import static com.massivekinetics.ow.widgets.oWeatherProvider4x2.updateWeather;
 
 /**
@@ -44,7 +42,7 @@ public class ClockUpdateService extends Service {
     private final BroadcastReceiver clockChangedReceiver = new
             BroadcastReceiver() {
                 public void onReceive(Context context, Intent intent) {
-                    updateTime(context);
+                    updateWeather(context);
                 }
             };
 
@@ -60,13 +58,8 @@ public class ClockUpdateService extends Service {
 
     public void onStart(Intent intent, int startId) {
         if (intent != null && intent.getAction() != null) {
+            Log.e("abw", "onStart:" + intent.getAction());
             if (intent.getAction().equals(ACTION_UPDATE)) {
-                updateTime(this);
-                updateLocation(this);
-                updateWeather(this);
-            } else if (intent.getAction().equals(ACTION_LOCATION_UPDATED)) {
-                updateLocation(this);
-            } else if (intent.getAction().equals(ACTION_WEATHER_UPDATED)) {
                 updateWeather(this);
             }
         }

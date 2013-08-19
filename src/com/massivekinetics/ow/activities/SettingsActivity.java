@@ -124,6 +124,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
                     btnFahrenheit.setImageResource(resIdF);
                 }
             });
+            startService(new Intent(ClockUpdateService.ACTION_UPDATE));
         }
     };
     private ProgressListener progressListener = new ProgressListener() {
@@ -336,7 +337,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
         isLocationChanged = true;
 
-        startService(new Intent(ClockUpdateService.ACTION_LOCATION_UPDATED));
+        startService(new Intent(ClockUpdateService.ACTION_UPDATE));
 
         notifier.alert(getString(R.string.location_saved), Toast.LENGTH_SHORT);
     }
@@ -356,11 +357,5 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         locationAutoCompleteView.setAdapter((ArrayAdapter<String>)null);
         Drawable leftDrawable = (isAutoDefineEnabled) ? getResources().getDrawable(R.drawable.location_gps) : null;
         locationAutoCompleteView.setCompoundDrawablesWithIntrinsicBounds(leftDrawable, null, null, null);
-
-        /*ArrayAdapter adapter = (isAutoDefineEnabled) ? null : new PlacesAutoCompleteAdapter(SettingsActivity.this, R.layout.prediction);
-
-        locationAutoCompleteView.setAdapter(adapter);
-
-        locationAutoCompleteView.requestFocus(View.FOCUS_FORWARD);  */
     }
 }

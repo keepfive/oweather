@@ -133,7 +133,7 @@ public class FirstLocationActivity extends OWActivity implements AdapterView.OnI
         configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
         configManager.setAutoDefineLocation(isAutoDefined);
 
-        startService(new Intent(ClockUpdateService.ACTION_LOCATION_UPDATED));
+        startService(new Intent(ClockUpdateService.ACTION_UPDATE));
 
         NavigationService.navigate(FirstLocationActivity.this, UpdatePageActivity.class);
         finish();

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 import com.massivekinetics.ow.R;
@@ -28,7 +29,6 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class oWeatherProvider4x2 extends AppWidgetProvider {
-    ConfigManager settings;
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
@@ -42,7 +42,6 @@ public class oWeatherProvider4x2 extends AppWidgetProvider {
 
     public void onDisabled(Context context) {
         super.onDisabled(context);
-
         context.stopService(new Intent(context, ClockUpdateService.class));
     }
 
@@ -57,14 +56,15 @@ public class oWeatherProvider4x2 extends AppWidgetProvider {
     }
 
     public static void updateWeather(Context context) {
+        Log.e("abw", "updateWeather");
         ComponentName clockWidget = new ComponentName(context, oWeatherProvider4x2.class);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         buildUpdate(context, appWidgetManager, clockWidget);
     }
 
-    public static void updateTime(Context context) {
-        ComponentName componentName = new ComponentName(context, oWeatherProvider4x2.class);
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+    private static void buildUpdate(Context context, AppWidgetManager appWidgetManager, ComponentName componentName) {
+        ConfigManager config = new OWConfigManager();
+        DataManager dataManager = WeatherDataManager.getInstance();
 
         int[] ids = appWidgetManager.getAppWidgetIds(componentName);
 
@@ -90,23 +90,10 @@ public class oWeatherProvider4x2 extends AppWidgetProvider {
             if (!is24hour)
                 remoteViews.setTextViewText(R.id.amPm, amPm);
 
-            appWidgetManager.updateAppWidget(wid, remoteViews);
 
-        }
-    }
-
-    public static void updateLocation(Context context) {
-        ComponentName componentName = new ComponentName(context, oWeatherProvider4x2.class);
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        ConfigManager config = new OWConfigManager();
-
-        int[] ids = appWidgetManager.getAppWidgetIds(componentName);
-
-        for (int wid : ids) {
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_4x2);
+            //---------------------------
             String locality = config.getLocationName();
             String country = config.getLocationCountry();
-
             //updating views
             if (locality == null)
                 locality = context.getString(R.string.no_location);
@@ -117,24 +104,12 @@ public class oWeatherProvider4x2 extends AppWidgetProvider {
                 remoteViews.setTextViewText(R.id.country, country);
             int countryVisibility = (country == null) ? View.INVISIBLE : View.VISIBLE;
             remoteViews.setViewVisibility(R.id.country, countryVisibility);
-            appWidgetManager.updateAppWidget(wid, remoteViews);
-        }
-    }
-
-    private static void buildUpdate(Context context, AppWidgetManager appWidgetManager, ComponentName componentName) {
-        ConfigManager config = new OWConfigManager();
-        DataManager dataManager = WeatherDataManager.getInstance();
-
-        int[] ids = appWidgetManager.getAppWidgetIds(componentName);
-
-        for (int wid : ids) {
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_4x2);
+            //---------------------------
 
             WeatherModel currentWeather = dataManager.getCurrentWeather();
             if (currentWeather == WeatherModel.NULL) {
                 remoteViews.setInt(R.id.dataAvailable, "setVisibility", View.GONE);
                 remoteViews.setInt(R.id.dataNotAvailable, "setVisibility", View.VISIBLE);
-
             } else {
                 remoteViews.setInt(R.id.dataAvailable, "setVisibility", View.VISIBLE);
                 remoteViews.setInt(R.id.dataNotAvailable, "setVisibility", View.GONE);

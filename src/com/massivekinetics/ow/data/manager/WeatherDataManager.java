@@ -78,8 +78,7 @@ public class WeatherDataManager implements DataManager {
     public void updateForecast(WeatherForecast forecast) {
         this.mWeatherForecast = forecast;
         saveForecast();
-        OWApplication.getInstance().startService(new Intent(ClockUpdateService.ACTION_WEATHER_UPDATED));
-        //updateWidget(OWApplication.getInstance());
+        OWApplication.getInstance().startService(new Intent(ClockUpdateService.ACTION_UPDATE));
     }
 
     @Override
@@ -121,7 +120,7 @@ public class WeatherDataManager implements DataManager {
 
         String gpsLocation = OWApplication.getInstance().getConfigManager().getLocationCoordinates();
         long weatherLifeInMsec = DateUtils.getCurrentInMillis()- mWeatherForecast.getTimeStamp();
-        long expirationLimit = NetworkUtils.isOnline() ? EXPIRATION_ONLINE : EXPIRATION_ONLINE;
+        long expirationLimit = NetworkUtils.isOnline() ? EXPIRATION_ONLINE : EXPIRATION_OFFLINE;
 
         boolean isActual = !mWeatherForecast.getForecastList().isEmpty() && gpsLocation.equals(mWeatherForecast.getLocationString())
                 && weatherLifeInMsec < expirationLimit;
@@ -139,10 +138,8 @@ public class WeatherDataManager implements DataManager {
                 }
             }
         }
-
         else
             runUpdate(null);
-
         return WeatherModel.NULL;
     }
 

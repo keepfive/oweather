@@ -65,9 +65,7 @@ public class WidgetConfigActivity extends Activity {
         Intent result = new Intent();
         result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         setResult(RESULT_OK, result);
-
         startService(new Intent(ClockUpdateService.ACTION_UPDATE));
-
         finish();
     }
 }

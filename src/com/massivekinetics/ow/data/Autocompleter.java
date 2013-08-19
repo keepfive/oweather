@@ -3,6 +3,7 @@ package com.massivekinetics.ow.data;
 import android.util.Log;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.data.manager.OWConfigManager;
 import com.massivekinetics.ow.data.model.Prediction;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -121,6 +122,28 @@ public class Autocompleter {
             // Create a JSON object hierarchy from the results
             JSONObject jsonObj = new JSONObject(jsonResults.toString());
             JSONObject resultObj = jsonObj.getJSONObject("result");
+            JSONArray jsonAddress = resultObj.getJSONArray("address_components");
+
+            String admin_area_1 = null;
+            String country = null;
+            for(int i=0; i < jsonAddress.length(); i++){
+                JSONObject address = jsonAddress.getJSONObject(i);
+                String types = address.getString("types");
+                if(types.contains("administrative_area_1"))
+                    admin_area_1 = address.getString("long_name");
+                if(types.contains("country"))
+                    country = address.getString("long_name");
+            }
+
+            if(country == null){
+                if(admin_area_1 == null)
+                    country = "";
+                else
+                    country = admin_area_1;
+            }
+
+            new OWConfigManager().setLocationCountry(country);
+
             JSONObject geometryObj = resultObj.getJSONObject("geometry");
             JSONObject locationObj =  geometryObj.getJSONObject("location");
             String lat = locationObj.getString("lat");
