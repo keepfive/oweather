@@ -20,9 +20,9 @@
                       />
 
             <TextView android:id="@+id/amPm" android:layout_width="wrap_content" android:layout_height="match_parent"
-                      android:textSize="18sp" android:text="AM" android:textColor="@android:color/white"
+                      android:textSize="17sp" android:text="AM" android:textColor="@android:color/white"
                       android:gravity="top" android:layout_marginTop="5dp"
-                      android:includeFontPadding="false" android:layout_marginLeft="3dp" android:visibility="gone"
+                      android:includeFontPadding="false" android:layout_marginLeft="2dp" android:layout_marginRight="2dp" android:visibility="gone"
                     />
 
         </LinearLayout>
