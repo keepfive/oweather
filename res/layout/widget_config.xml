@@ -30,6 +30,6 @@
 
     <Button android:id="@+id/set" android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_gravity="center_horizontal" android:gravity="center"
-            android:text="@string/set" android:background="@drawable/blue_button" android:paddingLeft="25dp" android:paddingRight="25dp" android:layout_marginTop="10dp"/>
+            android:text="@string/set" android:background="@drawable/blue_button" android:paddingLeft="55dp" android:paddingRight="55dp" android:layout_marginTop="55dp"/>
 
 </LinearLayout>

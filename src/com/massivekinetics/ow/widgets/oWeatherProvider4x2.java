@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 import com.massivekinetics.ow.R;
+import com.massivekinetics.ow.activities.SettingsActivity;
 import com.massivekinetics.ow.activities.SplashScreenActivity;
 import com.massivekinetics.ow.activities.UpdatePageActivity;
 import com.massivekinetics.ow.application.OWApplication;
@@ -143,6 +144,7 @@ public class oWeatherProvider4x2 extends AppWidgetProvider {
     private static void setOnClickListeners(Context context, RemoteViews remoteViews) {
         Intent runAlarmClock = NavigationService.alarmIntent(context);
         Intent runOweatherIntent = new Intent(context, SplashScreenActivity.class);
+        Intent runSettingsIntent = new Intent(context, SettingsActivity.class);
 
         PendingIntent onClickPending;
         if (runAlarmClock == null)
@@ -164,7 +166,11 @@ public class oWeatherProvider4x2 extends AppWidgetProvider {
         remoteViews.setOnClickPendingIntent(R.id.weatherState, onClickPending);
         remoteViews.setOnClickPendingIntent(R.id.max, onClickPending);
         remoteViews.setOnClickPendingIntent(R.id.min, onClickPending);
+
+        runSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        onClickPending = PendingIntent.getActivity(context, 0, runSettingsIntent, 0);
         remoteViews.setOnClickPendingIntent(R.id.locality, onClickPending);
+        remoteViews.setOnClickPendingIntent(R.id.country, onClickPending);
 
     }
 }

@@ -184,4 +184,10 @@ public class BitmapUtils {
 
     }
 
+    public static final int spToPx(int sp) {
+        Resources r = OWApplication.getInstance().getResources();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp,
+                r.getDisplayMetrics());
+    }
+
 }

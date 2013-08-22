@@ -13,6 +13,11 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">2dp</item>
         <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:ellipsize">marquee</item>
+    </style>
+
+    <style name="TextViewWithMargin" parent="TextView">
+        <item name="android:layout_marginBottom">1dp</item>
     </style>
 
     <style name="TextViewWithPadding" parent="TextView">
