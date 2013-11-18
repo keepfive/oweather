@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.application.Application;
 import com.massivekinetics.ow.data.Autocompleter;
 import com.massivekinetics.ow.data.model.Prediction;
 
@@ -33,14 +33,14 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<Prediction> implemen
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if(convertView == null)
-            convertView = View.inflate(OWApplication.getInstance(), layoutID, null);
+            convertView = View.inflate(Application.getInstance(), layoutID, null);
         updateView(convertView, position);
         return convertView;
     }
 
     private void updateView(View view, int position){
         TextView text = (TextView) view;
-        text.setTypeface(OWApplication.getInstance().getFontThin());
+        text.setTypeface(Application.getInstance().getFontThin());
         text.setText(getItem(position).getDescription());
     }
 

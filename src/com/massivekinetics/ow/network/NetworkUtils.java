@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.Log;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.application.Application;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -112,13 +112,13 @@ public class NetworkUtils {
 
 
     public static String getSession(){
-        String requestURL = OWApplication.getInstance().getString(R.string.ow_url_get_session);
+        String requestURL = Application.getInstance().getString(R.string.ow_url_get_session);
         String base64 = doGet(requestURL, 2000);
         return base64;
     }
 
     public static boolean isOnline(){
-        ConnectivityManager cm = (ConnectivityManager)OWApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) Application.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         return (cm.getActiveNetworkInfo() == null) ? false : true;
     }
 

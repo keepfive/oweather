@@ -4,7 +4,7 @@ import android.content.res.Resources;
 import android.graphics.*;
 import android.util.TypedValue;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.application.Application;
 
 /**
  * Created with IntelliJ IDEA.
@@ -51,7 +51,7 @@ public class BitmapUtils {
     }
 
     public static Bitmap doGreyscale(int resourceId) {
-        Bitmap src = BitmapFactory.decodeResource(OWApplication.getInstance().getResources(), R.drawable.settings);
+        Bitmap src = BitmapFactory.decodeResource(Application.getInstance().getResources(), R.drawable.settings);
         // constant factors
         final double GS_RED = 0.299;
         final double GS_GREEN = 0.587;
@@ -98,7 +98,7 @@ public class BitmapUtils {
         Bitmap myBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas myCanvas = new Canvas(myBitmap);
         Paint paint = new Paint();
-        Typeface typeface = OWApplication.getInstance().getFontThin();
+        Typeface typeface = Application.getInstance().getFontThin();
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
         paint.setTypeface(typeface);
@@ -118,7 +118,7 @@ public class BitmapUtils {
         Bitmap myBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas myCanvas = new Canvas(myBitmap);
         Paint paint = new Paint();
-        Typeface typeface = OWApplication.getInstance().getFontThin();
+        Typeface typeface = Application.getInstance().getFontThin();
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
         paint.setTypeface(typeface);
@@ -139,7 +139,7 @@ public class BitmapUtils {
         Bitmap myBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas myCanvas = new Canvas(myBitmap);
         Paint paint = new Paint();
-        Typeface typeface = OWApplication.getInstance().getFontThin();
+        Typeface typeface = Application.getInstance().getFontThin();
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
         paint.setTypeface(typeface);
@@ -162,7 +162,7 @@ public class BitmapUtils {
         Bitmap myBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas myCanvas = new Canvas(myBitmap);
         Paint paint = new Paint();
-        Typeface typeface = OWApplication.getInstance().getFontThin();
+        Typeface typeface = Application.getInstance().getFontThin();
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
         paint.setTypeface(typeface);
@@ -178,14 +178,14 @@ public class BitmapUtils {
 
     public static final int dipToPx(int dp) {
 
-        Resources r = OWApplication.getInstance().getResources();
+        Resources r = Application.getInstance().getResources();
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
                 r.getDisplayMetrics());
 
     }
 
     public static final int spToPx(int sp) {
-        Resources r = OWApplication.getInstance().getResources();
+        Resources r = Application.getInstance().getResources();
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp,
                 r.getDisplayMetrics());
     }

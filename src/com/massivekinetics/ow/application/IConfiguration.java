@@ -1,4 +1,4 @@
-package com.massivekinetics.ow.data.manager;
+package com.massivekinetics.ow.application;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,7 +7,7 @@ package com.massivekinetics.ow.data.manager;
  * Time: 9:29 AM
  * To change this template use File | Settings | File Templates.
  */
-public interface ConfigManager {
+public interface IConfiguration {
     public static final String SETTINGS = "settings";
     public static final String CITY_NAME = "city_name";
     public static final String COUNTRY_NAME = "country_name";
@@ -21,7 +21,7 @@ public interface ConfigManager {
     public static final String SESSION = "session";
     public static final String WIDGET_BACKGROUND = "widget_background_";
 
-    String getStringConfig(String configName);
+    /*<T> T getConfig(String configName);
 
     boolean getBooleanConfig(String configName);
 
@@ -33,7 +33,7 @@ public interface ConfigManager {
     void setConfig(String name, String value);
 
     void setConfig(String name, boolean value);
-    void setConfig(String name, long value);
+    void setConfig(String name, long value);  */
 
     String getActiveSession();
     boolean getAutoDefineLocation();
@@ -49,6 +49,9 @@ public interface ConfigManager {
 
     String getLocationCoordinates();
     void setLocationCoordinates(String locationCoordinates);
+
+    void setLocationLastUpdated(long time);
+    long getLocationLastUpdated();
 
     String getNotificationTimeAsString();
     void setNotificationTime(int hour, int minute);
@@ -67,5 +70,5 @@ public interface ConfigManager {
     void setWidgetBackground(int widgetId, int color);
     int getWidgetBackground(int widgetId);
 
-
+    boolean isTablet();
 }

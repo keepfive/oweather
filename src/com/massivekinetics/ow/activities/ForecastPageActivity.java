@@ -1,19 +1,17 @@
 package com.massivekinetics.ow.activities;
 
 import android.app.NotificationManager;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
-import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.*;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.application.Application;
+import com.massivekinetics.ow.application.Font;
 import com.massivekinetics.ow.data.adapters.WeatherPagerAdapter;
-import com.massivekinetics.ow.data.manager.ConfigManager;
 import com.massivekinetics.ow.data.manager.DataManager;
 import com.massivekinetics.ow.data.manager.WeatherDataManager;
 import com.massivekinetics.ow.data.model.WeatherForecast;
@@ -23,7 +21,7 @@ import com.massivekinetics.ow.states.WeatherState;
 import com.massivekinetics.ow.utils.*;
 import com.massivekinetics.ow.views.SwipeIndicatorPresenter;
 
-public class ForecastPageActivity extends OWActivity {
+public class ForecastPageActivity extends BaseActivity {
     public static final String ACTION = "com.massivekinetics.ow.forecast";
     ViewGroup weatherContainer, updateLayout;
     TextView tvDate, tvCurrentTemp, tvDaytime, tvNightTemp, tvWeatherDescription, tvMinus, tvLocation;
@@ -37,7 +35,7 @@ public class ForecastPageActivity extends OWActivity {
     WeatherForecast weatherForecast;
     LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
         @Override
-        public void callback(WeatherForecast result) {
+        public void onLoaded(WeatherForecast result) {
             if(!result.isSuccessed()){
                 Bundle data = new Bundle();
                 data.putCharSequence(ErrorActivity.ERROR_DESCRIPTION, getString(R.string.no_cache));
@@ -72,11 +70,11 @@ public class ForecastPageActivity extends OWActivity {
 
     private void checkIntent() {
         Bundle extras = getIntent().getExtras();
-        if(extras != null && extras.containsKey(OWNotification.NOTIFICATION_ID_KEY)){
+        if(extras != null && extras.containsKey(BaseNotification.NOTIFICATION_ID_KEY)){
             //---look up the notification manager service---
             NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             //---cancel the notification---
-            nm.cancel(extras.getInt(OWNotification.NOTIFICATION_ID_KEY));
+            nm.cancel(extras.getInt(BaseNotification.NOTIFICATION_ID_KEY));
         }
     }
 
@@ -117,10 +115,13 @@ public class ForecastPageActivity extends OWActivity {
         ibRefresh = (ImageButton) findViewById(R.id.ibRefresh);
 
         indicatorLayout = (ViewGroup) findViewById(R.id.indicator);
-        if(isTablet)
+        if(mConfiguration.isTablet())
             tvLocation = (TextView) findViewById(R.id.tvLocationMain);
+
         setFont(weatherContainer);
         setFont(updateLayout);
+
+        setFont(Font.NUMERIC, tvCurrentTemp, tvNightTemp);
 
         setTouchDelegates(findViewById(R.id.weather_container), ibSettings, 150);
         setTouchDelegates(findViewById(R.id.header), ibRefresh, 150);
@@ -130,14 +131,14 @@ public class ForecastPageActivity extends OWActivity {
     protected void runWeatherUpdate() {
         LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
             @Override
-            public void callback(WeatherForecast result) {
+            public void onLoaded(WeatherForecast result) {
                 updateWeatherInfo(result);
             }
 
             @Override
             public void notifyStart() {
                 OWAnimationUtils.startRotation(ivRefreshIndicator);
-                String locationName = configManager.getStringConfig(ConfigManager.CITY_NAME);
+                String locationName = mConfiguration.getLocationName();
                 locationName = (locationName == null) ? "" : locationName;
                 tvLocationName.setText(locationName);
 
@@ -256,7 +257,7 @@ public class ForecastPageActivity extends OWActivity {
         if (currentTemp < 0)
             tvMinus.setVisibility(View.VISIBLE);
         else{
-            int invis = isTablet ? View.GONE : View.INVISIBLE;
+            int invis = mConfiguration.isTablet() ? View.GONE : View.INVISIBLE;
             tvMinus.setVisibility(invis);
         }
         currentTemp = Math.abs(currentTemp);
@@ -266,8 +267,8 @@ public class ForecastPageActivity extends OWActivity {
 
         //setMarginParams(margin, tvCurrentTemp);
 
-        if(isTablet){
-            String locationName = configManager.getStringConfig(ConfigManager.CITY_NAME);
+        if(mConfiguration.isTablet()){
+            String locationName = mConfiguration.getLocationName();
             locationName = (locationName == null) ? "" : locationName;
             tvLocation.setText(locationName);
         }
@@ -286,7 +287,7 @@ public class ForecastPageActivity extends OWActivity {
         ivLunarState.setImageResource(ResourcesCodeUtils.getLunarStateImageResource(model.getLunarState()));
 
         WeatherState weatherState = model.getState();
-        tvWeatherDescription.setText(weatherState.getValue());
+        tvWeatherDescription.setText(weatherState.getDisplayName());
         int backgroundColor = ResourcesCodeUtils.getWeatherBackgroundColor(weatherState);
 
         OWAnimationUtils.rotate(ivWindDirection, Float.parseFloat(model.getWindDegree())+180);
@@ -312,7 +313,7 @@ public class ForecastPageActivity extends OWActivity {
         int density = 1;
 
         try {
-            density = (int) ((OWApplication) getApplication()).getDisplayMetrics().density;
+            density = (int) ((Application) getApplication()).getDisplayMetrics().density;
         } catch (NullPointerException npe) {
             DisplayMetrics dm = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(dm);

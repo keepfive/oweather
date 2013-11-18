@@ -1,12 +1,10 @@
 package com.massivekinetics.ow.data.manager;
 
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.application.Application;
+import com.massivekinetics.ow.application.Configuration;
 import com.massivekinetics.ow.data.WeatherForecastChangedListener;
 import com.massivekinetics.ow.data.model.WeatherForecast;
 import com.massivekinetics.ow.data.model.WeatherModel;
@@ -15,7 +13,6 @@ import com.massivekinetics.ow.data.tasks.LoadingListener;
 import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.DateUtils;
 import com.massivekinetics.ow.widgets.ClockUpdateService;
-import com.massivekinetics.ow.widgets.oWeatherProvider4x1;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -37,7 +34,6 @@ public class WeatherDataManager implements DataManager {
     private static final long EXPIRATION_ONLINE = 3 * 60 * 60 * 1000;  // 3 hours
     private static final long EXPIRATION_OFFLINE = 5 * (24 - 1) * 60 * 60 * 1000;  // 5 days minus 5 hours --> (24 - 1) just for convenience.
 
-
     private WeatherDataManager() {
     }
 
@@ -53,38 +49,28 @@ public class WeatherDataManager implements DataManager {
 
     @Override
     public void runUpdate(LoadingListener<WeatherForecast> listener) {
-        new GetWeatherTask(new OWConfigManager(), listener).execute();
+        new GetWeatherTask(new Configuration(), listener).execute();
     }
 
     @Override
     public void getWeatherForecast(LoadingListener<WeatherForecast> listener) {
         if (hasActualForecast())
-            listener.callback(mWeatherForecast);
+            listener.onLoaded(mWeatherForecast);
         else
             runUpdate(listener);
-    }
-
-    @Override
-    public void addWeatherForecastChangedListener(WeatherForecastChangedListener listener) {
-        listeners.add(listener);
-    }
-
-    @Override
-    public void removeWeatherForecastChangedListener(WeatherForecastChangedListener listener) {
-        listeners.remove(listener);
     }
 
     @Override
     public void updateForecast(WeatherForecast forecast) {
         this.mWeatherForecast = forecast;
         saveForecast();
-        OWApplication.getInstance().startService(new Intent(ClockUpdateService.ACTION_UPDATE));
+        Application.getInstance().startService(new Intent(ClockUpdateService.ACTION_UPDATE));
     }
 
     @Override
     public void saveForecast() {
         try {
-            File cache = new File(OWApplication.getInstance().getCacheDir(), "oweather.dat");
+            File cache = new File(Application.getInstance().getCacheDir(), "oweather.dat");
             cache.createNewFile();
             FileOutputStream fos = new FileOutputStream(cache);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -99,7 +85,7 @@ public class WeatherDataManager implements DataManager {
     @Override
     public void restoreForecast() {
         try {
-            File cache = new File(OWApplication.getInstance().getCacheDir(), "oweather.dat");
+            File cache = new File(Application.getInstance().getCacheDir(), "oweather.dat");
             if (cache.exists()) {
                 FileInputStream input = new FileInputStream(cache);
                 ObjectInputStream ois = new ObjectInputStream(input);
@@ -118,7 +104,7 @@ public class WeatherDataManager implements DataManager {
         if(mWeatherForecast == null || mWeatherForecast == WeatherForecast.NULL)
             restoreForecast();
 
-        String gpsLocation = OWApplication.getInstance().getConfigManager().getLocationCoordinates();
+        String gpsLocation = Application.getInstance().getConfiguration().getLocationCoordinates();
         long weatherLifeInMsec = DateUtils.getCurrentInMillis()- mWeatherForecast.getTimeStamp();
         long expirationLimit = NetworkUtils.isOnline() ? EXPIRATION_ONLINE : EXPIRATION_OFFLINE;
 
@@ -152,10 +138,10 @@ public class WeatherDataManager implements DataManager {
             for (WeatherModel model : mWeatherForecast.getForecastList()) {
                 if (dateUtils.isToday(model.getDate())) {
                     char degree = '\u00B0';
-                    String degreeName = degree + (OWApplication.getInstance().getConfigManager().isTemperatureFahrengeitMode() ? "F" : "C");
-                    String notificationPattern = OWApplication.getInstance().getString(R.string.notification_pattern);
+                    String degreeName = degree + (Application.getInstance().getConfiguration().isTemperatureFahrengeitMode() ? "F" : "C");
+                    String notificationPattern = Application.getInstance().getString(R.string.notification_pattern);
 
-                    notification = notificationPattern.replace("[DESC]", model.getState().getValue())
+                    notification = notificationPattern.replace("[DESC]", model.getState().getDisplayName())
                             .replace("[TEMP_MAX]", model.getMaxTemperature() + degreeName)
                             .replace("[TEMP_MIN]", model.getMinTemperature() + degreeName);
                 }

@@ -20,9 +20,6 @@ public interface DataManager extends Serializable {
 
     public void getWeatherForecast(LoadingListener<WeatherForecast> listener);
 
-    void addWeatherForecastChangedListener(WeatherForecastChangedListener listener);
-    void removeWeatherForecastChangedListener(WeatherForecastChangedListener listener);
-
     void updateForecast(WeatherForecast forecast);
     void saveForecast();
     void restoreForecast();

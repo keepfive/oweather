@@ -62,7 +62,7 @@ public class TimePicker extends FrameLayout {
     private static final int HOURS_IN_HALF_DAY = 12;
 
     /**
-     * A no-op callback used in the constructor to avoid null checks later in
+     * A no-op onLoaded used in the constructor to avoid null checks later in
      * the code.
      */
     private static final OnTimeChangedListener NO_OP_CHANGE_LISTENER = new OnTimeChangedListener() {
@@ -108,7 +108,7 @@ public class TimePicker extends FrameLayout {
     private Locale mCurrentLocale;
 
     /**
-     * The callback interface used to indicate the time has been adjusted.
+     * The onLoaded interface used to indicate the time has been adjusted.
      */
     public interface OnTimeChangedListener {
 
@@ -367,9 +367,9 @@ public class TimePicker extends FrameLayout {
     }
 
     /**
-     * Set the callback that indicates the time has been adjusted by the user.
+     * Set the onLoaded that indicates the time has been adjusted by the user.
      *
-     * @param onTimeChangedListener the callback, should not be null.
+     * @param onTimeChangedListener the onLoaded, should not be null.
      */
     public void setOnTimeChangedListener(OnTimeChangedListener onTimeChangedListener) {
         mOnTimeChangedListener = onTimeChangedListener;

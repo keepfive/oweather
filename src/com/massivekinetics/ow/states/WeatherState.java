@@ -1,5 +1,8 @@
 package com.massivekinetics.ow.states;
 
+import com.massivekinetics.ow.R;
+import com.massivekinetics.ow.application.Application;
+
 /**
  * Created with IntelliJ IDEA.
  * User: bovy
@@ -9,16 +12,20 @@ package com.massivekinetics.ow.states;
  */
 public enum WeatherState {
 
-    SUNNY("Sunny"), MOSTLY_CLOUDLY("Mostly Cloudy"), PARTLY_CLOUDLY("Partly Cloudy"), RAIN("Rain"), RAIN_AND_SUN("Rain And Sun"), SLEET("Sleet"),
-    SNOW("Snow"), SNOW_FALL("Snow Fall"), LIGHTNING_STORM("Lightning Storm"), LIGHT_RAIN("Light Rain"), DOWNPOUR("Downpour"), FOG("Fog"), HURRICANE("Hurricane"), NONE("none");
+    SUNNY(R.string.sunny), MOSTLY_CLOUDLY(R.string.mostly_cloudy), PARTLY_CLOUDLY(R.string.partly_cloudy),
+    RAIN(R.string.rain), RAIN_AND_SUN(R.string.rain_and_sun), SLEET(R.string.sleet),
+    SNOW(R.string.snow), SNOW_FALL(R.string.snow_fall), LIGHTNING_STORM(R.string.lightning_storm),
+    LIGHT_RAIN(R.string.light_rain), DOWNPOUR(R.string.downpour), FOG(R.string.fog),
+    HURRICANE(R.string.hurricane), NONE(R.string.none);
 
-    private final String value;
+    private final String mDisplayName;
 
-    WeatherState(String value){
-       this.value = value;
+    WeatherState(int resId) {
+        String displayName = Application.getInstance().getString(resId);
+        mDisplayName = displayName;
     }
 
-    public String getValue(){
-        return value;
+    public String getDisplayName() {
+        return mDisplayName;
     }
 }

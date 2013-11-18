@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -14,11 +13,9 @@ import android.widget.RemoteViews;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.activities.SettingsActivity;
 import com.massivekinetics.ow.activities.SplashScreenActivity;
-import com.massivekinetics.ow.activities.UpdatePageActivity;
-import com.massivekinetics.ow.application.OWApplication;
-import com.massivekinetics.ow.data.manager.ConfigManager;
+import com.massivekinetics.ow.application.Configuration;
+import com.massivekinetics.ow.application.IConfiguration;
 import com.massivekinetics.ow.data.manager.DataManager;
-import com.massivekinetics.ow.data.manager.OWConfigManager;
 import com.massivekinetics.ow.data.manager.WeatherDataManager;
 import com.massivekinetics.ow.data.model.WeatherModel;
 import com.massivekinetics.ow.states.WeatherState;
@@ -64,7 +61,7 @@ public class oWeatherProvider4x2 extends AppWidgetProvider {
     }
 
     private static void buildUpdate(Context context, AppWidgetManager appWidgetManager, ComponentName componentName) {
-        ConfigManager config = new OWConfigManager();
+        IConfiguration config = new Configuration();
         DataManager dataManager = WeatherDataManager.getInstance();
 
         int[] ids = appWidgetManager.getAppWidgetIds(componentName);
@@ -82,7 +79,7 @@ public class oWeatherProvider4x2 extends AppWidgetProvider {
             String dateFormat = "E, dd MMM";
             String amPm = (calendar.get(Calendar.HOUR_OF_DAY) >= 12) ? "PM" : "AM";
             String time = new SimpleDateFormat(timeFormat).format(calendar.getTime());
-            String date = new SimpleDateFormat(dateFormat, Locale.ENGLISH).format(calendar.getTime());
+            String date = new SimpleDateFormat(dateFormat, Locale.getDefault()).format(calendar.getTime());
 
             remoteViews.setTextViewText(R.id.time, time);
             remoteViews.setTextViewText(R.id.date, date);
@@ -116,7 +113,7 @@ public class oWeatherProvider4x2 extends AppWidgetProvider {
                 remoteViews.setInt(R.id.dataNotAvailable, "setVisibility", View.GONE);
 
                 WeatherState weatherState = currentWeather.getState();
-                String state = weatherState.getValue();
+                String state = weatherState.getDisplayName();
                 int stateResourceId = ResourcesCodeUtils.getWidgetWeatherImageResource(weatherState);
 
                 remoteViews.setTextViewText(R.id.weatherState, state);

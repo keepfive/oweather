@@ -141,7 +141,7 @@ public class NumberPicker extends LinearLayout {
     private static final int SIZE_UNSPECIFIED = -1;
 
     /**
-     * Use a custom NumberPicker formatting callback to use two-digit minutes
+     * Use a custom NumberPicker formatting onLoaded to use two-digit minutes
      * strings like "01". Keeping a static formatter etc. is the most efficient
      * way to do this; it avoids creating temporary objects on every call to
      * format().
@@ -1892,7 +1892,7 @@ public class NumberPicker extends LinearLayout {
     }
 
     /**
-     * Removes all pending callback from the message queue.
+     * Removes all pending onLoaded from the message queue.
      */
     private void removeAllCallbacks() {
         if (mChangeCurrentByOneFromLongPressCommand != null) {

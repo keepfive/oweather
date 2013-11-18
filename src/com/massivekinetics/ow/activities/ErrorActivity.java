@@ -8,6 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 import com.massivekinetics.ow.R;
+import com.massivekinetics.ow.application.Font;
 import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.NavigationService;
 
@@ -17,7 +18,7 @@ import com.massivekinetics.ow.utils.NavigationService;
  * Date: 4/24/13
  * Time: 4:28 PM
  */
-public class ErrorActivity extends OWActivity {
+public class ErrorActivity extends BaseActivity {
     public static final String ERROR_DESCRIPTION = "error_description";
     ViewGroup rootContainer;
     Button btnSettings, btnSkip;

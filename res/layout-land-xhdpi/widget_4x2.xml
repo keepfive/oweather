@@ -30,12 +30,12 @@
                   android:textSize="18sp" android:text="Tue, May 28"/>
 
         <TextView android:id="@+id/locality" android:layout_above="@+id/country" style="@style/TextViewWidget"
-                  android:textSize="26sp" android:text="@string/no_location" android:layout_marginTop="10dp"
+                  android:textSize="26sp" android:text="@string/no_location" android:layout_marginTop="13dp"
                   android:drawableLeft="@drawable/location_light" android:drawablePadding="5dp" android:singleLine="true" android:maxLines="1"/>
 
         <TextView android:id="@id/country" style="@style/TextViewWidget" android:textSize="12sp"
                   android:layout_alignParentBottom="true"
-                  android:layout_marginBottom="5dp" android:singleLine="true" android:maxLines="1"/>
+                  android:layout_marginBottom="2dp" android:singleLine="true" android:maxLines="1"/>
 
         <TextView android:id="@+id/darkSeparator" android:layout_height="fill_parent" android:layout_width="1dp" android:layout_alignParentRight="true"
                   android:background="@color/dark_separator"/>
@@ -47,17 +47,17 @@
     <RelativeLayout android:id="@+id/dataAvailable" android:layout_width="0dp" android:paddingTop="15dp" android:paddingRight="7dp"
                     android:paddingBottom="15dp"
                     android:layout_height="match_parent" android:orientation="vertical" android:layout_weight="3"
-                    android:gravity="center_horizontal" android:visibility="gone">
+                    android:gravity="center_horizontal" android:visibility="visible">
         <LinearLayout android:id="@+id/imgContainer" android:layout_height="wrap_content"
                       android:layout_width="match_parent" android:gravity="center_horizontal"
                       android:layout_alignParentTop="true">
             <ImageView android:id="@+id/image" android:layout_height="fill_parent" android:layout_width="wrap_content" android:src="@drawable/widget_state_rain"
                        android:scaleType="fitStart"
-                       android:layout_marginTop="-12dp"/>
+                       android:layout_marginTop="-12dp" android:layout_marginBottom="5dp"/>
         </LinearLayout>
 
         <TextView android:id="@+id/weatherState" style="@style/TextViewWidget"
-                  android:textSize="16sp" android:layout_centerInParent="true" android:marqueeRepeatLimit="marquee_forever" android:maxLines="2" android:gravity="center" android:paddingTop="5dp"/>
+                  android:textSize="16sp" android:layout_centerInParent="true" android:marqueeRepeatLimit="marquee_forever" android:maxLines="2" android:gravity="center" android:paddingTop="5dp" android:layout_marginTop="4dp"/>
 
         <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
                       android:orientation="horizontal"
@@ -89,7 +89,7 @@
 
     <RelativeLayout android:id="@+id/dataNotAvailable" android:layout_width="0dp" android:paddingRight="7dp" android:paddingTop="7dp" android:paddingBottom="7dp"
                     android:layout_height="match_parent" android:orientation="vertical" android:layout_weight="3"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_centerInParent="true" android:gravity="center">
             <ImageView android:id="@+id/imageError" android:src="@drawable/widget_state_error" android:layout_height="wrap_content"

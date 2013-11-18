@@ -5,7 +5,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import com.massivekinetics.ow.application.Application;
 
 /**
  * Created with IntelliJ IDEA.
@@ -121,6 +124,21 @@ public class NavigationService {
             }
         }
         return false;
+    }
+
+    public static final void startActivityOrProposeGooglePlay(Intent intent, String packageOnGooglePlay){
+        Context context = Application.getInstance();
+        PackageManager pm = context.getPackageManager();
+        ComponentName cn = intent.resolveActivity(pm);
+        if(cn == null){
+            Uri marketUri = Uri.parse(packageOnGooglePlay);
+            Intent marketIntent = new Intent(Intent.ACTION_VIEW).setData(marketUri);
+            if(marketIntent.resolveActivity(pm) != null)
+                context.startActivity(marketIntent);
+            else
+                Log.e("startActivityOrProposeGooglePlay", "Market client not available");
+        } else
+            context.startActivity(intent);
     }
 
 

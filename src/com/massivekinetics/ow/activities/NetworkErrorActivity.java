@@ -8,7 +8,7 @@ import android.os.Bundle;
  * Date: 4/26/13
  * Time: 12:33 PM
  */
-public class NetworkErrorActivity extends OWActivity {
+public class NetworkErrorActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }

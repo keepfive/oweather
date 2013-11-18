@@ -1,8 +1,8 @@
-package com.massivekinetics.ow.data.manager;
+package com.massivekinetics.ow.application;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,46 +11,14 @@ import com.massivekinetics.ow.application.OWApplication;
  * Time: 9:29 AM
  * To change this template use File | Settings | File Templates.
  */
-public class OWConfigManager implements ConfigManager {
-    SharedPreferences prefs;
+public class Configuration implements IConfiguration {
+    private SharedPreferences prefs;
+    private boolean isTablet;
 
-    public OWConfigManager() {
-        prefs = OWApplication.getInstance().getSharedPreferences(SETTINGS, 0);
-    }
-
-    @Override
-    public String getStringConfig(String configName) {
-        return prefs.getString(configName, null);
-    }
-
-    @Override
-    public boolean getBooleanConfig(String configName) {
-        return prefs.getBoolean(configName, false);
-    }
-
-    @Override
-    public int getIntConfig(String configName) {
-        return prefs.getInt(configName, 0);
-    }
-
-    @Override
-    public long getLongConfig(String configName) {
-        return prefs.getLong(configName, 0);
-    }
-
-    @Override
-    public void setConfig(String name, String value) {
-        prefs.edit().putString(name, value).commit();
-    }
-
-    @Override
-    public void setConfig(String name, boolean value) {
-        prefs.edit().putBoolean(name, value).commit();
-    }
-
-    @Override
-    public void setConfig(String name, long value) {
-        prefs.edit().putLong(name, value).commit();
+    public Configuration() {
+        Application app = Application.getInstance();
+        prefs = app.getSharedPreferences(SETTINGS, 0);
+        isTablet = app.getResources().getBoolean(R.bool.isTablet);
     }
 
     public String getActiveSession() {
@@ -102,11 +70,21 @@ public class OWConfigManager implements ConfigManager {
     }
 
     @Override
+    public void setLocationLastUpdated(long time) {
+        prefs.edit().putLong(GPS_LAST_UPDATED, time).commit();
+    }
+
+    @Override
+    public long getLocationLastUpdated() {
+        return prefs.getLong(GPS_LAST_UPDATED, 0);
+    }
+
+    @Override
     public String getNotificationTimeAsString() {
         int notificationHour = prefs.getInt(NOTIFICATION_TIME_HOUR, -1);
         int notificationMinute = prefs.getInt(NOTIFICATION_TIME_MINUTE, -1);
         if (notificationHour == -1 || notificationMinute == -1)
-            return OWApplication.getInstance().getString(R.string.select_time);
+            return Application.getInstance().getString(R.string.select_time);
         else {
             String notificationTime = notificationHour + ":" + ((notificationMinute < 10) ? "0" + notificationMinute : notificationMinute);
             return notificationTime;
@@ -115,7 +93,7 @@ public class OWConfigManager implements ConfigManager {
 
     @Override
     public void setNotificationTime(int hour, int minute) {
-        synchronized (OWConfigManager.class) {
+        synchronized (Configuration.class) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt(NOTIFICATION_TIME_HOUR, hour);
             editor.putInt(NOTIFICATION_TIME_MINUTE, minute);
@@ -172,9 +150,40 @@ public class OWConfigManager implements ConfigManager {
     public int getWidgetBackground(int widgetId) {
         int color = prefs.getInt(WIDGET_BACKGROUND + widgetId, -1);
         if (color == -1)
-            return OWApplication.getInstance().getResources().getColor(R.color.widget_bg_black);
+            return Application.getInstance().getResources().getColor(R.color.widget_bg_black);
         else
             return color;
+    }
+
+    @Override
+    public boolean isTablet() {
+        return isTablet;
+    }
+
+
+    public String getDeviceId() {
+
+			/*
+			 * Taken from http://www.pocketmagic.net/?p=1662 Pseudo-Unique ID, that works on all Android devices Some
+			 * devices don't have a phone (eg. Tablets) or for some reason you don't want to include the
+			 * READ_PHONE_STATE permission. You can still read details like ROM Version, Manufacturer name, CPU type,
+			 * and other hardware details, that will be well suited if you want to use the ID for a serial key check, or
+			 * other general purposes. The ID computed in this way won't be unique: it is possible to find two devices
+			 * with the same ID (based on the same hardware and rom image) but the chances in real world applications
+			 * are negligible. For this purpose Build class is used:
+			 */
+
+        String pseudoDeviceIMEI = "35" + // we make this look like a valid IMEI
+                Build.BOARD.length() % 10 + Build.BRAND.length() % 10 +
+                Build.CPU_ABI.length() % 10 + Build.DEVICE.length() % 10 +
+                Build.DISPLAY.length() % 10 + Build.HOST.length() % 10 +
+                Build.ID.length() % 10 + Build.MANUFACTURER.length() % 10 +
+                Build.MODEL.length() % 10 + Build.PRODUCT.length() % 10 +
+                Build.TAGS.length() % 10 + Build.TYPE.length() % 10 +
+                Build.USER.length() % 10; // 13 digits
+
+        return pseudoDeviceIMEI;
+
     }
 
 

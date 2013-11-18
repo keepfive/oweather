@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.application.Application;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,7 +31,7 @@ public class SwipeIndicatorPresenter {
     }
 
     private void inflateLayout() {
-        LayoutInflater inflater = LayoutInflater.from(OWApplication.getInstance());
+        LayoutInflater inflater = LayoutInflater.from(Application.getInstance());
         layout.removeAllViews();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(10, 5, 10, 5);

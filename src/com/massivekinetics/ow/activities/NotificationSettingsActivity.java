@@ -16,7 +16,7 @@ import com.massivekinetics.ow.views.timepicker.TimePicker;
  * Date: 4/24/13
  * Time: 1:43 PM
  */
-public class NotificationSettingsActivity extends OWActivity {
+public class NotificationSettingsActivity extends BaseActivity {
     Button btnSet;
     TimePicker timePicker;
 
@@ -46,7 +46,7 @@ public class NotificationSettingsActivity extends OWActivity {
             public void onClick(View v) {
                 int hour = timePicker.getCurrentHour();
                 int minute = timePicker.getCurrentMinute();
-                configManager.setNotificationTime(hour, minute);
+                mConfiguration.setNotificationTime(hour, minute);
                 NotificationService.turnNotification(false);
                 NotificationService.turnNotification(true);
                 finish();

@@ -33,7 +33,7 @@ public class GetLocationFromPlaceTask extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        listener.callback(result);
+        listener.onLoaded(result);
         listener.notifyStop();
     }
 }

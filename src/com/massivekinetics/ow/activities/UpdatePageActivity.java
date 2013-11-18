@@ -17,11 +17,11 @@ import com.massivekinetics.ow.utils.OWAnimationUtils;
  * Date: 4/30/13
  * Time: 1:31 PM
  */
-public class UpdatePageActivity extends OWActivity {
+public class UpdatePageActivity extends BaseActivity {
     ImageView image;
     LoadingListener<WeatherForecast> listener = new LoadingListener<WeatherForecast>() {
         @Override
-        public void callback(WeatherForecast result) {
+        public void onLoaded(WeatherForecast result) {
             if (!result.isSuccessed() && !getOWApplication().getDataManager().hasActualForecast()) {
                 NavigationService.navigate(UpdatePageActivity.this, ErrorActivity.class);
             } else {

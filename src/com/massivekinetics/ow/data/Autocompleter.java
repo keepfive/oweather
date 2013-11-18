@@ -2,8 +2,8 @@ package com.massivekinetics.ow.data;
 
 import android.util.Log;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
-import com.massivekinetics.ow.data.manager.OWConfigManager;
+import com.massivekinetics.ow.application.Application;
+import com.massivekinetics.ow.application.Configuration;
 import com.massivekinetics.ow.data.model.Prediction;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,6 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,10 +34,14 @@ public class Autocompleter {
         HttpURLConnection conn = null;
         StringBuilder jsonResults = new StringBuilder();
         try {
-            input = URLEncoder.encode(input, "utf8");
-            String key = OWApplication.getInstance().getString(R.string.autocomplete_key);
             String offset = "" + input.length();
-            String serverUrl = OWApplication.getInstance().getString(R.string.autocomplete_url).replace("[KEY]", key).replace("[INPUT]", input).replace("[OFFSET]", offset);
+
+            input = URLEncoder.encode(input, "utf8");
+
+            String key = Application.getInstance().getString(R.string.autocomplete_key);
+            String locale = Application.getInstance().getString(R.string.locale);
+
+            String serverUrl = Application.getInstance().getString(R.string.autocomplete_url).replace("[LANG]", locale).replace("[KEY]", key).replace("[INPUT]", input).replace("[OFFSET]", offset);
 
             URL url = new URL(serverUrl);
             conn = (HttpURLConnection) url.openConnection();
@@ -93,8 +98,9 @@ public class Autocompleter {
         StringBuilder jsonResults = new StringBuilder();
         try {
 
-            String key = OWApplication.getInstance().getString(R.string.autocomplete_key);
-            String serverUrl = OWApplication.getInstance().getString(R.string.autocomplete_details_url).replace("[KEY]", key).replace("[REFERENCE]", reference);
+            String key = Application.getInstance().getString(R.string.autocomplete_key);
+            final String locale = Application.getInstance().getString(R.string.locale);
+            String serverUrl = Application.getInstance().getString(R.string.autocomplete_details_url).replace("[LANG]", locale).replace("[KEY]", key).replace("[REFERENCE]", reference);
 
             URL url = new URL(serverUrl);
             conn = (HttpURLConnection) url.openConnection();
@@ -142,7 +148,7 @@ public class Autocompleter {
                     country = admin_area_1;
             }
 
-            new OWConfigManager().setLocationCountry(country);
+            new Configuration().setLocationCountry(country);
 
             JSONObject geometryObj = resultObj.getJSONObject("geometry");
             JSONObject locationObj =  geometryObj.getJSONObject("location");

@@ -1,5 +1,8 @@
 package com.massivekinetics.ow.data.enums;
 
+import com.massivekinetics.ow.R;
+import com.massivekinetics.ow.application.Application;
+
 /**
  * Created with IntelliJ IDEA.
  * User: bovy
@@ -7,32 +10,23 @@ package com.massivekinetics.ow.data.enums;
  * Time: 3:15 AM
  */
 public enum DayName {
-    TODAY, TOMORROW, YESTERDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
+    TODAY(R.string.today), TOMORROW(R.string.tomorrow), YESTERDAY(R.string.yesterday),
+    MONDAY(R.string.monday), TUESDAY(R.string.tuesday), WEDNESDAY(R.string.wednesday),
+    THURSDAY(R.string.thursday), FRIDAY(R.string.friday), SATURDAY(R.string.saturday),
+    SUNDAY(R.string.sunday);
 
-    private String displayName;
-
-    DayName() {
-       setDisplayName(toString());
+    DayName(int resId) {
+        String displayName = Application.getInstance().getString(resId);
+        setDisplayName(displayName);
     }
 
-    DayName(String displayName){
-       setDisplayName(displayName);
+    public String getDisplayName() {
+        return mDisplayName;
     }
 
-    public String getDisplayName(){
-        return displayName;
-
-        /*String first = displayName.substring(0,1).toUpperCase();
-        String last = displayName.substring(1).toLowerCase();
-        return first.concat(last);*/
+    private void setDisplayName(String displayName) {
+        mDisplayName = displayName;
     }
 
-    private void setDisplayName(String displayName){
-        String first = displayName.substring(0,1).toUpperCase();
-        String last = displayName.substring(1).toLowerCase();
-        this.displayName = first.concat(last);
-
-
-        //this.displayName = displayName;
-    }
+    private String mDisplayName;
 }

@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.activities.OWActivity;
+import com.massivekinetics.ow.activities.BaseActivity;
 import com.massivekinetics.ow.data.model.WeatherModel;
 import com.massivekinetics.ow.states.WeatherState;
 import com.massivekinetics.ow.utils.ResourcesCodeUtils;
@@ -26,12 +26,12 @@ import java.util.List;
 public class WeatherPagerAdapter extends PagerAdapter {
 
     public final static String TAG = "WeatherPagerAdapter";
-    private OWActivity parentActivity;
+    private BaseActivity parentActivity;
     private LayoutInflater inflater;
     private List<WeatherModel> items;
     private Handler adapterHandler = new Handler();
 
-    public WeatherPagerAdapter(OWActivity parentActivity, List<WeatherModel> items){
+    public WeatherPagerAdapter(BaseActivity parentActivity, List<WeatherModel> items){
         this.items = new ArrayList<WeatherModel>(items);
         this.parentActivity = parentActivity;
         this.inflater = LayoutInflater.from(parentActivity);

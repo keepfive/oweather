@@ -6,12 +6,11 @@ import android.location.*;
 import android.os.Bundle;
 import android.os.Handler;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.application.Application;
 import com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants;
 import com.massivekinetics.ow.data.parser.geocoder.GeocoderParser;
 import com.massivekinetics.ow.network.NetworkUtils;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -26,7 +25,7 @@ public class OWLocationManager {
     Timer timer;
     LocationManager lm;
     LocationResult locationResult;
-    Geocoder geoCoder = new Geocoder(OWApplication.getInstance(), Locale.US);
+    Geocoder geoCoder = new Geocoder(Application.getInstance(), Locale.US);
     boolean gps_enabled = false;
     boolean network_enabled = false;
     boolean passive_enabled = false;
@@ -75,7 +74,7 @@ public class OWLocationManager {
     private int tries = 0;
 
     public OWLocationManager(){
-        this.resources = OWApplication.getInstance().getResources();
+        this.resources = Application.getInstance().getResources();
     }
 
     public boolean getLocation(Context context, LocationResult result) {
@@ -122,7 +121,9 @@ public class OWLocationManager {
     private Map<String, String> getLocationInfoFromGoogle(Location location){
         String gps = getGpsCoordinatesAsParams(location);
         String request = resources.getString(R.string.google_geocoder);
-        request = request.replace("%LATLNG", gps);
+        String locale = resources.getString(R.string.locale);
+        request = request.replace("[LOCATION]", gps);
+        request = request.replace("[LANG]", locale);
         String response = NetworkUtils.doGet(request);
         Map<String, String> locationMap = new GeocoderParser().getLocationInfoMap(response);
         String gpsParams = getGpsCoordinatesAsParams(location);

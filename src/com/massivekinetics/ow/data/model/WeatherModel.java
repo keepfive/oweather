@@ -1,7 +1,7 @@
 package com.massivekinetics.ow.data.model;
 
-import com.massivekinetics.ow.data.manager.ConfigManager;
-import com.massivekinetics.ow.data.manager.OWConfigManager;
+import com.massivekinetics.ow.application.Configuration;
+import com.massivekinetics.ow.application.IConfiguration;
 import com.massivekinetics.ow.states.WeatherState;
 import com.massivekinetics.ow.utils.ResourcesCodeUtils;
 
@@ -59,17 +59,17 @@ public class WeatherModel implements Serializable {
             date = new Date(timeStamp);
 	}
 
-    private ConfigManager getConfigManager(){
-        return new OWConfigManager();
+    private IConfiguration getConfigManager(){
+        return new Configuration();
     }
 
     public String getMaxTemperature(){
-        boolean isFahrenheit = getConfigManager().getBooleanConfig(ConfigManager.TEMPERATURE_MODE_FAHRENHEIT);
+        boolean isFahrenheit = getConfigManager().isTemperatureFahrengeitMode();
         return isFahrenheit ? tempMaxF : tempMaxC;
     }
 
     public String getMinTemperature(){
-        boolean isFahrenheit = getConfigManager().getBooleanConfig(ConfigManager.TEMPERATURE_MODE_FAHRENHEIT);
+        boolean isFahrenheit = getConfigManager().isTemperatureFahrengeitMode();
         return isFahrenheit ? tempMinF : tempMinC;
     }
 
@@ -175,12 +175,12 @@ public class WeatherModel implements Serializable {
     }
 
     public String getPrecipitation(){
-        boolean isFahrenheit = getConfigManager().getBooleanConfig(ConfigManager.TEMPERATURE_MODE_FAHRENHEIT);
+        boolean isFahrenheit = getConfigManager().isTemperatureFahrengeitMode();
         return isFahrenheit ? precipitationIN  + " in" : precipitationMM  + " mm";
     }
 
     public String getWindSpeed(){
-        boolean isFahrenheit = getConfigManager().getBooleanConfig(ConfigManager.TEMPERATURE_MODE_FAHRENHEIT);
+        boolean isFahrenheit = getConfigManager().isTemperatureFahrengeitMode();
         return isFahrenheit ? windSpeedMiles  + " mph" : windSpeedKmph  + " kmph";
     }
 

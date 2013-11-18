@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.data.manager.ConfigManager;
-import com.massivekinetics.ow.data.manager.OWConfigManager;
+import com.massivekinetics.ow.application.Configuration;
+import com.massivekinetics.ow.application.IConfiguration;
 import com.massivekinetics.ow.widgets.ClockUpdateService;
 
 /**
@@ -23,7 +23,7 @@ public class WidgetConfigActivity extends Activity {
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     private Button set;
     private RadioGroup rgBackground;
-    private ConfigManager config;
+    private IConfiguration config;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +39,7 @@ public class WidgetConfigActivity extends Activity {
 
         set = (Button)findViewById(R.id.set);
         rgBackground = (RadioGroup)findViewById(R.id.rgBackgorundColor);
-        config = new OWConfigManager();
+        config = new Configuration();
 
 
         set.setOnClickListener(new View.OnClickListener() {

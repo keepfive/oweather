@@ -11,7 +11,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.application.Application;
 import com.massivekinetics.ow.data.Autocompleter;
 import com.massivekinetics.ow.data.adapters.PlacesAutoCompleteAdapter;
 import com.massivekinetics.ow.data.manager.NotificationService;
@@ -30,7 +30,7 @@ import com.massivekinetics.ow.widgets.ClockUpdateService;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.massivekinetics.ow.data.manager.ConfigManager.*;
+import static com.massivekinetics.ow.application.IConfiguration.*;
 import static com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants.COUNTRY;
 import static com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants.GPS_PARAMS;
 import static com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants.LOCALITY;
@@ -42,7 +42,7 @@ import static com.massivekinetics.ow.data.parser.geocoder.GeocoderConstants.LOCA
  * Time: 10:18 AM
  * To change this template use File | Settings | File Templates.
  */
-public class SettingsActivity extends OWActivity implements AdapterView.OnItemClickListener {
+public class SettingsActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     View rootContent, settingsNotification, btnTemperature;
     ImageButton btnBack, btnCelsius, btnFahrenheit;
     TextView tvLocationTitle, tvAutoDefineTitle, tvNotificationTitle;
@@ -77,7 +77,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
                                 setUserLocation(locationInfoMap);
                             } else {
                                 notifier.alert(getString(R.string.could_not_locate), Toast.LENGTH_LONG);
-                                locationAutoCompleteView.setText(configManager.getLocationName());
+                                locationAutoCompleteView.setText(mConfiguration.getLocationName());
                                 switchAutoDefine.setChecked(false);
                             }
                             progressListener.hideProgress();
@@ -90,7 +90,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
 
     LoadingListener<String> autocompleteListener = new LoadingListener<String>() {
         @Override
-        public void callback(String result) {
+        public void onLoaded(String result) {
             if (result != null)  {
                 Map<String, String> locMap = new HashMap<String, String>(2);
                 locMap.put(LOCALITY, locationAutoCompleteView.getText().toString());
@@ -112,9 +112,10 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     private View.OnClickListener temperatureModeListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            boolean isFahrenheit = configManager.getBooleanConfig(TEMPERATURE_MODE_FAHRENHEIT);
+            boolean isFahrenheit = mConfiguration.isTemperatureFahrengeitMode();
             isFahrenheit = !isFahrenheit;
-            configManager.setConfig(TEMPERATURE_MODE_FAHRENHEIT, isFahrenheit);
+            mConfiguration.setTemperatureFahrengeitMode(isFahrenheit);
+
             final int resIdC = isFahrenheit ? R.drawable.celcius_dark : R.drawable.celcius_light;
             final int resIdF = isFahrenheit ? R.drawable.fahrenheit_light : R.drawable.fahrenheit_dark;
             uiHandler.post(new Runnable() {
@@ -217,7 +218,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && locationAutoCompleteView.getAdapter() == null){
-                    ArrayAdapter adapter = (configManager.getAutoDefineLocation()) ? null : new PlacesAutoCompleteAdapter(SettingsActivity.this, R.layout.prediction);
+                    ArrayAdapter adapter = (mConfiguration.getAutoDefineLocation()) ? null : new PlacesAutoCompleteAdapter(SettingsActivity.this, R.layout.prediction);
                     locationAutoCompleteView.setAdapter(adapter);
                 }
 
@@ -236,7 +237,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         switchAutoDefine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                configManager.setAutoDefineLocation(isChecked);
+                mConfiguration.setAutoDefineLocation(isChecked);
                 checkAutocompleteMode();
                 if (isChecked) {
                     tryGetLocation();
@@ -247,7 +248,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         switchNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                configManager.setNotificationEnabled(isChecked);
+                mConfiguration.setNotificationEnabled(isChecked);
                 NotificationService.turnNotification(isChecked);
 
                 int notificationVisibility = isChecked ? View.VISIBLE : View.INVISIBLE;
@@ -269,10 +270,10 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     }
 
     private void checkConfig() {
-        boolean isAutoDefineLocation = configManager.getAutoDefineLocation();
-        boolean isNotificationEnabled = configManager.isNotificationEnabled();
-        boolean isFahrenheit = configManager.getBooleanConfig(TEMPERATURE_MODE_FAHRENHEIT);
-        String cityName = configManager.getStringConfig(CITY_NAME);
+        boolean isAutoDefineLocation = mConfiguration.getAutoDefineLocation();
+        boolean isNotificationEnabled = mConfiguration.isNotificationEnabled();
+        boolean isFahrenheit = mConfiguration.isTemperatureFahrengeitMode();
+        String cityName = mConfiguration.getLocationName();
 
         switchAutoDefine.setChecked(isAutoDefineLocation);
         checkAutocompleteMode();
@@ -294,7 +295,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         if (isAutoDefineLocation)
             tryGetLocation();
 
-        tvNotificationTime.setText(configManager.getNotificationTimeAsString());
+        tvNotificationTime.setText(mConfiguration.getNotificationTimeAsString());
     }
 
     @Override
@@ -309,7 +310,7 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
     private void resolveBackClick() {
         Class nextPageClass;
 
-        if (StringUtils.isNullOrEmpty(configManager.getLocationCoordinates()) || !NetworkUtils.isOnline())
+        if (StringUtils.isNullOrEmpty(mConfiguration.getLocationCoordinates()) || !NetworkUtils.isOnline())
             nextPageClass = ErrorActivity.class;
 
         else if (isLocationChanged)
@@ -328,13 +329,13 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         String gpsMarams = locationInfoMap.get(GPS_PARAMS);
 
         if(!StringUtils.isNullOrEmpty(locality))
-            configManager.setLocationName(locality);
+            mConfiguration.setLocationName(locality);
         if(!StringUtils.isNullOrEmpty(country))
-            configManager.setLocationCountry(country);
+            mConfiguration.setLocationCountry(country);
         if(!StringUtils.isNullOrEmpty(gpsMarams))
-            configManager.setLocationCoordinates(gpsMarams);
+            mConfiguration.setLocationCoordinates(gpsMarams);
 
-        configManager.setConfig(GPS_LAST_UPDATED, DateUtils.getCurrentInMillis());
+        mConfiguration.setLocationLastUpdated(DateUtils.getCurrentInMillis());
         isLocationChanged = true;
 
         startService(new Intent(ClockUpdateService.ACTION_UPDATE));
@@ -347,12 +348,12 @@ public class SettingsActivity extends OWActivity implements AdapterView.OnItemCl
         final Prediction prediction = (Prediction) parent.getItemAtPosition(position);
         locationAutoCompleteView.setText(prediction.getCity());
         new GetLocationFromPlaceTask(prediction.getReference(), new Autocompleter(), autocompleteListener).execute();
-        InputMethodManager imm = (InputMethodManager) OWApplication.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) Application.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(locationAutoCompleteView.getWindowToken(), 0);
     }
 
     private void checkAutocompleteMode() {
-        boolean isAutoDefineEnabled = configManager.getAutoDefineLocation();
+        boolean isAutoDefineEnabled = mConfiguration.getAutoDefineLocation();
         locationAutoCompleteView.setEnabled(!isAutoDefineEnabled);
         locationAutoCompleteView.setAdapter((ArrayAdapter<String>)null);
         Drawable leftDrawable = (isAutoDefineEnabled) ? getResources().getDrawable(R.drawable.location_gps) : null;

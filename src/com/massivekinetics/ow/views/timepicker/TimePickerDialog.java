@@ -36,7 +36,7 @@ public class TimePickerDialog extends AlertDialog
         implements OnClickListener, TimePicker.OnTimeChangedListener {
 
     /**
-     * The callback interface used to indicate the user is done filling in
+     * The onLoaded interface used to indicate the user is done filling in
      * the time (they clicked on the 'Set' button).
      */
     public interface OnTimeSetListener {

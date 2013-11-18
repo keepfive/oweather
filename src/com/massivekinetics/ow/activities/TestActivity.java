@@ -15,7 +15,7 @@ import com.massivekinetics.ow.data.model.Prediction;
  * Date: 5/10/13
  * Time: 1:17 AM
  */
-public class TestActivity extends OWActivity implements AdapterView.OnItemClickListener {
+public class TestActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     AutoCompleteTextView autoCompView;
     public void onCreate(Bundle savedInstanceState) {

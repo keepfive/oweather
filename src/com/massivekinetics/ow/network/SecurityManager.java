@@ -2,8 +2,8 @@ package com.massivekinetics.ow.network;
 
 import android.util.Base64;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
-import com.massivekinetics.ow.data.manager.ConfigManager;
+import com.massivekinetics.ow.application.Application;
+import com.massivekinetics.ow.application.IConfiguration;
 
 import javax.crypto.Cipher;
 import java.math.BigInteger;
@@ -25,9 +25,9 @@ public class SecurityManager {
     }
 
     public static final String getRSAEncryptedMessage(String input) {
-        OWApplication application = OWApplication.getInstance();
-        ConfigManager configManager = application.getConfigManager();
-        String modulus = configManager.getActiveSession();
+        Application application = Application.getInstance();
+        IConfiguration IConfiguration = application.getConfiguration();
+        String modulus = IConfiguration.getActiveSession();
         String exponent = application.getString(R.string.rsa_exponent);
         byte[] modulusBytes = Base64.decode(modulus.getBytes(), Base64.DEFAULT);
 
@@ -51,40 +51,43 @@ public class SecurityManager {
     }
 
     public static final String getEncodedCoordinate(float coordinate) {
+        final int NEEDED_INT_DIGITS = 3;
+        final int NEEDED_FRACTIONAL_DIGITS = 6;
+
         StringBuilder coordinateBuilder = new StringBuilder();
+        //Adding sign
         coordinateBuilder.append((coordinate > 0) ? 0 : 1);
         coordinate = Math.abs(coordinate);
 
-        if (coordinate < 100) {
+        //Constructing integral part of gps
+        int integral = (int) coordinate;
+        int integralDigitLength = String.valueOf(integral).length();
+        while(integralDigitLength < NEEDED_INT_DIGITS){
             coordinateBuilder.append(0);
-            if (coordinate < 10)
-                coordinateBuilder.append(0);
+            integralDigitLength++;
+        }
+        coordinateBuilder.append(integral);
+
+        //Constructing fractional part of gps
+        float fractional = coordinate - integral;
+        //String fractionalPart = "" + (int)(fractional * Math.pow(10, NEEDED_FRACTIONAL_DIGITS));
+        String fractionalPart = (""+fractional).substring(2);
+        coordinateBuilder.append(fractionalPart);
+
+        int resultSize = NEEDED_FRACTIONAL_DIGITS + NEEDED_INT_DIGITS + 1;
+        while(coordinateBuilder.length() < resultSize){
+            coordinateBuilder.append(0);
         }
 
-        int real = (int) coordinate;
-        coordinateBuilder.append(real);
-
-        float decimal = coordinate - real;
-        String decimalPart = ("" + decimal).substring(2);
-
-        coordinateBuilder.append(decimalPart);
-        if (coordinateBuilder.length() > 10) {
-            String result = coordinateBuilder.substring(0, 10);
-            return result;
-        } else {
-            while (coordinateBuilder.length() < 10) {
-                coordinateBuilder.append(0);
-            }
-            return coordinateBuilder.toString();
-        }
+        return coordinateBuilder.toString().substring(0, resultSize);
     }
 
     public static final String getEncodedCoordinates() {
-        OWApplication application = OWApplication.getInstance();
-        ConfigManager configManager = application.getConfigManager();
+        Application application = Application.getInstance();
+        IConfiguration IConfiguration = application.getConfiguration();
 
         String result = "";
-        String locationString = configManager.getLocationCoordinates();
+        String locationString = IConfiguration.getLocationCoordinates();
         String[] coordinateArray = locationString.split(",");
         for (String coordinate : coordinateArray) {
             float value = Float.parseFloat(coordinate);

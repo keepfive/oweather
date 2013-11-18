@@ -4,13 +4,15 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView android:id="@+id/bgColorText" android:text="Select background color" android:layout_width="match_parent"
+
+    <TextView android:id="@+id/bgColorText" android:text="Widget Background Color" android:layout_width="match_parent"
               android:layout_height="wrap_content" android:padding="5dp" android:background="@color/background"
               android:gravity="center"/>
 
     <RadioGroup android:id="@+id/rgBackgorundColor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
 
         <RadioButton
                 android:id="@+id/rbBlack"
@@ -24,12 +26,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
-                android:text="White"/>
+                android:text="White" android:layout_marginTop="7dp"/>
     </RadioGroup>
 
 
     <Button android:id="@+id/set" android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_gravity="center_horizontal" android:gravity="center"
-            android:text="@string/set" android:background="@drawable/blue_button" android:paddingLeft="55dp" android:paddingRight="55dp" android:layout_marginTop="55dp"/>
+            android:text="@string/set" android:background="@drawable/blue_button" android:paddingLeft="85dp" android:paddingRight="85dp" android:layout_marginTop="55dp"/>
 
 </LinearLayout>

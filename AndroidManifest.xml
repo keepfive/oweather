@@ -20,7 +20,7 @@
             android:xlargeScreens="true"
             android:anyDensity="true" />
 
-    <application android:label="@string/app_name" android:name="com.massivekinetics.ow.application.OWApplication"
+    <application android:label="@string/app_name" android:name=".application.Application"
                  android:hardwareAccelerated="true"
                  android:icon="@drawable/icon" android:theme="@style/AppTheme">
 
@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.OWNotification">
+        <activity android:name=".activities.BaseNotification">
 
         </activity>
 

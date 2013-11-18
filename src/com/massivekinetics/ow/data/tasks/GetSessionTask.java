@@ -1,8 +1,8 @@
 package com.massivekinetics.ow.data.tasks;
 
 import android.os.AsyncTask;
-import com.massivekinetics.ow.data.manager.ConfigManager;
-import com.massivekinetics.ow.data.manager.OWConfigManager;
+import com.massivekinetics.ow.application.Configuration;
+import com.massivekinetics.ow.application.IConfiguration;
 import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.StringUtils;
 
@@ -11,12 +11,12 @@ public class GetSessionTask extends AsyncTask<Void, Void, Boolean> {
 
     private int tries;
     private LoadingListener<Boolean> listener;
-    private ConfigManager configManager;
+    private IConfiguration IConfiguration;
 
     public GetSessionTask(){
-        this(new OWConfigManager(), new LoadingListener<Boolean>() {
+        this(new Configuration(), new LoadingListener<Boolean>() {
             @Override
-            public void callback(Boolean result) {}
+            public void onLoaded(Boolean result) {}
 
             @Override
             public void notifyStart() {}
@@ -26,9 +26,9 @@ public class GetSessionTask extends AsyncTask<Void, Void, Boolean> {
         }, DEFAULT_TRIES);
     }
 
-    public GetSessionTask(ConfigManager configManager, LoadingListener<Boolean> listener, int tries) {
+    public GetSessionTask(IConfiguration IConfiguration, LoadingListener<Boolean> listener, int tries) {
         this.listener = listener;
-        this.configManager = configManager;
+        this.IConfiguration = IConfiguration;
         this.tries = tries;
     }
 
@@ -46,7 +46,7 @@ public class GetSessionTask extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
-        listener.callback(result);
+        listener.onLoaded(result);
         listener.notifyStop();
     }
 
@@ -61,7 +61,7 @@ public class GetSessionTask extends AsyncTask<Void, Void, Boolean> {
             session = NetworkUtils.getSession();
             succeeded = !StringUtils.isNullOrEmpty(session);
             if (succeeded) {
-                configManager.setActiveSession(session);
+                IConfiguration.setActiveSession(session);
                 break;
             }
             tries--;

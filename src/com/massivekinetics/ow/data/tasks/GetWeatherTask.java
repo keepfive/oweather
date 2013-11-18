@@ -3,8 +3,8 @@ package com.massivekinetics.ow.data.tasks;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import com.massivekinetics.ow.R;
-import com.massivekinetics.ow.application.OWApplication;
-import com.massivekinetics.ow.data.manager.ConfigManager;
+import com.massivekinetics.ow.application.Application;
+import com.massivekinetics.ow.application.IConfiguration;
 import com.massivekinetics.ow.data.manager.WeatherDataManager;
 import com.massivekinetics.ow.data.model.WeatherForecast;
 import com.massivekinetics.ow.data.parser.WeatherParser;
@@ -20,11 +20,11 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
     private LoadingListener<WeatherForecast> listener;
     private Resources resources;
 
-    public GetWeatherTask(ConfigManager configManager, LoadingListener<WeatherForecast> listener) {
+    public GetWeatherTask(IConfiguration IConfiguration, LoadingListener<WeatherForecast> listener) {
         this.listener = listener;
-        this.resources = OWApplication.getInstance().getResources();
-        gpsParams = configManager.getLocationCoordinates();
-        session = configManager.getActiveSession();
+        this.resources = Application.getInstance().getResources();
+        gpsParams = IConfiguration.getLocationCoordinates();
+        session = IConfiguration.getActiveSession();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
     protected void onPostExecute(WeatherForecast result) {
         super.onPostExecute(result);
         if(listener != null){
-            listener.callback(result);
+            listener.onLoaded(result);
             listener.notifyStop();
         }
     }

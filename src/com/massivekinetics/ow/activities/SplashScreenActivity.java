@@ -10,8 +10,6 @@ import com.massivekinetics.ow.network.NetworkUtils;
 import com.massivekinetics.ow.utils.NavigationService;
 import com.massivekinetics.ow.utils.StringUtils;
 
-import static com.massivekinetics.ow.utils.Constants.ERROR;
-
 /**
  * Created with IntelliJ IDEA.
  * User: bovy
@@ -19,11 +17,11 @@ import static com.massivekinetics.ow.utils.Constants.ERROR;
  * Time: 12:05 AM
  * To change this template use File | Settings | File Templates.
  */
-public class SplashScreenActivity extends OWActivity {
+public class SplashScreenActivity extends BaseActivity {
     private static boolean isInitialized = false;
     private LoadingListener<Boolean> listener = new LoadingListener<Boolean>() {
         @Override
-        public void callback(Boolean isSessionSucceded) {
+        public void onLoaded(Boolean isSessionSucceded) {
                 goNext(2000);
         }
 
@@ -44,7 +42,7 @@ public class SplashScreenActivity extends OWActivity {
     public void onResume() {
         super.onResume();
         initApplication();
-        new GetSessionTask(configManager, listener, 5).execute();
+        new GetSessionTask(mConfiguration, listener, 5).execute();
     }
 
     private void goNext(final int delay) {
@@ -53,7 +51,7 @@ public class SplashScreenActivity extends OWActivity {
             public void run() {
                 if (!NetworkUtils.isOnline())
                     NavigationService.navigate(SplashScreenActivity.this, ErrorActivity.class);
-                else if (StringUtils.isNullOrEmpty(configManager.getLocationCoordinates()))
+                else if (StringUtils.isNullOrEmpty(mConfiguration.getLocationCoordinates()))
                     NavigationService.navigate(SplashScreenActivity.this, FirstLocationActivity.class);
                 else
                     NavigationService.navigate(SplashScreenActivity.this, UpdatePageActivity.class);

@@ -14,7 +14,7 @@ import com.massivekinetics.ow.utils.StringUtils;
  * Date: 5/10/13
  * Time: 11:30 PM
  */
-public class OWNotification extends OWActivity {
+public class BaseNotification extends BaseActivity {
     public static final String ACTION = "com.massivekinetics.ow.notification";
     public static final String NOTIFICATION_ID_KEY = "notification_id_key";
 

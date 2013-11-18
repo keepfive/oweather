@@ -17,12 +17,12 @@ public class oWeatherProvider4x1{}/* extends AppWidgetProvider {
             WeatherModel current = null;
 
             try{
-                current = OWApplication.getInstance().getDataManager().getCurrentWeather();
+                current = Application.getInstance().getDataManager().getCurrentWeather();
             }catch (Throwable e){
 
             }
 
-            String cityStr = OWApplication.getInstance().getConfigManager().getLocationName();
+            String cityStr = Application.getInstance().getConfiguration().getLocationName();
             String todayDate = "Today / " + dataFormatter.format(new Date());
             String weatherDescStr = "";
             String currentTemp = "";
@@ -34,7 +34,7 @@ public class oWeatherProvider4x1{}/* extends AppWidgetProvider {
 
             if (current != null && current != WeatherModel.NULL) {
                 cityStr = (cityStr == null) ? "Unknown" : cityStr;
-                weatherDescStr = current.getState().getValue();
+                weatherDescStr = current.getState().getDisplayName();
                 currentTemp = current.getMaxTemperature();
                 nightTempStr = current.getMinTemperature();
                 WeatherState weatherState = current.getState();
@@ -44,8 +44,8 @@ public class oWeatherProvider4x1{}/* extends AppWidgetProvider {
                 BitmapFactory.Options opt = new BitmapFactory.Options();
                 opt.inPreferQualityOverSpeed = true;
 
-                Bitmap weatherbitmap = BitmapFactory.decodeResource(OWApplication.getInstance().getResources(), weatherImage, opt);
-                BitmapDrawable weatherDrawable = new BitmapDrawable(OWApplication.getInstance().getResources(), weatherbitmap);
+                Bitmap weatherbitmap = BitmapFactory.decodeResource(Application.getInstance().getResources(), weatherImage, opt);
+                BitmapDrawable weatherDrawable = new BitmapDrawable(Application.getInstance().getResources(), weatherbitmap);
                 weatherDrawable.setAntiAlias(true);
                 weatherDrawable.setFilterBitmap(true);
 
@@ -57,7 +57,7 @@ public class oWeatherProvider4x1{}/* extends AppWidgetProvider {
 
                 boolean isTablet = false;
                 try{
-                    isTablet = OWActivity.current.isTablet();
+                    isTablet = BaseActivity.current.isTablet();
                 }catch(Throwable e){}
 
                 int xOffset = nightTempStr.length() > 1 ? (isTablet ? 10 : 5) : (isTablet ? 15 : 10);

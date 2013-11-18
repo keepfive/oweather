@@ -1,7 +1,7 @@
 package com.massivekinetics.ow.utils;
 
 import android.widget.Toast;
-import com.massivekinetics.ow.activities.OWActivity;
+import com.massivekinetics.ow.activities.BaseActivity;
 import com.massivekinetics.ow.interfaces.Notifier;
 
 /**
@@ -14,6 +14,6 @@ import com.massivekinetics.ow.interfaces.Notifier;
 public class OWNotifier implements Notifier {
     @Override
     public void alert(String message, int duration) {
-        Toast.makeText(OWActivity.current, message, duration).show();
+        Toast.makeText(BaseActivity.getActiveInstance(), message, duration).show();
     }
 }

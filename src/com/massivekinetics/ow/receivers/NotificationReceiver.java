@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.activities.ForecastPageActivity;
-import com.massivekinetics.ow.application.OWApplication;
+import com.massivekinetics.ow.application.Application;
 import com.massivekinetics.ow.utils.StringUtils;
 
 /**
@@ -23,7 +23,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     public void onReceive(Context context, Intent intent) {
 
-        String notificationMessage = OWApplication.getInstance().getDataManager().getNotification();
+        String notificationMessage = Application.getInstance().getDataManager().getNotification();
         if (!StringUtils.isNullOrEmpty(notificationMessage)) {
 
             //---get the notification ID for the notification;
@@ -38,12 +38,12 @@ public class NotificationReceiver extends BroadcastReceiver {
 
             PendingIntent detailsIntent = PendingIntent.getActivity(context, 0, i, 0);
 
-            NotificationManager nm = (NotificationManager)OWApplication.getInstance().getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager nm = (NotificationManager) Application.getInstance().getSystemService(Context.NOTIFICATION_SERVICE);
             Notification notif = new Notification(R.drawable.icon_notification, "oW", System.currentTimeMillis());
 
             CharSequence from = "oW";
 
-            notif.setLatestEventInfo(OWApplication.getInstance(), from, notificationMessage, detailsIntent);
+            notif.setLatestEventInfo(Application.getInstance(), from, notificationMessage, detailsIntent);
             nm.notify(notificationId, notif);
             //---destroy the activity---
         }
