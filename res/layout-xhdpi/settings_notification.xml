@@ -7,7 +7,7 @@
               android:layout_marginTop="15dp" android:layout_marginBottom="15dp" android:layout_alignParentBottom="true">
 
     <TextView android:id="@+id/tvNotificationTime" android:layout_width="fill_parent"
-              android:layout_height="50dp" android:textSize="28sp" android:padding="5dp"
+              android:layout_height="50dp" android:textSize="28dp" android:padding="5dp"
               android:drawableEnd="@drawable/reminder_arrow"
               android:background="@android:color/white" android:textColor="@color/ow_settings"
               android:paddingLeft="10dp" android:gravity="center_vertical" android:text="@string/select_time" android:layout_marginTop="10dp"/>
@@ -23,7 +23,7 @@
 
         <TextView android:id="@+id/tvNotificationMsg" android:layout_height="wrap_content" android:layout_width="0dp"
                   android:layout_weight="4" android:text="@string/notification_time_message"
-                  style="@style/TextView" android:padding="5dp" android:textSize="16sp"
+                  style="@style/TextView" android:padding="5dp" android:textSize="16dp"
                   android:lineSpacingExtra="-3dp"/>
     </LinearLayout>
 

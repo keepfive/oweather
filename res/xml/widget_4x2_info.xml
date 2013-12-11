@@ -4,6 +4,6 @@
                     android:minHeight="110dp"
                     android:minWidth="290dp"
                     android:updatePeriodMillis="1800000" android:previewImage="@drawable/widget_preview"
-                    android:configure="com.massivekinetics.ow.activities.WidgetConfigActivity">
+                    android:configure="com.massivekinetics.ow.ui.activities.WidgetConfigActivity">
 </appwidget-provider>
 

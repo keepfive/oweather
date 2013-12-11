@@ -6,7 +6,7 @@
     <string name="your_location">Your location</string>
     <string name="location_hint">your location here...</string>
     <string name="notification_time">Notification time</string>
-    <string name="notification_time_message">Here you can schedule everyday\n notification about the weather</string>
+    <string name="notification_time_message">Here you can schedule everyday notification about the weather</string>
     <string name="notification_pattern">[DESC] / ○ [TEMP_MAX] / ● [TEMP_MIN]</string>
     <string name="could_not_locate">Your location could not been retrieved. Please add location manually</string>
     <string name="location_saved">Location saved</string>
@@ -15,6 +15,9 @@
     <string name="not_available">N/A</string>
     <string name="night">Night</string>
     <string name="day">Day</string>
+
+    <string name="auto_define">Auto Define</string>
+    <string name="notification">Notification</string>
 
     <string name="day_indicator">○</string>
     <string name="night_indicator">●</string>
@@ -27,8 +30,15 @@
         city, in the application settings.
     </string>
     <string name="select_time">Select time</string>
-    <string name="weather_not_updated">Weather not updated. Please check your internet connection</string>
-    <string name="no_cache">Unfortunately you don\'t have any actual cached weather forecast</string>
+    <string name="weather_not_updated">Weather was not updated.</string>
+    <string name="no_cache">Cached version of forecast has expired. Please check your Internet connection to get latest forecast</string>
+    <string name="updating">Updating</string>
+    <string name="moon">Moon</string>
+
+    <string name="widget_background_color">Widget Background Color</string>
+    <string name="black">Black</string>
+    <string name="white">White</string>
+
 
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
@@ -55,6 +65,22 @@
     <string name="fog">Fog</string>
     <string name="hurricane">Hurricane</string>
     <string name="none">none</string>
+
+    <string name="direction_n">N</string>
+    <string name="direction_ne">NE</string>
+    <string name="direction_e">E</string>
+    <string name="direction_se">SE</string>
+    <string name="direction_s">S</string>
+    <string name="direction_sw">SW</string>
+    <string name="direction_w">W</string>
+    <string name="direction_nw">NW</string>
+
+    <string name="km_per_hour">kmph</string>
+    <string name="miles_per_hour">mph</string>
+    <string name="inches">in</string>
+    <string name="millimeters">mm</string>
+
+
 
     <!--Time picker-->
     <!-- The title of the time picker dialog. [CHAR LIMIT=NONE] -->

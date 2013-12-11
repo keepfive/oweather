@@ -14,26 +14,26 @@
                       android:layout_height="wrap_content" android:layout_alignParentTop="true"
                       android:orientation="horizontal" android:layout_marginTop="-1dp" android:layout_marginLeft="-1dp">
             <TextView android:id="@+id/time" style="@style/TextViewWidget" android:layout_width="wrap_content"
-                      android:textSize="60sp"
+                      android:textSize="60dp"
                       android:layout_marginBottom="-7dp" android:gravity="top"
                       android:layout_marginLeft="-3dp" android:layout_marginTop="-5dp" android:includeFontPadding="false"
                       />
 
             <TextView android:id="@+id/amPm" android:layout_width="wrap_content" android:layout_height="match_parent"
-                      android:textSize="17sp" android:text="AM" android:textColor="@android:color/white"
+                      android:textSize="17dp" android:text="AM" android:textColor="@android:color/white"
                       android:gravity="top" android:layout_marginTop="5dp"
                       android:includeFontPadding="false" android:layout_marginLeft="2dp" android:layout_marginRight="2dp" android:visibility="gone"
                     />
 
         </LinearLayout>
         <TextView android:id="@+id/date" android:layout_below="@id/timeContainer" style="@style/TextViewWidget"
-                  android:textSize="18sp" android:text="Tue, May 28"/>
+                  android:textSize="18dp" android:text="Tue, May 28"/>
 
         <TextView android:id="@+id/locality" android:layout_above="@+id/country" style="@style/TextViewWidget" android:layout_width="wrap_content"
-                  android:textSize="26sp" android:text="@string/no_location" android:layout_marginTop="10dp"
+                  android:textSize="26dp" android:text="@string/no_location" android:layout_marginTop="10dp"
                   android:drawableLeft="@drawable/location_light" android:drawablePadding="5dp" android:singleLine="true" android:maxLines="1" android:paddingRight="15dp"/>
 
-        <TextView android:id="@id/country" style="@style/TextViewWidget" android:textSize="12sp"
+        <TextView android:id="@id/country" style="@style/TextViewWidget" android:textSize="12dp"
                   android:layout_alignParentBottom="true"
                   android:layout_marginBottom="5dp" android:singleLine="true" android:maxLines="1"/>
 
@@ -60,7 +60,7 @@
         <RelativeLayout android:layout_height="0dp" android:layout_width="match_parent" android:layout_weight="5" >
 
             <TextView android:id="@+id/weatherState" style="@style/TextViewWidget"
-                      android:textSize="16sp" android:gravity="center_horizontal"
+                      android:textSize="16dp" android:gravity="center_horizontal"
                       android:marqueeRepeatLimit="marquee_forever" android:maxLines="2"
                       android:layout_below="@id/imgContainer" android:layout_alignParentTop="true" android:text="Sunny"/>
 
@@ -70,7 +70,7 @@
 
                 <TextView android:id="@+id/max" style="@style/TextView" android:layout_height="match_parent"
                           android:layout_width="0dp" android:layout_weight="3" android:paddingRight="3dp"
-                          android:textSize="26sp" android:gravity="bottom|right" android:layout_marginBottom="-3dp"
+                          android:textSize="26dp" android:gravity="bottom|right" android:layout_marginBottom="-3dp"
                         />
 
 
@@ -83,7 +83,7 @@
                             android:id="@+id/degrees"
                             android:src="@drawable/degrees"/>
                     <TextView android:id="@+id/min" style="@style/TextView" android:layout_height="wrap_content"
-                              android:layout_width="match_parent" android:text="-15" android:textSize="16sp"
+                              android:layout_width="match_parent" android:text="-15" android:textSize="16dp"
                               android:gravity="left" android:layout_marginLeft="1dp"/>
 
 
@@ -103,7 +103,7 @@
             <ImageView android:id="@+id/imageError" android:src="@drawable/widget_state_error" android:layout_height="wrap_content"
                        android:layout_width="wrap_content"
                        android:scaleType="fitStart"   />
-            <TextView style="@style/TextViewWidget" android:textSize="16sp" android:text="Not updated" android:gravity="center" android:layout_marginTop="7dp"></TextView>
+            <TextView style="@style/TextViewWidget" android:textSize="16dp" android:text="Not updated" android:gravity="center" android:layout_marginTop="7dp"></TextView>
         </LinearLayout>
 
 

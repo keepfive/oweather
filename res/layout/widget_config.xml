@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView android:id="@+id/bgColorText" android:text="Widget Background Color" android:layout_width="match_parent"
+    <TextView android:id="@+id/bgColorText" android:text="@string/widget_background_color" android:layout_width="match_parent"
               android:layout_height="wrap_content" android:padding="5dp" android:background="@color/background"
               android:gravity="center"/>
 
@@ -19,14 +19,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
-                android:text="Black"/>
+                android:text="@string/black"/>
 
         <RadioButton
                 android:id="@+id/rbWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
-                android:text="White" android:layout_marginTop="7dp"/>
+                android:text="@string/white" android:layout_marginTop="7dp"/>
     </RadioGroup>
 
 

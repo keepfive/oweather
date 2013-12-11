@@ -1,17 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.massivekinetics.ow"
-          android:versionCode="4"
-          android:versionName="1.1" android:installLocation="auto">
+          android:versionCode="6"
+          android:versionName="1.6" android:installLocation="auto">
 
     <uses-sdk
             android:minSdkVersion="8"
-            android:targetSdkVersion="15"/>
+            android:targetSdkVersion="11"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <supports-screens
             android:smallScreens="false"
@@ -24,46 +25,45 @@
                  android:hardwareAccelerated="true"
                  android:icon="@drawable/icon" android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.SplashScreenActivity" android:screenOrientation="portrait">
+        <activity android:name=".ui.activities.SplashScreenActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.ForecastPageActivity" android:screenOrientation="portrait">
+        <activity android:name=".ui.activities.ForecastPageActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.massivekinetics.ow.forecast"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.BaseNotification">
+        <activity android:name=".ui.activities.BaseNotification">
 
         </activity>
 
-        <activity android:name=".activities.SettingsActivity" android:screenOrientation="portrait"
+        <activity android:name=".ui.activities.SettingsActivity" android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.Holo.Light"/>
-        <activity android:name=".activities.NotificationSettingsActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activities.ErrorActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activities.NetworkErrorActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activities.UpdatePageActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activities.TestActivity"/>
-        <activity android:name=".activities.FirstLocationActivity"/>
-        <activity android:name=".activities.WidgetConfigActivity">
+        <activity android:name=".ui.activities.NotificationSettingsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.ErrorActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.NetworkErrorActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.UpdatePageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.FirstLocationActivity"/>
+        <activity android:name=".ui.activities.WidgetConfigActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
             </intent-filter>
         </activity>
 
-        <receiver android:name=".receivers.NotificationReceiver">
+        <receiver android:name=".application.receivers.NotificationReceiver" android:exported="true" android:enabled="true">
             <intent-filter>
                 <action android:name="com.massivekinetics.ow.notification"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".widgets.oWeatherProvider4x2" android:label="@string/widget_4_2">
+        <receiver android:name=".ui.widgets.oWeatherProvider4x2" android:label="@string/widget_4_2">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
                 <action android:name="com.mk.clock.action.UPDATE" />
@@ -72,7 +72,7 @@
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_4x2_info"/>
         </receiver>
-        <service android:name=".widgets.ClockUpdateService">
+        <service android:name=".ui.widgets.ClockUpdateService">
             <intent-filter>
                 <action android:name="com.mk.clock.action.UPDATE" />
                 <action android:name="com.mk.clock.action.UPDATED_LOCATION" />

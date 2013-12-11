@@ -11,7 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvMinus" android:textColor="@android:color/white"
-            android:text="-" android:textSize="100sp" android:layout_gravity="center_vertical"
+            android:text="-" android:textSize="100dp" android:layout_gravity="center_vertical"
             android:singleLine="true"
             android:maxLines="1"
             android:gravity="end|center_vertical" android:layout_toLeftOf="@+id/llCurrentTemperature"
@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTemp" android:textColor="@android:color/white"
-                android:textSize="130sp" android:layout_gravity="center" android:gravity="center_horizontal" android:singleLine="true"
+                android:textSize="130dp" android:layout_gravity="center" android:gravity="center_horizontal" android:singleLine="true"
                 android:maxLines="1" android:focusable="false" />
     </LinearLayout>
 
@@ -51,14 +51,14 @@
                 android:layout_height="0dp" android:layout_weight="1"
                 android:gravity="center|bottom|right"
                 android:id="@+id/tvDaytime" android:textColor="@android:color/white"
-                android:text="@string/night" android:textSize="18sp"  android:layout_marginLeft="15dp" android:paddingBottom="1dp"
+                android:text="@string/night" android:textSize="18dp"  android:layout_marginLeft="15dp" android:paddingBottom="1dp"
                 />
         <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="0dp" android:layout_weight="1"
                 android:gravity="right|top" android:paddingLeft="5dp"
                 android:id="@+id/tvNightTemp" android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="24dp"
                 android:text="18" android:focusableInTouchMode="false"  android:layout_marginLeft="15dp"/>
     </LinearLayout>
 
