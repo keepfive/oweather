@@ -8,7 +8,7 @@
     <string name="notification_time">Время уведомления</string>
     <string name="notification_time_message">Тут Вы можете выбрать время ежедневных уведомлений</string>
     <string name="notification_pattern">[DESC] / ○ [TEMP_MAX] / ● [TEMP_MIN]</string>
-    <string name="could_not_locate">Your location could not been retrieved. Please add location manually</string>
+    <string name="could_not_locate">Невозможно определить локацию. Пожалуйста, выберите местоположение вручную</string>
     <string name="location_saved">Локация сохранена</string>
     <string name="location_unknown">Unknown location</string>
     <string name="no_location">Нет локации</string>

@@ -16,17 +16,12 @@ public enum DayName {
     SUNDAY(R.string.sunday);
 
     DayName(int resId) {
-        String displayName = Application.getInstance().getString(resId);
-        setDisplayName(displayName);
+        mDisplayNameID = resId;
     }
 
     public String getDisplayName() {
-        return mDisplayName;
+        return Application.getInstance().getString(mDisplayNameID);
     }
 
-    private void setDisplayName(String displayName) {
-        mDisplayName = displayName;
-    }
-
-    private String mDisplayName;
+    private int mDisplayNameID;
 }

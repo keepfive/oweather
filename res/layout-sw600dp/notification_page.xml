@@ -28,7 +28,7 @@
 
             <ImageView android:layout_height="40dp" android:layout_width="0dp" android:layout_weight="1"
                        android:src="@drawable/reminder_icon" android:scaleType="centerInside"
-                       android:layout_gravity="start|center_vertical"/>
+                       android:layout_gravity="left|center_vertical"/>
 
             <TextView android:id="@+id/tvNotificationMsg" android:layout_height="wrap_content"
                       android:layout_width="0dp"

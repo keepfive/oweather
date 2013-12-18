@@ -81,9 +81,11 @@ public class WeatherDataManager implements IDataManager {
             }
 
         } catch (IOException e) {
-            Log.e(TAG, e.getMessage());
+
         } catch (ClassNotFoundException e) {
-            Log.e(TAG, e.getMessage());
+
+        } catch (Throwable t){
+            //I'm a Scatman
         }
     }
 

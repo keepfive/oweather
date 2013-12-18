@@ -18,14 +18,13 @@ public enum WeatherState {
     LIGHT_RAIN(R.string.light_rain), DOWNPOUR(R.string.downpour), FOG(R.string.fog),
     HURRICANE(R.string.hurricane), NONE(R.string.none);
 
-    private final String mDisplayName;
+    private final int mDisplayNameId;
 
     WeatherState(int resId) {
-        String displayName = Application.getInstance().getString(resId);
-        mDisplayName = displayName;
+        mDisplayNameId = resId;
     }
 
     public String getDisplayName() {
-        return mDisplayName;
+        return Application.getInstance().getString(mDisplayNameId);
     }
 }

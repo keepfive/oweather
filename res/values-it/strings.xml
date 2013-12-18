@@ -1,69 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">oW</string>
-    <string name="locale">ru</string>
+    <string name="locale">it</string>
 
-    <string name="your_location">Локация</string>
-    <string name="location_hint">Ваше положение...</string>
-    <string name="notification_time">Время уведомления</string>
-    <string name="notification_time_message">Тут Вы можете выбрать время ежедневных уведомлений</string>
+    <string name="your_location">La tua posizione</string>
+    <string name="location_hint">La tua posizione qui ...</string>
+    <string name="notification_time">Ora di notifica</string>
+    <string name="notification_time_message">Qui è possibile programmare la notifica di tutti i giorni per il meteo</string>
     <string name="notification_pattern">[DESC] / ○ [TEMP_MAX] / ● [TEMP_MIN]</string>
-    <string name="could_not_locate">Your location could not been retrieved. Please add location manually</string>
-    <string name="location_saved">Локация сохранена</string>
-    <string name="location_unknown">Unknown location</string>
-    <string name="no_location">Нет локации</string>
+    <string name="could_not_locate">La Tua Posizione non e stata trovata.. provare con modalità manuale</string>
+    <string name="location_saved">Localitò salvata</string>
+    <string name="location_unknown">Località sconosciuta</string>
+    <string name="no_location">Nessuna località</string>
     <string name="not_available">N/A</string>
-    <string name="night">Ночь</string>
-    <string name="day">День</string>
+    <string name="night">Notte</string>
+    <string name="day">Giorno</string>
 
-    <string name="auto_define">Геопозиция</string>
-    <string name="notification">Оповещение</string>
+    <string name="auto_define">Posizione</string>
+    <string name="notification">Notifica</string>
 
     <string name="day_indicator">○</string>
     <string name="night_indicator">●</string>
 
-    <string name="set">Установить</string>
-    <string name="connection_error">Ошибка соединения</string>
-    <string name="go_to_settings">Настройки</string>
-    <string name="skip_and_continue">Пропустить ></string>
-    <string name="error_screen_message">Пожалуйста, проверьте Интернет соединение, а так же наличие геопозиции в настройках.</string>
-    <string name="select_time">Выберите время</string>
-    <string name="weather_not_updated">Погода не обновленна</string>
-    <string name="no_cache">Сохраненный прогноз не актуален. Пожалуйста, проверьте Интернет соединение, чтобы получить последний прогноз.</string>
-    <string name="updating">Обновление</string>
-    <string name="moon">Луна</string>
+    <string name="set">Stabilito</string>
+    <string name="connection_error">Errore connessione</string>
+    <string name="go_to_settings">Vai a impostazioni</string>
+    <string name="skip_and_continue">Salta e continua ></string>
+    <string name="error_screen_message">Si prega di collegarsi a Internet, tra cui la posizione o inserire manualmente la città, nelle impostazioni dell\'applicazione.</string>
+    <string name="select_time">Seleziona Ora</string>
+    <string name="weather_not_updated">Meteo non aggiornato.</string>
+    <string name="no_cache">Purtroppo non si dispone di alcuna previsione nella cache attuale</string>
+    <string name="updating">Aggiornamento</string>
+    <string name="moon">Luna</string>
 
-    <string name="widget_background_color">Цвет фона виджета</string>
-    <string name="black">Черный</string>
-    <string name="white">Белый</string>
+    <string name="widget_background_color">Colore di Sfondo</string>
+    <string name="black">Nero</string>
+    <string name="white">Bianco</string>
 
-    <string name="today">Сегодня</string>
-    <string name="tomorrow">Завтра</string>
-    <string name="yesterday">Вчера</string>
-    <string name="monday">Понедельник</string>
-    <string name="tuesday">Вторник</string>
-    <string name="wednesday">Среда</string>
-    <string name="thursday">Четверг</string>
-    <string name="friday">Пятница</string>
-    <string name="saturday">Суббота</string>
-    <string name="sunday">Воскресенье</string>
+    <string name="today">Oggi</string>
+    <string name="tomorrow">Domani</string>
+    <string name="yesterday">Ieri</string>
+    <string name="monday">Lunedi</string>
+    <string name="tuesday">Martedì</string>
+    <string name="wednesday">Mercoledì</string>
+    <string name="thursday">Giovedi</string>
+    <string name="friday">Venerdì</string>
+    <string name="saturday">Sabato</string>
+    <string name="sunday">Domenica</string>
 
 
-    <string name="sunny">Солнечно</string>
-    <string name="mostly_cloudy">Облачно</string>
-    <string name="partly_cloudy">Местами облачно</string>
-    <string name="rain">Дождь</string>
-    <string name="rain_and_sun">Дождь и солнце</string>
-    <string name="sleet">Дождь со снегом</string>
-    <string name="snow">Снег</string>
-    <string name="snow_fall">Снегопад</string>
-    <string name="lightning_storm">Молния с грозой</string>
-    <string name="light_rain">Легкий дождь</string>
-    <string name="downpour">Ливень</string>
-    <string name="fog">Туман</string>
-    <string name="hurricane">Ураган</string>
-    <string name="none">н.д.</string>
+    <string name="sunny">Soleggiato</string>
+    <string name="mostly_cloudy">Nuvoloso</string>
+    <string name="partly_cloudy">Parzialmente Nuvoloso</string>
+    <string name="rain">Pioggia</string>
+    <string name="rain_and_sun">Pioggia e Sole</string>
+    <string name="sleet">Nevischio</string>
+    <string name="snow">Neve</string>
+    <string name="snow_fall">Nevicata</string>
+    <string name="lightning_storm">Fulmine</string>
+    <string name="light_rain">Leggera Pioggia</string>
+    <string name="downpour">Acquazzone</string>
+    <string name="fog">Nebbia</string>
+    <string name="hurricane">Uragano</string>
+    <string name="none">n.a.</string>
 
+
+   <!-- Not needed translations
     <string name="direction_n">С</string>
     <string name="direction_ne">СВ</string>
     <string name="direction_e">В</string>
@@ -76,38 +78,38 @@
     <string name="km_per_hour">км/ч</string>
     <string name="miles_per_hour">миль/ч</string>
     <string name="inches">дм</string>
-    <string name="millimeters">мм</string>
+    <string name="millimeters">мм</string>   -->
 
 
     <!--Time picker-->
     <!-- The title of the time picker dialog. [CHAR LIMIT=NONE] -->
-    <string name="time_picker_dialog_title">Задать время</string>
+    <string name="time_picker_dialog_title">Impostare il tempo di</string>
     <!-- The title of the date picker dialog. [CHAR LIMIT=NONE] -->
-    <string name="date_picker_dialog_title">Задать дату</string>
+    <string name="date_picker_dialog_title">Impostare tempo</string>
     <!-- Name of the button in the date/time picker to accept the date/time change -->
-    <string name="date_time_set">Set</string>
+    <string name="date_time_set">Stabilito</string>
     <!-- Name of the button in the date/time picker to accept the date/time change -->
-    <string name="date_time_done">Готово</string>
+    <string name="date_time_done">Fatto</string>
     <!-- Preference framework strings. -->
-    <string name="cancel">Отмена</string>
+    <string name="cancel">Cancella</string>
 
     <!-- TimePicker - accessibility support -->
     <!-- Description of the button to increment the TimePicker's minute value. [CHAR LIMIT=NONE] -->
-    <string name="time_picker_increment_minute_button">Добавить минуту</string>
+    <string name="time_picker_increment_minute_button">Incrementa minuti in</string>
     <!-- Description of the button to decrement the TimePicker's minute value. [CHAR LIMIT=NONE] -->
-    <string name="time_picker_decrement_minute_button">Отнять минуту</string>
+    <string name="time_picker_decrement_minute_button">Diminuzione minuti in</string>
     <!-- Description of the button to increment the TimePicker's hour value. [CHAR LIMIT=NONE] -->
-    <string name="time_picker_increment_hour_button">Добавить час</string>
+    <string name="time_picker_increment_hour_button">Incrementa ore in</string>
     <!-- Description of the button to decrement the TimePicker's hour value. [CHAR LIMIT=NONE] -->
-    <string name="time_picker_decrement_hour_button">Отнять час</string>
+    <string name="time_picker_decrement_hour_button">Diminuizione ore in</string>
     <!-- Description of the button to increment the TimePicker's set PM value. [CHAR LIMIT=NONE] -->
-    <string name="time_picker_increment_set_pm_button">Задать PM</string>
+    <string name="time_picker_increment_set_pm_button">Set PM</string>
     <!-- Description of the button to decrement the TimePicker's set AM value. [CHAR LIMIT=NONE] -->
-    <string name="time_picker_decrement_set_am_button">Задать AM</string>
+    <string name="time_picker_decrement_set_am_button">Set AM</string>
 
     <!-- @hide DO NOT TRANSLATE. Separator between the hour and minute elements in a TimePicker widget -->
     <string name="time_picker_separator">:</string>
-    <string name="retrieving_location">Определение локации</string>
+    <string name="retrieving_location">Recuperare la posizione</string>
     <string name="widget_4_1">oW weather widget 4x1</string>
     <string name="widget_4_2">oW widget 4x2</string>
 </resources>

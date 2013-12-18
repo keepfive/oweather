@@ -40,7 +40,11 @@ public class Autocompleter {
             String key = Application.getInstance().getString(R.string.autocomplete_key);
             String locale = Application.getInstance().getString(R.string.locale);
 
-            String serverUrl = Application.getInstance().getString(R.string.autocomplete_url).replace("[LANG]", locale).replace("[KEY]", key).replace("[INPUT]", input).replace("[OFFSET]", offset);
+            String serverUrl = Application.getInstance().getString(R.string.autocomplete_url).
+                    replace("[LANG]", locale).
+                    replace("[KEY]", key).
+                    replace("[INPUT]", input).
+                    replace("[OFFSET]", offset);
 
             URL url = new URL(serverUrl);
             conn = (HttpURLConnection) url.openConnection();

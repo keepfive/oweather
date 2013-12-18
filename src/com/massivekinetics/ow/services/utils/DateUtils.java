@@ -18,7 +18,6 @@ public class DateUtils {
     }
 
     public String getDayName(Date inputDate) {
-        String name = "";
         DayName dayName = DayName.TODAY;
 
         Calendar cal = Calendar.getInstance();
