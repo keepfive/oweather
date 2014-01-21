@@ -136,7 +136,7 @@ public class WeatherDataManager implements IDataManager {
         } catch (IOException e) {
 
         } catch (Throwable t) {
-            //I'm a Scatman hut
+            //I'm a Scatman
         }
     }
 
