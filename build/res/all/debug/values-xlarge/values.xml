@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/E:/Github_repo/oW/res/values-xlarge/screen.xml -->
+    <eat-comment />
+
+    <bool name="isTablet">true</bool>
+
+</resources>

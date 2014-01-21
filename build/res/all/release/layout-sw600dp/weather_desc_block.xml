@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="90dp"  android:id="@+id/weather_desc_block" android:layout_below="@+id/temperature_block" android:weightSum="7" android:gravity="center_horizontal" android:layout_marginTop="25dp">
+
+
+    <ImageButton
+            android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:background="@android:color/transparent"
+            android:id="@+id/ibPrevious" android:layout_gravity="center" android:src="@drawable/left_arrow"
+            android:scaleType="centerInside"/>
+
+    <android.support.v4.view.ViewPager android:id="@+id/viewPager"  android:layout_width="0dp" android:layout_weight="5"  android:background="@android:color/transparent"
+                android:layout_height="fill_parent"  android:fadingEdge="none" android:scrollbarFadeDuration="0"  android:fadingEdgeLength="0dp" android:fadeScrollbars="false" android:overScrollMode="never"
+                />
+
+    <ImageButton
+            android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:background="@android:color/transparent"
+            android:id="@+id/ibNext" android:layout_gravity="center" android:src="@drawable/right_arrow"
+            android:scaleType="centerInside"/>
+</LinearLayout><!-- From: file:/E:/Github_repo/oW/res/layout-sw600dp/weather_desc_block.xml -->

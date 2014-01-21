@@ -1,0 +1,62 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.7.0'
+    }
+}
+
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+
+    buildToolsVersion "19.0.0"
+
+}
+
+android {
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+
+            renderscript.srcDirs = ['src']
+
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("massive-kinetics.keystore")
+            storePassword "84662ok"
+            keyAlias "mk"
+            keyPassword "84662ok"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile("com.android.support:support-v4:13.0.0")
+    compile files('libs/libGoogleAnalyticsV2.jar')
+    compile 'de.greenrobot:eventbus:2.2.0'
+}
+

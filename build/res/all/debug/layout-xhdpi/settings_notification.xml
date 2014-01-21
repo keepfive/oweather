@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content" android:id="@+id/settingsNotification" android:padding="15dp"
+              android:layout_marginTop="15dp" android:layout_marginBottom="15dp" android:layout_alignParentBottom="true">
+
+    <TextView android:id="@+id/tvNotificationTime" android:layout_width="fill_parent"
+              android:layout_height="50dp" android:textSize="28dp" android:padding="5dp"
+              android:drawableEnd="@drawable/reminder_arrow"
+              android:background="@android:color/white" android:textColor="@color/ow_settings"
+              android:paddingLeft="10dp" android:gravity="center_vertical" android:text="@string/select_time" android:layout_marginTop="10dp"/>
+
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content" android:gravity="center_vertical"
+                  android:orientation="horizontal" android:weightSum="5" android:layout_marginTop="30dp"
+                  android:layout_alignParentBottom="true">
+
+        <ImageView android:layout_height="40dp" android:layout_width="0dp" android:layout_weight="1"
+                   android:src="@drawable/reminder_icon" android:scaleType="centerInside"
+                   android:layout_gravity="start|center_vertical"/>
+
+        <TextView android:id="@+id/tvNotificationMsg" android:layout_height="wrap_content" android:layout_width="0dp"
+                  android:layout_weight="4" android:text="@string/notification_time_message"
+                  style="@style/TextView" android:padding="5dp" android:textSize="16dp"
+                  android:lineSpacingExtra="-3dp"/>
+    </LinearLayout>
+
+</LinearLayout><!-- From: file:/E:/Github_repo/oW/res/layout-xhdpi/settings_notification.xml -->

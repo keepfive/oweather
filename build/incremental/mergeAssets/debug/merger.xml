@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="E:\Github_repo\oW\assets" >
+            <file
+                name="lintel_light.otf"
+                path="E:\Github_repo\oW\assets\lintel_light.otf" />
+            <file
+                name="titilliumthin.ttf"
+                path="E:\Github_repo\oW\assets\titilliumthin.ttf" />
+        </source>
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="E:\Github_repo\oW\src\debug\assets" />
+    </dataSet>
+
+</merger>

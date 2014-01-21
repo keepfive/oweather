@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="3dp" android:id="@+id/main"
+              android:background="@color/ow_rain_and_sun"
+              android:orientation="horizontal" android:weightSum="2">
+
+    <LinearLayout android:layout_height="fill_parent" android:layout_width="0dp" android:layout_weight="1"
+                  android:orientation="vertical" android:weightSum="3" android:paddingLeft="10dp">
+
+        <TextView android:layout_height="0dp"
+                  android:layout_width="fill_parent"
+                  android:gravity="left|center_vertical" android:text="Today / 12.05.2013"
+                  android:id="@+id/tvDate" android:layout_weight="1" android:textColor="@android:color/white"
+                  android:textSize="10sp" android:layout_gravity="center" android:singleLine="true"
+                  android:maxLines="1"/>
+
+
+        <TextView android:layout_height="0dp"
+                  android:layout_width="fill_parent"
+                  android:gravity="left|center_vertical" android:text="London"
+                  android:id="@+id/tvCity" android:layout_weight="1" android:textColor="@android:color/white"
+                  android:textSize="20sp" android:layout_gravity="center" android:singleLine="true"
+                  android:maxLines="1"/>
+
+        <LinearLayout android:layout_height="0dp"
+                      android:layout_width="fill_parent" android:layout_weight="1" android:orientation="horizontal" android:gravity="center_vertical">
+
+            <ImageView android:id="@+id/ivWeather" android:layout_height="25dp" android:layout_width="25dp" android:src="@drawable/weather_state_12"/>
+
+            <TextView android:layout_height="fill_parent"
+                      android:layout_width="wrap_content"
+                      android:gravity="left|center_vertical" android:text="Rain and sun"
+                      android:id="@+id/tvWeather" android:textColor="@android:color/white"
+                      android:textSize="12sp" android:singleLine="true"
+                      android:maxLines="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_height="fill_parent" android:layout_width="0dp" android:layout_weight="1"
+                  android:weightSum="4" android:orientation="horizontal">
+
+        <TextView   android:fontFamily="sans-serif-thin"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:text="20"
+                android:id="@+id/tvTemp" android:layout_weight="3" android:textColor="@android:color/white"
+                android:textSize="74sp" android:singleLine="true" android:maxLines="1"
+                android:gravity="bottom|right" android:layout_gravity="center_vertical"/>
+
+
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:weightSum="8"
+                      android:layout_height="fill_parent" android:orientation="vertical">
+            <TextView   android:fontFamily="sans-serif-thin"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp" android:layout_weight="1"
+                    android:gravity="center"
+                    />
+
+            <LinearLayout android:layout_width="fill_parent"
+                          android:layout_height="0dp" android:layout_weight="2" android:gravity="left|center_vertical">
+                <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" android:scaleType="centerCrop"
+                        android:id="@+id/ivDegrees"
+                        android:src="@drawable/degrees"/>
+            </LinearLayout>
+
+            <TextView    android:fontFamily="sans-serif-thin"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp" android:layout_weight="2" android:paddingLeft="5dp"
+                    android:gravity="center"
+                    android:id="@+id/tvDaytime" android:textColor="@android:color/white"
+                    android:text="@string/night" android:textSize="12sp"/>
+
+            <TextView   android:fontFamily="sans-serif-thin"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp" android:layout_weight="2"
+                    android:gravity="center_horizontal|top" android:paddingLeft="5dp"
+                    android:id="@+id/tvNightTemp" android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:text="18" />
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp" android:layout_weight="1"
+                    android:gravity="center"
+                    />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout><!-- From: file:/E:/Github_repo/oW/res/layout/widget.xml -->

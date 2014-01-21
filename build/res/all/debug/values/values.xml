@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/E:/Github_repo/oW/res/values/themes.xml -->
+    <eat-comment />
+
+    <attr name="numberPickerStyle" format="reference" />
+    <!-- From: file:/E:/Github_repo/oW/res/values/attrs.xml -->
+    <eat-comment />
+
+    <attr name="timePickerStyle" format="reference" />
+    <!-- From: file:/E:/Github_repo/oW/res/values/analytics.xml -->
+    <eat-comment />
+
+    <bool name="ga_autoActivityTracking">true</bool>
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+    <!-- From: file:/E:/Github_repo/oW/res/values/screen.xml -->
+    <eat-comment />
+
+    <bool name="isTablet">false</bool>
+    <!-- From: file:/E:/Github_repo/oW/res/values/colors.xml -->
+    <eat-comment />
+
+    <color name="background">#272727</color>
+    <color name="dark_separator">#51272727</color>
+    <color name="light_separator">#51AAAAAA</color>
+    <color name="ow_downpour">#919191</color>
+    <color name="ow_fog">#75608B</color>
+    <color name="ow_hurricane">#5D5D5D</color>
+    <color name="ow_light_rain">#AF9B7B</color>
+    <color name="ow_lighting_storm">#89766F</color>
+    <color name="ow_mostly_cloudy">#E0A74B</color>
+    <color name="ow_partly_cloudy">#1D9E48</color>
+    <color name="ow_progress_background">#EE272727</color>
+    <color name="ow_rain">#71797C</color>
+    <color name="ow_rain_and_sun">#F1854B</color>
+    <color name="ow_settings">#343434</color>
+    <color name="ow_sleet">#6199BC</color>
+    <color name="ow_slider_left">#36B1C0</color>
+    <color name="ow_slider_right">#272727</color>
+    <color name="ow_snow">#3B9CD1</color>
+    <color name="ow_snowfall">#1A6698</color>
+    <color name="ow_storm">#5D5D5D</color>
+    <color name="ow_sunny">#E23343</color>
+    <color name="ow_thunderstorm">#89766F</color>
+    <color name="transparent">#00000000</color>
+    <color name="widget_bg_black">#77111111</color>
+    <color name="widget_bg_white">#77AAAAAA</color>
+    <!-- From: file:/E:/Github_repo/oW/res/values/themes.xml -->
+    <eat-comment />
+
+    <declare-styleable name="NumberPicker">
+
+        <!-- @hide Color for the solid color background if such for optimized rendering. -->
+        <attr name="solidColor" format="color|reference" />
+        <!-- @hide The divider for making the selection area. -->
+        <attr name="selectionDivider" format="reference" />
+        <!-- @hide The height of the selection divider. -->
+        <attr name="selectionDividerHeight" format="dimension" />
+        <!-- @hide The distance between the two selection dividers. -->
+        <attr name="selectionDividersDistance" format="dimension" />
+        <!-- @hide The min height of the NumberPicker. -->
+        <attr name="internalMinHeight" format="dimension" />
+        <!-- @hide The max height of the NumberPicker. -->
+        <attr name="internalMaxHeight" format="dimension" />
+        <!-- @hide The min width of the NumberPicker. -->
+        <attr name="internalMinWidth" format="dimension" />
+        <!-- @hide The max width of the NumberPicker. -->
+        <attr name="internalMaxWidth" format="dimension" />
+        <!-- @hide The layout of the number picker. -->
+        <attr name="internalLayout" format="reference" />
+        <!-- @hide The drawable for pressed virtual (increment/decrement) buttons. -->
+        <attr name="virtualButtonPressedDrawable" format="reference" />
+    </declare-styleable>
+    <!-- From: file:/E:/Github_repo/oW/res/values/colors.xml -->
+    <eat-comment />
+
+    <drawable name="ow_blue">#308DAF</drawable>
+    <drawable name="ow_blue_pressed">#558DAF</drawable>
+    <!-- From: file:/E:/Github_repo/oW/res/values/ids.xml -->
+    <eat-comment />
+
+    <item name="np__decrement" type="id"/>
+    <item name="np__increment" type="id"/>
+    <!-- From: file:/E:/Github_repo/oW/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="app_name">oW</string>
+    <string name="auto_define">Auto Define</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/config.xml -->
+    <eat-comment />
+
+    <string name="autocomplete_details_url">        https://maps.googleapis.com/maps/api/place/details/json?reference=[REFERENCE]&amp;sensor=false&amp;key=[KEY]&amp;language=[LANG]</string>
+    <string name="autocomplete_key">        AIzaSyCQw2aYmSUBrcKjwJWQjMT7xADo3NH_UoU</string>
+    <string name="autocomplete_url">        https://maps.googleapis.com/maps/api/place/autocomplete/json?input=[INPUT]&amp;sensor=false&amp;key=[KEY]&amp;offset=[OFFSET]&amp;language=[LANG]&amp;types=geocode&amp;regions=administrative_area_level_1</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="black">Black</string>
+    <string name="cancel">Cancel</string>
+    <string name="connection_error">Connection error</string>
+    <string name="could_not_locate">Your location could not been retrieved. Please add location manually</string>
+    <string name="date_picker_dialog_title">Set date</string>
+    <string name="date_time_done">Done</string>
+    <string name="date_time_set">Set</string>
+    <string name="day">Day</string>
+    <string name="day_indicator">○</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/fonts.xml -->
+    <eat-comment />
+
+    <string name="default_font">lintel_light.otf</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="direction_e">E</string>
+    <string name="direction_n">N</string>
+    <string name="direction_ne">NE</string>
+    <string name="direction_nw">NW</string>
+    <string name="direction_s">S</string>
+    <string name="direction_se">SE</string>
+    <string name="direction_sw">SW</string>
+    <string name="direction_w">W</string>
+    <string name="downpour">Downpour</string>
+    <string name="error_screen_message">Please connect to the Internet, including the location or manually enter the
+        city, in the application settings.</string>
+    <string name="fog">Fog</string>
+    <string name="friday">Friday</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/analytics.xml -->
+    <eat-comment />
+
+    <string name="ga_trackingId">@string/google_analytics_production</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="go_to_settings">Go to settings</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/config.xml -->
+    <eat-comment />
+
+    <string name="google_analytics_dev">UA-39457220-1</string>
+    <string name="google_analytics_production">UA-39762882-1</string>
+    <string name="google_geocoder">http://maps.googleapis.com/maps/api/geocode/json?sensor=true&amp;latlng=[LOCATION]&amp;language=[LANG]</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="hurricane">Hurricane</string>
+    <string name="inches">in</string>
+    <string name="km_per_hour">kmph</string>
+    <string name="light_rain">Light Rain</string>
+    <string name="lightning_storm">Lightning Storm</string>
+    <string name="locale">en</string>
+    <string name="location_hint">your location here...</string>
+    <string name="location_saved">Location saved</string>
+    <string name="location_unknown">Unknown location</string>
+    <string name="miles_per_hour">mph</string>
+    <string name="millimeters">mm</string>
+    <string name="monday">Monday</string>
+    <string name="moon">Moon</string>
+    <string name="mostly_cloudy">Mostly Cloudy</string>
+    <string name="night">Night</string>
+    <string name="night_indicator">●</string>
+    <string name="no_cache">Cached version of forecast has expired. Please check your Internet connection to get latest forecast</string>
+    <string name="no_location">No location</string>
+    <string name="none">none</string>
+    <string name="not_available">N/A</string>
+    <string name="notification">Notification</string>
+    <string name="notification_pattern">[DESC] / ○ [TEMP_MAX] / ● [TEMP_MIN]</string>
+    <string name="notification_time">Notification time</string>
+    <string name="notification_time_message">Here you can schedule everyday notification about the weather</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/fonts.xml -->
+    <eat-comment />
+
+    <string name="numeric_font">titilliumthin.ttf</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/config.xml -->
+    <eat-comment />
+
+    <string name="ow_url_get_session">http://api.oweather.net/rest/1/getSession</string>
+    <string name="ow_url_get_weather">http://api.oweather.net/rest/1/weather</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="partly_cloudy">Partly Cloudy</string>
+    <string name="rain">Rain</string>
+    <string name="rain_and_sun">Rain And Sun</string>
+    <string name="retrieving_location">Retrieving location</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/config.xml -->
+    <eat-comment />
+
+    <string name="rsa_exponent">65537</string>
+    <string name="rsa_standard">RSA/ECB/NoPadding</string>
+    <string name="rsa_token">        878654923516102755875186758602874285917544326072118383176109618244898606747831066226648310876287428204536782</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="saturday">Saturday</string>
+    <string name="select_time">Select time</string>
+    <string name="set">Set</string>
+    <string name="skip_and_continue">Skip and continue ></string>
+    <string name="sleet">Sleet</string>
+    <string name="snow">Snow</string>
+    <string name="snow_fall">Snow Fall</string>
+    <string name="sunday">Sunday</string>
+    <string name="sunny">Sunny</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/config.xml -->
+    <eat-comment />
+
+    <string name="test_ow_url_get_session">http://dev.oweather.net/dev/1/getSession</string>
+    <string name="test_ow_url_get_weather">http://dev.oweather.net/dev/1/weather</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="thursday">Thursday</string>
+    <string name="time_picker_decrement_hour_button">Decrement hour</string>
+    <string name="time_picker_decrement_minute_button">Decrement minute</string>
+    <string name="time_picker_decrement_set_am_button">Set AM</string>
+    <string name="time_picker_dialog_title">Set time</string>
+    <string name="time_picker_increment_hour_button">Increment hour</string>
+    <string name="time_picker_increment_minute_button">Increment minute</string>
+    <string name="time_picker_increment_set_pm_button">Set PM</string>
+    <string name="time_picker_separator">:</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="updating">Updating</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/config.xml -->
+    <eat-comment />
+
+    <string name="weather_base_url_city">http://free.worldweatheronline.com/feed/weather.ashx?q=%CITY&amp;format=json&amp;num_of_days=%DAYS&amp;key=%KEY</string>
+    <string name="weather_base_url_gps">http://free.worldweatheronline.com/feed/weather.ashx?q=%GPS&amp;format=json&amp;num_of_days=5&amp;key=%KEY</string>
+    <string name="weather_key">bd44eb1c6f224139132601</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="weather_not_updated">Weather was not updated.</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="white">White</string>
+    <string name="widget_4_1">oW weather widget 4x1</string>
+    <string name="widget_4_2">oW widget 4x2</string>
+    <string name="widget_background_color">Widget Background Color</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="your_location">Your location</string>
+    <!-- From: file:/E:/Github_repo/oW/res/values/styles.xml -->
+    <eat-comment />
+
+    <style name="AppTheme" parent="android:Theme.Holo">
+        <item name="numberPickerStyle">@style/NPWidget.Holo.NumberPicker</item>
+    </style>
+
+    <style name="LocationEditText">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ow_settings</item>
+        <item name="android:hint">@string/location_hint</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <!-- <item name="android:textCursorDrawable">@null</item> -->
+        <item name="android:background">@android:color/white</item>
+        <item name="android:imeOptions">actionNone</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="LocationTextView" parent="TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">68sp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+    <!-- From: file:/E:/Github_repo/oW/res/values/themes.xml -->
+    <eat-comment />
+
+    <style name="NPWidget">
+        <item name="android:textAppearance">?android:attr/textAppearance</item>
+    </style>
+
+    <style name="NPWidget.Holo.Light.NumberPicker" parent="NPWidget.Holo.NumberPicker">
+        <item name="virtualButtonPressedDrawable">@drawable/item_background_holo_light</item>
+    </style>
+
+    <style name="NPWidget.Holo.NumberPicker" parent="NPWidget.NumberPicker">
+        <item name="solidColor">@android:color/transparent</item>
+        <item name="selectionDivider">@drawable/np_numberpicker_selection_divider</item>
+        <item name="selectionDividerHeight">2dip</item>
+        <item name="internalLayout">@layout/number_picker_with_selector_wheel</item>
+        <item name="internalMinWidth">64dip</item>
+        <item name="internalMaxHeight">180dip</item>
+        <item name="virtualButtonPressedDrawable">@drawable/item_background_holo_dark</item>
+    </style>
+
+    <style name="NPWidget.NumberPicker">
+        <item name="android:orientation">vertical</item>
+        <item name="android:fadingEdge">vertical</item>
+        <item name="android:fadingEdgeLength">50dip</item>
+    </style>
+    <!-- From: file:/E:/Github_repo/oW/res/values/styles.xml -->
+    <eat-comment />
+
+    <style name="PredictionTextView">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ow_settings</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+
+        <!-- <item name="android:textCursorDrawable">@null</item> -->
+        <item name="android:background">@android:color/white</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="TextView">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextViewWidget">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:ellipsize">marquee</item>
+    </style>
+
+    <style name="TextViewWithMargin" parent="TextView">
+        <item name="android:layout_marginBottom">1dp</item>
+    </style>
+
+    <style name="TextViewWithPadding" parent="TextView">
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
+
+</resources>

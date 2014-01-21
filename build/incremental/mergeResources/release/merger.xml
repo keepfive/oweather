@@ -1,0 +1,2017 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="E:\Github_repo\oW\res" >
+            <file
+                name="rotation"
+                path="E:\Github_repo\oW\res\anim\rotation.xml"
+                qualifiers=""
+                type="anim" />
+            <file
+                name="blue_button"
+                path="E:\Github_repo\oW\res\drawable\blue_button.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="border"
+                path="E:\Github_repo\oW\res\drawable\border.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="border_right"
+                path="E:\Github_repo\oW\res\drawable\border_right.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="icon_notification"
+                path="E:\Github_repo\oW\res\drawable\icon_notification.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="item_background_holo_dark"
+                path="E:\Github_repo\oW\res\drawable\item_background_holo_dark.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="item_background_holo_light"
+                path="E:\Github_repo\oW\res\drawable\item_background_holo_light.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="list_selector_background_transition_holo_dark"
+                path="E:\Github_repo\oW\res\drawable\list_selector_background_transition_holo_dark.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="list_selector_background_transition_holo_light"
+                path="E:\Github_repo\oW\res\drawable\list_selector_background_transition_holo_light.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="widget_preview"
+                path="E:\Github_repo\oW\res\drawable\widget_preview.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="back"
+                path="E:\Github_repo\oW\res\drawable-hdpi\back.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="back_button"
+                path="E:\Github_repo\oW\res\drawable-hdpi\back_button.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="celcius_dark"
+                path="E:\Github_repo\oW\res\drawable-hdpi\celcius_dark.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="celcius_light"
+                path="E:\Github_repo\oW\res\drawable-hdpi\celcius_light.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="degrees"
+                path="E:\Github_repo\oW\res\drawable-hdpi\degrees.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="degree_active"
+                path="E:\Github_repo\oW\res\drawable-hdpi\degree_active.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="degree_main"
+                path="E:\Github_repo\oW\res\drawable-hdpi\degree_main.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="degree_passive"
+                path="E:\Github_repo\oW\res\drawable-hdpi\degree_passive.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="error_button"
+                path="E:\Github_repo\oW\res\drawable-hdpi\error_button.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="error_icon"
+                path="E:\Github_repo\oW\res\drawable-hdpi\error_icon.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="fahrenheit_dark"
+                path="E:\Github_repo\oW\res\drawable-hdpi\fahrenheit_dark.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="fahrenheit_light"
+                path="E:\Github_repo\oW\res\drawable-hdpi\fahrenheit_light.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="header_remainder"
+                path="E:\Github_repo\oW\res\drawable-hdpi\header_remainder.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="icon"
+                path="E:\Github_repo\oW\res\drawable-hdpi\icon.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_action_search"
+                path="E:\Github_repo\oW\res\drawable-hdpi\ic_action_search.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="indicator_active"
+                path="E:\Github_repo\oW\res\drawable-hdpi\indicator_active.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="indicator_passive"
+                path="E:\Github_repo\oW\res\drawable-hdpi\indicator_passive.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="left_arrow"
+                path="E:\Github_repo\oW\res\drawable-hdpi\left_arrow.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="list_focused_holo"
+                path="E:\Github_repo\oW\res\drawable-hdpi\list_focused_holo.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="list_longpressed_holo"
+                path="E:\Github_repo\oW\res\drawable-hdpi\list_longpressed_holo.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="list_pressed_holo_dark"
+                path="E:\Github_repo\oW\res\drawable-hdpi\list_pressed_holo_dark.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="list_pressed_holo_light"
+                path="E:\Github_repo\oW\res\drawable-hdpi\list_pressed_holo_light.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="list_selector_disabled_holo_dark"
+                path="E:\Github_repo\oW\res\drawable-hdpi\list_selector_disabled_holo_dark.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="list_selector_disabled_holo_light"
+                path="E:\Github_repo\oW\res\drawable-hdpi\list_selector_disabled_holo_light.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="location_gps"
+                path="E:\Github_repo\oW\res\drawable-hdpi\location_gps.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn0"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn0.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn1"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn1.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn10"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn10.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn11"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn11.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn12"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn12.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn13"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn13.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn14"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn14.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn15"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn15.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn16"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn16.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn17"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn17.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn18"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn18.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn19"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn19.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn2"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn2.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn20"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn20.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn21"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn21.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn22"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn22.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn23"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn23.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn24"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn24.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn25"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn25.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn26"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn26.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn27"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn27.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn28"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn28.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn29"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn29.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn3"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn3.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn30"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn30.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn4"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn4.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn5"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn5.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn6"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn6.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn7"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn7.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn8"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn8.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="mn9"
+                path="E:\Github_repo\oW\res\drawable-hdpi\mn9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="notification_header"
+                path="E:\Github_repo\oW\res\drawable-hdpi\notification_header.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="np_numberpicker_selection_divider"
+                path="E:\Github_repo\oW\res\drawable-hdpi\np_numberpicker_selection_divider.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="precipmm"
+                path="E:\Github_repo\oW\res\drawable-hdpi\precipmm.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="refresh_arrow"
+                path="E:\Github_repo\oW\res\drawable-hdpi\refresh_arrow.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="refresh_button"
+                path="E:\Github_repo\oW\res\drawable-hdpi\refresh_button.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="reminder_arrow"
+                path="E:\Github_repo\oW\res\drawable-hdpi\reminder_arrow.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="reminder_icon"
+                path="E:\Github_repo\oW\res\drawable-hdpi\reminder_icon.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="right_arrow"
+                path="E:\Github_repo\oW\res\drawable-hdpi\right_arrow.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="settings"
+                path="E:\Github_repo\oW\res\drawable-hdpi\settings.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="settings_back_button"
+                path="E:\Github_repo\oW\res\drawable-hdpi\settings_back_button.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="settings_button"
+                path="E:\Github_repo\oW\res\drawable-hdpi\settings_button.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="settings_header"
+                path="E:\Github_repo\oW\res\drawable-hdpi\settings_header.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="set_26"
+                path="E:\Github_repo\oW\res\drawable-hdpi\set_26.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="set_28"
+                path="E:\Github_repo\oW\res\drawable-hdpi\set_28.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="splash_logo"
+                path="E:\Github_repo\oW\res\drawable-hdpi\splash_logo.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="sun"
+                path="E:\Github_repo\oW\res\drawable-hdpi\sun.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="switch_off_left"
+                path="E:\Github_repo\oW\res\drawable-hdpi\switch_off_left.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="switch_off_right"
+                path="E:\Github_repo\oW\res\drawable-hdpi\switch_off_right.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="switch_on_left"
+                path="E:\Github_repo\oW\res\drawable-hdpi\switch_on_left.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="switch_on_left3"
+                path="E:\Github_repo\oW\res\drawable-hdpi\switch_on_left3.9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="switch_on_left3opy"
+                path="E:\Github_repo\oW\res\drawable-hdpi\switch_on_left3opy.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="switch_on_right"
+                path="E:\Github_repo\oW\res\drawable-hdpi\switch_on_right.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="switch_selector"
+                path="E:\Github_repo\oW\res\drawable-hdpi\switch_selector.xml"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_drop_1"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_drop_1.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_drop_2"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_drop_2.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_drop_3"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_drop_3.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_0"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_0.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_1"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_1.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_10"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_10.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_11"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_11.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_12"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_12.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_2"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_2.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_3"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_3.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_4"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_4.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_5"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_5.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_6"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_6.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_7"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_7.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_8"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_8.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="weather_state_9"
+                path="E:\Github_repo\oW\res\drawable-hdpi\weather_state_9.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="wind_direction"
+                path="E:\Github_repo\oW\res\drawable-hdpi\wind_direction.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="icon"
+                path="E:\Github_repo\oW\res\drawable-ldpi\icon.png"
+                qualifiers="ldpi"
+                type="drawable" />
+            <file
+                name="icon"
+                path="E:\Github_repo\oW\res\drawable-mdpi\icon.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_action_search"
+                path="E:\Github_repo\oW\res\drawable-mdpi\ic_action_search.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="list_focused_holo"
+                path="E:\Github_repo\oW\res\drawable-mdpi\list_focused_holo.9.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="list_longpressed_holo"
+                path="E:\Github_repo\oW\res\drawable-mdpi\list_longpressed_holo.9.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="list_pressed_holo_dark"
+                path="E:\Github_repo\oW\res\drawable-mdpi\list_pressed_holo_dark.9.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="list_pressed_holo_light"
+                path="E:\Github_repo\oW\res\drawable-mdpi\list_pressed_holo_light.9.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="list_selector_disabled_holo_dark"
+                path="E:\Github_repo\oW\res\drawable-mdpi\list_selector_disabled_holo_dark.9.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="list_selector_disabled_holo_light"
+                path="E:\Github_repo\oW\res\drawable-mdpi\list_selector_disabled_holo_light.9.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="np_numberpicker_selection_divider"
+                path="E:\Github_repo\oW\res\drawable-mdpi\np_numberpicker_selection_divider.9.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="change_sound_quality"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\change_sound_quality.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="icon"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\icon.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="ic_action_search"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\ic_action_search.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="list_focused_holo"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\list_focused_holo.9.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="list_longpressed_holo"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\list_longpressed_holo.9.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="list_pressed_holo_dark"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\list_pressed_holo_dark.9.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="list_pressed_holo_light"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\list_pressed_holo_light.9.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="list_selector_disabled_holo_dark"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\list_selector_disabled_holo_dark.9.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="list_selector_disabled_holo_light"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\list_selector_disabled_holo_light.9.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="location_light"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\location_light.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="myjuke_settings"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\myjuke_settings.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="np_numberpicker_selection_divider"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\np_numberpicker_selection_divider.9.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_downpour"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_downpour.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_error"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_error.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_fog"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_fog.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_hurricane"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_hurricane.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_lightning_storm"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_lightning_storm.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_light_rain"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_light_rain.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_mostly_cloudly"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_mostly_cloudly.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_partly_cloudly"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_partly_cloudly.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_rain"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_rain.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_rain_and_sun"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_rain_and_sun.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_sleet"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_sleet.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_snow"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_snow.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_snow_fall"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_snow_fall.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="widget_state_sunny"
+                path="E:\Github_repo\oW\res\drawable-xhdpi\widget_state_sunny.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="activity_layout"
+                path="E:\Github_repo\oW\res\layout\activity_layout.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="error_screen"
+                path="E:\Github_repo\oW\res\layout\error_screen.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="first_location_page"
+                path="E:\Github_repo\oW\res\layout\first_location_page.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="forecast_details_block"
+                path="E:\Github_repo\oW\res\layout\forecast_details_block.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="forecast_page"
+                path="E:\Github_repo\oW\res\layout\forecast_page.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="fragment_forecast"
+                path="E:\Github_repo\oW\res\layout\fragment_forecast.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="image_view"
+                path="E:\Github_repo\oW\res\layout\image_view.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="notification_page"
+                path="E:\Github_repo\oW\res\layout\notification_page.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="number_picker_with_selector_wheel"
+                path="E:\Github_repo\oW\res\layout\number_picker_with_selector_wheel.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="pager_item"
+                path="E:\Github_repo\oW\res\layout\pager_item.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="prediction"
+                path="E:\Github_repo\oW\res\layout\prediction.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="progress_bar"
+                path="E:\Github_repo\oW\res\layout\progress_bar.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="settings"
+                path="E:\Github_repo\oW\res\layout\settings.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="settings_header"
+                path="E:\Github_repo\oW\res\layout\settings_header.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="settings_location"
+                path="E:\Github_repo\oW\res\layout\settings_location.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="settings_notification"
+                path="E:\Github_repo\oW\res\layout\settings_notification.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="settings_switches"
+                path="E:\Github_repo\oW\res\layout\settings_switches.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="splash_screen"
+                path="E:\Github_repo\oW\res\layout\splash_screen.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="start"
+                path="E:\Github_repo\oW\res\layout\start.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="temperature_block"
+                path="E:\Github_repo\oW\res\layout\temperature_block.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="test"
+                path="E:\Github_repo\oW\res\layout\test.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="time_picker_dialog"
+                path="E:\Github_repo\oW\res\layout\time_picker_dialog.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="time_picker_holo"
+                path="E:\Github_repo\oW\res\layout\time_picker_holo.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="update_layout"
+                path="E:\Github_repo\oW\res\layout\update_layout.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="update_page"
+                path="E:\Github_repo\oW\res\layout\update_page.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="weather_desc_block"
+                path="E:\Github_repo\oW\res\layout\weather_desc_block.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="widget"
+                path="E:\Github_repo\oW\res\layout\widget.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="widget_4x2"
+                path="E:\Github_repo\oW\res\layout\widget_4x2.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="widget_config"
+                path="E:\Github_repo\oW\res\layout\widget_config.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="widget_img_4x1"
+                path="E:\Github_repo\oW\res\layout\widget_img_4x1.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="forecast_details_block"
+                path="E:\Github_repo\oW\res\layout-hdpi\forecast_details_block.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="forecast_page"
+                path="E:\Github_repo\oW\res\layout-hdpi\forecast_page.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="settings"
+                path="E:\Github_repo\oW\res\layout-hdpi\settings.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="settings_header"
+                path="E:\Github_repo\oW\res\layout-hdpi\settings_header.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="settings_location"
+                path="E:\Github_repo\oW\res\layout-hdpi\settings_location.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="settings_notification"
+                path="E:\Github_repo\oW\res\layout-hdpi\settings_notification.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="settings_switches"
+                path="E:\Github_repo\oW\res\layout-hdpi\settings_switches.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="temperature_block"
+                path="E:\Github_repo\oW\res\layout-hdpi\temperature_block.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="update_layout"
+                path="E:\Github_repo\oW\res\layout-hdpi\update_layout.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="weather_desc_block"
+                path="E:\Github_repo\oW\res\layout-hdpi\weather_desc_block.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="widget_4x2"
+                path="E:\Github_repo\oW\res\layout-hdpi\widget_4x2.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="widget_img_4x1"
+                path="E:\Github_repo\oW\res\layout-hdpi\widget_img_4x1.xml"
+                qualifiers="hdpi"
+                type="layout" />
+            <file
+                name="settings_switches"
+                path="E:\Github_repo\oW\res\layout-hdpi-v14\settings_switches.xml"
+                qualifiers="hdpi-v14"
+                type="layout" />
+            <file
+                name="forecast_page"
+                path="E:\Github_repo\oW\res\layout-land\forecast_page.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="fragment_forecast"
+                path="E:\Github_repo\oW\res\layout-land\fragment_forecast.xml"
+                qualifiers="land"
+                type="layout" />
+            <file
+                name="widget_4x2"
+                path="E:\Github_repo\oW\res\layout-land-xhdpi\widget_4x2.xml"
+                qualifiers="land-xhdpi"
+                type="layout" />
+            <file
+                name="forecast_details_block"
+                path="E:\Github_repo\oW\res\layout-sw600dp\forecast_details_block.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="forecast_page"
+                path="E:\Github_repo\oW\res\layout-sw600dp\forecast_page.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="notification_page"
+                path="E:\Github_repo\oW\res\layout-sw600dp\notification_page.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="settings"
+                path="E:\Github_repo\oW\res\layout-sw600dp\settings.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="settings_header"
+                path="E:\Github_repo\oW\res\layout-sw600dp\settings_header.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="settings_location"
+                path="E:\Github_repo\oW\res\layout-sw600dp\settings_location.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="settings_notification"
+                path="E:\Github_repo\oW\res\layout-sw600dp\settings_notification.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="settings_switches"
+                path="E:\Github_repo\oW\res\layout-sw600dp\settings_switches.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="temperature_block"
+                path="E:\Github_repo\oW\res\layout-sw600dp\temperature_block.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="update_layout"
+                path="E:\Github_repo\oW\res\layout-sw600dp\update_layout.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="weather_desc_block"
+                path="E:\Github_repo\oW\res\layout-sw600dp\weather_desc_block.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="widget_img_4x1"
+                path="E:\Github_repo\oW\res\layout-sw600dp\widget_img_4x1.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="settings_switches"
+                path="E:\Github_repo\oW\res\layout-v14\settings_switches.xml"
+                qualifiers="v14"
+                type="layout" />
+            <file
+                name="forecast_details_block"
+                path="E:\Github_repo\oW\res\layout-xhdpi\forecast_details_block.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="forecast_page"
+                path="E:\Github_repo\oW\res\layout-xhdpi\forecast_page.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="settings"
+                path="E:\Github_repo\oW\res\layout-xhdpi\settings.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="settings_header"
+                path="E:\Github_repo\oW\res\layout-xhdpi\settings_header.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="settings_location"
+                path="E:\Github_repo\oW\res\layout-xhdpi\settings_location.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="settings_notification"
+                path="E:\Github_repo\oW\res\layout-xhdpi\settings_notification.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="settings_switches"
+                path="E:\Github_repo\oW\res\layout-xhdpi\settings_switches.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="temperature_block"
+                path="E:\Github_repo\oW\res\layout-xhdpi\temperature_block.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="update_layout"
+                path="E:\Github_repo\oW\res\layout-xhdpi\update_layout.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="weather_desc_block"
+                path="E:\Github_repo\oW\res\layout-xhdpi\weather_desc_block.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="widget_4x2"
+                path="E:\Github_repo\oW\res\layout-xhdpi\widget_4x2.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="widget_img_4x1"
+                path="E:\Github_repo\oW\res\layout-xhdpi\widget_img_4x1.xml"
+                qualifiers="xhdpi"
+                type="layout" />
+            <file
+                name="settings_switches"
+                path="E:\Github_repo\oW\res\layout-xhdpi-v14\settings_switches.xml"
+                qualifiers="xhdpi-v14"
+                type="layout" />
+            <file
+                path="E:\Github_repo\oW\res\values\analytics.xml"
+                qualifiers="" >
+                <bool name="ga_autoActivityTracking" >
+true
+                </bool>
+
+                <string name="ga_trackingId" >@string/google_analytics_production
+                </string>
+
+                <bool name="ga_reportUncaughtExceptions" >
+true
+                </bool>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values\attrs.xml"
+                qualifiers="" >
+                <attr
+                    name="timePickerStyle"
+                    format="reference" />
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values\colors.xml"
+                qualifiers="" >
+                <color name="ow_fog" >#75608B
+                </color>
+                <color name="ow_slider_right" >#272727
+                </color>
+                <color name="background" >#272727
+                </color>
+                <color name="ow_slider_left" >#36B1C0
+                </color>
+                <color name="widget_bg_black" >#77111111
+                </color>
+                <color name="ow_sleet" >#6199BC
+                </color>
+                <color name="ow_thunderstorm" >#89766F
+                </color>
+                <color name="ow_lighting_storm" >#89766F
+                </color>
+                <color name="light_separator" >#51AAAAAA
+                </color>
+                <color name="ow_light_rain" >#AF9B7B
+                </color>
+                <color name="widget_bg_white" >#77AAAAAA
+                </color>
+                <color name="ow_mostly_cloudy" >#E0A74B
+                </color>
+                <color name="ow_sunny" >#E23343
+                </color>
+                <color name="ow_storm" >#5D5D5D
+                </color>
+
+                <drawable name="ow_blue_pressed" >
+#558DAF
+                </drawable>
+
+                <color name="transparent" >#00000000
+                </color>
+                <color name="ow_snow" >#3B9CD1
+                </color>
+                <color name="ow_downpour" >#919191
+                </color>
+                <color name="ow_rain_and_sun" >#F1854B
+                </color>
+
+                <drawable name="ow_blue" >
+#308DAF
+                </drawable>
+
+                <color name="ow_hurricane" >#5D5D5D
+                </color>
+                <color name="ow_snowfall" >#1A6698
+                </color>
+                <color name="ow_settings" >#343434
+                </color>
+                <color name="ow_partly_cloudy" >#1D9E48
+                </color>
+                <color name="dark_separator" >#51272727
+                </color>
+                <color name="ow_progress_background" >#EE272727
+                </color>
+                <color name="ow_rain" >#71797C
+                </color>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values\config.xml"
+                qualifiers="" >
+                <string name="ow_url_get_session" >http://api.oweather.net/rest/1/getSession
+                </string>
+                <string name="weather_base_url_city" >http://free.worldweatheronline.com/feed/weather.ashx?q=%CITY&amp;format=json&amp;num_of_days=%DAYS&amp;key=%KEY
+                </string>
+                <string name="weather_base_url_gps" >http://free.worldweatheronline.com/feed/weather.ashx?q=%GPS&amp;format=json&amp;num_of_days=5&amp;key=%KEY
+                </string>
+                <string name="test_ow_url_get_session" >http://dev.oweather.net/dev/1/getSession
+                </string>
+                <string name="rsa_token" >        878654923516102755875186758602874285917544326072118383176109618244898606747831066226648310876287428204536782
+                </string>
+                <string name="google_analytics_dev" >UA-39457220-1
+                </string>
+                <string name="rsa_standard" >RSA/ECB/NoPadding
+                </string>
+                <string name="autocomplete_details_url" >        https://maps.googleapis.com/maps/api/place/details/json?reference=[REFERENCE]&amp;sensor=false&amp;key=[KEY]&amp;language=[LANG]
+                </string>
+                <string name="google_analytics_production" >UA-39762882-1
+                </string>
+                <string name="autocomplete_url" >        https://maps.googleapis.com/maps/api/place/autocomplete/json?input=[INPUT]&amp;sensor=false&amp;key=[KEY]&amp;offset=[OFFSET]&amp;language=[LANG]&amp;types=geocode&amp;regions=administrative_area_level_1
+                </string>
+                <string name="weather_key" >bd44eb1c6f224139132601
+                </string>
+                <string name="google_geocoder" >http://maps.googleapis.com/maps/api/geocode/json?sensor=true&amp;latlng=[LOCATION]&amp;language=[LANG]
+                </string>
+                <string name="ow_url_get_weather" >http://api.oweather.net/rest/1/weather
+                </string>
+                <string name="autocomplete_key" >        AIzaSyCQw2aYmSUBrcKjwJWQjMT7xADo3NH_UoU
+                </string>
+                <string name="rsa_exponent" >65537
+                </string>
+                <string name="test_ow_url_get_weather" >http://dev.oweather.net/dev/1/weather
+                </string>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values\fonts.xml"
+                qualifiers="" >
+                <string name="default_font" >lintel_light.otf
+                </string>
+                <string name="numeric_font" >titilliumthin.ttf
+                </string>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values\ids.xml"
+                qualifiers="" >
+                <item
+                    name="np__decrement"
+                    type="id"/>
+                <item
+                    name="np__increment"
+                    type="id"/>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values\screen.xml"
+                qualifiers="" >
+                <bool name="isTablet" >
+false
+                </bool>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values\strings.xml"
+                qualifiers="" >
+                <string name="night" >Night
+                </string>
+                <string name="not_available" >N/A
+                </string>
+                <string name="retrieving_location" >Retrieving location
+                </string>
+                <string name="saturday" >Saturday
+                </string>
+                <string name="direction_se" >SE
+                </string>
+                <string name="tuesday" >Tuesday
+                </string>
+                <string name="thursday" >Thursday
+                </string>
+                <string name="error_screen_message" >Please connect to the Internet, including the location or manually enter the
+        city, in the application settings.
+                </string>
+                <string name="time_picker_separator" >:
+                </string>
+                <string name="auto_define" >Auto Define
+                </string>
+                <string name="date_time_set" >Set
+                </string>
+                <string name="millimeters" >mm
+                </string>
+                <string name="direction_ne" >NE
+                </string>
+                <string name="hurricane" >Hurricane
+                </string>
+                <string name="go_to_settings" >Go to settings
+                </string>
+                <string name="location_unknown" >Unknown location
+                </string>
+                <string name="today" >Today
+                </string>
+                <string name="fog" >Fog
+                </string>
+                <string name="no_location" >No location
+                </string>
+                <string name="time_picker_increment_set_pm_button" >Set PM
+                </string>
+                <string name="direction_e" >E
+                </string>
+                <string name="white" >White
+                </string>
+                <string name="mostly_cloudy" >Mostly Cloudy
+                </string>
+                <string name="lightning_storm" >Lightning Storm
+                </string>
+                <string name="direction_w" >W
+                </string>
+                <string name="location_saved" >Location saved
+                </string>
+                <string name="friday" >Friday
+                </string>
+                <string name="time_picker_increment_minute_button" >Increment minute
+                </string>
+                <string name="direction_s" >S
+                </string>
+                <string name="direction_sw" >SW
+                </string>
+                <string name="direction_n" >N
+                </string>
+                <string name="black" >Black
+                </string>
+                <string name="time_picker_decrement_minute_button" >Decrement minute
+                </string>
+                <string name="date_picker_dialog_title" >Set date
+                </string>
+                <string name="light_rain" >Light Rain
+                </string>
+                <string name="could_not_locate" >Your location could not been retrieved. Please add location manually
+                </string>
+                <string name="wednesday" >Wednesday
+                </string>
+                <string name="monday" >Monday
+                </string>
+                <string name="widget_4_1" >oW weather widget 4x1
+                </string>
+                <string name="connection_error" >Connection error
+                </string>
+                <string name="time_picker_dialog_title" >Set time
+                </string>
+                <string name="widget_4_2" >oW widget 4x2
+                </string>
+                <string name="updating" >Updating
+                </string>
+                <string name="day_indicator" >○
+                </string>
+                <string name="sunny" >Sunny
+                </string>
+                <string name="select_time" >Select time
+                </string>
+                <string name="time_picker_decrement_hour_button" >Decrement hour
+                </string>
+                <string name="time_picker_increment_hour_button" >Increment hour
+                </string>
+                <string name="cancel" >Cancel
+                </string>
+                <string name="weather_not_updated" >Weather was not updated.
+                </string>
+                <string name="your_location" >Your location
+                </string>
+                <string name="moon" >Moon
+                </string>
+                <string name="skip_and_continue" >Skip and continue >
+                </string>
+                <string name="widget_background_color" >Widget Background Color
+                </string>
+                <string name="tomorrow" >Tomorrow
+                </string>
+                <string name="snow_fall" >Snow Fall
+                </string>
+                <string name="notification_time" >Notification time
+                </string>
+                <string name="notification_time_message" >Here you can schedule everyday notification about the weather
+                </string>
+                <string name="notification" >Notification
+                </string>
+                <string name="sleet" >Sleet
+                </string>
+                <string name="locale" >en
+                </string>
+                <string name="sunday" >Sunday
+                </string>
+                <string name="set" >Set
+                </string>
+                <string name="km_per_hour" >kmph
+                </string>
+                <string name="none" >none
+                </string>
+                <string name="no_cache" >Cached version of forecast has expired. Please check your Internet connection to get latest forecast
+                </string>
+                <string name="location_hint" >your location here...
+                </string>
+                <string name="notification_pattern" >[DESC] / ○ [TEMP_MAX] / ● [TEMP_MIN]
+                </string>
+                <string name="direction_nw" >NW
+                </string>
+                <string name="time_picker_decrement_set_am_button" >Set AM
+                </string>
+                <string name="downpour" >Downpour
+                </string>
+                <string name="snow" >Snow
+                </string>
+                <string name="inches" >in
+                </string>
+                <string name="day" >Day
+                </string>
+                <string name="night_indicator" >●
+                </string>
+                <string name="date_time_done" >Done
+                </string>
+                <string name="rain_and_sun" >Rain And Sun
+                </string>
+                <string name="partly_cloudy" >Partly Cloudy
+                </string>
+                <string name="app_name" >oW
+                </string>
+                <string name="rain" >Rain
+                </string>
+                <string name="yesterday" >Yesterday
+                </string>
+                <string name="miles_per_hour" >mph
+                </string>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values\styles.xml"
+                qualifiers="" >
+
+                <style
+                    name="TextViewWithMargin"
+                    parent="TextView" >
+                    <item name="android:layout_marginBottom">
+1dp
+                    </item>
+                </style>
+
+                <style name="TextViewWidget" >
+                    <item name="android:textColor">
+@android:color/white
+                    </item>
+                    <item name="android:layout_width">
+match_parent
+                    </item>
+                    <item name="android:layout_height">
+wrap_content
+                    </item>
+                    <item name="android:layout_marginBottom">
+2dp
+                    </item>
+                    <item name="android:marqueeRepeatLimit">
+marquee_forever
+                    </item>
+                    <item name="android:ellipsize">
+marquee
+                    </item>
+                </style>
+
+                <style
+                    name="TextViewWithPadding"
+                    parent="TextView" >
+                    <item name="android:layout_marginBottom">
+2dp
+                    </item>
+                </style>
+
+                <style name="TextView" >
+                    <item name="android:textColor">
+@android:color/white
+                    </item>
+                </style>
+
+                <style
+                    name="LocationTextView"
+                    parent="TextView" >
+                    <item name="android:gravity">
+center
+                    </item>
+                    <item name="android:padding">
+10dp
+                    </item>
+                    <item name="android:textSize">
+68sp
+                    </item>
+                    <item name="android:layout_marginBottom">
+10dp
+                    </item>
+                    <item name="android:layout_marginTop">
+10dp
+                    </item>
+                </style>
+
+                <style name="LocationEditText" >
+                    <item name="android:textSize">
+24sp
+                    </item>
+                    <item name="android:textStyle">
+bold
+                    </item>
+                    <item name="android:textColor">
+@color/ow_settings
+                    </item>
+                    <item name="android:hint">
+@string/location_hint
+                    </item>
+                    <item name="android:layout_gravity">
+center_horizontal
+                    </item>
+                    <item name="android:padding">
+5dp
+                    </item>
+                    <item name="android:layout_marginTop">
+15dp
+                    </item>
+                    <item name="android:layout_marginLeft">
+15dp
+                    </item>
+                    <item name="android:layout_marginRight">
+15dp
+                    </item>
+                    <!-- <item name="android:textCursorDrawable">@null</item> -->
+                    <item name="android:background">
+@android:color/white
+                    </item>
+                    <item name="android:imeOptions">
+actionNone
+                    </item>
+                    <item name="android:singleLine">
+true
+                    </item>
+                </style>
+
+                <style name="PredictionTextView" >
+                    <item name="android:textSize">
+24sp
+                    </item>
+                    <item name="android:textStyle">
+bold
+                    </item>
+                    <item name="android:textColor">
+@color/ow_settings
+                    </item>
+                    <item name="android:layout_gravity">
+center_horizontal
+                    </item>
+                    <item name="android:padding">
+5dp
+                    </item>
+                    <item name="android:layout_marginTop">
+15dp
+                    </item>
+                    <item name="android:layout_marginLeft">
+15dp
+                    </item>
+                    <item name="android:layout_marginRight">
+15dp
+                    </item>
+
+                    <!-- <item name="android:textCursorDrawable">@null</item> -->
+                    <item name="android:background">
+@android:color/white
+                    </item>
+                    <item name="android:singleLine">
+true
+                    </item>
+                </style>
+
+                <style
+                    name="AppTheme"
+                    parent="android:Theme.Holo" >
+                    <item name="numberPickerStyle">
+@style/NPWidget.Holo.NumberPicker
+                    </item>
+                </style>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values\themes.xml"
+                qualifiers="" >
+                <declare-styleable name="NumberPicker" >
+
+                    <!-- @hide Color for the solid color background if such for optimized rendering. -->
+                    <attr
+                        name="solidColor"
+                        format="color|reference" />
+                    <!-- @hide The divider for making the selection area. -->
+                    <attr
+                        name="selectionDivider"
+                        format="reference" />
+                    <!-- @hide The height of the selection divider. -->
+                    <attr
+                        name="selectionDividerHeight"
+                        format="dimension" />
+                    <!-- @hide The distance between the two selection dividers. -->
+                    <attr
+                        name="selectionDividersDistance"
+                        format="dimension" />
+                    <!-- @hide The min height of the NumberPicker. -->
+                    <attr
+                        name="internalMinHeight"
+                        format="dimension" />
+                    <!-- @hide The max height of the NumberPicker. -->
+                    <attr
+                        name="internalMaxHeight"
+                        format="dimension" />
+                    <!-- @hide The min width of the NumberPicker. -->
+                    <attr
+                        name="internalMinWidth"
+                        format="dimension" />
+                    <!-- @hide The max width of the NumberPicker. -->
+                    <attr
+                        name="internalMaxWidth"
+                        format="dimension" />
+                    <!-- @hide The layout of the number picker. -->
+                    <attr
+                        name="internalLayout"
+                        format="reference" />
+                    <!-- @hide The drawable for pressed virtual (increment/decrement) buttons. -->
+                    <attr
+                        name="virtualButtonPressedDrawable"
+                        format="reference" />
+                </declare-styleable>
+
+                <style
+                    name="NPWidget.Holo.Light.NumberPicker"
+                    parent="NPWidget.Holo.NumberPicker" >
+                    <item name="virtualButtonPressedDrawable">
+@drawable/item_background_holo_light
+                    </item>
+                </style>
+
+                <style name="NPWidget" >
+                    <item name="android:textAppearance">
+?android:attr/textAppearance
+                    </item>
+                </style>
+
+                <style name="NPWidget.NumberPicker" >
+                    <item name="android:orientation">
+vertical
+                    </item>
+                    <item name="android:fadingEdge">
+vertical
+                    </item>
+                    <item name="android:fadingEdgeLength">
+50dip
+                    </item>
+                </style>
+
+                <style
+                    name="NPWidget.Holo.NumberPicker"
+                    parent="NPWidget.NumberPicker" >
+                    <item name="solidColor">
+@android:color/transparent
+                    </item>
+                    <item name="selectionDivider">
+@drawable/np_numberpicker_selection_divider
+                    </item>
+                    <item name="selectionDividerHeight">
+2dip
+                    </item>
+                    <item name="internalLayout">
+@layout/number_picker_with_selector_wheel
+                    </item>
+                    <item name="internalMinWidth">
+64dip
+                    </item>
+                    <item name="internalMaxHeight">
+180dip
+                    </item>
+                    <item name="virtualButtonPressedDrawable">
+@drawable/item_background_holo_dark
+                    </item>
+                </style>
+
+                <attr
+                    name="numberPickerStyle"
+                    format="reference" />
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values-it\strings.xml"
+                qualifiers="it" >
+                <string name="black" >Nero
+                </string>
+                <string name="night_indicator" >●
+                </string>
+                <string name="could_not_locate" >La Tua Posizione non e stata trovata.. provare con modalità manuale
+                </string>
+                <string name="white" >Bianco
+                </string>
+                <string name="connection_error" >Errore connessione
+                </string>
+                <string name="notification_time_message" >Qui è possibile programmare la notifica di tutti i giorni per il meteo
+                </string>
+                <string name="time_picker_increment_set_pm_button" >Set PM
+                </string>
+                <string name="cancel" >Cancella
+                </string>
+                <string name="moon" >Luna
+                </string>
+                <string name="date_time_done" >Fatto
+                </string>
+                <string name="select_time" >Seleziona Ora
+                </string>
+                <string name="auto_define" >Posizione
+                </string>
+                <string name="date_picker_dialog_title" >Impostare tempo
+                </string>
+                <string name="locale" >it
+                </string>
+                <string name="night" >Notte
+                </string>
+                <string name="time_picker_decrement_hour_button" >Diminuizione ore in
+                </string>
+                <string name="location_saved" >Localitò salvata
+                </string>
+                <string name="snow_fall" >Nevicata
+                </string>
+                <string name="day_indicator" >○
+                </string>
+                <string name="light_rain" >Leggera Pioggia
+                </string>
+                <string name="no_cache" >Purtroppo non si dispone di alcuna previsione nella cache attuale
+                </string>
+                <string name="notification" >Notifica
+                </string>
+                <string name="tuesday" >Martedì
+                </string>
+                <string name="set" >Stabilito
+                </string>
+                <string name="downpour" >Acquazzone
+                </string>
+                <string name="widget_4_1" >oW weather widget 4x1
+                </string>
+                <string name="day" >Giorno
+                </string>
+                <string name="widget_4_2" >oW widget 4x2
+                </string>
+                <string name="skip_and_continue" >Salta e continua >
+                </string>
+                <string name="rain_and_sun" >Pioggia e Sole
+                </string>
+                <string name="wednesday" >Mercoledì
+                </string>
+                <string name="time_picker_increment_hour_button" >Incrementa ore in
+                </string>
+                <string name="rain" >Pioggia
+                </string>
+                <string name="date_time_set" >Stabilito
+                </string>
+                <string name="time_picker_dialog_title" >Impostare il tempo di
+                </string>
+                <string name="notification_pattern" >[DESC] / ○ [TEMP_MAX] / ● [TEMP_MIN]
+                </string>
+                <string name="error_screen_message" >Si prega di collegarsi a Internet, tra cui la posizione o inserire manualmente la città, nelle impostazioni dell\'applicazione.
+                </string>
+                <string name="no_location" >Nessuna località
+                </string>
+                <string name="weather_not_updated" >Meteo non aggiornato.
+                </string>
+                <string name="not_available" >N/A
+                </string>
+                <string name="notification_time" >Ora di notifica
+                </string>
+                <string name="time_picker_decrement_minute_button" >Diminuzione minuti in
+                </string>
+                <string name="monday" >Lunedi
+                </string>
+                <string name="friday" >Venerdì
+                </string>
+                <string name="retrieving_location" >Recuperare la posizione
+                </string>
+                <string name="thursday" >Giovedi
+                </string>
+                <string name="yesterday" >Ieri
+                </string>
+                <string name="snow" >Neve
+                </string>
+                <string name="time_picker_increment_minute_button" >Incrementa minuti in
+                </string>
+                <string name="your_location" >La tua posizione
+                </string>
+                <string name="widget_background_color" >Colore di Sfondo
+                </string>
+                <string name="saturday" >Sabato
+                </string>
+                <string name="sunday" >Domenica
+                </string>
+                <string name="location_hint" >La tua posizione qui ...
+                </string>
+                <string name="mostly_cloudy" >Nuvoloso
+                </string>
+                <string name="updating" >Aggiornamento
+                </string>
+                <string name="hurricane" >Uragano
+                </string>
+                <string name="app_name" >oW
+                </string>
+                <string name="fog" >Nebbia
+                </string>
+                <string name="partly_cloudy" >Parzialmente Nuvoloso
+                </string>
+                <string name="go_to_settings" >Vai a impostazioni
+                </string>
+                <string name="sleet" >Nevischio
+                </string>
+                <string name="lightning_storm" >Fulmine
+                </string>
+                <string name="time_picker_decrement_set_am_button" >Set AM
+                </string>
+                <string name="location_unknown" >Località sconosciuta
+                </string>
+                <string name="today" >Oggi
+                </string>
+                <string name="tomorrow" >Domani
+                </string>
+                <string name="none" >n.a.
+                </string>
+                <string name="time_picker_separator" >:
+                </string>
+                <string name="sunny" >Soleggiato
+                </string>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values-ru\strings.xml"
+                qualifiers="ru" >
+                <string name="set" >Установить
+                </string>
+                <string name="cancel" >Отмена
+                </string>
+                <string name="inches" >дм
+                </string>
+                <string name="no_cache" >Сохраненный прогноз не актуален. Пожалуйста, проверьте Интернет соединение, чтобы получить последний прогноз.
+                </string>
+                <string name="updating" >Обновление
+                </string>
+                <string name="time_picker_separator" >:
+                </string>
+                <string name="white" >Белый
+                </string>
+                <string name="friday" >Пятница
+                </string>
+                <string name="notification_time" >Время уведомления
+                </string>
+                <string name="km_per_hour" >км/ч
+                </string>
+                <string name="notification" >Оповещение
+                </string>
+                <string name="time_picker_increment_hour_button" >Добавить час
+                </string>
+                <string name="widget_background_color" >Цвет фона виджета
+                </string>
+                <string name="sunny" >Солнечно
+                </string>
+                <string name="rain_and_sun" >Дождь и солнце
+                </string>
+                <string name="night_indicator" >●
+                </string>
+                <string name="could_not_locate" >Невозможно определить локацию. Пожалуйста, выберите местоположение вручную
+                </string>
+                <string name="sunday" >Воскресенье
+                </string>
+                <string name="light_rain" >Легкий дождь
+                </string>
+                <string name="notification_pattern" >[DESC] / ○ [TEMP_MAX] / ● [TEMP_MIN]
+                </string>
+                <string name="time_picker_decrement_set_am_button" >Задать AM
+                </string>
+                <string name="location_saved" >Локация сохранена
+                </string>
+                <string name="downpour" >Ливень
+                </string>
+                <string name="skip_and_continue" >Пропустить >
+                </string>
+                <string name="snow_fall" >Снегопад
+                </string>
+                <string name="rain" >Дождь
+                </string>
+                <string name="time_picker_decrement_minute_button" >Отнять минуту
+                </string>
+                <string name="millimeters" >мм
+                </string>
+                <string name="thursday" >Четверг
+                </string>
+                <string name="partly_cloudy" >Местами облачно
+                </string>
+                <string name="location_hint" >Ваше положение...
+                </string>
+                <string name="tomorrow" >Завтра
+                </string>
+                <string name="date_time_done" >Готово
+                </string>
+                <string name="app_name" >oW
+                </string>
+                <string name="none" >н.д.
+                </string>
+                <string name="locale" >ru
+                </string>
+                <string name="miles_per_hour" >миль/ч
+                </string>
+                <string name="notification_time_message" >Тут Вы можете выбрать время ежедневных уведомлений
+                </string>
+                <string name="error_screen_message" >Пожалуйста, проверьте Интернет соединение, а так же наличие геопозиции в настройках.
+                </string>
+                <string name="today" >Сегодня
+                </string>
+                <string name="time_picker_decrement_hour_button" >Отнять час
+                </string>
+                <string name="day" >День
+                </string>
+                <string name="direction_nw" >СЗ
+                </string>
+                <string name="not_available" >N/A
+                </string>
+                <string name="go_to_settings" >Настройки
+                </string>
+                <string name="date_time_set" >Set
+                </string>
+                <string name="monday" >Понедельник
+                </string>
+                <string name="widget_4_2" >oW widget 4x2
+                </string>
+                <string name="widget_4_1" >oW weather widget 4x1
+                </string>
+                <string name="direction_ne" >СВ
+                </string>
+                <string name="connection_error" >Ошибка соединения
+                </string>
+                <string name="direction_s" >Ю
+                </string>
+                <string name="day_indicator" >○
+                </string>
+                <string name="night" >Ночь
+                </string>
+                <string name="lightning_storm" >Молния с грозой
+                </string>
+                <string name="select_time" >Выберите время
+                </string>
+                <string name="no_location" >Нет локации
+                </string>
+                <string name="wednesday" >Среда
+                </string>
+                <string name="direction_w" >З
+                </string>
+                <string name="saturday" >Суббота
+                </string>
+                <string name="auto_define" >Геопозиция
+                </string>
+                <string name="time_picker_increment_set_pm_button" >Задать PM
+                </string>
+                <string name="yesterday" >Вчера
+                </string>
+                <string name="date_picker_dialog_title" >Задать дату
+                </string>
+                <string name="hurricane" >Ураган
+                </string>
+                <string name="black" >Черный
+                </string>
+                <string name="direction_n" >С
+                </string>
+                <string name="fog" >Туман
+                </string>
+                <string name="time_picker_increment_minute_button" >Добавить минуту
+                </string>
+                <string name="direction_sw" >ЮЗ
+                </string>
+                <string name="moon" >Луна
+                </string>
+                <string name="sleet" >Дождь со снегом
+                </string>
+                <string name="direction_e" >В
+                </string>
+                <string name="location_unknown" >Unknown location
+                </string>
+                <string name="your_location" >Локация
+                </string>
+                <string name="weather_not_updated" >Погода не обновленна
+                </string>
+                <string name="tuesday" >Вторник
+                </string>
+                <string name="time_picker_dialog_title" >Задать время
+                </string>
+                <string name="direction_se" >ЮВ
+                </string>
+                <string name="snow" >Снег
+                </string>
+                <string name="retrieving_location" >Определение локации
+                </string>
+                <string name="mostly_cloudy" >Облачно
+                </string>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values-sw600dp\screen.xml"
+                qualifiers="sw600dp" >
+                <bool name="isTablet" >
+true
+                </bool>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values-sw600dp\strings.xml"
+                qualifiers="sw600dp" >
+                <string name="notification_time_message" >Here you can schedule everyday notification about the weather
+                </string>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values-v11\styles.xml"
+                qualifiers="v11" >
+
+                <style
+                    name="AppTheme"
+                    parent="android:Theme.Holo" >
+                    <item name="numberPickerStyle">
+@style/NPWidget.Holo.NumberPicker
+                    </item>
+                </style>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values-v14\styles.xml"
+                qualifiers="v14" >
+
+                <style
+                    name="AppTheme"
+                    parent="android:Theme.Holo" >
+                    <item name="numberPickerStyle">
+@style/NPWidget.Holo.NumberPicker
+                    </item>
+                </style>
+            </file>
+            <file
+                path="E:\Github_repo\oW\res\values-xlarge\screen.xml"
+                qualifiers="xlarge" >
+                <bool name="isTablet" >
+true
+                </bool>
+            </file>
+            <file
+                name="widget_4x1_info"
+                path="E:\Github_repo\oW\res\xml\widget_4x1_info.xml"
+                qualifiers=""
+                type="xml" />
+            <file
+                name="widget_4x2_info"
+                path="E:\Github_repo\oW\res\xml\widget_4x2_info.xml"
+                qualifiers=""
+                type="xml" />
+        </source>
+        <source path="E:\Github_repo\oW\build\res\rs\release" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="E:\Github_repo\oW\src\release\res" />
+    </dataSet>
+
+</merger>

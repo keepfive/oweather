@@ -1,0 +1,71 @@
+<!-- From: file:/E:/Github_repo/oW/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionCode="7" android:versionName="1.5.3" package="com.massivekinetics.ow">
+
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="11"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="false" android:xlargeScreens="true"/>
+
+    <application android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/app_name" android:name="com.massivekinetics.ow.application.Application" android:theme="@style/AppTheme">
+
+        <activity android:name="com.massivekinetics.ow.ui.activities.SplashScreenActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.massivekinetics.ow.ui.activities.ForecastPageActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.massivekinetics.ow.forecast"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.massivekinetics.ow.ui.activities.BaseNotification">
+
+        </activity>
+
+        <activity android:name="com.massivekinetics.ow.ui.activities.SettingsActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Holo.Light"/>
+        <activity android:name="com.massivekinetics.ow.ui.activities.NotificationSettingsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.massivekinetics.ow.ui.activities.ErrorActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.massivekinetics.ow.ui.activities.NetworkErrorActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.massivekinetics.ow.ui.activities.UpdatePageActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.massivekinetics.ow.ui.activities.FirstLocationActivity"/>
+        <activity android:name="com.massivekinetics.ow.ui.activities.WidgetConfigActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+
+        <receiver android:enabled="true" android:exported="true" android:name="com.massivekinetics.ow.application.receivers.NotificationReceiver">
+            <intent-filter>
+                <action android:name="com.massivekinetics.ow.notification"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:label="@string/widget_4_2" android:name="com.massivekinetics.ow.ui.widgets.oWeatherProvider4x2">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.mk.clock.action.UPDATE"/>
+                <action android:name="com.mk.clock.action.UPDATED_LOCATION"/>
+                <action android:name="com.mk.clock.action.UPDATED_WEATHER"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_4x2_info"/>
+        </receiver>
+        <service android:name="com.massivekinetics.ow.ui.widgets.ClockUpdateService">
+            <intent-filter>
+                <action android:name="com.mk.clock.action.UPDATE"/>
+                <action android:name="com.mk.clock.action.UPDATED_LOCATION"/>
+                <action android:name="com.mk.clock.action.UPDATED_WEATHER"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

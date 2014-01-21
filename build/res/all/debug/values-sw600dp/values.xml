@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/E:/Github_repo/oW/res/values-sw600dp/screen.xml -->
+    <eat-comment />
+
+    <bool name="isTablet">true</bool>
+    <!-- From: file:/E:/Github_repo/oW/res/values-sw600dp/strings.xml -->
+    <eat-comment />
+
+    <string name="notification_time_message">Here you can schedule everyday notification about the weather</string>
+
+</resources>

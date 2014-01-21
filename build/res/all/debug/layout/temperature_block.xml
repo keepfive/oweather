@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_marginTop="13dp" android:layout_marginBottom="22dp"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content" android:id="@+id/temperature_block"
+              android:layout_below="@+id/header" android:layout_gravity="center">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvMinus" android:textColor="@android:color/white"
+            android:text="-" android:textSize="100sp" android:layout_gravity="center_vertical"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:gravity="end|center_vertical" android:layout_toLeftOf="@+id/llCurrentTemperature"
+            android:layout_alignTop="@+id/llCurrentTemperature"
+            android:layout_alignBottom="@+id/llCurrentTemperature"/>
+
+    <LinearLayout android:id="@id/llCurrentTemperature" android:orientation="horizontal"
+                  android:layout_width="wrap_content" android:layout_centerInParent="true"
+                  android:layout_height="wrap_content" android:gravity="center">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTemp" android:textColor="@android:color/white"
+                android:textSize="130sp" android:layout_gravity="center" android:gravity="center_horizontal" android:singleLine="true"
+                android:maxLines="1" android:focusable="false" />
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="wrap_content" android:weightSum="3"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical" android:layout_toRightOf="@id/llCurrentTemperature"
+                  android:layout_alignTop="@id/llCurrentTemperature"
+                  android:layout_alignBottom="@id/llCurrentTemperature" android:paddingBottom="4dp" android:layout_marginLeft="5dp">
+
+
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="0dp" android:layout_weight="1" android:gravity="center_vertical"
+                      android:paddingTop="33dp">
+            <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp" android:scaleType="centerCrop"
+                    android:id="@+id/ivDegrees"
+                    android:src="@drawable/degrees"/>
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0dp" android:layout_weight="1"
+                android:gravity="center|bottom|right"
+                android:id="@+id/tvDaytime" android:textColor="@android:color/white"
+                android:text="@string/night" android:textSize="18sp"  android:layout_marginLeft="15dp" android:paddingBottom="1dp"
+                />
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0dp" android:layout_weight="1"
+                android:gravity="right|top" android:paddingLeft="5dp"
+                android:id="@+id/tvNightTemp" android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:text="18" android:focusableInTouchMode="false"  android:layout_marginLeft="15dp"/>
+    </LinearLayout>
+
+
+</RelativeLayout><!-- From: file:/E:/Github_repo/oW/res/layout/temperature_block.xml -->

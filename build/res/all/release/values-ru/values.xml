@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/E:/Github_repo/oW/res/values-ru/strings.xml -->
+    <eat-comment />
+
+    <string name="app_name">oW</string>
+    <string name="auto_define">Геопозиция</string>
+    <string name="black">Черный</string>
+    <string name="cancel">Отмена</string>
+    <string name="connection_error">Ошибка соединения</string>
+    <string name="could_not_locate">Невозможно определить локацию. Пожалуйста, выберите местоположение вручную</string>
+    <string name="date_picker_dialog_title">Задать дату</string>
+    <string name="date_time_done">Готово</string>
+    <string name="date_time_set">Set</string>
+    <string name="day">День</string>
+    <string name="day_indicator">○</string>
+    <string name="direction_e">В</string>
+    <string name="direction_n">С</string>
+    <string name="direction_ne">СВ</string>
+    <string name="direction_nw">СЗ</string>
+    <string name="direction_s">Ю</string>
+    <string name="direction_se">ЮВ</string>
+    <string name="direction_sw">ЮЗ</string>
+    <string name="direction_w">З</string>
+    <string name="downpour">Ливень</string>
+    <string name="error_screen_message">Пожалуйста, проверьте Интернет соединение, а так же наличие геопозиции в настройках.</string>
+    <string name="fog">Туман</string>
+    <string name="friday">Пятница</string>
+    <string name="go_to_settings">Настройки</string>
+    <string name="hurricane">Ураган</string>
+    <string name="inches">дм</string>
+    <string name="km_per_hour">км/ч</string>
+    <string name="light_rain">Легкий дождь</string>
+    <string name="lightning_storm">Молния с грозой</string>
+    <string name="locale">ru</string>
+    <string name="location_hint">Ваше положение...</string>
+    <string name="location_saved">Локация сохранена</string>
+    <string name="location_unknown">Unknown location</string>
+    <string name="miles_per_hour">миль/ч</string>
+    <string name="millimeters">мм</string>
+    <string name="monday">Понедельник</string>
+    <string name="moon">Луна</string>
+    <string name="mostly_cloudy">Облачно</string>
+    <string name="night">Ночь</string>
+    <string name="night_indicator">●</string>
+    <string name="no_cache">Сохраненный прогноз не актуален. Пожалуйста, проверьте Интернет соединение, чтобы получить последний прогноз.</string>
+    <string name="no_location">Нет локации</string>
+    <string name="none">н.д.</string>
+    <string name="not_available">N/A</string>
+    <string name="notification">Оповещение</string>
+    <string name="notification_pattern">[DESC] / ○ [TEMP_MAX] / ● [TEMP_MIN]</string>
+    <string name="notification_time">Время уведомления</string>
+    <string name="notification_time_message">Тут Вы можете выбрать время ежедневных уведомлений</string>
+    <string name="partly_cloudy">Местами облачно</string>
+    <string name="rain">Дождь</string>
+    <string name="rain_and_sun">Дождь и солнце</string>
+    <string name="retrieving_location">Определение локации</string>
+    <string name="saturday">Суббота</string>
+    <string name="select_time">Выберите время</string>
+    <string name="set">Установить</string>
+    <string name="skip_and_continue">Пропустить ></string>
+    <string name="sleet">Дождь со снегом</string>
+    <string name="snow">Снег</string>
+    <string name="snow_fall">Снегопад</string>
+    <string name="sunday">Воскресенье</string>
+    <string name="sunny">Солнечно</string>
+    <string name="thursday">Четверг</string>
+    <string name="time_picker_decrement_hour_button">Отнять час</string>
+    <string name="time_picker_decrement_minute_button">Отнять минуту</string>
+    <string name="time_picker_decrement_set_am_button">Задать AM</string>
+    <string name="time_picker_dialog_title">Задать время</string>
+    <string name="time_picker_increment_hour_button">Добавить час</string>
+    <string name="time_picker_increment_minute_button">Добавить минуту</string>
+    <string name="time_picker_increment_set_pm_button">Задать PM</string>
+    <string name="time_picker_separator">:</string>
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
+    <string name="tuesday">Вторник</string>
+    <string name="updating">Обновление</string>
+    <string name="weather_not_updated">Погода не обновленна</string>
+    <string name="wednesday">Среда</string>
+    <string name="white">Белый</string>
+    <string name="widget_4_1">oW weather widget 4x1</string>
+    <string name="widget_4_2">oW widget 4x2</string>
+    <string name="widget_background_color">Цвет фона виджета</string>
+    <string name="yesterday">Вчера</string>
+    <string name="your_location">Локация</string>
+
+</resources>

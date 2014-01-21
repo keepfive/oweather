@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/E:/Github_repo/oW/res/values-it/strings.xml -->
+    <eat-comment />
+
+    <string name="app_name">oW</string>
+    <string name="auto_define">Posizione</string>
+    <string name="black">Nero</string>
+    <string name="cancel">Cancella</string>
+    <string name="connection_error">Errore connessione</string>
+    <string name="could_not_locate">La Tua Posizione non e stata trovata.. provare con modalità manuale</string>
+    <string name="date_picker_dialog_title">Impostare tempo</string>
+    <string name="date_time_done">Fatto</string>
+    <string name="date_time_set">Stabilito</string>
+    <string name="day">Giorno</string>
+    <string name="day_indicator">○</string>
+    <string name="downpour">Acquazzone</string>
+    <string name="error_screen_message">Si prega di collegarsi a Internet, tra cui la posizione o inserire manualmente la città, nelle impostazioni dell\'applicazione.</string>
+    <string name="fog">Nebbia</string>
+    <string name="friday">Venerdì</string>
+    <string name="go_to_settings">Vai a impostazioni</string>
+    <string name="hurricane">Uragano</string>
+    <string name="light_rain">Leggera Pioggia</string>
+    <string name="lightning_storm">Fulmine</string>
+    <string name="locale">it</string>
+    <string name="location_hint">La tua posizione qui ...</string>
+    <string name="location_saved">Localitò salvata</string>
+    <string name="location_unknown">Località sconosciuta</string>
+    <string name="monday">Lunedi</string>
+    <string name="moon">Luna</string>
+    <string name="mostly_cloudy">Nuvoloso</string>
+    <string name="night">Notte</string>
+    <string name="night_indicator">●</string>
+    <string name="no_cache">Purtroppo non si dispone di alcuna previsione nella cache attuale</string>
+    <string name="no_location">Nessuna località</string>
+    <string name="none">n.a.</string>
+    <string name="not_available">N/A</string>
+    <string name="notification">Notifica</string>
+    <string name="notification_pattern">[DESC] / ○ [TEMP_MAX] / ● [TEMP_MIN]</string>
+    <string name="notification_time">Ora di notifica</string>
+    <string name="notification_time_message">Qui è possibile programmare la notifica di tutti i giorni per il meteo</string>
+    <string name="partly_cloudy">Parzialmente Nuvoloso</string>
+    <string name="rain">Pioggia</string>
+    <string name="rain_and_sun">Pioggia e Sole</string>
+    <string name="retrieving_location">Recuperare la posizione</string>
+    <string name="saturday">Sabato</string>
+    <string name="select_time">Seleziona Ora</string>
+    <string name="set">Stabilito</string>
+    <string name="skip_and_continue">Salta e continua ></string>
+    <string name="sleet">Nevischio</string>
+    <string name="snow">Neve</string>
+    <string name="snow_fall">Nevicata</string>
+    <string name="sunday">Domenica</string>
+    <string name="sunny">Soleggiato</string>
+    <string name="thursday">Giovedi</string>
+    <string name="time_picker_decrement_hour_button">Diminuizione ore in</string>
+    <string name="time_picker_decrement_minute_button">Diminuzione minuti in</string>
+    <string name="time_picker_decrement_set_am_button">Set AM</string>
+    <string name="time_picker_dialog_title">Impostare il tempo di</string>
+    <string name="time_picker_increment_hour_button">Incrementa ore in</string>
+    <string name="time_picker_increment_minute_button">Incrementa minuti in</string>
+    <string name="time_picker_increment_set_pm_button">Set PM</string>
+    <string name="time_picker_separator">:</string>
+    <string name="today">Oggi</string>
+    <string name="tomorrow">Domani</string>
+    <string name="tuesday">Martedì</string>
+    <string name="updating">Aggiornamento</string>
+    <string name="weather_not_updated">Meteo non aggiornato.</string>
+    <string name="wednesday">Mercoledì</string>
+    <string name="white">Bianco</string>
+    <string name="widget_4_1">oW weather widget 4x1</string>
+    <string name="widget_4_2">oW widget 4x2</string>
+    <string name="widget_background_color">Colore di Sfondo</string>
+    <string name="yesterday">Ieri</string>
+    <string name="your_location">La tua posizione</string>
+
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="50dp" android:weightSum="3" android:id="@+id/settingsHeader">
+
+    <LinearLayout android:layout_height="fill_parent" android:layout_width="0dp"
+                  android:layout_weight="1" android:layout_gravity="center_vertical|left"
+                  android:orientation="horizontal"
+                  android:gravity="center_horizontal" android:weightSum="2">
+
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
+                      android:layout_weight="1" android:layout_gravity="center_vertical|left" android:gravity="center_vertical|right">
+
+            <ImageButton android:id="@+id/ibBack" android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:src="@drawable/settings_back_button" android:background="@android:color/transparent"
+                         android:adjustViewBounds="true" android:scaleType="centerInside"
+                         android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
+                      android:layout_weight="1" android:layout_gravity="center_vertical|left">
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView android:layout_height="wrap_content" android:layout_width="0dp" android:layout_weight="1"
+               android:src="@drawable/settings_header" android:layout_gravity="top"
+               android:background="@android:color/transparent">
+    </ImageView>
+
+    <LinearLayout android:id="@+id/btnTemperature" android:layout_height="fill_parent" android:layout_width="0dp"
+                  android:layout_weight="1" android:gravity="center" android:orientation="horizontal"
+                  android:layout_gravity="center">
+        <ImageButton android:id="@+id/ibCelcius" android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:src="@drawable/celcius_light" android:background="@android:color/transparent"
+                     android:adjustViewBounds="true" android:scaleType="centerInside"/>
+
+        <ImageButton android:id="@+id/ibFahrenheit" android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:src="@drawable/fahrenheit_dark" android:layout_marginLeft="10dp"
+                     android:background="@android:color/transparent" android:adjustViewBounds="true"
+                     android:scaleType="centerInside"/>
+
+    </LinearLayout>
+</LinearLayout><!-- From: file:/E:/Github_repo/oW/res/layout-hdpi/settings_header.xml -->

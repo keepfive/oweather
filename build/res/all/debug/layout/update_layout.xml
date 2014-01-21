@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/updateLayout"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:gravity="center"
+              android:background="@color/ow_progress_background" android:visibility="gone" >
+
+    <ImageView android:id="@+id/ivRefresh" android:src="@drawable/refresh_arrow" android:layout_height="wrap_content"
+               android:layout_width="wrap_content" android:layout_gravity="center_horizontal" android:layout_marginTop="77dp"
+               android:layout_marginBottom="39dp"/>
+
+    <TextView android:id="@+id/tvLocationName" android:layout_height="wrap_content"
+              android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
+              android:textColor="@android:color/white" android:textSize="32sp" android:singleLine="true"
+              android:marqueeRepeatLimit="marquee_forever" android:paddingRight="10dp" android:paddingLeft="10dp" android:paddingTop="2dp"/>
+
+</LinearLayout><!-- From: file:/E:/Github_repo/oW/res/layout/update_layout.xml -->
