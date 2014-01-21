@@ -6,7 +6,7 @@ import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.*;
 import com.massivekinetics.ow.domain.model.WeatherForecast;
 import com.massivekinetics.ow.domain.parser.WeatherParser;
-import com.massivekinetics.ow.services.network.NetworkUtils;
+import com.massivekinetics.ow.services.network.NetworkService;
 import com.massivekinetics.ow.services.network.RESTService;
 import com.massivekinetics.ow.services.utils.StringUtils;
 import com.massivekinetics.ow.ui.interfaces.LoadingListener;
@@ -36,12 +36,12 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
 
     @Override
     protected WeatherForecast doInBackground(Void... params) {
-        if (!NetworkUtils.isOnline() || StringUtils.isNullOrEmpty(gpsParams) || StringUtils.isNullOrEmpty(session))
+        if (!NetworkService.isOnline() || StringUtils.isNullOrEmpty(gpsParams) || StringUtils.isNullOrEmpty(session))
             return WeatherForecast.NULL;
 
         String response = getWeatherResponse();
 
-        if(response.equals(NetworkUtils.CODE_403)){
+        if(response.equals(NetworkService.CODE_403)){
             new GetSessionTask().doTask();
             response = getWeatherResponse();
         }
@@ -69,7 +69,7 @@ public class GetWeatherTask extends AsyncTask<Void, Void, WeatherForecast> {
     private String getWeatherResponse(){
         String requestBody = RESTService.getWeatherRequestEncryptedBody();
         String serverUrl = resources.getString(R.string.ow_url_get_weather);
-        return NetworkUtils.doPost(serverUrl, requestBody);
+        return NetworkService.doPost(serverUrl, requestBody);
     }
 
 }

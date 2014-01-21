@@ -2,6 +2,8 @@ package com.massivekinetics.ow.services.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.http.HttpResponseCache;
 import android.util.Log;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.Application;
@@ -17,9 +19,9 @@ import java.net.URL;
  * Time: 7:38 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NetworkUtils {
+public class NetworkService {
     public static final String CODE_403 = "session_expired";
-    private static final String TAG = "NetworkUtils";
+    private static final String TAG = "NetworkService";
 
     public static String doGet(final String serverUrl) {
         return doGet(serverUrl, 7000);
@@ -32,6 +34,7 @@ public class NetworkUtils {
             //Ensures that connections are closed when switching networks
             System.setProperty("http.keepAlive", "false");
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            enableHttpResponseCache();
             connection.setConnectTimeout(timeout);
             connection.setReadTimeout(timeout);
 
@@ -119,7 +122,19 @@ public class NetworkUtils {
 
     public static boolean isOnline(){
         ConnectivityManager cm = (ConnectivityManager) Application.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
-        return (cm.getActiveNetworkInfo() == null) ? false : true;
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
+    private static void enableHttpResponseCache() {
+        try {
+            long httpCacheSize = 10 * 1024 * 1024; // 10 MiB
+            File httpCacheDir = new File(Application.getInstance().getCacheDir(), "http");
+            Class.forName("android.net.http.HttpResponseCache")
+                    .getMethod("install", File.class, long.class)
+                    .invoke(null, httpCacheDir, httpCacheSize);
+        } catch (Exception httpResponseCacheNotAvailable) {
+        }
     }
 
 }

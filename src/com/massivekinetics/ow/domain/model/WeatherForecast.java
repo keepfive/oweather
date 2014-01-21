@@ -16,6 +16,12 @@ public class WeatherForecast implements Serializable {
         Date today = new Date();
         timeStamp = today.getTime();
     }
+
+    public WeatherForecast(List<WeatherModel> forecastList, String locationString, long timeStamp){
+        this.forecastList = forecastList;
+        this.locationString = locationString;
+        this.timeStamp = timeStamp;
+    }
 	
 	public List<WeatherModel> getForecastList() {
 		return forecastList;
@@ -33,6 +39,10 @@ public class WeatherForecast implements Serializable {
 
     public long getTimeStamp(){
         return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp){
+        this.timeStamp = timeStamp;
     }
 
     public String getLocationString(){

@@ -57,7 +57,7 @@ public class oWeatherProvider4x2 extends AppWidgetProvider {
     }
 
     private static void buildUpdate(Context context, AppWidgetManager appWidgetManager, ComponentName componentName) {
-        IConfiguration config = AppLocator.resolve(IConfiguration.class);
+        IConfiguration config = Configuration.INSTANCE();
         IDataManager dataManager = AppLocator.resolve(IDataManager.class);
         if (config == null || dataManager == null)
             return;

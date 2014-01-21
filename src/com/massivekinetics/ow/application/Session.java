@@ -5,17 +5,13 @@ package com.massivekinetics.ow.application;
  */
 public class Session {
     private String mToken = "";
-    private static Session instance;
 
-    private Session(){}
+    private Session(){
+
+    }
+
     public static Session Current(){
-        if (instance ==null){
-            synchronized (Session.class){
-                if (instance == null)
-                    instance = new Session();
-            }
-        }
-        return instance;
+        return SessionHolder.sessionInstance;
     }
     public String getToken(){
         return mToken;
@@ -25,4 +21,8 @@ public class Session {
         mToken = token;
     }
 
+
+    private static class SessionHolder{
+        public static Session sessionInstance = new Session();
+    }
 }

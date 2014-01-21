@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.AppLocator;
 import com.massivekinetics.ow.application.IDataManager;
-import com.massivekinetics.ow.services.network.NetworkUtils;
+import com.massivekinetics.ow.services.network.NetworkService;
 import com.massivekinetics.ow.services.utils.NavigationService;
 
 /**
@@ -61,10 +61,10 @@ public class ErrorActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 IDataManager dataManager = AppLocator.resolve(IDataManager.class);
-                if (dataManager.hasActualForecast() && !NetworkUtils.isOnline()) {
+                if (dataManager.hasActualForecast() && !NetworkService.isOnline()) {
                     NavigationService.navigate(ErrorActivity.this, ForecastPageActivity.class);
                     finish();
-                } else if (NetworkUtils.isOnline()) {
+                } else if (NetworkService.isOnline()) {
                     NavigationService.navigate(ErrorActivity.this, UpdatePageActivity.class);
                     finish();
                 } else {

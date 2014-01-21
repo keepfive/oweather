@@ -22,7 +22,7 @@ import com.massivekinetics.ow.domain.parser.geocoder.GeocoderConstants;
 import com.massivekinetics.ow.domain.tasks.GetLocationFromPlaceTask;
 import com.massivekinetics.ow.ui.interfaces.LoadingListener;
 import com.massivekinetics.ow.ui.interfaces.ProgressListener;
-import com.massivekinetics.ow.services.network.NetworkUtils;
+import com.massivekinetics.ow.services.network.NetworkService;
 import com.massivekinetics.ow.services.utils.DateUtils;
 import com.massivekinetics.ow.services.utils.NavigationService;
 import com.massivekinetics.ow.services.utils.StringUtils;
@@ -310,7 +310,7 @@ public class SettingsActivity extends BaseActivity implements AdapterView.OnItem
     private void resolveBackClick() {
         Class nextPageClass;
 
-        if (StringUtils.isNullOrEmpty(mConfiguration.getLocationCoordinates()) || !NetworkUtils.isOnline())
+        if (StringUtils.isNullOrEmpty(mConfiguration.getLocationCoordinates()) || !NetworkService.isOnline())
             nextPageClass = ErrorActivity.class;
 
         else if (isLocationChanged)

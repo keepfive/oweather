@@ -28,7 +28,7 @@ public abstract class BaseActivity extends Activity {
     private GoogleAnalytics mGaInstance;
     private static boolean isGADispatchSet = false;
 
-    protected IConfiguration mConfiguration = AppLocator.resolve(IConfiguration.class);
+    protected IConfiguration mConfiguration = Configuration.INSTANCE();
 
 
     @Override

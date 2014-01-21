@@ -2,16 +2,18 @@ package com.massivekinetics.ow.application;
 
 import android.content.Intent;
 import android.util.Log;
+import com.google.gson.Gson;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.domain.model.WeatherForecast;
 import com.massivekinetics.ow.domain.model.WeatherModel;
 import com.massivekinetics.ow.domain.tasks.GetWeatherTask;
 import com.massivekinetics.ow.ui.interfaces.LoadingListener;
-import com.massivekinetics.ow.services.network.NetworkUtils;
+import com.massivekinetics.ow.services.network.NetworkService;
 import com.massivekinetics.ow.services.utils.DateUtils;
 import com.massivekinetics.ow.ui.widgets.ClockUpdateService;
 
 import java.io.*;
+import java.nio.ByteBuffer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,13 +32,17 @@ public class WeatherDataManager implements IDataManager {
     private static final long EXPIRATION_OFFLINE = 5 * (24 - 1) * 60 * 60 * 1000;  // 5 days minus 5 hours --> (24 - 1) just for convenience.
 
     protected WeatherDataManager() {
-        mConfiguration = AppLocator.resolve(IConfiguration.class);
+        this(Configuration.INSTANCE());
+    }
+
+    protected WeatherDataManager(IConfiguration configuration) {
+        mConfiguration = configuration;
         restoreForecast();
     }
 
     @Override
     public void runUpdate(LoadingListener<WeatherForecast> listener) {
-        new GetWeatherTask(new Configuration(), listener).execute();
+        new GetWeatherTask(Configuration.INSTANCE(), listener).execute();
     }
 
     @Override
@@ -54,7 +60,7 @@ public class WeatherDataManager implements IDataManager {
         Application.getInstance().startService(new Intent(ClockUpdateService.ACTION_UPDATE));
     }
 
-    @Override
+    /*@Override
     public void saveForecast() {
         try {
             File cache = new File(Application.getInstance().getCacheDir(), "oweather.dat");
@@ -87,15 +93,60 @@ public class WeatherDataManager implements IDataManager {
         } catch (Throwable t){
             //I'm a Scatman
         }
+    }  */
+
+    @Override
+    public void saveForecast() {
+        try {
+            Gson gson = new Gson();
+            String jsonString = gson.toJson(mWeatherForecast);
+            File cache = new File(Application.getInstance().getCacheDir(), "oweather.json");
+            cache.createNewFile();
+            FileWriter fileWriter = new FileWriter(cache);
+            fileWriter.write(jsonString);
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            Log.e(TAG, e.getMessage());
+        } finally {
+        }
+    }
+
+    @Override
+    public void restoreForecast() {
+        try {
+
+            Gson gson = new Gson();
+            File cache = new File(Application.getInstance().getCacheDir(), "oweather.json");
+            if (cache.exists()) {
+                FileInputStream fis = new FileInputStream(cache);
+                InputStreamReader isr = new InputStreamReader(fis);
+                BufferedReader bufferedReader = new BufferedReader(isr);
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+                bufferedReader.close();
+                String json = sb.toString();
+                WeatherForecast restored = gson.fromJson(json, WeatherForecast.class);
+                this.mWeatherForecast = restored;
+            }
+
+        } catch (IOException e) {
+
+        } catch (Throwable t) {
+            //I'm a Scatman
+        }
     }
 
     public boolean hasActualForecast() {
-        if(mWeatherForecast == null || mWeatherForecast == WeatherForecast.NULL)
+        if (mWeatherForecast == null || mWeatherForecast == WeatherForecast.NULL)
             restoreForecast();
 
         String gpsLocation = mConfiguration.getLocationCoordinates();
-        long weatherLifeInMsec = DateUtils.getCurrentInMillis()- mWeatherForecast.getTimeStamp();
-        long expirationLimit = NetworkUtils.isOnline() ? EXPIRATION_ONLINE : EXPIRATION_OFFLINE;
+        long weatherLifeInMsec = DateUtils.getCurrentInMillis() - mWeatherForecast.getTimeStamp();
+        long expirationLimit = NetworkService.isOnline() ? EXPIRATION_ONLINE : EXPIRATION_OFFLINE;
 
         boolean isActual = !mWeatherForecast.getForecastList().isEmpty()
                 && gpsLocation.equals(mWeatherForecast.getLocationString())
@@ -113,8 +164,7 @@ public class WeatherDataManager implements IDataManager {
                     return model;
                 }
             }
-        }
-        else
+        } else
             runUpdate(null);
         return WeatherModel.NULL;
     }

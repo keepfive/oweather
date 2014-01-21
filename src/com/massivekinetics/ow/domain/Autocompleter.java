@@ -4,6 +4,7 @@ import android.util.Log;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.Application;
 import com.massivekinetics.ow.application.Configuration;
+import com.massivekinetics.ow.application.IConfiguration;
 import com.massivekinetics.ow.domain.model.Prediction;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +27,16 @@ import java.util.ArrayList;
 public class Autocompleter {
 
     private static final String LOG_TAG = "Autocompleter";
+
+    private IConfiguration configuration;
+
+    public Autocompleter(){
+        this(Configuration.INSTANCE());
+    }
+
+    public Autocompleter(IConfiguration configuration){
+        this.configuration = configuration;
+    }
 
     public ArrayList<Prediction> getPlacePredictions(String input) {
         ArrayList<Prediction> resultList = null;
@@ -151,7 +162,7 @@ public class Autocompleter {
                     country = admin_area_1;
             }
 
-            new Configuration().setLocationCountry(country);
+            configuration.setLocationCountry(country);
 
             JSONObject geometryObj = resultObj.getJSONObject("geometry");
             JSONObject locationObj =  geometryObj.getJSONObject("location");

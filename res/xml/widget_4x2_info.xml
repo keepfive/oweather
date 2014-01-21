@@ -3,7 +3,9 @@
                     android:initialLayout="@layout/widget_4x2"
                     android:minHeight="110dp"
                     android:minWidth="290dp"
-                    android:updatePeriodMillis="1800000" android:previewImage="@drawable/widget_preview"
+                    android:updatePeriodMillis="1800000"
+                    android:previewImage="@drawable/widget_preview"
                     android:configure="com.massivekinetics.ow.ui.activities.WidgetConfigActivity">
 </appwidget-provider>
 
+        <!--android:initialKeyguardLayout="@layout/widget_4x2" android:widgetCategory="home_screen|keyguard"  android:resizeMode="vertical"-->

@@ -9,7 +9,7 @@ import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.Application;
 import com.massivekinetics.ow.domain.parser.geocoder.GeocoderConstants;
 import com.massivekinetics.ow.domain.parser.geocoder.GeocoderParser;
-import com.massivekinetics.ow.services.network.NetworkUtils;
+import com.massivekinetics.ow.services.network.NetworkService;
 
 import java.util.*;
 
@@ -125,7 +125,7 @@ public class GeoLocator implements IGeoLocator {
         String locale = resources.getString(R.string.locale);
         request = request.replace("[LOCATION]", gps);
         request = request.replace("[LANG]", locale);
-        String response = NetworkUtils.doGet(request);
+        String response = NetworkService.doGet(request);
         Map<String, String> locationMap = new GeocoderParser().getLocationInfoMap(response);
         String gpsParams = getGpsCoordinatesAsParams(location);
         locationMap.put(GeocoderConstants.GPS_PARAMS, gpsParams);

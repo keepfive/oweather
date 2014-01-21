@@ -25,7 +25,8 @@ public class AppLocator {
 
     public static <T> T resolve(Class interfaceType) {
         if(!canResolve(interfaceType))
-            return null;
+            throw new IllegalArgumentException("Passed unregistered type");
+
 
         if(instance.containsObject(interfaceType))
             return (T)instance.objectMap.get(interfaceType);

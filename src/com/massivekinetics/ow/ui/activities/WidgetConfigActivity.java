@@ -1,6 +1,7 @@
 package com.massivekinetics.ow.ui.activities;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class WidgetConfigActivity extends Activity {
 
         set = (Button)findViewById(R.id.set);
         rgBackground = (RadioGroup)findViewById(R.id.rgBackgorundColor);
-        config = new Configuration();
+        config = Configuration.INSTANCE();
 
 
         set.setOnClickListener(new View.OnClickListener() {

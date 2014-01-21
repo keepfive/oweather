@@ -4,6 +4,7 @@ import android.util.Base64;
 import com.massivekinetics.ow.R;
 import com.massivekinetics.ow.application.AppLocator;
 import com.massivekinetics.ow.application.Application;
+import com.massivekinetics.ow.application.Configuration;
 import com.massivekinetics.ow.application.IConfiguration;
 
 import javax.crypto.Cipher;
@@ -28,7 +29,7 @@ public class RESTService {
 
     public static final String encryptToRSA(String message) {
         Application application = Application.getInstance();
-        IConfiguration configuration = AppLocator.resolve(IConfiguration.class);
+        IConfiguration configuration = Configuration.INSTANCE();
         String modulus = configuration.getActiveSession();
         String exponent = application.getString(R.string.rsa_exponent);
         byte[] modulusBytes = Base64.decode(modulus.getBytes(), Base64.DEFAULT);
@@ -72,7 +73,6 @@ public class RESTService {
 
         //Constructing fractional part of gps
         float fractional = coordinate - integral;
-        //String fractionalPart = "" + (int)(fractional * Math.pow(10, NEEDED_FRACTIONAL_DIGITS));
         String fractionalPart = (""+fractional).substring(2);
         coordinateBuilder.append(fractionalPart);
 
@@ -86,7 +86,7 @@ public class RESTService {
 
     public static final String getEncodedCoordinates() {
         Application application = Application.getInstance();
-        IConfiguration configuration = AppLocator.resolve(IConfiguration.class);
+        IConfiguration configuration = Configuration.INSTANCE();
 
         String result = "";
         String locationString = configuration.getLocationCoordinates();

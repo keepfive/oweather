@@ -15,10 +15,14 @@ public class Configuration implements IConfiguration {
     private SharedPreferences prefs;
     private boolean isTablet;
 
-    public Configuration() {
+    private Configuration() {
         Application app = Application.getInstance();
         prefs = app.getSharedPreferences(SETTINGS, 0);
         isTablet = app.getResources().getBoolean(R.bool.isTablet);
+    }
+
+    public static IConfiguration INSTANCE(){
+          return ConfigHolder.config;
     }
 
     public String getActiveSession() {
@@ -186,5 +190,8 @@ public class Configuration implements IConfiguration {
 
     }
 
+    private static class ConfigHolder{
+        private static final IConfiguration config = new Configuration();
+    }
 
 }

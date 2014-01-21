@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import com.massivekinetics.ow.application.AppLocator;
+import com.massivekinetics.ow.application.Configuration;
 import com.massivekinetics.ow.ui.activities.BaseActivity;
 import com.massivekinetics.ow.application.Application;
 import com.massivekinetics.ow.application.IConfiguration;
@@ -33,7 +34,7 @@ public class NotificationService {
     }
 
     public static void toggle(boolean isOn) {
-        IConfiguration configuration = AppLocator.resolve(IConfiguration.class);
+        IConfiguration configuration = Configuration.INSTANCE();
         AlarmManager alarmManager = (AlarmManager) Application.getInstance().getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(NotificationReceiver.ACTION);

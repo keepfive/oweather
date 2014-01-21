@@ -65,17 +65,13 @@ public class WeatherModel implements Serializable {
             date = new Date(timeStamp);
 	}
 
-    private IConfiguration getConfigManager(){
-        return new Configuration();
-    }
-
     public String getMaxTemperature(){
-        boolean isFahrenheit = getConfigManager().isTemperatureFahrengeitMode();
+        boolean isFahrenheit = Configuration.INSTANCE().isTemperatureFahrengeitMode();
         return isFahrenheit ? tempMaxF : tempMaxC;
     }
 
     public String getMinTemperature(){
-        boolean isFahrenheit = getConfigManager().isTemperatureFahrengeitMode();
+        boolean isFahrenheit = Configuration.INSTANCE().isTemperatureFahrengeitMode();
         return isFahrenheit ? tempMinF : tempMinC;
     }
 
@@ -186,7 +182,7 @@ public class WeatherModel implements Serializable {
 
     public String getPrecipitation(){
         Resources res = Application.getInstance().getResources();
-        boolean isFahrenheit = getConfigManager().isTemperatureFahrengeitMode();
+        boolean isFahrenheit = Configuration.INSTANCE().isTemperatureFahrengeitMode();
 
         return isFahrenheit ? precipitationIN  + " " + res.getString(R.string.inches) :
                                 precipitationMM + " " +  res.getString(R.string.millimeters);
@@ -194,7 +190,7 @@ public class WeatherModel implements Serializable {
 
     public String getWindSpeed(){
         Resources res = Application.getInstance().getResources();
-        boolean isFahrenheit = getConfigManager().isTemperatureFahrengeitMode();
+        boolean isFahrenheit = Configuration.INSTANCE().isTemperatureFahrengeitMode();
         return isFahrenheit ? windSpeedMiles  + " " +  res.getString(R.string.miles_per_hour) :
                                 windSpeedKmph  + " " + res.getString(R.string.km_per_hour);
     }

@@ -2,7 +2,7 @@ package com.massivekinetics.ow.domain.tasks;
 
 import android.os.AsyncTask;
 import com.massivekinetics.ow.domain.Autocompleter;
-import com.massivekinetics.ow.services.network.NetworkUtils;
+import com.massivekinetics.ow.services.network.NetworkService;
 import com.massivekinetics.ow.ui.interfaces.LoadingListener;
 
 public class GetLocationFromPlaceTask extends AsyncTask<Void, Void, String> {
@@ -25,7 +25,7 @@ public class GetLocationFromPlaceTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... params) {
-        if (!NetworkUtils.isOnline() || placeReference == null)
+        if (!NetworkService.isOnline() || placeReference == null)
             return null;
         String placeCoordinates = autocompleter.getPlaceCoordinates(placeReference);
         return placeCoordinates;

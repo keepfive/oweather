@@ -22,7 +22,6 @@ public class Application extends android.app.Application {
 
     private void initCoreDependencies(){
         AppLocator.init();
-        AppLocator.register(IConfiguration.class, new Configuration());
         AppLocator.register(IGeoLocator.class, new GeoLocator());
         AppLocator.register(DisplayMetrics.class, getDisplayMetrics());
         AppLocator.register(IDataManager.class, new WeatherDataManager());
